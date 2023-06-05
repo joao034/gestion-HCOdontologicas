@@ -30,12 +30,16 @@
                 <div class="collapse navbar-collapse" id="navbarSupportedContent">
                     <!-- Left Side Of Navbar -->
                     <ul class="navbar-nav me-auto">
-                          <a class="nav-link active" href=" {{ route('hclinicas')}}" aria-current="page">Historias Clinicas</a>
+                        
+                        @auth
+                          <a class="nav-link active" href="#" aria-current="page">Historias Clinicas</a>
                           <a class="nav-link active" href="#">Odontogramas</a>
                           <a class="nav-link active" href="#">Presupuestos</a>
                           <a class="nav-link active" href="#">Tratamientos</a>
                           <a class="nav-link active" href="#">Especialidades</a>
                           <a class="nav-link active" href="#">Odontólogos</a>
+                        @endauth
+                  
                     </ul>
 
                     <!-- Right Side Of Navbar -->

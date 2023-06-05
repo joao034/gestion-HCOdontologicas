@@ -32,7 +32,7 @@
                     <ul class="navbar-nav me-auto">
                         
                         @auth
-                          <a class="nav-link active" href="#" aria-current="page">Historias Clinicas</a>
+                          <a class="nav-link active" href="{{ route('hclinicas.index') }}" aria-current="page">Historias Clinicas</a>
                           <a class="nav-link active" href="#">Odontogramas</a>
                           <a class="nav-link active" href="#">Presupuestos</a>
                           <a class="nav-link active" href="#">Tratamientos</a>
@@ -81,8 +81,15 @@
             </div>
         </nav>
 
-        <main class="py-4">
-            @yield('content')
+        <main class="container">
+            <br>
+            <div class="row">
+                <div class="col-md-1"></div>
+                <div class="col-md-10">
+                    @yield('content')
+                </div>
+                <div class="col-md-1"></div>
+            </div>
         </main>
     </div>
 </body>

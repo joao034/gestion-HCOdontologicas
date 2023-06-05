@@ -38,6 +38,7 @@ class HClinicaController extends Controller
     public function create()
     {
         //
+        return view("hclinicas.create");
     }
 
     /**

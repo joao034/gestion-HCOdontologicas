@@ -46,7 +46,9 @@ class AntecedentesPersonalesFamiliare extends Model
 		'embarazada',
 		'semanas_embarazo',
 		'otro_antecendente',
-		'habitos'
+		'habitos',
+		'otra_enfermedad',
+		'otro_habito'
 	];
 
 	public function paciente()

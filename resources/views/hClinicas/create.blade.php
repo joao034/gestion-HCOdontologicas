@@ -50,14 +50,14 @@
                                   <div class="mb-3">
                                       <label for="" class="form-label">Fecha de Nacimiento</label>
                                       <input type="date"
-                                        class="form-control" name="siglo_año" id="" aria-describedby="helpId" placeholder="" required>
+                                        class="form-control" name="fecha_nacimiento" id="fechaNacimiento" aria-describedby="helpId" placeholder="" onchange="calcularEdad()" required>
                                     </div>
                               </div>
                               <div class="col-md-2">
                                 <div class="mb-3">
                                     <label for="" class="form-label">Edad</label>
                                     <input type="text"
-                                      class="form-control" name="siglo_año" id="" aria-describedby="helpId" placeholder="" readonly>
+                                      class="form-control" name="edad" id="edad" aria-describedby="helpId" placeholder="" readonly>
                                   </div>
                             </div>
                           </div>
@@ -181,7 +181,7 @@
                   <div class="col-md-6">
                       <div class="card text-start">
                           <div class="card-body">
-                            <h4 class="card-title">Antecedentes Infecciosos</h4>
+                            <h5 class="card-title">Antecedentes Infecciosos</h5>
                             
                             <div class="row">
                                 <div class="col-md-9">
@@ -289,7 +289,7 @@
                                 <div class="mb-3 col-6">
                                     <label for="" class="form-label">Parentesco</label>
                                     <input type="text"
-                                      class="form-control" name="parentesco" id="" aria-describedby="helpId" placeholder="">
+                                      class="form-control" name="parentesco_covid" id="" aria-describedby="helpId" placeholder="">
                                 </div>
 
                             </div>
@@ -347,27 +347,27 @@
                             <div class="row">
                               <div class="col-md-3">
                                 <div class="form-check">
-                                    <input class="form-check-input" type="checkbox" id="" name="enfermedades" value="hipertension">
+                                    <input class="form-check-input" type="checkbox" id="" name="enfermedades[]" value="hipertension">
                                     <label class="form-check-label" for="">
                                       Hipertensión
                                     </label>
                                   </div>
                               </div>
                               <div class="col-3">
-                                <input class="form-check-input" type="checkbox" id="" name="enfermedades" value="enfermedades cardiacas">
+                                <input class="form-check-input" type="checkbox" id="" name="enfermedades[]" value="enfermedades cardiacas">
                                 <label class="form-check-label" for="">
                                   Enfermedades Cardiacas
                                 </label>
                               </div>
                               <div class="col-3">
-                                <input class="form-check-input" type="checkbox" id="" name="enfermedades" value="diabetes mellitus">
+                                <input class="form-check-input" type="checkbox" id="" name="enfermedades[]" value="diabetes mellitus">
                                 <label class="form-check-label" for="">
                                   Diabetes Mellitus
                                 </label>
                               </div>
 
                               <div class="col-3">
-                                <input class="form-check-input" type="checkbox" id="" name="enfermedades" value="hepatitis">
+                                <input class="form-check-input" type="checkbox" id="" name="enfermedades[]" value="hepatitis">
                                 <label class="form-check-label" for="">
                                   Hepatitis
                                 </label>
@@ -377,27 +377,27 @@
                             <div class="row">
                                 <div class="col-md-3">
                                   <div class="form-check">
-                                      <input class="form-check-input" type="checkbox" id="" name="enfermedades" value="fiebre reumatica">
+                                      <input class="form-check-input" type="checkbox" id="" name="enfermedades[]" value="fiebre reumatica">
                                       <label class="form-check-label" for="">
                                         Fiebre Reumática
                                       </label>
                                     </div>
                                 </div>
                                 <div class="col-3">
-                                  <input class="form-check-input" type="checkbox" id="" name="enfermedades" value="tuberculosis">
+                                  <input class="form-check-input" type="checkbox" id="" name="enfermedades[]" value="tuberculosis">
                                   <label class="form-check-label" for="">
                                     Tuberculosis
                                   </label>
                                 </div>
                                 <div class="col-3">
-                                  <input class="form-check-input" type="checkbox" id="" name="enfermedades" value="asma">
+                                  <input class="form-check-input" type="checkbox" id="" name="enfermedades[]" value="asma">
                                   <label class="form-check-label" for="">
                                     Asma
                                   </label>
                                 </div>
   
                                 <div class="col-3">
-                                  <input class="form-check-input" type="checkbox" id="" name="enfermedades" value="hemorragias">
+                                  <input class="form-check-input" type="checkbox" id="" name="enfermedades[]" value="hemorragias">
                                   <label class="form-check-label" for="">
                                     Hemorragias
                                   </label>
@@ -407,14 +407,14 @@
                             <div class="row">
                                 <div class="col-md-3">
                                   <div class="form-check">
-                                      <input class="form-check-input" type="checkbox" id="" name="enfermedades" value="epilepsias">
+                                      <input class="form-check-input" type="checkbox" id="" name="enfermedades[]" value="epilepsias">
                                       <label class="form-check-label" for="">
                                         Epilepsias
                                       </label>
                                     </div>
                                 </div>
                                 <div class="col-3">
-                                  <input class="form-check-input" type="checkbox" id="" name="enfermedades" value="alergias">
+                                  <input class="form-check-input" type="checkbox" id="" name="enfermedades[]" value="alergias">
                                   <label class="form-check-label" for="">
                                     Alergias
                                   </label>
@@ -493,27 +493,27 @@
                             <div class="row">
                               <div class="col-md-3">
                                 <div class="form-check">
-                                    <input class="form-check-input" type="checkbox" id="" name="habitos" value="tabaquismo">
+                                    <input class="form-check-input" type="checkbox" id="" name="habitos[]" value="tabaquismo">
                                     <label class="form-check-label" for="">
                                       Tabaquismo
                                     </label>
                                   </div>
                               </div>
                               <div class="col-3">
-                                <input class="form-check-input" type="checkbox" id="" name="habitos" value="alcohol">
+                                <input class="form-check-input" type="checkbox" id="" name="habitos[]" value="alcohol">
                                 <label class="form-check-label" for="">
                                   Alcohol
                                 </label>
                               </div>
                               <div class="col-3">
-                                <input class="form-check-input" type="checkbox" id="" name="habitos" value="duglucion atipica">
+                                <input class="form-check-input" type="checkbox" id="" name="habitos[]" value="duglucion atipica">
                                 <label class="form-check-label" for="">
                                   Duglución atípica
                                 </label>
                               </div>
 
                               <div class="col-3">
-                                <input class="form-check-input" type="checkbox" id="" name="habitos" value="respiracion bucal">
+                                <input class="form-check-input" type="checkbox" id="" name="habitos[]" value="respiracion bucal">
                                 <label class="form-check-label" for="">
                                   Respiración bucal
                                 </label>
@@ -523,14 +523,14 @@
                             <div class="row">
                                 <div class="col-md-3">
                                   <div class="form-check">
-                                      <input class="form-check-input" type="checkbox" id="" name="habitos" value="bruxismo">
+                                      <input class="form-check-input" type="checkbox" id="" name="habitos[]" value="bruxismo">
                                       <label class="form-check-label" for="">
                                         Bruxismo
                                       </label>
                                     </div>
                                 </div>
                                 <div class="col-md-3">
-                                  <input class="form-check-input" type="checkbox" id="" name="habitos" value="succion digital">
+                                  <input class="form-check-input" type="checkbox" id="" name="habitos[]" value="succion digital">
                                   <label class="form-check-label" for="">
                                     Succión Digital
                                   </label>
@@ -558,5 +558,13 @@
     
     </form>
 
+    <script>
+        function calcularEdad() {
+            var fechaNacimiento = document.getElementById('fechaNacimiento').value;
+            var fechaActual = new Date();
+            var edad = fechaActual.getFullYear() - new Date(fechaNacimiento).getFullYear();
+            document.getElementById('edad').value = edad;
+        }
+    </script>
 
 @endsection

@@ -22,6 +22,8 @@ return new class extends Migration
             $table->integer('semanas_embarazo')->nullable();
             $table->string('otro_antecendente', 100)->nullable();
             $table->string('habitos', 255)->nullable();
+            $table->string('otra_enfermedad', 100)->nullable();
+            $table->string('otro_habito', 100)->nullable();
 
             //llave foranea
             $table->foreign('paciente_id')->references('id')->on('pacientes');

@@ -22,6 +22,7 @@ return new class extends Migration
             $table->string('parentesco_covid')->nullable();
             $table->string('grado_contagio')->nullable();
             $table->unsignedBigInteger('paciente_id')->nullable();
+            
 
             //llave foranea
             $table->foreign('paciente_id')->references('id')->on('pacientes');

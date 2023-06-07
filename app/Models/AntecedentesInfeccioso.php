@@ -28,9 +28,9 @@ use Illuminate\Database\Eloquent\Model;
  *
  * @package App\Models
  */
-class AntecedentesInfeccione extends Model
+class AntecedentesInfeccioso extends Model
 {
-	protected $table = 'antecedentes_infecciones';
+	protected $table = 'antecedentes_infecciosos';
 
 	protected $casts = [
 		'enfermedad_respiratoria' => 'bool',

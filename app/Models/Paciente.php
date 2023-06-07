@@ -38,7 +38,7 @@ class Paciente extends Model
 	protected $table = 'pacientes';
 
 	protected $casts = [
-		'fecha_nacimiento' => 'datetime',
+		'fecha_nacimiento' => 'date',
 		'edad' => 'int'
 	];
 
@@ -64,5 +64,14 @@ class Paciente extends Model
 	public function antecedentes_personales_familiares()
 	{
 		return $this->hasMany(AntecedentesPersonalesFamiliare::class);
+	}
+
+	public function calcularEdad(){
+	
+		$fecha_nacimiento = $this->fecha_nacimiento;
+		$fecha_actual = Carbon::now();
+		$edad = $fecha_nacimiento->diffInYears($fecha_actual);
+		$this->edad = $edad;
+
 	}
 }

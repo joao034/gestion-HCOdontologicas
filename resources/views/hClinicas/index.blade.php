@@ -9,26 +9,27 @@
     <table class="table">
         <thead class="bg-dark text-white">
             <tr>
-                <th scope="col">ID</th>
+                <th scope="col">Nº</th>
+                <th scope="col">Cédula</th>
                 <th scope="col">Nombres</th>
                 <th scope="col">Apellidos</th>
-                <th scope="col">Fec. Nacimiento</th>
+                <th scope="col">Celular</th>
                 <th>Acciones</th>
             </tr>
         </thead>
         <tbody>
             @foreach ($pacientes as $paciente)
             <tr class="">
-                <td scope="row">{{$paciente->cedula}}</td>
+                <td scope="row">{{$paciente->id}}</td>
+                <td>{{$paciente->cedula}}</td>
                 <td>{{$paciente->nombres}}</td>
                 <td>{{$paciente->apellidos}}</td>
-                <td>{{$paciente->fecha_nacimiento}}</td>
+                <td>{{$paciente->celular}}</td>
                 <td>
                     
                     <!--editar-->
-                    <button type="button" class="btn btn-success" data-bs-toggle="modal" data-bs-target="#edit{{$paciente->id}}">
-                        Editar
-                    </button>
+                    <a href="{{ route('hclinicas.edit', $paciente->id) }}" class="btn btn-success">Editar</a>
+
                     <!--eliminar-->
                     <button type="button" class="btn btn-danger" data-bs-toggle="modal" data-bs-target="#delete{{$paciente->id}}">
                         Eliminar
@@ -36,7 +37,6 @@
 
                 </td>
             </tr>
-            {{-- @include('pacientes.info') --}}
             @endforeach
 
         </tbody>

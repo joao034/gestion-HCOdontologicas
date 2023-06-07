@@ -5,6 +5,7 @@
  */
 
 namespace App\Models;
+use Illuminate\Http\Request;
 
 use Carbon\Carbon;
 use Illuminate\Database\Eloquent\Model;
@@ -55,4 +56,5 @@ class AntecedentesPersonalesFamiliare extends Model
 	{
 		return $this->belongsTo(Paciente::class);
 	}
+
 }

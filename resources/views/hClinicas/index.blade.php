@@ -37,10 +37,11 @@
 
                 </td>
             </tr>
+            @include('hClinicas.destroy')
             @endforeach
-
         </tbody>
     </table>
+    
 </div>
 
 @endsection

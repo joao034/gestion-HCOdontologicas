@@ -32,7 +32,7 @@ class HClinicaController extends Controller
     }
 
     /**
-     * Show the form for creating a new resource.
+     * Muestra la vista create.
      *
      * @return \Illuminate\Http\Response
      */
@@ -51,21 +51,11 @@ class HClinicaController extends Controller
     public function store(Request $request)
     {
         //
-        DB::beginTransaction();
         try {    
+            DB::beginTransaction();
             //insertar paciente
             $paciente = new Paciente();
-            $paciente->nombres = $request->input('nombres');
-            $paciente->apellidos = $request->input('apellidos');
-            $paciente->cedula = $request->input('cedula');
-            $paciente->sexo = $request->input('sexo');
-            $paciente->fecha_nacimiento = $request->input('fecha_nacimiento');
-            $paciente->calcularEdad();
-            $paciente->estado_civil = $request->input('estado_civil');
-            $paciente->ocupacion = $request->input('ocupacion');
-            $paciente->direccion = $request->input('direccion');
-            $paciente->celular = $request->input('celular');
-            $paciente->telef_convencional = $request->input('telef_convencional');
+            $this->asignarVariablesDePaciente($paciente, $request);
             $paciente->save();
 
             //insertar antecedentes infecciosos
@@ -75,6 +65,7 @@ class HClinicaController extends Controller
             $this->almacenarAntecedentePersonales($request, $paciente->id);
 
             DB::commit();
+
             return redirect()->route('hclinicas.index')->with('status', 'HClinica creado exitosamente');
 
         } catch (\Exception $e) {
@@ -86,62 +77,59 @@ class HClinicaController extends Controller
     /**
      * Display the specified resource.
      *
-     * @param  \App\Models\Autor  $autor
-     * @return \Illuminate\Http\Response
+     * @param  \App\Models\  $autor
+     * @return \Illuminate\Http\
      */
-    public function show(Autor $autor)
+    public function show()
     {
         //
     }
 
     /**
-     * Show the form for editing the specified resource.
+     * Muesta la vista info
      *
-     * @param  \App\Models\Autor  $autor
-     * @return \Illuminate\Http\Response
+     * @param  \App\Models\  $id_paciente
+     * @return \Illuminate\Http\
      */
     public function edit( int $id )
     {
-        //$hclinica = Paciente::find($id); // Obtener el registro específico a editar
-        return view('hclinicas.info');
+        $paciente = Paciente::find($id); // Obtener el registro específico a editar
+        //buscar los antecedentes infecciosos del paciente
+        $antInfecciosos = AntecedentesInfeccioso::where('paciente_id', $paciente->id)->first();
+        //buscar los antecedentes personales y familiares del paciente
+        $antPersonales = AntecedentesPersonalesFamiliare::where('paciente_id', $paciente->id)->first();
+        return view('hclinicas.edit', compact(['paciente', 'antInfecciosos', 'antPersonales']));
     }
 
     /**
-     * Update the specified resource in storage.
+     * Actualiza la hclinica del paciente en storage.
      *
      * @param  \Illuminate\Http\Request  $request
-     * @param  \App\Models\Autor  $autor
+     * @param  \App\Models\Paciente  $id_paciente
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, int $id)
+    public function update(Request $request, int $id_paciente)
     {
         //
-        //
-        DB::beginTransaction();
-        try {    
-            //insertar paciente
-            $paciente = Paciente::findOrFail($id);
-            $paciente->nombres = $request->input('nombres');
-            $paciente->apellidos = $request->input('apellidos');
-            $paciente->cedula = $request->input('cedula');
-            $paciente->sexo = $request->input('sexo');
-            $paciente->fecha_nacimiento = $request->input('fecha_nacimiento');
-            $paciente->calcularEdad();
-            $paciente->estado_civil = $request->input('estado_civil');
-            $paciente->ocupacion = $request->input('ocupacion');
-            $paciente->direccion = $request->input('direccion');
-            $paciente->celular = $request->input('celular');
-            $paciente->telef_convencional = $request->input('telef_convencional');
+        try { 
+            DB::beginTransaction();   
+            //buscar paciente
+            $paciente = Paciente::findOrFail($id_paciente);
+            $this->asignarVariablesDePaciente($paciente, $request);
             $paciente->save();
 
             //buscar los antecedentes infecciosos del paciente
             $antInfecciosos = AntecedentesInfeccioso::where('paciente_id', $paciente->id)->first();
+            $this->asignarVariablesDeAntecedentesInfecciosos($antInfecciosos, $request);
+            $antInfecciosos->save();
 
             //buscar los antecedentes personales y familiares del paciente
             $antPersonales = AntecedentesPersonalesFamiliare::where('paciente_id', $paciente->id)->first();
+            $this->asignarVariablesDeAntecedentesPersonoles($antPersonales, $request);
+            $antPersonales->save();
 
             DB::commit();
-            return redirect()->route('hclinicas.index')->with('status', 'HClinica creado exitosamente');
+            return redirect()->route('hclinicas.index')->with('status', 'HClinica actualizada exitosamente');
 
         } catch (\Exception $e) {
             DB::rollback();
@@ -151,17 +139,36 @@ class HClinicaController extends Controller
     }
 
     /**
-     * Remove the specified resource from storage.
+     * Eliminar la hclinica del storage.
      *
-     * @param  \App\Models\Autor  $autor
+     * @param  \App\Models\Paciente  $id_paciente
      * @return \Illuminate\Http\Response
      */
     public function destroy(int $id)
     {
         //
-        $autor = Autor::find($id);
-        $autor->delete();
-        return redirect()->route('autores.index')->with('status', 'Autor eliminado exitosamente');
+        try {    
+            DB::beginTransaction();
+            //buscar paciente
+            $paciente = Paciente::findOrFail($id);
+            if( $paciente ){
+                //buscar antecedentes infecciosos
+                $antInfecciosos = AntecedentesInfeccioso::where('paciente_id', $id)->first();
+                $antInfecciosos->delete();
+
+                //buscar antecedentes personales y familiares
+                $antPersonales = AntecedentesPersonalesFamiliare::where('paciente_id', $id)->first();
+                $antPersonales->delete();
+
+                $paciente->delete();
+                DB::commit();
+                return redirect()->route('hclinicas.index')->with('status', 'HClinica eliminada exitosamente');
+            }
+
+        } catch (\Exception $e) {
+            DB::rollback();
+            throw $e;
+        }
     }
 
     private function almacenarAntecedentesInfecciosos( Request $request, int $paciente_id ){
@@ -186,6 +193,23 @@ class HClinicaController extends Controller
 
     }
 
+    private function asignarVariablesDePaciente($paciente ,Request $request){
+            $paciente->nombres = $request->input('nombres');
+            $paciente->apellidos = $request->input('apellidos');
+            $paciente->cedula = $request->input('cedula');
+            $paciente->sexo = $request->input('sexo');
+            
+            //almacenar la fecha de nacimiento con el formato dd-mm-yyyy
+            $paciente->fecha_nacimiento =  $request->input('fecha_nacimiento');
+            
+            $paciente->calcularEdad();
+            $paciente->estado_civil = $request->input('estado_civil');
+            $paciente->ocupacion = $request->input('ocupacion');
+            $paciente->direccion = $request->input('direccion');
+            $paciente->celular = $request->input('celular');
+            $paciente->telef_convencional = $request->input('telef_convencional');
+    }
+    
     //Asignar variables de la vista de informacion que vienen del request
     private function asignarVariablesDeAntecedentesInfecciosos($antInfecciosos, Request $request){
         
@@ -202,13 +226,22 @@ class HClinicaController extends Controller
     //Asignar variables de la vista de informacion que vienen del request
     private function asignarVariablesDeAntecedentesPersonoles($antPersonales, Request $request){
         
-        $antPersonales->enfermedades = implode(",", $request->input('enfermedades'));
+        //
+        $antPersonales->enfermedades = $request->input('enfermedades');
+        if($antPersonales->enfermedades != null || $antPersonales->enfermedades != ""){
+            $antPersonales->enfermedades = implode(",", $request->input('enfermedades'));
+        }
+
+        $antPersonales->habitos = $request->input('habitos');
+        if($antPersonales->habitos != null || $antPersonales->habitos != ""){
+            $antPersonales->habitos = implode(",", $request->input('habitos'));
+        }
+        
         $antPersonales->parentesco = $request->input('parentesco');
         $antPersonales->medicamento = $request->input('medicamento');
         $antPersonales->embarazada = $request->input('embarazada');
         $antPersonales->semanas_embarazo = $request->input('semanas_embarazo');
         $antPersonales->otro_antecendente = $request->input('otro_antecendente');
-        $antPersonales->habitos = implode(",", $request->input('habitos'));
         $antPersonales->otra_enfermedad = $request->input('otra_enfermedad');
         $antPersonales->otro_habito = $request->input('otro_habito');
     }

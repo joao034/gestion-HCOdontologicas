@@ -57,4 +57,31 @@ class AntecedentesPersonalesFamiliare extends Model
 		return $this->belongsTo(Paciente::class);
 	}
 
+	public function retornar_enfermedades($enfermedadABuscar) {
+
+		$enfermedadesArray = explode(',', $this->enfermedades);
+	
+		foreach ($enfermedadesArray as $enfermedad) {
+			if ( (trim( $enfermedad ) === trim( $enfermedadABuscar ))) {
+				return true;
+			}
+		}
+		return false;
+		
+			
+	}
+
+	public function retornar_habitos($habitoABuscar) {
+		
+		$habitosArray = explode(',', $this->habitos);
+		
+		foreach ($habitosArray as $habito) {
+			if ( (trim( $habito ) === trim( $habitoABuscar ))) {
+				return true;
+			}
+		}
+		return false;
+		
+	}
+
 }

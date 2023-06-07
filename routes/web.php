@@ -28,4 +28,4 @@ Auth::routes();
 Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
 
 
-Route::resource("hclinicas", App\Http\Controllers\HClinicaController::class);
+Route::resource("hclinicas", HClinicaController::class);

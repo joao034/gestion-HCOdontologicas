@@ -55,4 +55,5 @@ class AntecedentesInfeccioso extends Model
 	{
 		return $this->belongsTo(Paciente::class);
 	}
+
 }

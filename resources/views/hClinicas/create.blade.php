@@ -50,7 +50,8 @@
                                   <div class="mb-3">
                                       <label for="" class="form-label">Fecha de Nacimiento</label>
                                       <input type="date"
-                                        class="form-control" name="fecha_nacimiento" id="fechaNacimiento" aria-describedby="helpId" placeholder="" onchange="calcularEdad()" required>
+                                        class="form-control" name="fecha_nacimiento" id="fechaNacimiento" aria-describedby="helpId" placeholder="dd/mm/aaaa" 
+                                            pattern="\d{2}/\d{2}/\d{4}" onchange="calcularEdad()" required>
                                     </div>
                               </div>
                               <div class="col-md-2">
@@ -261,6 +262,12 @@
                                 </div>
                             </div>
 
+                            <div class="mb-3 col-6">
+                                <label for="" class="form-label">Razón de la hospitalización</label>
+                                <input type="text"
+                                  class="form-control" name="razon_hospitalizacion" id="" aria-describedby="helpId" placeholder="">
+                            </div>
+
                             <div class="row">
                                 <div class="col-md-9">
                                     <p>¿Ha sido detectado usted o algún miembro de su familia con COVID-19?</p>
@@ -268,7 +275,7 @@
                                 <div class="col-md-1">
                                     <div class="col-sm">
                                         <div class="form-check">
-                                        <input class="form-check-input" type="radio" id=""  name="detectado:covid" value="0">
+                                        <input class="form-check-input" type="radio" id=""  name="detectado_covid" value="0">
                                         <label class="form-check-label" for="">
                                             Sí
                                         </label>
@@ -278,7 +285,7 @@
                                 <div class="col-md-1">
                                     <div class="col-sm">
                                         <div class="form-check">
-                                        <input class="form-check-input" type="radio" id=""  name="detectado:covid" value="1">
+                                        <input class="form-check-input" type="radio" id=""  name="detectado_covid" value="1">
                                         <label class="form-check-label" for="">
                                             No
                                         </label>

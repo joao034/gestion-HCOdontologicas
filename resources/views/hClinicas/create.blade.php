@@ -179,7 +179,7 @@
                   </div>
       
                   <!--Antecedentes Infecciosos-->
-                  <div class="col-md-6">
+                  <div class="col-md-6 mt-4">
                       <div class="card text-start">
                           <div class="card-body">
                             <h5 class="card-title">Antecedentes Infecciosos</h5>
@@ -360,20 +360,20 @@
                                     </label>
                                   </div>
                               </div>
-                              <div class="col-3">
+                              <div class="col-md-3">
                                 <input class="form-check-input" type="checkbox" id="" name="enfermedades[]" value="enfermedades cardiacas">
                                 <label class="form-check-label" for="">
                                   Enfermedades Cardiacas
                                 </label>
                               </div>
-                              <div class="col-3">
+                              <div class="col-md-3">
                                 <input class="form-check-input" type="checkbox" id="" name="enfermedades[]" value="diabetes mellitus">
                                 <label class="form-check-label" for="">
                                   Diabetes Mellitus
                                 </label>
                               </div>
 
-                              <div class="col-3">
+                              <div class="col-md-3">
                                 <input class="form-check-input" type="checkbox" id="" name="enfermedades[]" value="hepatitis">
                                 <label class="form-check-label" for="">
                                   Hepatitis
@@ -390,20 +390,20 @@
                                       </label>
                                     </div>
                                 </div>
-                                <div class="col-3">
+                                <div class="col-md-3">
                                   <input class="form-check-input" type="checkbox" id="" name="enfermedades[]" value="tuberculosis">
                                   <label class="form-check-label" for="">
                                     Tuberculosis
                                   </label>
                                 </div>
-                                <div class="col-3">
+                                <div class="col-md-3">
                                   <input class="form-check-input" type="checkbox" id="" name="enfermedades[]" value="asma">
                                   <label class="form-check-label" for="">
                                     Asma
                                   </label>
                                 </div>
   
-                                <div class="col-3">
+                                <div class="col-md-3">
                                   <input class="form-check-input" type="checkbox" id="" name="enfermedades[]" value="hemorragias">
                                   <label class="form-check-label" for="">
                                     Hemorragias
@@ -420,20 +420,20 @@
                                       </label>
                                     </div>
                                 </div>
-                                <div class="col-3">
+                                <div class="col-md-3 mb-2">
                                   <input class="form-check-input" type="checkbox" id="" name="enfermedades[]" value="alergias">
                                   <label class="form-check-label" for="">
                                     Alergias
                                   </label>
                                 </div>
-                                <div class="col-3">
+                                <div class="col-md-3">
                                     <div class="mb-3">
                                         <input type="text"
                                           class="form-control" name="otra_enfermedad" id="" aria-describedby="helpId" placeholder="Otra Enfermedad">
                                       </div>
                                 </div>
 
-                                <div class="col-3">
+                                <div class="col-md-3">
                                     <div class="mb-3">
                                         <input type="text"
                                           class="form-control" name="parentesco" id="" aria-describedby="helpId" placeholder="Parentesco">
@@ -506,20 +506,20 @@
                                     </label>
                                   </div>
                               </div>
-                              <div class="col-3">
+                              <div class="col-md-3">
                                 <input class="form-check-input" type="checkbox" id="" name="habitos[]" value="alcohol">
                                 <label class="form-check-label" for="">
                                   Alcohol
                                 </label>
                               </div>
-                              <div class="col-3">
+                              <div class="col-md-3">
                                 <input class="form-check-input" type="checkbox" id="" name="habitos[]" value="duglucion atipica">
                                 <label class="form-check-label" for="">
                                   Duglución atípica
                                 </label>
                               </div>
 
-                              <div class="col-3">
+                              <div class="col-md-3">
                                 <input class="form-check-input" type="checkbox" id="" name="habitos[]" value="respiracion bucal">
                                 <label class="form-check-label" for="">
                                   Respiración bucal

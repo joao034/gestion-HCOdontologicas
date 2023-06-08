@@ -2,6 +2,7 @@
 
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\HClinicaController;
+use App\Http\Controllers\TratamientoController;
 use Illuminate\Support\Facades\Auth;
 
 /*
@@ -29,3 +30,4 @@ Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name
 
 
 Route::resource("hclinicas", HClinicaController::class);
+Route::resource("tratamientos", TratamientoController::class);

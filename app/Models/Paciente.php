@@ -74,4 +74,14 @@ class Paciente extends Model
 		$this->edad = $edad;
 
 	}
+
+	//metodo para buscar un paciente por su cedula, nombres o apellidos
+	public static function buscarPaciente($busqueda){
+		$pacientes = Paciente::where('cedula', 'LIKE', "%$busqueda%")
+								->orWhere('nombres', 'LIKE', "%$busqueda%")
+								->orWhere('apellidos', 'LIKE', "%$busqueda%")
+								->get();
+		return $pacientes;
+	}
+
 }

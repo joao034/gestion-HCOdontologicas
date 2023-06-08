@@ -22,13 +22,17 @@ class HClinicaController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function index( Request $request )
     {
-        //
-        $pacientes = Paciente::all();
-        $antecendentesInfecciones = AntecedentesInfeccioso::all();
-        $antecendentesPersonales = AntecedentesPersonalesFamiliare::all();
-        return view('hclinicas.index', compact(['pacientes', 'antecendentesInfecciones', 'antecendentesPersonales']));
+        $search = trim($request->get('buscador'));
+        $pacientes = DB::table('pacientes')->select('id', 'cedula', 'nombres', 'apellidos','edad', 'celular')
+                        ->where( 'cedula' , 'LIKE', '%' . $search . '%' )
+                        ->orWhere( 'nombres' , 'LIKE', '%' . $search . '%' )
+                        ->orWhere( 'apellidos' , 'LIKE', '%' . $search . '%' )
+                        ->orderBy('apellidos', 'asc')
+                        ->paginate(10);
+
+        return view('hclinicas.index', compact(['pacientes', 'search']));
     }
 
     /**

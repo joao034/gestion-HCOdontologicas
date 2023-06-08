@@ -50,8 +50,8 @@
                               <div class="col-md-5">
                                   <div class="mb-3">
                                       <label for="" class="form-label">Fecha de Nacimiento</label>
-                                      <input type="date" class="form-control" name="fecha_nacimiento" id="fechaNacimiento"
-                                        aria-describedby="helpId" placeholder="dd/mm/aaaa" pattern="\d{2}/\d{2}/\d{4}" required onchange="calcularEdad()">
+                                      <input type="date" value="{{ $paciente->fecha_nacimiento }}" class="form-control" max="<?php echo date('Y-m-d')?>" name="fecha_nacimiento" id="fechaNacimiento"
+                                         placeholder="dd-mm-aaaa" pattern="\d{4}-\d{2}-\d{2}" required onchange="calcularEdad()">
                                     </div>
                               </div>
                               <div class="col-md-2">

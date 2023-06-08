@@ -32,7 +32,7 @@
                     <ul class="navbar-nav me-auto">
                         
                         @auth
-                          <a class="nav-link active" href="{{ route('hclinicas.index') }}" aria-current="page">Historias Clinicas</a>
+                          <a class="nav-link active" href="{{ route('hclinicas.index') }}" aria-current="page">Historias Clínicas</a>
                           <a class="nav-link active" href="#">Odontogramas</a>
                           <a class="nav-link active" href="#">Presupuestos</a>
                           <a class="nav-link active" href="#">Tratamientos</a>

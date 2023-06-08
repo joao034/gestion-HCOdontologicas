@@ -50,7 +50,7 @@
                                   <div class="mb-3">
                                       <label for="" class="form-label">Fecha de Nacimiento</label>
                                       <input type="date"
-                                        class="form-control" name="fecha_nacimiento" id="fechaNacimiento" aria-describedby="helpId" placeholder="dd/mm/aaaa" 
+                                        class="form-control" name="fecha_nacimiento"  max="<?php echo date('Y-m-d')?>" id="fechaNacimiento" placeholder="dd/mm/aaaa" 
                                             pattern="\d{2}/\d{2}/\d{4}" onchange="calcularEdad()" required>
                                     </div>
                               </div>

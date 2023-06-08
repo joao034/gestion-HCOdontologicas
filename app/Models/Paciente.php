@@ -38,7 +38,6 @@ class Paciente extends Model
 	protected $table = 'pacientes';
 
 	protected $casts = [
-		'fecha_nacimiento' => 'date',
 		'edad' => 'int'
 	];
 
@@ -68,20 +67,14 @@ class Paciente extends Model
 
 	public function calcularEdad(){
 	
-		$fecha_nacimiento = $this->fecha_nacimiento;
+		$fecha_nacimiento = Carbon::parse($this->fecha_nacimiento);
 		$fecha_actual = Carbon::now();
-		$edad = $fecha_nacimiento->diffInYears($fecha_actual);
+		$edad = $fecha_nacimiento->diffInYears($fecha_actual, false);
 		$this->edad = $edad;
 
 	}
 
-	//metodo para buscar un paciente por su cedula, nombres o apellidos
-	public static function buscarPaciente($busqueda){
-		$pacientes = Paciente::where('cedula', 'LIKE', "%$busqueda%")
-								->orWhere('nombres', 'LIKE', "%$busqueda%")
-								->orWhere('apellidos', 'LIKE', "%$busqueda%")
-								->get();
-		return $pacientes;
-	}
+	//calcular edad sin aproximar
+
 
 }

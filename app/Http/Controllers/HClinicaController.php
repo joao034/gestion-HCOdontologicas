@@ -198,14 +198,12 @@ class HClinicaController extends Controller
     }
 
     private function asignarVariablesDePaciente($paciente ,Request $request){
+            
             $paciente->nombres = $request->input('nombres');
             $paciente->apellidos = $request->input('apellidos');
             $paciente->cedula = $request->input('cedula');
             $paciente->sexo = $request->input('sexo');
-            
-            //almacenar la fecha de nacimiento con el formato dd-mm-yyyy
             $paciente->fecha_nacimiento =  $request->input('fecha_nacimiento');
-            
             $paciente->calcularEdad();
             $paciente->estado_civil = $request->input('estado_civil');
             $paciente->ocupacion = $request->input('ocupacion');

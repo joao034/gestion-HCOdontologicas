@@ -36,7 +36,7 @@
                           <a class="nav-link active" href="#">Odontogramas</a>
                           <a class="nav-link active" href="#">Presupuestos</a>
                           <a class="nav-link active" href="{{ route('tratamientos.index') }}">Tratamientos</a>
-                          <a class="nav-link active" href="#">Especialidades</a>
+                          <a class="nav-link active" href="{{ route('especialidades.index') }}">Especialidades</a>
                           <a class="nav-link active" href="#">Odontólogos</a>
                         @endauth
                   

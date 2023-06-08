@@ -19,9 +19,10 @@ use Illuminate\Database\Eloquent\Model;
  * @property string $apellidos
  * @property string $cedula
  * @property string $sexo
+ * @property string $celular
  * @property int $especialidad_id
  * 
- * @property Especialidade $especialidade
+ * @property Especialidad $especialidade
  *
  * @package App\Models
  */
@@ -38,10 +39,11 @@ class Odontologo extends Model
 		'apellidos',
 		'cedula',
 		'sexo',
+		'celular',
 		'especialidad_id'
 	];
 
-	public function especialidade()
+	public function especialidad()
 	{
 		return $this->belongsTo(Especialidade::class, 'especialidad_id');
 	}

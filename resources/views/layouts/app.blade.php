@@ -18,9 +18,9 @@
 </head>
 <body>
     <div id="app">
-        <nav class="navbar navbar-expand-md navbar-light bg-white shadow-sm">
+        <nav class="navbar navbar-expand-md navbar-light bg-primary shadow-sm">
             <div class="container">
-                <a class="navbar-brand" href="{{ url('/') }}">
+                <a class="navbar-brand text-white" href="{{ url('/') }}">
                     Saúde Medical Group
                 </a>
                 <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="{{ __('Toggle navigation') }}">
@@ -32,12 +32,12 @@
                     <ul class="navbar-nav me-auto">
                         
                         @auth
-                          <a class="nav-link active" href="{{ route('hclinicas.index') }}" aria-current="page">Historias Clínicas</a>
-                          <a class="nav-link active" href="#">Odontogramas</a>
-                          <a class="nav-link active" href="#">Presupuestos</a>
-                          <a class="nav-link active" href="{{ route('tratamientos.index') }}">Tratamientos</a>
-                          <a class="nav-link active" href="{{ route('especialidades.index') }}">Especialidades</a>
-                          <a class="nav-link active" href="#">Odontólogos</a>
+                          <a class="nav-link active text-white" href="{{ route('hclinicas.index') }}" aria-current="page">Historias Clínicas</a>
+                          <a class="nav-link active text-white" href="#">Odontogramas</a>
+                          <a class="nav-link active text-white" href="#">Presupuestos</a>
+                          <a class="nav-link active text-white" href="{{ route('tratamientos.index') }}">Tratamientos</a>
+                          <a class="nav-link active text-white" href="{{ route('especialidades.index') }}">Especialidades</a>
+                          <a class="nav-link active text-white" href="{{ route('odontologos.index') }}">Odontólogos</a>
                         @endauth
                   
                     </ul>
@@ -59,7 +59,7 @@
                             @endif
                         @else
                             <li class="nav-item dropdown">
-                                <a id="navbarDropdown" class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false" v-pre>
+                                <a id="navbarDropdown" class="nav-link dropdown-toggle text-white" href="#" role="button" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false" v-pre>
                                     {{ Auth::user()->name }}
                                 </a>
 
@@ -86,6 +86,7 @@
             <div class="row">
                 <div class="col-md-1"></div>
                 <div class="col-md-10">
+                    @include('components.flash_alerts')
                     @yield('content')
                 </div>
                 <div class="col-md-1"></div>

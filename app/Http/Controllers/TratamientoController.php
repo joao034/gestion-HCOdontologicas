@@ -5,9 +5,24 @@ namespace App\Http\Controllers;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\Models\Tratamiento;
+use Illuminate\Support\Facades\Validator;
 
 class TratamientoController extends Controller
 {
+
+    /**
+     * Valida los datos del tratamiento del formulario.
+     *
+     * @param  array  $data
+     * @return \Illuminate\Contracts\Validation\Validator
+     */
+    protected function validator(array $data)
+    {
+        return Validator::make($data, [
+            'nombre' => ['required', 'string', 'max:255'],
+            'precio' => ['required', 'numeric'],
+        ]);
+    }
 
     public function index()
     {
@@ -23,13 +38,14 @@ class TratamientoController extends Controller
     {
         try{
             $tratamiento = new Tratamiento();
-            $tratamiento->nombre = $request->nombre;
-            $tratamiento->precio = $request->precio;
-            $tratamiento->save();
+            //valida el ingreso de los datos
+            $this->validator($request->all())->validate();
+            $this->storeAndUpdate($request, $tratamiento);
+            
         }catch(\Exception $e){
-            return redirect()->route('tratamientos.index')->with('error', 'No se pudo crear el tratamiento');
+            return redirect()->route('tratamientos.index')->with('danger', 'No se pudo crear el tratamiento');
         }
-        return redirect()->route('tratamientos.index')->with('success', 'Tratamiento creado correctamente');
+        return redirect()->route('tratamientos.index')->with('message', 'Tratamiento creado correctamente');
     }
 
     public function show($id)
@@ -44,14 +60,15 @@ class TratamientoController extends Controller
     {
         try{
             $tratamiento = Tratamiento::find($id);
-            $tratamiento->nombre = $request->nombre;
-            $tratamiento->precio = $request->precio;
-            $tratamiento->update();
+            
+            //valida el ingreso de los datos
+            $this->validator($request->all())->validate();
+            $this->storeAndUpdate($request, $tratamiento);
 
         }catch(\Exception $e){
-            return redirect()->route('tratamientos.index')->with('error', 'No se pudo actualizar el tratamiento');
+            return redirect()->route('tratamientos.index')->with('danger', 'No se pudo actualizar el tratamiento');
         }
-        return redirect()->route('tratamientos.index')->with('success', 'Tratamiento actualizado correctamente');
+        return redirect()->route('tratamientos.index')->with('message', 'Tratamiento actualizado correctamente');
     }
 
     public function destroy($id)
@@ -60,8 +77,14 @@ class TratamientoController extends Controller
             $tratamiento = Tratamiento::find($id);
             $tratamiento->delete();
         }catch(\Exception $e){  
-            return redirect()->route('tratamientos.index')->with('error', 'No se pudo eliminar el tratamiento');
+            return redirect()->route('tratamientos.index')->with('danger', 'No se pudo eliminar el tratamiento');
         }
-        return redirect()->route('tratamientos.index')->with('success', 'Tratamiento eliminado correctamente');
+        return redirect()->route('tratamientos.index')->with('message', 'Tratamiento eliminado correctamente');
+    }
+
+    private function storeAndUpdate(Request $request, Tratamiento $tratamiento){
+        $tratamiento->nombre = $request->nombre;
+        $tratamiento->precio = $request->precio;
+        $tratamiento->save();
     }
 }

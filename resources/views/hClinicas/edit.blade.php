@@ -44,7 +44,7 @@
                                   <div class="mb-3">
                                       <label for="" class="form-label">Cédula</label>
                                       <input type="text"
-                                        class="form-control" name="cedula" id="" aria-describedby="helpId" placeholder="" required value="{{ $paciente->cedula }}">
+                                        class="form-control" name="cedula" minlength="10" id="" aria-describedby="helpId" placeholder="" required value="{{ $paciente->cedula }}">
                                     </div>
                               </div>
                               <div class="col-md-5">
@@ -155,7 +155,7 @@
                                 <div class="mb-3">
                                     <label for="" class="form-label">Celular</label>
                                     <input type="text"
-                                      class="form-control" name="celular" id="" aria-describedby="helpId" placeholder="" value="{{$paciente->celular}}">
+                                      class="form-control" name="celular" minlength="10" id="" aria-describedby="helpId" placeholder="" value="{{$paciente->celular}}">
                                 </div>
                             </div>
                             <div class="col-md-6">

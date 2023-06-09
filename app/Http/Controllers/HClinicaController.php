@@ -8,6 +8,7 @@ use App\Models\AntecedentesPersonalesFamiliare;
 use App\Models\Paciente;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Validator;
 
 class HClinicaController extends Controller
 {
@@ -15,6 +16,29 @@ class HClinicaController extends Controller
     public function __construct()
     {
         $this->middleware('auth');
+    }
+
+    /**
+     * Valida los datos de la HCOdontologica del formulario.
+     *
+     * @param  array  $data
+     * @return \Illuminate\Contracts\Validation\Validator
+     */
+    protected function validator(array $data)
+    {
+        return Validator::make($data, [
+            'nombres' => ['required', 'string', 'max:255'],
+            'apellidos' => ['required', 'string', 'max:255'],
+            'cedula' => ['required', 'string', 'min:10', 'max:10'],
+            'fecha_nacimiento' => ['required', 'date'],
+            'edad' => ['required', 'integer'],
+            'estado_civil' => ['required', 'string', 'max:255'],
+            'direccion' => ['required', 'string', 'max:255'],
+            'ocupacion' => ['nullable', 'string', 'max:255'],
+            'sexo' => ['required', 'string', 'max:255'],
+            'celular' => ['nullable', 'min:10', 'max:10'],
+            'telef_convencional' => ['nullable', 'min:6', 'max:9'],
+        ]);
     }
 
     /**
@@ -57,10 +81,11 @@ class HClinicaController extends Controller
         //
         try {    
             DB::beginTransaction();
-            //insertar paciente
+            //crear paciente
             $paciente = new Paciente();
-            $this->asignarVariablesDePaciente($paciente, $request);
-            $paciente->save();
+            //validar el ingreso de los datos
+            $this->validator($request->all())->validate();
+            $this->storeAndUpdatePaciente($paciente, $request);
 
             //insertar antecedentes infecciosos
             $this->almacenarAntecedentesInfecciosos($request, $paciente->id);
@@ -70,10 +95,11 @@ class HClinicaController extends Controller
 
             DB::commit();
 
-            return redirect()->route('hclinicas.index')->with('status', 'HClinica creado exitosamente');
+            return redirect()->route('hclinicas.index')->with('message', 'Historia Clinica creado exitosamente');
 
         } catch (\Exception $e) {
             DB::rollback();
+            return redirect()->route('hclinicas.index')->with('danger', 'No se pudo crear la Historia Clinica');
             throw $e;
         }
     }
@@ -119,8 +145,9 @@ class HClinicaController extends Controller
             DB::beginTransaction();   
             //buscar paciente
             $paciente = Paciente::findOrFail($id_paciente);
-            $this->asignarVariablesDePaciente($paciente, $request);
-            $paciente->save();
+            //validar el ingreso de los datos
+            $this->validator($request->all())->validate();
+            $this->storeAndUpdatePaciente($paciente, $request);
 
             //buscar los antecedentes infecciosos del paciente
             $antInfecciosos = AntecedentesInfeccioso::where('paciente_id', $paciente->id)->first();
@@ -133,10 +160,11 @@ class HClinicaController extends Controller
             $antPersonales->save();
 
             DB::commit();
-            return redirect()->route('hclinicas.index')->with('status', 'HClinica actualizada exitosamente');
+            return redirect()->route('hclinicas.index')->with('message', 'Historia Clínica actualizada exitosamente');
 
         } catch (\Exception $e) {
             DB::rollback();
+            return redirect()->route('hclinicas.index')->with('danger', 'No se pudo actualizar la Historia Clínica.' . $e->getMessage() . ' ');
             throw $e;
         }
 
@@ -166,11 +194,12 @@ class HClinicaController extends Controller
 
                 $paciente->delete();
                 DB::commit();
-                return redirect()->route('hclinicas.index')->with('status', 'HClinica eliminada exitosamente');
+                return redirect()->route('hclinicas.index')->with('message', 'Historia Clínica eliminada exitosamente');
             }
 
         } catch (\Exception $e) {
             DB::rollback();
+            return redirect()->route('hclinicas.index')->with('danger', 'No se pudo eliminar la Historia Clínica');
             throw $e;
         }
     }
@@ -197,7 +226,7 @@ class HClinicaController extends Controller
 
     }
 
-    private function asignarVariablesDePaciente($paciente ,Request $request){
+    private function storeAndUpdatePaciente( Paciente $paciente ,Request $request){
             
             $paciente->nombres = $request->input('nombres');
             $paciente->apellidos = $request->input('apellidos');
@@ -210,6 +239,7 @@ class HClinicaController extends Controller
             $paciente->direccion = $request->input('direccion');
             $paciente->celular = $request->input('celular');
             $paciente->telef_convencional = $request->input('telef_convencional');
+            $paciente->save();
     }
     
     //Asignar variables de la vista de informacion que vienen del request
@@ -227,8 +257,7 @@ class HClinicaController extends Controller
 
     //Asignar variables de la vista de informacion que vienen del request
     private function asignarVariablesDeAntecedentesPersonoles($antPersonales, Request $request){
-        
-        //
+  
         $antPersonales->enfermedades = $request->input('enfermedades');
         if($antPersonales->enfermedades != null || $antPersonales->enfermedades != ""){
             $antPersonales->enfermedades = implode(",", $request->input('enfermedades'));

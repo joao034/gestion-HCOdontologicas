@@ -15,7 +15,7 @@
             <tr>
                 <th scope="col">Nº</th>
                 <th scope="col">Especialidad</th>
-                <th scope="col">Descripcion</th>
+                <th scope="col">Descripción</th>
                 <th>Acciones</th>
             </tr>
         </thead>

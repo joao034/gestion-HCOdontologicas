@@ -6,6 +6,7 @@ use App\Http\Controllers\HClinicaController;
 use App\Http\Controllers\OdontologoController;
 use App\Http\Controllers\TratamientoController;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\App;
 
 /*
 |--------------------------------------------------------------------------
@@ -20,6 +21,17 @@ use Illuminate\Support\Facades\Auth;
 
 Route::get('/', function () {
     return view('layouts.app');
+});
+
+//idioma
+Route::get('/greeting/{locale}', function (string $locale) {
+    if (! in_array($locale, ['es',])) {
+        abort(400);
+    }
+ 
+    App::setLocale($locale);
+ 
+    // ...
 });
 
 Route::get('/inicio', function () {

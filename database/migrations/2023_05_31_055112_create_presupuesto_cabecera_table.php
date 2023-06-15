@@ -11,9 +11,15 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('odontogramas', function (Blueprint $table) {
+        Schema::create('presupuesto_cabecera', function (Blueprint $table) {
             $table->id();
             $table->timestamps();
+            $table->date('fecha');
+            $table->float('total', 8, 2);
+
+            //llaves foraneas
+            $table->foreignId('paciente_id')->constrained('pacientes');
+            
         });
     }
 
@@ -22,6 +28,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('odontogramas');
+        Schema::dropIfExists('presupuesto_cabecera');
     }
 };

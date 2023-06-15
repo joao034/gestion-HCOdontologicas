@@ -42,7 +42,7 @@ class HClinicaController extends Controller
     }
 
     /**
-     * Display a listing of the resource.
+     * Despliega la lista de pacientes.
      *
      * @return \Illuminate\Http\Response
      */
@@ -85,7 +85,7 @@ class HClinicaController extends Controller
             $paciente = new Paciente();
             //validar el ingreso de los datos
             $this->validator($request->all())->validate();
-            $this->storeAndUpdatePaciente($paciente, $request);
+            $this->guardarOActualizarPaciente($paciente, $request);
 
             //insertar antecedentes infecciosos
             $this->almacenarAntecedentesInfecciosos($request, $paciente->id);
@@ -140,24 +140,16 @@ class HClinicaController extends Controller
      */
     public function update(Request $request, int $id_paciente)
     {
-        //
         try { 
             DB::beginTransaction();   
-            //buscar paciente
             $paciente = Paciente::findOrFail($id_paciente);
             //validar el ingreso de los datos
             $this->validator($request->all())->validate();
-            $this->storeAndUpdatePaciente($paciente, $request);
+            $this->guardarOActualizarPaciente($paciente, $request);
 
-            //buscar los antecedentes infecciosos del paciente
-            $antInfecciosos = AntecedentesInfeccioso::where('paciente_id', $paciente->id)->first();
-            $this->asignarVariablesDeAntecedentesInfecciosos($antInfecciosos, $request);
-            $antInfecciosos->save();
+            $this->actualizarAntecedenteInfeccioso($request, $paciente->id);
 
-            //buscar los antecedentes personales y familiares del paciente
-            $antPersonales = AntecedentesPersonalesFamiliare::where('paciente_id', $paciente->id)->first();
-            $this->asignarVariablesDeAntecedentesPersonoles($antPersonales, $request);
-            $antPersonales->save();
+            $this->actualizarAntecedentePersonal($request, $paciente->id);
 
             DB::commit();
             return redirect()->route('hclinicas.index')->with('message', 'Historia Clínica actualizada exitosamente');
@@ -167,7 +159,6 @@ class HClinicaController extends Controller
             return redirect()->route('hclinicas.index')->with('danger', 'No se pudo actualizar la Historia Clínica.' . $e->getMessage() . ' ');
             throw $e;
         }
-
     }
 
     /**
@@ -178,19 +169,15 @@ class HClinicaController extends Controller
      */
     public function destroy(int $id)
     {
-        //
         try {    
             DB::beginTransaction();
             //buscar paciente
             $paciente = Paciente::findOrFail($id);
             if( $paciente ){
-                //buscar antecedentes infecciosos
-                $antInfecciosos = AntecedentesInfeccioso::where('paciente_id', $id)->first();
-                $antInfecciosos->delete();
 
-                //buscar antecedentes personales y familiares
-                $antPersonales = AntecedentesPersonalesFamiliare::where('paciente_id', $id)->first();
-                $antPersonales->delete();
+                $this->eliminarAntecedenteInfeccioso( $id );
+                
+                $this->eliminarAntecedentePersonal( $id );
 
                 $paciente->delete();
                 DB::commit();
@@ -226,7 +213,7 @@ class HClinicaController extends Controller
 
     }
 
-    private function storeAndUpdatePaciente( Paciente $paciente ,Request $request){
+    private function guardarOActualizarPaciente( Paciente $paciente ,Request $request){
             
             $paciente->nombres = $request->input('nombres');
             $paciente->apellidos = $request->input('apellidos');
@@ -276,4 +263,34 @@ class HClinicaController extends Controller
         $antPersonales->otra_enfermedad = $request->input('otra_enfermedad');
         $antPersonales->otro_habito = $request->input('otro_habito');
     }
+
+    private function actualizarAntecedenteInfeccioso( Request $request, Paciente $paciente ){
+        //buscar los antecedentes infecciosos del paciente
+        $antInfecciosos = AntecedentesInfeccioso::where('paciente_id', $paciente->id)->first();
+        $this->asignarVariablesDeAntecedentesInfecciosos($antInfecciosos, $request);
+        $antInfecciosos->save();
+    }
+
+    private function actualizarAntecedentePersonal( Request $request, Paciente $paciente ){
+        //buscar los antecedentes personales y familiares del paciente
+        $antPersonales = AntecedentesPersonalesFamiliare::where('paciente_id', $paciente->id)->first();
+        $this->asignarVariablesDeAntecedentesPersonoles($antPersonales, $request);
+        $antPersonales->save();
+    }
+
+    private function eliminarAntecedenteInfeccioso( int $id ){
+        //buscar antecedentes infecciosos
+        $antInfecciosos = AntecedentesInfeccioso::where('paciente_id', $id)->first();
+        $antInfecciosos->delete();
+    }
+
+    private function eliminarAntecedentePersonal( int $id ){
+        //buscar antecedentes personales y familiares
+        $antPersonales = AntecedentesPersonalesFamiliare::where('paciente_id', $id)->first();
+        $antPersonales->delete();
+    }
+
+
+
+
 }

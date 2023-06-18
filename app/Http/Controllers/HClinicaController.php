@@ -264,16 +264,16 @@ class HClinicaController extends Controller
         $antPersonales->otro_habito = $request->input('otro_habito');
     }
 
-    private function actualizarAntecedenteInfeccioso( Request $request, Paciente $paciente ){
+    private function actualizarAntecedenteInfeccioso( Request $request, int $id ){
         //buscar los antecedentes infecciosos del paciente
-        $antInfecciosos = AntecedentesInfeccioso::where('paciente_id', $paciente->id)->first();
+        $antInfecciosos = AntecedentesInfeccioso::where('paciente_id', $id)->first();
         $this->asignarVariablesDeAntecedentesInfecciosos($antInfecciosos, $request);
         $antInfecciosos->save();
     }
 
-    private function actualizarAntecedentePersonal( Request $request, Paciente $paciente ){
+    private function actualizarAntecedentePersonal( Request $request, int $id ){
         //buscar los antecedentes personales y familiares del paciente
-        $antPersonales = AntecedentesPersonalesFamiliare::where('paciente_id', $paciente->id)->first();
+        $antPersonales = AntecedentesPersonalesFamiliare::where('paciente_id', $id)->first();
         $this->asignarVariablesDeAntecedentesPersonoles($antPersonales, $request);
         $antPersonales->save();
     }

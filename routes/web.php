@@ -6,7 +6,7 @@ use App\Http\Controllers\HClinicaController;
 use App\Http\Controllers\OdontologoController;
 use App\Http\Controllers\TratamientoController;
 use Illuminate\Support\Facades\Auth;
-use Illuminate\Support\Facades\App;
+//use Illuminate\Support\Facades\App;
 
 /*
 |--------------------------------------------------------------------------
@@ -24,7 +24,7 @@ Route::get('/', function () {
 });
 
 //idioma
-Route::get('/greeting/{locale}', function (string $locale) {
+/*Route::get('/greeting/{locale}', function (string $locale) {
     if (! in_array($locale, ['es',])) {
         abort(400);
     }
@@ -32,7 +32,7 @@ Route::get('/greeting/{locale}', function (string $locale) {
     App::setLocale($locale);
  
     // ...
-});
+});*/
 
 Route::get('/inicio', function () {
     return view('login');
@@ -47,3 +47,7 @@ Route::resource("hclinicas", HClinicaController::class);
 Route::resource("tratamientos", TratamientoController::class);
 Route::resource("especialidades", EspecialidadController::class);
 Route::resource("odontologos", OdontologoController::class);
+
+Route::get('/odontograma', function () {
+    return view('odontogramas.odontograma');
+});

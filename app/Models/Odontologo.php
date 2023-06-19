@@ -7,6 +7,7 @@
 namespace App\Models;
 
 use Carbon\Carbon;
+use Illuminate\Database\Eloquent\Collection;
 use Illuminate\Database\Eloquent\Model;
 
 /**
@@ -19,10 +20,11 @@ use Illuminate\Database\Eloquent\Model;
  * @property string $apellidos
  * @property string $cedula
  * @property string $sexo
- * @property string $celular
  * @property int $especialidad_id
+ * @property string|null $celular
  * 
  * @property Especialidad $especialidade
+ * @property Collection|OdontogramaDetalle[] $odontograma_detalles
  *
  * @package App\Models
  */
@@ -39,12 +41,17 @@ class Odontologo extends Model
 		'apellidos',
 		'cedula',
 		'sexo',
-		'celular',
-		'especialidad_id'
+		'especialidad_id',
+		'celular'
 	];
 
 	public function especialidad()
 	{
 		return $this->belongsTo(Especialidad::class, 'especialidad_id');
+	}
+
+	public function odontograma_detalles()
+	{
+		return $this->hasMany(OdontogramaDetalle::class);
 	}
 }

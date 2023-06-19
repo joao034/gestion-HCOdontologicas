@@ -10,7 +10,7 @@ use Carbon\Carbon;
 use Illuminate\Database\Eloquent\Model;
 
 /**
- * Class AntecedentesInfeccione
+ * Class AntecedentesInfeccioso
  * 
  * @property int $id
  * @property Carbon|null $created_at
@@ -55,5 +55,4 @@ class AntecedentesInfeccioso extends Model
 	{
 		return $this->belongsTo(Paciente::class);
 	}
-
 }

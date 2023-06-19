@@ -3,9 +3,12 @@
 use App\Http\Controllers\EspecialidadController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\HClinicaController;
+use App\Http\Controllers\OdontogramaController;
 use App\Http\Controllers\OdontologoController;
+use App\Http\Controllers\PresupuestoController;
 use App\Http\Controllers\TratamientoController;
 use Illuminate\Support\Facades\Auth;
+
 //use Illuminate\Support\Facades\App;
 
 /*
@@ -47,7 +50,10 @@ Route::resource("hclinicas", HClinicaController::class);
 Route::resource("tratamientos", TratamientoController::class);
 Route::resource("especialidades", EspecialidadController::class);
 Route::resource("odontologos", OdontologoController::class);
+Route::resource("odontogramas", OdontogramaController::class);
+Route::resource("presupuestos", PresupuestoController::class);
 
-Route::get('/odontograma', function () {
-    return view('odontogramas.odontograma');
-});
+//Route::get('/odontograma', [OdontogramaController::class, 'odontograma'])->name('odontograma');
+
+
+

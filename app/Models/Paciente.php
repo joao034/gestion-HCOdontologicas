@@ -21,15 +21,17 @@ use Illuminate\Database\Eloquent\Model;
  * @property Carbon $fecha_nacimiento
  * @property int $edad
  * @property string $estado_civil
- * @property string $ocupacion
+ * @property string|null $ocupacion
  * @property string $direccion
  * @property string|null $celular
  * @property string|null $telef_convencional
  * @property Carbon|null $created_at
  * @property Carbon|null $updated_at
  * 
- * @property Collection|AntecedentesInfeccione[] $antecedentes_infecciones
+ * @property Collection|AntecedentesInfeccioso[] $antecedentes_infecciosos
  * @property Collection|AntecedentesPersonalesFamiliare[] $antecedentes_personales_familiares
+ * @property Collection|OdontogramaCabecera[] $odontograma_cabeceras
+ * @property Collection|PresupuestoCabecera[] $presupuesto_cabeceras
  *
  * @package App\Models
  */
@@ -55,14 +57,24 @@ class Paciente extends Model
 		'telef_convencional'
 	];
 
-	public function antecedentes_infecciones()
+	public function antecedentes_infecciosos()
 	{
-		return $this->hasMany(AntecedentesInfeccione::class);
+		return $this->hasMany(AntecedentesInfeccioso::class);
 	}
 
 	public function antecedentes_personales_familiares()
 	{
 		return $this->hasMany(AntecedentesPersonalesFamiliare::class);
+	}
+
+	public function odontogramasCabecera()
+	{
+		return $this->hasMany(Odontograma::class);
+	}
+
+	public function presupuesto_cabeceras()
+	{
+		return $this->hasMany(PresupuestoCabecera::class);
 	}
 
 	public function calcularEdad(){
@@ -73,8 +85,5 @@ class Paciente extends Model
 		$this->edad = $edad;
 
 	}
-
-	//calcular edad sin aproximar
-
 
 }

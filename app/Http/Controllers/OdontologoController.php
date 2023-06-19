@@ -21,7 +21,7 @@ class OdontologoController extends Controller
         return Validator::make($data, [
             'nombres' => ['required', 'string', 'max:255'],
             'apellidos' => ['required', 'string', 'max:255'],
-            'cedula' => ['required', 'string', 'min:10', 'max:10', 'unique:odontologos'],
+            'cedula' => ['required', 'string', 'min:10', 'max:10'],
             'sexo' => ['required', 'string', 'max:255'],
             'celular' => ['required', 'string', 'min:10', 'max:10'],
             'especialidad_id' => ['required', 'integer'],

@@ -34,8 +34,8 @@
                         
                         @auth
                           <a class="nav-link active text-white" href="{{ route('hclinicas.index') }}" aria-current="page">Historias Clínicas</a>
-                          <a class="nav-link active text-white" href="#">Odontogramas</a>
-                          <a class="nav-link active text-white" href="#">Presupuestos</a>
+                          <a class="nav-link active text-white" href="{{ route('odontogramas.index') }}">Odontogramas</a>
+                          <a class="nav-link active text-white" href="{{ route('presupuestos.index') }}">Presupuestos</a>
                           <a class="nav-link active text-white" href="{{ route('tratamientos.index') }}">Tratamientos</a>
                           <a class="nav-link active text-white" href="{{ route('especialidades.index') }}">Especialidades</a>
                           <a class="nav-link active text-white" href="{{ route('odontologos.index') }}">Odontólogos</a>

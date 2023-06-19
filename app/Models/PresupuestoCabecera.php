@@ -11,33 +11,33 @@ use Illuminate\Database\Eloquent\Collection;
 use Illuminate\Database\Eloquent\Model;
 
 /**
- * Class OdontogramaCabecera
+ * Class PresupuestoCabecera
  * 
  * @property int $id
  * @property Carbon|null $created_at
  * @property Carbon|null $updated_at
- * @property string|null $diagnostico
- * @property string|null $enfermedad_actual
- * @property Carbon $fecha_creacion
+ * @property Carbon $fecha
+ * @property float $total
  * @property int $paciente_id
  * 
  * @property Paciente $paciente
- * @property Collection|OdontogramaDetalle[] $odontograma_detalles
+ * @property Collection|PresupuestosDetalle[] $presupuestos_detalles
  *
  * @package App\Models
  */
-class Odontograma extends Model
+class PresupuestoCabecera extends Model
 {
-	protected $table = 'odontograma_cabecera';
+	protected $table = 'presupuesto_cabecera';
 
 	protected $casts = [
+		'fecha' => 'datetime',
+		'total' => 'float',
 		'paciente_id' => 'int'
 	];
 
 	protected $fillable = [
-		'diagnostico',
-		'enfermedad_actual',
-		'fecha_creacion',
+		'fecha',
+		'total',
 		'paciente_id'
 	];
 
@@ -46,8 +46,8 @@ class Odontograma extends Model
 		return $this->belongsTo(Paciente::class);
 	}
 
-	public function odontograma_detalles()
+	public function presupuestos_detalles()
 	{
-		return $this->hasMany(OdontogramaDetalle::class);
+		return $this->hasMany(PresupuestosDetalle::class, 'presupuesto_id');
 	}
 }

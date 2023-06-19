@@ -7,6 +7,7 @@
 namespace App\Models;
 
 use Carbon\Carbon;
+use Illuminate\Database\Eloquent\Collection;
 use Illuminate\Database\Eloquent\Model;
 
 /**
@@ -17,6 +18,9 @@ use Illuminate\Database\Eloquent\Model;
  * @property Carbon|null $updated_at
  * @property string $nombre
  * @property float $precio
+ * 
+ * @property Collection|OdontogramaDetalle[] $odontograma_detalles
+ * @property Collection|PresupuestosDetalle[] $presupuestos_detalles
  *
  * @package App\Models
  */
@@ -32,4 +36,14 @@ class Tratamiento extends Model
 		'nombre',
 		'precio'
 	];
+
+	public function odontograma_detalles()
+	{
+		return $this->hasMany(OdontogramaDetalle::class);
+	}
+
+	public function presupuestos_detalles()
+	{
+		return $this->hasMany(PresupuestosDetalle::class);
+	}
 }

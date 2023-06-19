@@ -5,7 +5,6 @@
  */
 
 namespace App\Models;
-use Illuminate\Http\Request;
 
 use Carbon\Carbon;
 use Illuminate\Database\Eloquent\Model;
@@ -24,6 +23,8 @@ use Illuminate\Database\Eloquent\Model;
  * @property int|null $semanas_embarazo
  * @property string|null $otro_antecendente
  * @property string|null $habitos
+ * @property string|null $otra_enfermedad
+ * @property string|null $otro_habito
  * 
  * @property Paciente|null $paciente
  *
@@ -83,5 +84,4 @@ class AntecedentesPersonalesFamiliare extends Model
 		return false;
 		
 	}
-
 }

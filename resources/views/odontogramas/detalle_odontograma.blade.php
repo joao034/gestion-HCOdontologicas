@@ -12,11 +12,11 @@
           <div class="row">
              <div class="mb-3">
               <label for="" class="form-label">Tratamientos</label>
-              <select class="form-select form-select-md" name="id_tratamiento" id="">
+              <select class="form-select form-select-md" name="tratamiento_id" id="">
                 <option selected>Select one</option>
-                <option value="">New Delhi</option>
-                <option value="">Istanbul</option>
-                <option value="">Jakarta</option>
+                @foreach ( $tratamientos as $tratamiento )
+                  <option value="{{ $tratamiento->id }}">{{ $tratamiento->nombre }}</option>
+                @endforeach
               </select>
              </div>
           </div>

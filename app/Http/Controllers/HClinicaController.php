@@ -6,6 +6,7 @@ use App\Http\Controllers\Controller;
 use App\Models\AntecedentesInfeccioso;
 use App\Models\AntecedentesPersonalesFamiliare;
 use App\Models\Paciente;
+use App\Models\Odontograma;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Validator;
@@ -85,14 +86,17 @@ class HClinicaController extends Controller
             $paciente = new Paciente();
             //validar el ingreso de los datos
             $this->validator($request->all())->validate();
-            $this->guardarOActualizarPaciente($paciente, $request);
+            $this->guardarOActualizarPaciente( $paciente, $request );
 
             //insertar antecedentes infecciosos
-            $this->almacenarAntecedentesInfecciosos($request, $paciente->id);
+            $this->almacenarAntecedentesInfecciosos( $request, $paciente->id );
 
             //insertar anteceentes personales y familiares
-            $this->almacenarAntecedentePersonales($request, $paciente->id);
+            $this->almacenarAntecedentePersonales( $request, $paciente->id );
 
+            //inserta el registro en la tabla odontogramaCabecera
+            $this->crearOdontograma( $paciente->id );
+            
             DB::commit();
 
             return redirect()->route('hclinicas.index')->with('message', 'Historia Clinica creado exitosamente');
@@ -288,6 +292,13 @@ class HClinicaController extends Controller
         //buscar antecedentes personales y familiares
         $antPersonales = AntecedentesPersonalesFamiliare::where('paciente_id', $id)->first();
         $antPersonales->delete();
+    }
+
+    private function crearOdontograma( int $id_paciente ){
+        $odontograma = new Odontograma();
+        $odontograma->paciente_id = $id_paciente;
+        $odontograma->fecha_creacion = now();
+        $odontograma->save();
     }
 
 

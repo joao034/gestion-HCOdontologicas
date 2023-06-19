@@ -12,6 +12,7 @@
             value= "{{ $search }}" aria-label="Recipient's username" aria-describedby="button-addon2">
         <button class="btn btn-warning" type="submit" id="button-addon2">Buscar</button>
     </div>
+</form>
 
 <a href="{{ route('hclinicas.create') }}" class="btn btn-primary">Nuevo historia clínica</a>
 

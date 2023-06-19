@@ -323,14 +323,14 @@
 <div class="row">
     <div class="col-md-6">
         <div class="form-floating mt-3">
-            <input type="text" class="form-control" id="floatingDiagnostico" placeholder="Diagnóstico">
+            <input type="text" class="form-control" id="floatingDiagnostico" placeholder="Diagnóstico" value="{{ $odontograma->diagnostico }}">
             <label for="floatingDiagnostico">Diagnóstico</label>
           </div>
     </div>
 
     <div class="col-md-6">
         <div class="form-floating mt-3">
-            <input type="text" class="form-control" id="floatingEnfermedadActual" placeholder="Enfermedad Actual">
+            <input type="text" class="form-control" value="{{ $odontograma->enfermedad_actual }}" id="floatingEnfermedadActual" placeholder="Enfermedad Actual">
             <label for="floatingEnfermedadActual">Enfermedad Actual</label>
           </div>
     </div>

@@ -27,7 +27,8 @@ use Illuminate\Database\Eloquent\Model;
  * @property OdontogramaCabecera $odontograma_cabecera
  * @property Odontologo $odontologo
  * @property Tratamiento $tratamiento
- *
+ * @property Simbolo $simbolo
+ * 
  * @package App\Models
  */
 class OdontogramaDetalle extends Model
@@ -38,18 +39,21 @@ class OdontogramaDetalle extends Model
 		'fecha' => 'datetime',
 		'odontograma_cabecera_id' => 'int',
 		'tratamiento_id' => 'int',
-		'odontologo_id' => 'int'
+		'odontologo_id' => 'int',
+		'simbolo_id' => 'int',
 	];
 
 	protected $fillable = [
 		'fecha',
 		'num_pieza_dental',
 		'cara_dental',
-		'simbolo',
+		'simbolo_id',
 		'observacion',
 		'odontograma_cabecera_id',
+		'estado',
 		'tratamiento_id',
-		'odontologo_id'
+		'odontologo_id',
+
 	];
 
 	public function odontograma_cabecera()
@@ -65,5 +69,10 @@ class OdontogramaDetalle extends Model
 	public function tratamiento()
 	{
 		return $this->belongsTo(Tratamiento::class);
+	}
+
+	public function simbolo()
+	{
+		return $this->belongsTo(Simbolo::class);
 	}
 }

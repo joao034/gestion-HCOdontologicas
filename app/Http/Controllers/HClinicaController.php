@@ -79,28 +79,19 @@ class HClinicaController extends Controller
      */
     public function store(Request $request)
     {
-        //
         try {    
             DB::beginTransaction();
-            //crear paciente
             $paciente = new Paciente();
-            //validar el ingreso de los datos
+            //validar los datos
             $this->validator($request->all())->validate();
             $this->guardarOActualizarPaciente( $paciente, $request );
-
-            //insertar antecedentes infecciosos
+            //insertar antecedentes
             $this->almacenarAntecedentesInfecciosos( $request, $paciente->id );
-
-            //insertar anteceentes personales y familiares
             $this->almacenarAntecedentePersonales( $request, $paciente->id );
-
             //inserta el registro en la tabla odontogramaCabecera
             $this->crearOdontograma( $paciente->id );
-            
             DB::commit();
-
             return redirect()->route('hclinicas.index')->with('message', 'Historia Clinica creado exitosamente');
-
         } catch (\Exception $e) {
             DB::rollback();
             return redirect()->route('hclinicas.index')->with('danger', 'No se pudo crear la Historia Clinica');

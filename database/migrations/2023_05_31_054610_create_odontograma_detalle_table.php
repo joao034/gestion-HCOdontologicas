@@ -19,8 +19,7 @@ return new class extends Migration
             $table->string('cara_dental', 100);
             $table->string('simbolo', 100)->nullable();
             $table->string('observacion', 255)->nullable();
-            //$table->string('color', 100)->nullable();
-            //$table->string('estado', 100)->nullable();
+            $table->string('estado', 25);
 
             //claves foraneas
             $table->foreignId('odontograma_cabecera_id')->constrained('odontograma_cabecera');

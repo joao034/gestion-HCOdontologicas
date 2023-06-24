@@ -20,3 +20,55 @@ background: #eee;
 	border-radius: 5px;
 	background-color: #0DB574;
 }
+
+.contenedor-botones {
+	display: flex;
+	justify-content: center;
+}
+
+.btn_simbolo_necesario{
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	border: none;
+	border-radius: 3px;
+	width: 25px;
+	height: 25px;
+	background-color:#dc3545;
+	color: white;
+	margin: 5px;
+	
+
+}
+
+.btn_simbolo_realizado{
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	border: none;
+	border-radius: 3px;
+	width: 25px;
+	height: 25px;
+	background-color:#3243a6;
+	color: white;
+	margin: 5px;
+}
+
+#btn_simbolo:hover, #btn_simbolo.clicked {
+	background-color: #0DB574;
+	color: white;
+}
+
+.btn_simbolo_necesario:hover{
+	cursor: pointer;
+	border: solid 1px #0DB574;
+	border-radius: 5px;
+	background-color: #0DB574;
+}
+
+.btn_simbolo_realizado:hover{
+	cursor: pointer;
+	border: solid 1px #0DB574;
+	border-radius: 5px;
+	background-color: #0DB574;
+}

@@ -12,7 +12,10 @@
         </div>
     </form>
     
-    <a name="" id="" class="btn btn-primary" href=" # " role="button">Nuevo Odontograma</a>
+    <button type="button" class="btn btn-primary btn-md" data-bs-toggle="modal" data-bs-target="#modalId">
+        Nuevo Odontograma
+    </button>
+    @include('odontogramas.nuevo')
     
     <div class="table-responsive">
         <br>

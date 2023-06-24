@@ -7,40 +7,69 @@
         </div>
         <div class="modal-body">
         
-          <form action="">
-        
+          <form action=" {{ route('odontogramas.store') }}" method="POST">
+            @csrf
+            @method('POST')
+
+            <input type="hidden" name="odontograma_cabecera_id" id="odontograma_cabecera_id">
+            <input type="hidden" name="cara_dental" id="cara_dental">
+            <input type="hidden" name="num_pieza_dental" id="num_pieza_dental">
+            <input type="hidden" name="simbolo_id" id="simbolo_id">
+
           <div class="row">
              <div class="mb-3">
               <label for="" class="form-label">Tratamientos</label>
               <select class="form-select form-select-md" name="tratamiento_id" id="">
-                <option selected>Select one</option>
+                <option selected>Seleccione un tratamiento</option>
                 @foreach ( $tratamientos as $tratamiento )
-                  <option value="{{ $tratamiento->id }}">{{ $tratamiento->nombre }}</option>
+                  <option value="{{ $tratamiento->id }}">{{ $tratamiento->nombre.' - $'. $tratamiento->precio }}</option>
                 @endforeach
               </select>
              </div>
           </div>
 
           <!--Simbolos-->
+          <div class="row" style="margin-top: 5px;border-top:">
+            <div class="card">
+              <div class="card-body">
+                <h6 class="card-title">Símbolos</h6>
+                <hr>
+                  <div class="row">
+                    <div class="col-lg-6 col-md-6 col-sm-6 col-xs-6"><label for="">Necesarios</label>
+                      <br>
+                      <div class="contenedor-botones">
+                        @foreach ( $simbolosRojos as $simboloRojo )
+                          <button type="button" class="btn_simbolo_necesario" id="btn_simbolo" data-bs-toggle="tooltip" data-bs-title="Default tooltip"
+                          onclick="agregar_simbolo( event, {{$simboloRojo->id}})"> {{ $simboloRojo->simbolo }} </button>
+                        @endforeach
+                      </div>
+                    </div>
+                    
+                      <div class="col-lg-6 col-md-6 col-sm-6 col-xs-6"><label for="">Realizados</label>
+                        <br>
+                        <div class="contenedor-botones">
+                          @foreach ( $simbolosAzules as $simboloAzul )
+                          <button type="button" class="btn_simbolo_realizado" id="btn_simbolo" title=" {{ $simboloAzul->nombre }}"
+                          onclick="agregar_simbolo( event, {{$simboloAzul->id}} )"> {{ $simboloAzul->simbolo }} </button>
+                        @endforeach
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>  
 
-          <div class="row" style="margin-top: 5px;border-top: solid 1px #F6ECEC;">
-            <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12" style="padding-top: 5px;display: none;" id="div_simbolos">
-                <button type="button" class="btn btn-danger btn-sm" onclick="ad_simbolo(1)">X</button>
-                <button type="button" class="btn btn-primary btn-sm" onclick="ad_simbolo(2)">X</button>
-
-                <button type="button" class="btn btn-danger btn-sm" onclick="ad_simbolo(3)">&#9650;</button>
-                <button type="button" class="btn btn-primary btn-sm" onclick="ad_simbolo(4)">&#9650;</button> 
-
-                <button type="button" class="btn btn-danger btn-sm" onclick="ad_simbolo(5)">O</button>
-                <button type="button" class="btn btn-primary btn-sm" onclick="ad_simbolo(6)">O</button>
-
-                <button type="button" class="btn btn-primary btn-sm" onclick="ad_simbolo(7)">I</button>
-
-                <button type="button" class="btn btn-danger btn-sm" onclick="ad_simbolo(8)">S</button>
-                <button type="button" class="btn btn-primary btn-sm" onclick="ad_simbolo(9)">S</button>
-                <button type="button" class="btn btn-default btn-sm" onclick="ad_simbolo(10)">S</button>
-            </div>       
-          </div>
+          <div class="row mt-2">
+            <div class="mb-3">
+             <label for="" class="form-label">Odontólogos</label>
+             <select class="form-select form-select-md" name="odontologo_id" id="">
+               <option selected>Seleccione un odontólogo</option>
+               @foreach ( $odontologos as $odontologo )
+                 <option value="{{ $odontologo->id }}">{{ $odontologo->nombres . ' ' . $odontologo->apellidos . ' - ' . $odontologo->especialidad->nombre }}</option>
+               @endforeach
+             </select>
+            </div>
+         </div>
 
           <div class="row">
             <div class="mb-3">
@@ -51,23 +80,38 @@
           </div>
 
 
-          </form>
+          
         </div>
-
-        
-
 
         <div class="modal-footer">
           <button type="button" class="btn btn-danger float-left">Quitar</button>
           <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cerrar</button>
-          <button type="button" class="btn btn-primary">Guardar</button>
+          <button type="submit" class="btn btn-primary">Guardar</button>
         </div>
+      </form>
       </div>
     </div>
 </div>
 
 <script>
-  function ad_simbolo(simbol) {
-    $('#simbolo').val(simbol);
+  function agregar_simbolo( event, simbolo_id ) {
+    $('#simbolo_id').val( simbolo_id );
+    //al hacer clicked se agrega o se quita el hover al boton 
+    var boton = event.target;
+    console.log(simbolo_id);
+    if (boton.classList.contains("clicked")) {
+      boton.classList.remove("clicked");
+    } else {
+      boton.classList.add("clicked");
+    }
   }
+
+  function crear( cara_dental, num_pieza_dental, odontograma_id ){
+    $('#cara_dental').val(cara_dental);
+    $('#num_pieza_dental').val(num_pieza_dental);
+    $('#odontograma_cabecera_id').val(odontograma_id);
+    $('#simbolo').val('');
+    console.log(cara_dental, num_pieza_dental, odontograma_id);
+  }
+
 </script>

@@ -320,6 +320,7 @@
 </div>
 <!-- Fin Cuadrante Inferior dentadura adulta -->
 
+<!-- Diagnostico y Enfermedad Actual -->
 <div class="row">
     <div class="col-md-6">
         <div class="form-floating mt-3">

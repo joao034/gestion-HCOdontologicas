@@ -22,9 +22,7 @@ use Illuminate\Support\Facades\Auth;
 |
 */
 
-Route::get('/', function () {
-    return view('layouts.app');
-});
+
 
 //idioma
 /*Route::get('/greeting/{locale}', function (string $locale) {
@@ -41,16 +39,22 @@ Route::get('/inicio', function () {
     return view('login');
 });
 
+Route::get('/', function () {
+    return view('layouts.app');
+});
+
 Auth::routes();
 
 Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
-
 
 Route::resource("hclinicas", HClinicaController::class);
 Route::resource("tratamientos", TratamientoController::class);
 Route::resource("especialidades", EspecialidadController::class);
 Route::resource("odontologos", OdontologoController::class);
 Route::resource("odontogramas", OdontogramaController::class);
+
+Route::get('/search', [OdontogramaController::class, 'search']);
+
 Route::resource("presupuestos", PresupuestoController::class);
 
 //Route::get('/odontograma', [OdontogramaController::class, 'odontograma'])->name('odontograma');

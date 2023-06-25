@@ -54,27 +54,42 @@ class Odontograma extends Model
 	}
 
 	//devuelve el color a pintar en la cara dental
-    public function pintarCaraDental( $cara_dental, $num_diente, $id_odontograma ){
+    public function getColorCaraDentalAPintar( $cara_dental, $num_diente, $id_odontograma ){
 
-        //encontrar el detalle del odontograma a pintar
+        //encontrar el ultimo detalle del odontograma a pintar
 		try{
-			$detalles_odontograma = DB::table('odontograma_detalle')
-								->where('num_pieza_dental', $num_diente)
-								->where('cara_dental', $cara_dental)
-								->where('odontograma_cabecera_id', $id_odontograma)
-								->get(); 
-
 			$color = '';
-			if( !$detalles_odontograma->isEmpty() ){
-				$ultimo_detalle = $detalles_odontograma->last();
-				$simbolo = Simbolo::find($ultimo_detalle->simbolo_id);
-				$color = 'background-color:'.$simbolo->color.';'; 
-			}
+			$ultimo_detalle = $this->getUltimoDetalleOdontograma( $cara_dental, $num_diente, $id_odontograma );
+			$simbolo = Simbolo::find($ultimo_detalle->simbolo_id);
+			$color = $simbolo->color; 
 			return $color;
 		}catch(\Exception $e){
 			return $e->getMessage();
 		}
-        
+	}	
 
-    }
+	public function getRutaImagenSimbolo( $num_diente, $id_odontograma ){
+		//encontrar el ultimo detalle del odontograma
+		try{
+			$rutaImagen = '';
+			$ultimo_detalle = $this->getUltimoDetalleOdontograma( 'central', $num_diente, $id_odontograma );
+			$simbolo = Simbolo::find($ultimo_detalle->simbolo_id);
+			$rutaImagen = $simbolo->ruta_imagen; 
+			return $rutaImagen;
+		}catch(\Exception $e){
+			return $e->getMessage();
+		}
+	}
+
+	public function getUltimoDetalleOdontograma( $cara_dental, $num_diente, $id_odontograma ){
+		$detalles_odontograma = DB::table('odontograma_detalle')
+								->where('num_pieza_dental', $num_diente)
+								->where('cara_dental', $cara_dental)
+								->where('odontograma_cabecera_id', $id_odontograma)
+								->get(); 
+		if( !$detalles_odontograma->isEmpty() )
+			$ultimo_detalle = $detalles_odontograma->last();
+		return $ultimo_detalle;
+	}
+
 }

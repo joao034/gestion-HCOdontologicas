@@ -10,7 +10,7 @@
               <!--Titulo-->
               <div class="row justify-content-center align-items-center g-2">
                   <div class="col-12">
-                      <h2>Historia Clínica Odontológica</h2>
+                      <h2 class="text-center">Historia Clínica Odontológica</h2>
                   </div>  
               </div>
               

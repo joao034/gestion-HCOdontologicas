@@ -11,7 +11,8 @@ class Simbolo extends Model{
 		'simbolo',
 		'color',
         'ruta_imagen',
-		'nombre'
+		'nombre',
+		'tipo'
 	];
 
 	public function odontograma_detalles()
@@ -21,6 +22,10 @@ class Simbolo extends Model{
 
 	public function getSimbolosPorColor( $color ){
 		return Simbolo::where('color', $color)->get();
+	}
+
+	public function getSimbolosPorTipo( $tipo ){
+		return Simbolo::where('tipo', $tipo)->get();
 	}
 
 }

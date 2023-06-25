@@ -58,9 +58,9 @@ class OdontogramaController extends Controller
             $detalle_odontograma->observacion = $request->observacion;
             //consultar el color del simbolo
             $simbolo = Simbolo::find($request->simbolo_id);
-            if($simbolo->color == '#dc3545'){ //si es rojo
+            if($simbolo->tipo == 'necesario'){ //si es rojo
                 $detalle_odontograma->estado = 'necesario';
-            }else if($simbolo->color == '#3243a6'){ //si es azul
+            }else if($simbolo->color == 'realizado'){ //si es azul
                 $detalle_odontograma->estado = 'realizado';
             }
             $detalle_odontograma->save();
@@ -80,10 +80,10 @@ class OdontogramaController extends Controller
         $tratamientos = Tratamiento::all();
         $odontologos = Odontologo::all();
         $simbolo = new Simbolo();
-        $rojo = '#dc3545';
-        $azul = '#3243a6';
-        $simbolosRojos = $simbolo->getSimbolosPorColor( $rojo );
-        $simbolosAzules = $simbolo->getSimbolosPorColor( $azul );
+        $necesario = 'necesario';
+        $realizado = 'realizado';
+        $simbolosRojos = $simbolo->getSimbolosPorTipo( $necesario );
+        $simbolosAzules = $simbolo->getSimbolosPorTipo( $realizado );
 
         return view('odontogramas.edit', compact(['tratamientos', 'odontograma', 'odontologos', 'simbolosRojos', 'simbolosAzules']));
     }

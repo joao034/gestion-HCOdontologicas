@@ -40,7 +40,7 @@
                       <div class="contenedor-botones">
                         @foreach ( $simbolosRojos as $simboloRojo )
                           <button type="button" class="btn_simbolo_necesario" id="btn_simbolo" data-bs-toggle="tooltip" data-bs-title="Default tooltip"
-                          onclick="agregar_simbolo( event, {{$simboloRojo->id}})"> {{ $simboloRojo->simbolo }} </button>
+                          onclick="agregar_simbolo( event, {{$simboloRojo->id}})"> @if ($simboloRojo->simbolo != 'ss') {{ $simboloRojo->simbolo }} @endif </button>
                         @endforeach
                       </div>
                     </div>
@@ -50,7 +50,7 @@
                         <div class="contenedor-botones">
                           @foreach ( $simbolosAzules as $simboloAzul )
                           <button type="button" class="btn_simbolo_realizado" id="btn_simbolo" title=" {{ $simboloAzul->nombre }}"
-                          onclick="agregar_simbolo( event, {{$simboloAzul->id}} )"> {{ $simboloAzul->simbolo }} </button>
+                          onclick="agregar_simbolo( event, {{$simboloAzul->id}} )"> @if ($simboloAzul->simbolo != 'ss') {{ $simboloAzul->simbolo }} @endif  </button>
                         @endforeach
                       </div>
                     </div>

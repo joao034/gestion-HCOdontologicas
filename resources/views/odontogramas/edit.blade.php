@@ -19,9 +19,13 @@
             @for($i=18;$i>10;$i--)
                 <div style="flex-grow: 1;margin-left: 5px;">
 
-                 <!-- simbolo -->          
+                 <!-- simbolos -->
+                 <?php
+                    $ruta = $odontograma->getRutaImagenSimbolo( $i, $odontograma->id);
+                    $imagen = asset("assets/img/".$ruta);
+                 ?>
                     
-                    <div style="width: 40px;height: auto;background-repeat: no-repeat;background-position: center center;background-size: cover;">
+                    <div style="width: 40px;height: auto;background: url('{{ $imagen }}');background-repeat: no-repeat;background-position: center center;background-size: cover;">
 
                         <div style="display: flex;justify-content: center;">
                             @include('odontogramas.dientes.superior')

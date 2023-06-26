@@ -42,6 +42,13 @@ class HClinicaController extends Controller
         ]);
     }
 
+    private function validarDatos( $request ){
+        $validator = $this->validator($request->all());
+        if ($validator->fails()) {
+            return redirect()->back()->withErrors($validator)->withInput();
+        }
+    }
+    
     /**
      * Despliega la lista de pacientes.
      *
@@ -67,7 +74,6 @@ class HClinicaController extends Controller
      */
     public function create()
     {
-        //
         return view("hclinicas.create");
     }
 
@@ -83,7 +89,8 @@ class HClinicaController extends Controller
             DB::beginTransaction();
             $paciente = new Paciente();
             //validar los datos
-            $this->validator($request->all())->validate();
+            $this->validarDatos($request);           
+
             $this->guardarOActualizarPaciente( $paciente, $request );
             //insertar antecedentes
             $this->almacenarAntecedentesInfecciosos( $request, $paciente->id );
@@ -94,7 +101,7 @@ class HClinicaController extends Controller
             return redirect()->route('hclinicas.index')->with('message', 'Historia Clinica creado exitosamente');
         } catch (\Exception $e) {
             DB::rollback();
-            return redirect()->route('hclinicas.index')->with('danger', 'No se pudo crear la Historia Clinica');
+            return redirect()->route('hclinicas.create')->with('danger', 'No se pudo crear la Historia Clinica');
             throw $e;
         }
     }

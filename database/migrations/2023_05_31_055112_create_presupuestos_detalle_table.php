@@ -15,10 +15,12 @@ return new class extends Migration
             $table->id();
             $table->timestamps();
             $table->integer('cantidad');
+            $table->string('piezas_dentales', 255)->nullable();
             $table->float('subtotal', 8, 2);
 
             //llaves foraneas
             $table->foreignId('presupuesto_id')->constrained('presupuesto_cabecera');
+            //$table->foreignId('odontograma_detalle_id')->constrained('odontograma_detalle');
             $table->foreignId('tratamiento_id')->constrained('tratamientos');
         });
     }

@@ -11,15 +11,13 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('presupuesto_cabecera', function (Blueprint $table) {
+        Schema::create('simbolos', function (Blueprint $table) {
             $table->id();
-            $table->timestamps();
-            $table->date('fecha');
-            $table->float('total', 8, 2);
-
-            //llaves foraneas
-            $table->foreignId('odontograma_cabecera_id')->constrained('odontograma_cabecera');
-            
+            $table->string('simbolo', 10);
+            $table->string('color', 10)->nullable();
+            $table->string('ruta_imagen', 100)->nullable();
+            $table->string('nombre', 50);   
+            $table->string('tipo', 20);
         });
     }
 
@@ -28,6 +26,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('presupuesto_cabecera');
+        Schema::dropIfExists('simbolos');
     }
 };

@@ -92,4 +92,11 @@ class Odontograma extends Model
 		return $ultimo_detalle;
 	}
 
+	public function getNumeroDeOdontogramasDeUnPaciente( $paciente_id ){
+		$odontogramas = DB::table('odontograma_cabecera')
+								->where('paciente_id', $paciente_id)
+								->get(); 
+		return $odontogramas->count();
+	}
+
 }

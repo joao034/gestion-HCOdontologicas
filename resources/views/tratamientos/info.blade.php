@@ -47,7 +47,7 @@
             @csrf  
             @method('DELETE')
             <div class="modal-body">
-                Estas seguro de eliminar al autor <strong>{{ $tratamiento->nombre }}?</strong>
+                ¿Está seguro de eliminar al autor <strong>{{ $tratamiento->nombre }}?</strong>
             </div>
         
             <div class="modal-footer">

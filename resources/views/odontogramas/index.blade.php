@@ -7,15 +7,10 @@
         @method('GET')
         <div class="input-group mb-3">
             <input type="text" class="form-control" name="search" placeholder="Buscar por cédula, nombres o apellidos" 
-                value= "{{ $search }}" aria-label="Recipient's username" aria-describedby="button-addon2">
+              value="{{ $search }}" aria-label="Recipient's username" aria-describedby="button-addon2">
             <button class="btn btn-warning" type="submit" id="button-addon2">Buscar</button>
         </div>
     </form>
-    
-    <button type="button" class="btn btn-primary btn-md" data-bs-toggle="modal" data-bs-target="#modalId">
-        Nuevo Odontograma
-    </button>
-    @include('odontogramas.nuevo')
     
     <div class="table-responsive">
         <br>
@@ -44,20 +39,29 @@
                         
                         <td>
                             <!--editar-->
-                            <a href=" {{ route('odontogramas.edit', $odontograma->id) }} " id="" class="btn btn-success" href="#" role="button">Editar</a>
+                            <a href=" {{ route('detalleOdontogramas.edit', $odontograma->id) }} " id="" class="btn btn-success" href="#" role="button">Editar</a>
         
                             <!--eliminar-->
                             <button type="button" class="btn btn-danger" data-bs-toggle="modal" data-bs-target="#delete{{$odontograma->id}}">
                                 Eliminar
                             </button>
+
+                            <!--nuevo-->
+                            <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#nuevo{{$odontograma->id}}">
+                                Nuevo
+                            </button>
         
                         </td>
                     </tr>
+                    @include('odontogramas.destroy')
+                    @include('odontogramas.nuevo')
                     @endforeach
                 @endif
             </tbody>
         </table>
         <!--Paginacion-->
     </div>
+
+
 @endsection
 

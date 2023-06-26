@@ -12,4 +12,15 @@ class PresupuestoController extends Controller
     {
         return view('presupuestos.index');
     }
+
+    public function store( Request $request ){
+
+    }
+
+    public function edit( Request $request, int $id ){
+
+    }
+
+    
+
 }

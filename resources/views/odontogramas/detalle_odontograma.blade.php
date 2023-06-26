@@ -7,7 +7,7 @@
         </div>
         <div class="modal-body">
         
-          <form action=" {{ route('odontogramas.store') }}" method="POST">
+          <form action=" {{ route('detalleOdontogramas.store') }}" method="POST">
             @csrf
             @method('POST')
 

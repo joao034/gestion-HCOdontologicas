@@ -4,6 +4,7 @@ use App\Http\Controllers\EspecialidadController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\HClinicaController;
 use App\Http\Controllers\OdontogramaController;
+use App\Http\Controllers\OdontogramaDetalleController;
 use App\Http\Controllers\OdontologoController;
 use App\Http\Controllers\PresupuestoController;
 use App\Http\Controllers\TratamientoController;
@@ -52,12 +53,11 @@ Route::resource("tratamientos", TratamientoController::class);
 Route::resource("especialidades", EspecialidadController::class);
 Route::resource("odontologos", OdontologoController::class);
 Route::resource("odontogramas", OdontogramaController::class);
+Route::resource("detalleOdontogramas", OdontogramaDetalleController::class);
 
-Route::get('/search', [OdontogramaController::class, 'search']);
+Route::post('odontogramas/nuevo/{paciente_id}', 'App\Http\Controllers\OdontogramaController@nuevo')->name('odontogramas.nuevo');
 
 Route::resource("presupuestos", PresupuestoController::class);
-
-//Route::get('/odontograma', [OdontogramaController::class, 'odontograma'])->name('odontograma');
 
 
 

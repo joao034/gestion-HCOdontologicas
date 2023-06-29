@@ -36,7 +36,6 @@ class OdontogramaDetalle extends Model
 	protected $table = 'odontograma_detalle';
 
 	protected $casts = [
-		'fecha' => 'datetime',
 		'odontograma_cabecera_id' => 'int',
 		'tratamiento_id' => 'int',
 		'odontologo_id' => 'int',

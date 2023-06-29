@@ -22,6 +22,7 @@ class OdontogramaController extends Controller
             ->where('pacientes.nombres', 'LIKE', '%'.$search.'%')
             ->orWhere('pacientes.apellidos', 'LIKE', '%'.$search.'%')
             ->orWhere('pacientes.cedula', 'LIKE', '%'.$search.'%')
+            ->orderBy('pacientes.apellidos', 'asc')
             ->get();
         
         return view('odontogramas.index', compact(['search', 'odontogramas']));
@@ -32,8 +33,10 @@ class OdontogramaController extends Controller
             $odontograma = new Odontograma();
             $odontograma->fecha_creacion = Carbon::now();
             $odontograma->paciente_id = $paciente_id;
+            $odontograma->total = 0;
+            //dd($paciente_id);
             $odontograma->save();
-            return redirect()->route('odontogramas.index')->with('message', 'Odontograma creado correctamente');
+            return to_route('odontogramas.index')->with('message', 'Odontograma creado correctamente');
         }catch(\Exception $e){
             return view('odontogramas.index')->with('message', 'Error al crear el odontograma', $e->getMessage());
         }
@@ -46,16 +49,7 @@ class OdontogramaController extends Controller
 
     public function edit ( int $id ){
 
-        $odontograma = Odontograma::find($id);
-        $tratamientos = Tratamiento::all();
-        $odontologos = Odontologo::all();
-        $simbolo = new Simbolo();
-        $necesario = 'necesario';
-        $realizado = 'realizado';
-        $simbolosRojos = $simbolo->getSimbolosPorTipo( $necesario );
-        $simbolosAzules = $simbolo->getSimbolosPorTipo( $realizado );
 
-        return view('odontogramas.edit', compact(['tratamientos', 'odontograma', 'odontologos', 'simbolosRojos', 'simbolosAzules']));
     }
 
     public function destroy( int $id ){
@@ -66,12 +60,12 @@ class OdontogramaController extends Controller
                 //elimina los detalles del odontograma
                 OdontogramaDetalle::where('odontograma_cabecera_id', $id)->delete();
                 $odontograma->delete();
-                return redirect()->route('odontogramas.index')->with('message', 'Odontograma eliminado correctamente');
+                return to_route('odontogramas.index')->with('message', 'Odontograma eliminado correctamente');
             }
-            return redirect()->route('odontogramas.index')->with('danger', 'No se puede eliminar el odontograma del paciente, porque solo tiene un odontograma registrado');
+            return to_route('odontogramas.index')->with('danger', 'No se puede eliminar el odontograma del paciente, porque solo tiene un odontograma registrado');
             
         }catch(\Exception $e){
-            return redirect()->route('odontogramas.index')->with('danger', 'Error al eliminar el odontograma');
+            return to_route('odontogramas.index')->with('danger', 'Error al eliminar el odontograma');
         }
         
     }

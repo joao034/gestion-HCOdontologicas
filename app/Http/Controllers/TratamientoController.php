@@ -43,9 +43,9 @@ class TratamientoController extends Controller
             $this->storeAndUpdate($request, $tratamiento);
             
         }catch(\Exception $e){
-            return redirect()->route('tratamientos.index')->with('danger', 'No se pudo crear el tratamiento');
+            return to_route('tratamientos.index')->with('danger', 'No se pudo crear el tratamiento');
         }
-        return redirect()->route('tratamientos.index')->with('message', 'Tratamiento creado correctamente');
+        return to_route('tratamientos.index')->with('message', 'Tratamiento creado correctamente');
     }
 
     public function show($id)
@@ -66,9 +66,9 @@ class TratamientoController extends Controller
             $this->storeAndUpdate($request, $tratamiento);
 
         }catch(\Exception $e){
-            return redirect()->route('tratamientos.index')->with('danger', 'No se pudo actualizar el tratamiento');
+            return to_route('tratamientos.index')->with('danger', 'No se pudo actualizar el tratamiento');
         }
-        return redirect()->route('tratamientos.index')->with('message', 'Tratamiento actualizado correctamente');
+        return to_route('tratamientos.index')->with('message', 'Tratamiento actualizado correctamente');
     }
 
     public function destroy($id)
@@ -77,9 +77,9 @@ class TratamientoController extends Controller
             $tratamiento = Tratamiento::find($id);
             $tratamiento->delete();
         }catch(\Exception $e){  
-            return redirect()->route('tratamientos.index')->with('danger', 'No se pudo eliminar el tratamiento');
+            return to_route('tratamientos.index')->with('danger', 'No se pudo eliminar el tratamiento');
         }
-        return redirect()->route('tratamientos.index')->with('message', 'Tratamiento eliminado correctamente');
+        return to_route('tratamientos.index')->with('message', 'Tratamiento eliminado correctamente');
     }
 
     private function storeAndUpdate(Request $request, Tratamiento $tratamiento){

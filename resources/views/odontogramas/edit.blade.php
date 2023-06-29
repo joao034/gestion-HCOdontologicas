@@ -55,9 +55,13 @@
             @for($i=21;$i<=28;$i++)
                 <div style="flex-grow: 1;margin-left: 5px;">
 
-                 <!-- simbolo -->   
+                 <!-- simbolos -->
+                 <?php
+                    $ruta = $odontograma->getRutaImagenSimbolo( $i, $odontograma->id);
+                    $imagen = asset("assets/img/".$ruta);
+                 ?> 
                     
-                    <div style="width: 40px;height: auto;background-repeat: no-repeat;background-position: center center;background-size: cover;">
+                    <div style="width: 40px;height: auto; background: url('{{ $imagen }}'); background-repeat: no-repeat;background-position: center center;background-size: cover;">
 
                         <div style="display: flex;justify-content: center;">
                             @include('odontogramas.dientes.superior')
@@ -97,11 +101,15 @@
                     @if($i<=55)
                 <div style="flex-grow: 1;margin-left: 5px;">
 
-                   <!-- simbolo -->
+                   <!-- simbolos -->
+                    <?php
+                    $ruta = $odontograma->getRutaImagenSimbolo( $i, $odontograma->id);
+                    $imagen = asset("assets/img/".$ruta);
+                    ?>
                    
 
                      <!-- graficar el cuadrante III con los datos que hay en el -->
-                    <div style="width: 40px;height: auto;);background-repeat: no-repeat;background-position: center center;background-size: cover;">
+                    <div style="width: 40px;height: auto; background: url('{{ $imagen }}');background-repeat: no-repeat;background-position: center center;background-size: cover;">
 
                         <div style="display: flex;justify-content: center;">
                             @include('odontogramas.dientes.superior')
@@ -139,12 +147,16 @@
                     @if($i<=65)
                 <div style="flex-grow: 1;margin-left: 5px;">
 
-                 <!-- simbolo -->
+                 <!-- simbolos -->
+                 <?php
+                    $ruta = $odontograma->getRutaImagenSimbolo( $i, $odontograma->id);
+                    $imagen = asset("assets/img/".$ruta);
+                 ?>
                
 
                      <!-- graficar el cuadrante IV con los datos que hay en el -->
                     
-                    <div style="width: 40px;height: auto;background-repeat: no-repeat;background-position: center center;background-size: cover;">
+                    <div style="width: 40px;height: auto; background: url('{{ $imagen }}'); background-repeat: no-repeat;background-position: center center;background-size: cover;">
 
                         <div style="display: flex;justify-content: center;">
                             @include('odontogramas.dientes.superior')
@@ -187,9 +199,13 @@
                     @if($i<=85)
                 <div style="flex-grow: 1;margin-left: 5px;">
 
-                 <!-- simbolo -->
+                 <!-- simbolos -->
+                 <?php
+                    $ruta = $odontograma->getRutaImagenSimbolo( $i, $odontograma->id);
+                    $imagen = asset("assets/img/".$ruta);
+                 ?>
 
-                    <div style="width: 40px;height: auto;background-repeat: no-repeat;background-position: center center;background-size: cover;">
+                    <div style="width: 40px;height: auto; background: url('{{ $imagen }}'); background-repeat: no-repeat;background-position: center center;background-size: cover;">
 
                         <div style="display: flex;justify-content: center;">
                             @include('odontogramas.dientes.superior')
@@ -227,9 +243,13 @@
                     @if($i<=75)
                 <div style="flex-grow: 1;margin-left: 5px;">
 
-                 <!-- simbolo -->
+                 <!-- simbolos -->
+                 <?php
+                    $ruta = $odontograma->getRutaImagenSimbolo( $i, $odontograma->id);
+                    $imagen = asset("assets/img/".$ruta);
+                 ?>
                     
-                    <div style="width: 40px;height: auto;background-repeat: no-repeat;background-position: center center;background-size: cover;">
+                    <div style="width: 40px;height: auto; background: url('{{ $imagen }}'); background-repeat: no-repeat;background-position: center center;background-size: cover;">
 
                         <div style="display: flex;justify-content: center;">
                             @include('odontogramas.dientes.superior')
@@ -268,9 +288,13 @@
             @for($i=48;$i>40;$i--)
                 <div style="flex-grow: 1;margin-left: 5px;">
 
-                 <!-- simbolo -->          
+                 <!-- simbolos -->
+                 <?php
+                    $ruta = $odontograma->getRutaImagenSimbolo( $i, $odontograma->id);
+                    $imagen = asset("assets/img/".$ruta);
+                 ?>         
                     
-                    <div style="width: 40px;height: auto;background-repeat: no-repeat;background-position: center center;background-size: cover;">
+                    <div style="width: 40px;height: auto; background: url('{{ $imagen }}'); background-repeat: no-repeat;background-position: center center;background-size: cover;">
 
                         <div style="display: flex;justify-content: center;">
                             @include('odontogramas.dientes.superior')
@@ -300,9 +324,13 @@
             @for($i=31;$i<39;$i++)
                 <div style="flex-grow: 1;margin-left: 5px;">
 
-                 <!-- simbolo -->   
+                 <!-- simbolos -->
+                 <?php
+                    $ruta = $odontograma->getRutaImagenSimbolo( $i, $odontograma->id);
+                    $imagen = asset("assets/img/".$ruta);
+                 ?>
                     
-                    <div style="width: 40px;height: auto;background-repeat: no-repeat;background-position: center center;background-size: cover;">
+                    <div style="width: 40px;height: auto; background: url('{{ $imagen }}'); background-repeat: no-repeat;background-position: center center;background-size: cover;">
 
                         <div style="display: flex;justify-content: center;">
                             @include('odontogramas.dientes.superior')
@@ -342,6 +370,6 @@
 </div>
 
 <!-- Lista de Detalles -->
-
+@include('odontogramas.index_detalle')
 
 @endsection

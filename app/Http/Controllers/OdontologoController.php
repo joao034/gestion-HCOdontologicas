@@ -48,9 +48,9 @@ class OdontologoController extends Controller
             $this->storeAndUpdate($request, $odontologo);
 
         }catch(\Exception $e){
-            return redirect()->route('odontologos.index')->with('danger', 'No se pudo crear el odontólogo');
+            return to_route('odontologos.index')->with('danger', 'No se pudo crear el odontólogo');
         }
-        return redirect()->route('odontologos.index')->with('message', 'Odontólogo creado correctamente');
+        return to_route('odontologos.index')->with('message', 'Odontólogo creado correctamente');
     }
 
     public function show($id)
@@ -70,9 +70,9 @@ class OdontologoController extends Controller
             $this->storeAndUpdate($request, $odontologo);
 
         }catch(\Exception $e){
-            return redirect()->route('odontologos.index')->with('danger', 'No se pudo actualizar el odontólogo');
+            return to_route('odontologos.index')->with('danger', 'No se pudo actualizar el odontólogo');
         }
-        return redirect()->route('odontologos.index')->with('message', 'Odontólogo actualizado correctamente');
+        return to_route('odontologos.index')->with('message', 'Odontólogo actualizado correctamente');
     }
 
     public function destroy($id)
@@ -81,9 +81,9 @@ class OdontologoController extends Controller
             $odontologo = Odontologo::find($id);
             $odontologo->delete();
         }catch(\Exception $e){  
-            return redirect()->route('odontologos.index')->with('danger', 'No se pudo eliminar el odontólogo');
+            return to_route('odontologos.index')->with('danger', 'No se pudo eliminar el odontólogo');
         }
-        return redirect()->route('odontologos.index')->with('message', 'Odontólogo eliminado correctamente');
+        return to_route('odontologos.index')->with('message', 'Odontólogo eliminado correctamente');
     }
 
     private function storeAndUpdate(Request $request, $odontologo){

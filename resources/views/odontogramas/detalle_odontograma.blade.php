@@ -19,7 +19,7 @@
           <div class="row">
              <div class="mb-3">
               <label for="" class="form-label">Tratamientos</label>
-              <select class="form-select form-select-md" name="tratamiento_id" id="">
+              <select class="form-select form-select-md" name="tratamiento_id" id="" required>
                 <option selected>Seleccione un tratamiento</option>
                 @foreach ( $tratamientos as $tratamiento )
                   <option value="{{ $tratamiento->id }}">{{ $tratamiento->nombre.' - $'. $tratamiento->precio }}</option>
@@ -29,7 +29,7 @@
           </div>
 
           <!--Simbolos-->
-          <div class="row" style="margin-top: 5px;border-top:">
+          <div class="row" style="margin-top: 5px;border-top:"> 
             <div class="card">
               <div class="card-body">
                 <h6 class="card-title">Símbolos</h6>
@@ -38,21 +38,29 @@
                     <div class="col-lg-6 col-md-6 col-sm-6 col-xs-6"><label for="">Necesarios</label>
                       <br>
                       <div class="contenedor-botones">
-                        @foreach ( $simbolosRojos as $simboloRojo )
-                          <button type="button" class="btn_simbolo_necesario" id="btn_simbolo" data-bs-toggle="tooltip" data-bs-title="Default tooltip"
-                          onclick="agregar_simbolo( event, {{$simboloRojo->id}})"> @if ($simboloRojo->simbolo != 'ss') {{ $simboloRojo->simbolo }} @endif </button>
-                        @endforeach
+                        <div class="row">
+                          @foreach ( $simbolosRojos as $simboloRojo )
+                          <div class="col-5 col-sm-4 col-md-3 col-lg-2">
+                              <button type="button" class="btn_simbolo_necesario" id="btn_simbolo" data-bs-toggle="tooltip" data-bs-title="Default tooltip"
+                              onclick="agregar_simbolo( event, {{$simboloRojo->id}})"> @if ($simboloRojo->simbolo != 'ss') {{ $simboloRojo->simbolo }} @endif </button>
+                          </div>    
+                          @endforeach
+                        </div>
                       </div>
                     </div>
                     
                       <div class="col-lg-6 col-md-6 col-sm-6 col-xs-6"><label for="">Realizados</label>
                         <br>
                         <div class="contenedor-botones">
-                          @foreach ( $simbolosAzules as $simboloAzul )
-                          <button type="button" class="btn_simbolo_realizado" id="btn_simbolo" title=" {{ $simboloAzul->nombre }}"
-                          onclick="agregar_simbolo( event, {{$simboloAzul->id}} )"> @if ($simboloAzul->simbolo != 'ss') {{ $simboloAzul->simbolo }} @endif  </button>
-                        @endforeach
-                      </div>
+                          <div class="row">
+                            @foreach ( $simbolosAzules as $simboloAzul )
+                              <div class="col-5 col-sm-4 col-md-3 col-lg-2">
+                                <button type="button" class="btn_simbolo_realizado" id="btn_simbolo" title=" {{ $simboloAzul->nombre }}"
+                                onclick="agregar_simbolo( event, {{$simboloAzul->id}} )"> @if ($simboloAzul->simbolo != 'ss') {{ $simboloAzul->simbolo }} @endif  </button>
+                              </div>   
+                            @endforeach
+                          </div>
+                        </div>
                     </div>
                   </div>
                 </div>
@@ -62,7 +70,7 @@
           <div class="row mt-2">
             <div class="mb-3">
              <label for="" class="form-label">Odontólogos</label>
-             <select class="form-select form-select-md" name="odontologo_id" id="">
+             <select required class="form-select form-select-md" name="odontologo_id" id="">
                <option selected>Seleccione un odontólogo</option>
                @foreach ( $odontologos as $odontologo )
                  <option value="{{ $odontologo->id }}">{{ $odontologo->nombres . ' ' . $odontologo->apellidos . ' - ' . $odontologo->especialidad->nombre }}</option>
@@ -78,8 +86,6 @@
                 class="form-control" name="observacion" id="" aria-describedby="helpId" placeholder="">
             </div>
           </div>
-
-
           
         </div>
 

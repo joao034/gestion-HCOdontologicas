@@ -32,7 +32,8 @@ class Odontograma extends Model
 	protected $table = 'odontograma_cabecera';
 
 	protected $casts = [
-		'paciente_id' => 'int'
+		'paciente_id' => 'int',
+		'total' => 'float'
 	];
 
 	protected $fillable = [
@@ -40,7 +41,7 @@ class Odontograma extends Model
 		'enfermedad_actual',
 		'fecha_creacion',
 		'paciente_id',
-		'simbolo_id'
+		'total'
 	];
 
 	public function paciente()

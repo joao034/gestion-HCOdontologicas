@@ -13,21 +13,12 @@ use Carbon\Carbon;
 
 class OdontogramaDetalleController extends Controller
 {
-    public function index( Request $request)
+    public function index( int $odontograma_cabecera_id )
     {
-       
-    }
-
-    public function nuevo ( int $id ){
-        try{
-            $odontograma1 = Odontograma::find( $id );
-            $odontograma = new Odontograma();
-            $odontograma->paciente_id = $odontograma1->id_paciente;
-            $odontograma->save();
-            return view('odontogramas.index')->with('message', 'Odontograma creado correctamente');
-        }catch(\Exception $e){
-            return view('odontogramas.index')->with('message', 'Error al crear el odontograma', $e->getMessage());
-        }
+       $detalles_odontograma = OdontogramaDetalle::query()
+                             ->where('odontograma_cabecera_id', '=', "$odontograma_cabecera_id")
+                             ->get();
+        return view('odontogramas.index_detalle', compact(['detalles_odontograma']));
     }
 
     //guarda el detalle del odontograma
@@ -46,28 +37,27 @@ class OdontogramaDetalleController extends Controller
             $detalle_odontograma->tratamiento_id = $request->tratamiento_id;
             $detalle_odontograma->odontologo_id = $request->odontologo_id;
             $detalle_odontograma->observacion = $request->observacion;
-            //consultar el color del simbolo
+            //consultar el tipo del simbolo
             $simbolo = Simbolo::find($request->simbolo_id);
             if($simbolo->tipo == 'necesario'){ //si es rojo
                 $detalle_odontograma->estado = 'necesario';
-            }else if($simbolo->color == 'realizado'){ //si es azul
+            }else if($simbolo->tipo == 'realizado'){ //si es azul
                 $detalle_odontograma->estado = 'realizado';
             }
             $detalle_odontograma->save();
-    
+            return back()->with('message', 'Detalle del odontograma agreagado correctamente.');
+
         }catch(\Exception $e){
-            return $e->getMessage();
+            //return $e->getMessage();
+            return back()->with('danger', 'No se pudo guardar el detalle del odontograma.');
         }
-        
-        return $this->redireccionarOdontograma($request->odontograma_cabecera_id)
-                    ->with('message', 'Detalle agreagado correctamente');
 
     }
 
     public function edit ( int $id ){
 
         $odontograma = Odontograma::find($id);
-        $tratamientos = Tratamiento::all();
+        $tratamientos = Tratamiento::orderBy('nombre', 'asc')->get();
         $odontologos = Odontologo::all();
         $simbolo = new Simbolo();
         $necesario = 'necesario';
@@ -75,24 +65,23 @@ class OdontogramaDetalleController extends Controller
         $simbolosRojos = $simbolo->getSimbolosPorTipo( $necesario );
         $simbolosAzules = $simbolo->getSimbolosPorTipo( $realizado );
 
-        return view('odontogramas.edit', compact(['tratamientos', 'odontograma', 'odontologos', 'simbolosRojos', 'simbolosAzules']));
+        $detalles_odontograma = OdontogramaDetalle::query()
+                             ->where('odontograma_cabecera_id', '=', "$id")
+                             ->where('estado', '!=', 'presupuesto')
+                             ->get();
+
+        return view('odontogramas.edit', compact(['tratamientos', 'odontograma', 'detalles_odontograma',
+                                        'odontologos', 'simbolosRojos', 'simbolosAzules']));
     }
 
     public function destroy( int $id ){
         try{
-            
+           $detalle_odontograma = OdontogramaDetalle::find($id);
+           $detalle_odontograma->delete();
+            return back()->with('message', 'Detalle del odontograma eliminado correctamente.'); 
         }catch(\Exception $e){
-           
+            return back()->with('danger', 'No se pudo eliminar el detalle del odontograma.'); 
         }
         
     }
-
-    private function redireccionarOdontograma( int $id ){
-        
-        $odontograma = Odontograma::find($id);
-        $tratamientos = Tratamiento::all();
-        $odontologos = Odontologo::all();
-        return redirect()->route('odontogramas.edit', compact(['tratamientos', 'odontologos', 'odontograma']));
-    } 
-
 }

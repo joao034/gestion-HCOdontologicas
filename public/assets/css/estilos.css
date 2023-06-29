@@ -72,3 +72,11 @@ background: #eee;
 	border-radius: 5px;
 	background-color: #0DB574;
 }
+
+.selector {
+	background: url('{{ $imagen }}');
+	background-size: cover;
+	background-position: center;
+	width: 300px; /* Ancho deseado */
+	height: 200px; /* Alto deseado */
+}

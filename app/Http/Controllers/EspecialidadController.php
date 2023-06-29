@@ -43,9 +43,9 @@ class EspecialidadController extends Controller
             $this->storeAndUpdate($request, $especialidad);
             
         }catch(\Exception $e){
-            return redirect()->route('especialidades.index')->with('danger', 'No se pudo crear la especialidad');
+            return to_route('especialidades.index')->with('danger', 'No se pudo crear la especialidad');
         }
-        return redirect()->route('especialidades.index')->with('message', 'Especialidad creada correctamente');
+        return to_route('especialidades.index')->with('message', 'Especialidad creada correctamente');
     }
 
     public function show($id)
@@ -65,9 +65,9 @@ class EspecialidadController extends Controller
             $this->storeAndUpdate($request, $especialidad);
 
         }catch(\Exception $e){
-            return redirect()->route('especialidades.index')->with('danger', 'No se pudo actualizar la especialidad');
+            return to_route('especialidades.index')->with('danger', 'No se pudo actualizar la especialidad');
         }
-        return redirect()->route('especialidades.index')->with('message', 'Especialidad actualizada correctamente');
+        return to_route('especialidades.index')->with('message', 'Especialidad actualizada correctamente');
     }
 
     public function destroy($id)
@@ -76,9 +76,9 @@ class EspecialidadController extends Controller
             $especialidad = Especialidad::find($id);
             $especialidad->delete();
         }catch(\Exception $e){  
-            return redirect()->route('especialidades.index')->with('danger', 'No se pudo eliminar la especialidad');
+            return to_route('especialidades.index')->with('danger', 'No se pudo eliminar la especialidad');
         }
-        return redirect()->route('especialidades.index')->with('message', 'Especialidad eliminada correctamente');
+        return to_route('especialidades.index')->with('message', 'Especialidad eliminada correctamente');
     }
 
     private function storeAndUpdate( Request $request, Especialidad $especialidad ){

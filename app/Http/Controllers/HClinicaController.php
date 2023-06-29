@@ -98,10 +98,10 @@ class HClinicaController extends Controller
             //inserta el registro en la tabla odontogramaCabecera
             $this->crearOdontograma( $paciente->id );
             DB::commit();
-            return redirect()->route('hclinicas.index')->with('message', 'Historia Clinica creado exitosamente');
+            return to_route('hclinicas.index')->with('message', 'Historia Clinica creado exitosamente');
         } catch (\Exception $e) {
             DB::rollback();
-            return redirect()->route('hclinicas.create')->with('danger', 'No se pudo crear la Historia Clinica');
+            return to_route('hclinicas.create')->with('danger', 'No se pudo crear la Historia Clinica');
             throw $e;
         }
     }
@@ -154,11 +154,11 @@ class HClinicaController extends Controller
             $this->actualizarAntecedentePersonal($request, $paciente->id);
 
             DB::commit();
-            return redirect()->route('hclinicas.index')->with('message', 'Historia Clínica actualizada exitosamente');
+            return to_route('hclinicas.index')->with('message', 'Historia Clínica actualizada exitosamente');
 
         } catch (\Exception $e) {
             DB::rollback();
-            return redirect()->route('hclinicas.index')->with('danger', 'No se pudo actualizar la Historia Clínica.' . $e->getMessage() . ' ');
+            return to_route('hclinicas.index')->with('danger', 'No se pudo actualizar la Historia Clínica.' . $e->getMessage() . ' ');
             throw $e;
         }
     }
@@ -183,12 +183,12 @@ class HClinicaController extends Controller
 
                 $paciente->delete();
                 DB::commit();
-                return redirect()->route('hclinicas.index')->with('message', 'Historia Clínica eliminada exitosamente');
+                return to_route('hclinicas.index')->with('message', 'Historia Clínica eliminada exitosamente');
             }
 
         } catch (\Exception $e) {
             DB::rollback();
-            return redirect()->route('hclinicas.index')->with('danger', 'No se pudo eliminar la Historia Clínica');
+            return to_route('hclinicas.index')->with('danger', 'No se pudo eliminar la Historia Clínica');
             throw $e;
         }
     }
@@ -296,6 +296,7 @@ class HClinicaController extends Controller
         $odontograma = new Odontograma();
         $odontograma->paciente_id = $id_paciente;
         $odontograma->fecha_creacion = now();
+        $odontograma->total = 0;
         $odontograma->save();
     }
 

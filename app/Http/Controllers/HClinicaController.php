@@ -64,7 +64,7 @@ class HClinicaController extends Controller
                         ->orderBy('apellidos', 'asc')
                         ->paginate(10);
 
-        return view('hClinicas.index', compact(['pacientes', 'search']));
+        return view('hclinicas.index', compact(['pacientes', 'search']));
     }
 
     /**

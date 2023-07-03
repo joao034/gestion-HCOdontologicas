@@ -66,7 +66,7 @@
 
                     </td>
                 </tr>
-                @include('hClinicas.destroy')
+                @include('hclinicas.destroy')
                 @endforeach
             @endif
         </tbody>

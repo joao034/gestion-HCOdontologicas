@@ -34,11 +34,10 @@ class OdontogramaController extends Controller
             $odontograma->fecha_creacion = Carbon::now();
             $odontograma->paciente_id = $paciente_id;
             $odontograma->total = 0;
-            //dd($paciente_id);
             $odontograma->save();
             return to_route('odontogramas.index')->with('message', 'Odontograma creado correctamente');
         }catch(\Exception $e){
-            return view('odontogramas.index')->with('message', 'Error al crear el odontograma', $e->getMessage());
+            return to_route('odontogramas.index')->with('message', 'Error al crear el odontograma', $e->getMessage());
         }
     }
 

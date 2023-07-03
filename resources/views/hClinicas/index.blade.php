@@ -7,10 +7,17 @@
 <form action="{{ route('hclinicas.index') }}" method="GET">
     @csrf
     @method('GET')
-    <div class="input-group mb-3">
-        <input type="text" class="form-control" name="buscador" placeholder="Buscar por cédula, nombres o apellidos" 
-            value= "{{ $search }}" aria-label="Recipient's username" aria-describedby="button-addon2">
-        <button class="btn btn-warning" type="submit" id="button-addon2">Buscar</button>
+    
+    <div class="row">
+        <div class="input-group mb-3">
+            <div class="col-9 col-md-7 col-lg-5">
+                <input type="text" class="form-control" name="buscador" placeholder="Buscar por cédula, nombres o apellidos" 
+                    value= "{{ $search }}" aria-label="Recipient's username" aria-describedby="button-addon2">
+            </div>
+            <div class="col-3">
+                <button class="btn btn-warning" type="submit" id="button-addon2">Buscar</button>
+            </div>
+        </div>
     </div>
 </form>
 

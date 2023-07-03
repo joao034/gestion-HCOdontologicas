@@ -41,7 +41,7 @@
                         <div class="row">
                           @foreach ( $simbolosRojos as $simboloRojo )
                           <div class="col-5 col-sm-4 col-md-3 col-lg-2">
-                              <button type="button" class="btn_simbolo_necesario" id="btn_simbolo" data-bs-toggle="tooltip" data-bs-title="Default tooltip"
+                              <button type="button" class="btn_simbolo_necesario tt" id="btn_simbolo" data-bs-placement="bottom" title="{{ $simboloRojo->nombre }}}}"
                               onclick="agregar_simbolo( event, {{$simboloRojo->id}})"> @if ($simboloRojo->simbolo != 'ss') {{ $simboloRojo->simbolo }} @endif </button>
                           </div>    
                           @endforeach
@@ -90,7 +90,6 @@
         </div>
 
         <div class="modal-footer">
-          <button type="button" class="btn btn-danger float-left">Quitar</button>
           <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cerrar</button>
           <button type="submit" class="btn btn-primary">Guardar</button>
         </div>
@@ -117,7 +116,13 @@
     $('#num_pieza_dental').val(num_pieza_dental);
     $('#odontograma_cabecera_id').val(odontograma_id);
     $('#simbolo').val('');
-    console.log(cara_dental, num_pieza_dental, odontograma_id);
   }
 
+</script>
+<!-- Tooltips -->
+<script>
+  const tooltips = document.querySelectorAll('.tt')
+  tooltips.forEach((tooltip) => {
+    new bootstrap.Tooltip(tooltip)
+  })
 </script>

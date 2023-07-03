@@ -15,9 +15,8 @@ return new class extends Migration
             $table->id();
             $table->timestamps();
             $table->date('fecha');
-            $table->string('num_pieza_dental', 100);
-            $table->string('cara_dental', 100);
-            $table->string('simbolo', 100)->nullable();
+            $table->string('num_pieza_dental', 100)->nullable();
+            $table->string('cara_dental', 100)->nullable();
             $table->string('observacion', 255)->nullable();
             $table->string('estado', 25)->nullable();
 

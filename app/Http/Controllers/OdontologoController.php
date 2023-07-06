@@ -36,7 +36,10 @@ class OdontologoController extends Controller
 
     public function index()
     {
-        $odontologos = Odontologo::all();
+        $odontologos = Odontologo::query()
+            ->where('nombres', '!=', 'default')
+            ->get();    
+
         $especialidades = Especialidad::all();
         return view('odontologos.index', compact('odontologos', 'especialidades'));
     }

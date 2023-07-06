@@ -32,15 +32,16 @@
                   <div class="col-6">
                     <div class="mb-3">
                       <label for="" class="form-label">Cédula</label>
-                      <input type="text"class="form-control form-control-sm" name="cedula" minlength="10" id="" 
-                          aria-describedby="helpId" placeholder="" required>
+                      <input type="text"class="form-control form-control-sm" name="cedula" 
+                              minlength="10" maxlength="10" id="" 
+                              aria-describedby="helpId" placeholder="" required>
                   </div>
                   </div>
                   <div class="col-6">
                     <div class="mb-3">
                       <label for="" class="form-label">Celular</label>
                       <input type="text"
-                          class="form-control form-control-sm" name="celular" id="" minlength="10" 
+                          class="form-control form-control-sm" name="celular" id="" minlength="10" maxlength="10" 
                           aria-describedby="helpId" placeholder="" required>
                   </div>
                   </div>

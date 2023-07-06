@@ -7,13 +7,14 @@ use Illuminate\Http\Request;
 
 use App\Models\Odontograma;
 use App\Models\OdontogramaDetalle;
+use App\Models\Odontologo;
+use App\Models\Simbolo;
 use App\Models\Tratamiento;
 use Carbon\Carbon;
 use Exception;
 
 class PresupuestoController extends Controller
 {
-    //
 
     public function __construct()
     {
@@ -47,8 +48,8 @@ class PresupuestoController extends Controller
             $detalle_presupuesto->fecha = Carbon::now();
             $detalle_presupuesto->num_pieza_dental = "-";
             $detalle_presupuesto->cara_dental = "-";
-            $detalle_presupuesto->simbolo_id = 1;
-            $detalle_presupuesto->odontologo_id = 34;
+            $detalle_presupuesto->simbolo_id = Simbolo::first()->id;
+            $detalle_presupuesto->odontologo_id = Odontologo::first()->id;
             $detalle_presupuesto->estado = 'presupuesto';
             $detalle_presupuesto->save();
             return back()->with('message', 'Tratamiento agregado al presupuesto.');

@@ -10,6 +10,12 @@ use Illuminate\Support\Facades\Validator;
 
 class OdontologoController extends Controller
 {
+
+    public function __construct()
+    {
+        $this->middleware('auth');
+    }
+
     /**
      * Valida los datos del odontodólogo del formulario.
      *

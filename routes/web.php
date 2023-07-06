@@ -41,7 +41,7 @@ Route::get('/inicio', function () {
 });
 
 Route::get('/', function () {
-    return view('layouts.app');
+    return view('auth.login');
 });
 
 Auth::routes();
@@ -54,10 +54,10 @@ Route::resource("especialidades", EspecialidadController::class);
 Route::resource("odontologos", OdontologoController::class);
 Route::resource("odontogramas", OdontogramaController::class);
 Route::resource("detalleOdontogramas", OdontogramaDetalleController::class);
-
+Route::resource("presupuestos", PresupuestoController::class);
 Route::post('odontogramas/nuevo/{paciente_id}', 'App\Http\Controllers\OdontogramaController@nuevo')->name('odontogramas.nuevo');
 
-Route::resource("presupuestos", PresupuestoController::class);
+
 
 
 

@@ -4,15 +4,18 @@ namespace App\Http\Controllers;
 
 use App\Http\Controllers\Controller;
 use App\Models\Odontograma;
-use App\Models\Odontologo;
 use Illuminate\Http\Request;
-use App\Models\Tratamiento;
 use App\Models\OdontogramaDetalle;
-use App\Models\Simbolo;
 use Carbon\Carbon;
 
 class OdontogramaController extends Controller
 {
+
+    public function __construct()
+    {
+        $this->middleware('auth');
+    }
+
     public function index( Request $request)
     {
         $search = trim( $request->get('search') );
@@ -65,8 +68,7 @@ class OdontogramaController extends Controller
             
         }catch(\Exception $e){
             return to_route('odontogramas.index')->with('danger', 'Error al eliminar el odontograma');
-        }
-        
+        } 
     }
 
 }

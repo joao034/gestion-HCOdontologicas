@@ -13,6 +13,12 @@ use Carbon\Carbon;
 
 class OdontogramaDetalleController extends Controller
 {
+
+    public function __construct()
+    {
+        $this->middleware('auth');
+    }
+
     public function index( int $odontograma_cabecera_id )
     {
        $detalles_odontograma = OdontogramaDetalle::query()
@@ -27,8 +33,6 @@ class OdontogramaDetalleController extends Controller
         try{
             $detalle_odontograma = new OdontogramaDetalle();
 
-            //dd($request->all());
-
             $detalle_odontograma->fecha = Carbon::now();
             $detalle_odontograma->num_pieza_dental = $request->num_pieza_dental;
             $detalle_odontograma->cara_dental = $request->cara_dental;
@@ -37,12 +41,14 @@ class OdontogramaDetalleController extends Controller
             $detalle_odontograma->tratamiento_id = $request->tratamiento_id;
             $detalle_odontograma->odontologo_id = $request->odontologo_id;
             $detalle_odontograma->observacion = $request->observacion;
+            //$detalle_odontograma->estado = 'odontograma';
+
             //consultar el tipo del simbolo
             $simbolo = Simbolo::find($request->simbolo_id);
             if($simbolo->tipo == 'necesario'){ //si es rojo
                 $detalle_odontograma->estado = 'necesario';
             }else if($simbolo->tipo == 'realizado'){ //si es azul
-                $detalle_odontograma->estado = 'realizado';
+                 $detalle_odontograma->estado = 'realizado';
             }
             $detalle_odontograma->save();
             return back()->with('message', 'Detalle del odontograma agreagado correctamente.');

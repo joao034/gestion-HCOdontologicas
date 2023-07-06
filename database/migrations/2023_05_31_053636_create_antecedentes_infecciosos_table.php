@@ -11,7 +11,7 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('antecedentes_infecciones', function (Blueprint $table) {
+        Schema::create('antecedentes_infecciosos', function (Blueprint $table) {
             $table->id();
             $table->timestamps();
             $table->boolean('enfermedad_respiratoria')->nullable();

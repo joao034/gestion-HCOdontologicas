@@ -10,6 +10,11 @@ use Illuminate\Support\Facades\Validator;
 class TratamientoController extends Controller
 {
 
+    public function __construct()
+    {
+        $this->middleware('auth');
+    }
+
     /**
      * Valida los datos del tratamiento del formulario.
      *
@@ -60,7 +65,6 @@ class TratamientoController extends Controller
     {
         try{
             $tratamiento = Tratamiento::find($id);
-            
             //valida el ingreso de los datos
             $this->validator($request->all())->validate();
             $this->storeAndUpdate($request, $tratamiento);

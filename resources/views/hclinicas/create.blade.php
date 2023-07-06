@@ -246,8 +246,8 @@
                                 <div class="col-md-1">
                                     <div class="col-sm">
                                         <div class="form-check">
-                                        <input class="form-check-input" type="radio" name="enfermedad_respiratoria" value="0">
-                                        <label class="form-check-label" for="">
+                                        <input class="form-check-input" type="radio" name="enfermedad_respiratoria" value="0" id="radioEnfermedadSi">
+                                        <label class="form-check-label" for="radioEnfermedadSi">
                                             Sí
                                         </label>
                                         </div>
@@ -256,8 +256,8 @@
                                 <div class="col-md-1">
                                     <div class="col-sm">
                                         <div class="form-check">
-                                        <input class="form-check-input" type="radio" id=""  name="enfermedad_respiratoria" value="1">
-                                        <label class="form-check-label" for="">
+                                        <input class="form-check-input" type="radio" id="radioEnfermedadNo"  name="enfermedad_respiratoria" value="1">
+                                        <label class="form-check-label" for="radioEnfermedadNo">
                                             No
                                         </label>
                                         </div>
@@ -272,8 +272,8 @@
                                 <div class="col-md-1">
                                     <div class="col-sm">
                                         <div class="form-check">
-                                        <input class="form-check-input" type="radio" id=""  name="fiebre" value="0">
-                                        <label class="form-check-label" for="">
+                                        <input class="form-check-input" type="radio" id="radioFiebreSi"  name="fiebre" value="0">
+                                        <label class="form-check-label" for="radioFiebreSi">
                                             Sí
                                         </label>
                                         </div>
@@ -282,8 +282,8 @@
                                 <div class="col-md-1">
                                     <div class="col-sm">
                                         <div class="form-check">
-                                        <input class="form-check-input" type="radio" id=""  name="fiebre" value="1">
-                                        <label class="form-check-label" for="">
+                                        <input class="form-check-input" type="radio" id="radioFiebreNo"  name="fiebre" value="1">
+                                        <label class="form-check-label" for="radioFiebreNo">
                                             No
                                         </label>
                                         </div>
@@ -298,8 +298,8 @@
                                 <div class="col-md-1">
                                     <div class="col-sm">
                                         <div class="form-check">
-                                        <input class="form-check-input" type="radio" id=""  name="hospitalizado" value="0">
-                                        <label class="form-check-label" for="">
+                                        <input class="form-check-input" type="radio" id="radioHospitalizadoSi"  name="hospitalizado" value="0">
+                                        <label class="form-check-label" for="radioHospitalizadoSi">
                                             Sí
                                         </label>
                                         </div>
@@ -308,8 +308,8 @@
                                 <div class="col-md-1">
                                     <div class="col-sm">
                                         <div class="form-check">
-                                        <input class="form-check-input" type="radio" id=""  name="hospitalizado" value="1">
-                                        <label class="form-check-label" for="">
+                                        <input class="form-check-input" type="radio" id="radioHospitalizadoNo"  name="hospitalizado" value="1">
+                                        <label class="form-check-label" for="radioHospitalizadoNo">
                                             No
                                         </label>
                                         </div>
@@ -330,8 +330,8 @@
                                 <div class="col-md-1">
                                     <div class="col-sm">
                                         <div class="form-check">
-                                        <input class="form-check-input" type="radio" id=""  name="detectado_covid" value="0">
-                                        <label class="form-check-label" for="">
+                                        <input class="form-check-input" type="radio" id="radioCovidSi"  name="detectado_covid" value="0">
+                                        <label class="form-check-label" for="radioCovidSi">
                                             Sí
                                         </label>
                                         </div>
@@ -340,8 +340,8 @@
                                 <div class="col-md-1">
                                     <div class="col-sm">
                                         <div class="form-check">
-                                        <input class="form-check-input" type="radio" id=""  name="detectado_covid" value="1">
-                                        <label class="form-check-label" for="">
+                                        <input class="form-check-input" type="radio" id="radioCovidNo"  name="detectado_covid" value="1">
+                                        <label class="form-check-label" for="radioCovidNo">
                                             No
                                         </label>
                                         </div>
@@ -363,8 +363,8 @@
                                 <div class="col-md-2">
                                     <div class="col-sm">
                                         <div class="form-check">
-                                        <input class="form-check-input" type="radio" id=""  name="grado_contagio" value="alto">
-                                        <label class="form-check-label" for="">
+                                        <input class="form-check-input" type="radio" id="radioRiesgoAlto"  name="grado_contagio" value="alto">
+                                        <label class="form-check-label" for="radioRiesgoAlto">
                                             Alto
                                         </label>
                                         </div>
@@ -373,8 +373,8 @@
                                 <div class="col-md-2">
                                     <div class="col-sm">
                                         <div class="form-check">
-                                        <input class="form-check-input" type="radio" id=""  name="grado_contagio" value="medio">
-                                        <label class="form-check-label" for="">
+                                        <input class="form-check-input" type="radio" id="radioRiesgoMedio"  name="grado_contagio" value="medio">
+                                        <label class="form-check-label" for="radioRiesgoMedio">
                                             Medio
                                         </label>
                                         </div>
@@ -383,8 +383,8 @@
                                 <div class="col-md-2">
                                     <div class="col-sm">
                                         <div class="form-check">
-                                        <input class="form-check-input" type="radio" id=""  name="grado_contagio" value="bajo">
-                                        <label class="form-check-label" for="">
+                                        <input class="form-check-input" type="radio" id="radioRiesgoBajo"  name="grado_contagio" value="bajo">
+                                        <label class="form-check-label" for="radioRiesgoBajo">
                                             Bajo
                                         </label>
                                         </div>
@@ -409,28 +409,28 @@
                             <div class="row">
                               <div class="col-md-3">
                                 <div class="form-check">
-                                    <input class="form-check-input" type="checkbox" id="" name="enfermedades[]" value="hipertension">
-                                    <label class="form-check-label" for="">
+                                    <input class="form-check-input" type="checkbox" id="checkHipertension" name="enfermedades[]" value="hipertension">
+                                    <label class="form-check-label" for="checkHipertension">
                                       Hipertensión
                                     </label>
                                   </div>
                               </div>
                               <div class="col-md-3">
-                                <input class="form-check-input" type="checkbox" id="" name="enfermedades[]" value="enfermedades cardiacas">
-                                <label class="form-check-label" for="">
+                                <input class="form-check-input" type="checkbox" id="checkEcardiacas" name="enfermedades[]" value="enfermedades cardiacas">
+                                <label class="form-check-label" for="checkEcardiacas">
                                   Enfermedades Cardiacas
                                 </label>
                               </div>
                               <div class="col-md-3">
-                                <input class="form-check-input" type="checkbox" id="" name="enfermedades[]" value="diabetes mellitus">
-                                <label class="form-check-label" for="">
+                                <input class="form-check-input" type="checkbox" id="checkDiabetes" name="enfermedades[]" value="diabetes mellitus">
+                                <label class="form-check-label" for="checkDiabetes">
                                   Diabetes Mellitus
                                 </label>
                               </div>
 
                               <div class="col-md-3">
-                                <input class="form-check-input" type="checkbox" id="" name="enfermedades[]" value="hepatitis">
-                                <label class="form-check-label" for="">
+                                <input class="form-check-input" type="checkbox" id="checkHepatitis" name="enfermedades[]" value="hepatitis">
+                                <label class="form-check-label" for="checkHepatitis">
                                   Hepatitis
                                 </label>
                               </div>
@@ -439,28 +439,28 @@
                             <div class="row">
                                 <div class="col-md-3">
                                   <div class="form-check">
-                                      <input class="form-check-input" type="checkbox" id="" name="enfermedades[]" value="fiebre reumatica">
-                                      <label class="form-check-label" for="">
+                                      <input class="form-check-input" type="checkbox" id="checkFiebreReumatica" name="enfermedades[]" value="fiebre reumatica">
+                                      <label class="form-check-label" for="checkFiebreReumatica">
                                         Fiebre Reumática
                                       </label>
                                     </div>
                                 </div>
                                 <div class="col-md-3">
-                                  <input class="form-check-input" type="checkbox" id="" name="enfermedades[]" value="tuberculosis">
-                                  <label class="form-check-label" for="">
+                                  <input class="form-check-input" type="checkbox" id="checkTuberculosis" name="enfermedades[]" value="tuberculosis">
+                                  <label class="form-check-label" for="checkTuberculosis">
                                     Tuberculosis
                                   </label>
                                 </div>
                                 <div class="col-md-3">
-                                  <input class="form-check-input" type="checkbox" id="" name="enfermedades[]" value="asma">
-                                  <label class="form-check-label" for="">
+                                  <input class="form-check-input" type="checkbox" id="checkAsma" name="enfermedades[]" value="asma">
+                                  <label class="form-check-label" for="checkAsma">
                                     Asma
                                   </label>
                                 </div>
   
                                 <div class="col-md-3">
-                                  <input class="form-check-input" type="checkbox" id="" name="enfermedades[]" value="hemorragias">
-                                  <label class="form-check-label" for="">
+                                  <input class="form-check-input" type="checkbox" id="checkHemorragias" name="enfermedades[]" value="hemorragias">
+                                  <label class="form-check-label" for="checkHemorragias">
                                     Hemorragias
                                   </label>
                                 </div>
@@ -469,15 +469,15 @@
                             <div class="row">
                                 <div class="col-md-3">
                                   <div class="form-check">
-                                      <input class="form-check-input" type="checkbox" id="" name="enfermedades[]" value="epilepsias">
-                                      <label class="form-check-label" for="">
+                                      <input class="form-check-input" type="checkbox" id="checkEpilepsias" name="enfermedades[]" value="epilepsias">
+                                      <label class="form-check-label" for="checkEpilepsias">
                                         Epilepsias
                                       </label>
                                     </div>
                                 </div>
                                 <div class="col-md-3 mb-2">
-                                  <input class="form-check-input" type="checkbox" id="" name="enfermedades[]" value="alergias">
-                                  <label class="form-check-label" for="">
+                                  <input class="form-check-input" type="checkbox" id="checkAlergias" name="enfermedades[]" value="alergias">
+                                  <label class="form-check-label" for="checkAlergias">
                                     Alergias
                                   </label>
                                 </div>
@@ -505,8 +505,8 @@
                                     <div class="col-md-1">
                                         <div class="col-sm">
                                             <div class="form-check">
-                                            <input class="form-check-input" type="radio" id=""  name="embarazada" value="0">
-                                            <label class="form-check-label" for="">
+                                            <input class="form-check-input" type="radio" id="radioEmbarazadaSi"  name="embarazada" value="0">
+                                            <label class="form-check-label" for="radioEmbarazadaSi">
                                                 Sí
                                             </label>
                                             </div>
@@ -515,8 +515,8 @@
                                     <div class="col-md-1">
                                         <div class="col-sm">
                                             <div class="form-check">
-                                            <input class="form-check-input" type="radio" id=""  name="embarazada" value="1">
-                                            <label class="form-check-label" for="">
+                                            <input class="form-check-input" type="radio" id="radioEmbarazadaNo"  name="embarazada" value="1">
+                                            <label class="form-check-label" for="radioEmbarazadaNo">
                                                 No
                                             </label>
                                             </div>
@@ -555,28 +555,28 @@
                             <div class="row">
                               <div class="col-md-3">
                                 <div class="form-check">
-                                    <input class="form-check-input" type="checkbox" id="" name="habitos[]" value="tabaquismo">
-                                    <label class="form-check-label" for="">
+                                    <input class="form-check-input" type="checkbox" id="checkTabaquismo" name="habitos[]" value="tabaquismo">
+                                    <label class="form-check-label" for="checkTabaquismo">
                                       Tabaquismo
                                     </label>
                                   </div>
                               </div>
                               <div class="col-md-3">
-                                <input class="form-check-input" type="checkbox" id="" name="habitos[]" value="alcohol">
-                                <label class="form-check-label" for="">
+                                <input class="form-check-input" type="checkbox" id="checkAlcohol" name="habitos[]" value="alcohol">
+                                <label class="form-check-label" for="checkAlcohol">
                                   Alcohol
                                 </label>
                               </div>
                               <div class="col-md-3">
-                                <input class="form-check-input" type="checkbox" id="" name="habitos[]" value="duglucion atipica">
-                                <label class="form-check-label" for="">
+                                <input class="form-check-input" type="checkbox" id="checkDuglucion" name="habitos[]" value="duglucion atipica">
+                                <label class="form-check-label" for="checkDuglucion">
                                   Duglución atípica
                                 </label>
                               </div>
 
                               <div class="col-md-3">
-                                <input class="form-check-input" type="checkbox" id="" name="habitos[]" value="respiracion bucal">
-                                <label class="form-check-label" for="">
+                                <input class="form-check-input" type="checkbox" id="checkRespiracion" name="habitos[]" value="respiracion bucal">
+                                <label class="form-check-label" for="checkRespiracion">
                                   Respiración bucal
                                 </label>
                               </div>
@@ -585,15 +585,15 @@
                             <div class="row">
                                 <div class="col-md-3">
                                   <div class="form-check">
-                                      <input class="form-check-input" type="checkbox" id="" name="habitos[]" value="bruxismo">
-                                      <label class="form-check-label" for="">
+                                      <input class="form-check-input" type="checkbox" id="checkBruxismo" name="habitos[]" value="bruxismo">
+                                      <label class="form-check-label" for="checkBruxismo">
                                         Bruxismo
                                       </label>
                                     </div>
                                 </div>
                                 <div class="col-md-3">
-                                  <input class="form-check-input" type="checkbox" id="" name="habitos[]" value="succion digital">
-                                  <label class="form-check-label" for="">
+                                  <input class="form-check-input" type="checkbox" id="checkSuccionDigital" name="habitos[]" value="succion digital">
+                                  <label class="form-check-label" for="checkSuccionDigital">
                                     Succión Digital
                                   </label>
                                 </div>

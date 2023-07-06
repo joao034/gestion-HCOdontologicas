@@ -7,6 +7,7 @@ use App\Models\AntecedentesInfeccioso;
 use App\Models\AntecedentesPersonalesFamiliare;
 use App\Models\Paciente;
 use App\Models\Odontograma;
+use App\Models\OdontogramaDetalle;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Validator;
@@ -101,7 +102,7 @@ class HClinicaController extends Controller
             return to_route('hclinicas.index')->with('message', 'Historia Clinica creado exitosamente');
         } catch (\Exception $e) {
             DB::rollback();
-            return to_route('hclinicas.create')->with('danger', 'No se pudo crear la Historia Clinica');
+            return to_route('hclinicas.create')->with('danger', 'No se pudo crear la Historia Clinica' . $e->getMessage() . ' ');
             throw $e;
         }
     }
@@ -178,9 +179,8 @@ class HClinicaController extends Controller
             if( $paciente ){
 
                 $this->eliminarAntecedenteInfeccioso( $id );
-                
                 $this->eliminarAntecedentePersonal( $id );
-
+                $this->eliminarOdontogramas( $id );
                 $paciente->delete();
                 DB::commit();
                 return to_route('hclinicas.index')->with('message', 'Historia Clínica eliminada exitosamente');
@@ -188,7 +188,7 @@ class HClinicaController extends Controller
 
         } catch (\Exception $e) {
             DB::rollback();
-            return to_route('hclinicas.index')->with('danger', 'No se pudo eliminar la Historia Clínica');
+            return to_route('hclinicas.index')->with('danger', 'No se pudo eliminar la Historia Clínica' . $e->getMessage() . ' ');
             throw $e;
         }
     }
@@ -291,6 +291,16 @@ class HClinicaController extends Controller
         $antPersonales = AntecedentesPersonalesFamiliare::where('paciente_id', $id)->first();
         $antPersonales->delete();
     }
+
+    private function eliminarOdontogramas ( $id ) {
+        //recupera todos los odontogramas del paciente
+        $odontogramas = Odontograma::where('paciente_id', $id)->get(); 
+                
+        foreach( $odontogramas as $odontograma ){
+            OdontogramaDetalle::where('odontograma_cabecera_id', $odontograma->id)->delete();
+            $odontograma->delete();
+        }
+}
 
     private function crearOdontograma( int $id_paciente ){
         $odontograma = new Odontograma();

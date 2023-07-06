@@ -21,7 +21,7 @@
     </div>
 </form>
 
-<a href="{{ route('hclinicas.create') }}" class="btn btn-primary">Nuevo historia clínica</a>
+<a href="{{ route('hclinicas.create') }}" class="btn btn-primary">Nueva historia clínica</a>
 
 
 <div class="table-responsive">

@@ -41,7 +41,6 @@ class OdontogramaDetalleController extends Controller
             $detalle_odontograma->tratamiento_id = $request->tratamiento_id;
             $detalle_odontograma->odontologo_id = $request->odontologo_id;
             $detalle_odontograma->observacion = $request->observacion;
-            //$detalle_odontograma->estado = 'odontograma';
 
             //consultar el tipo del simbolo
             $simbolo = Simbolo::find($request->simbolo_id);
@@ -54,7 +53,6 @@ class OdontogramaDetalleController extends Controller
             return back()->with('message', 'Detalle del odontograma agreagado correctamente.');
 
         }catch(\Exception $e){
-            //return $e->getMessage();
             return back()->with('danger', 'No se pudo guardar el detalle del odontograma.');
         }
 

@@ -12,7 +12,8 @@
             @csrf  
             @method('DELETE')
             <div class="modal-body">
-                ¿Está seguro de eliminar la historia clínica de <strong>{{ $paciente->nombres . ' ' .  $paciente->apellidos}}?</strong>
+                ¿Está seguro de eliminar la historia clínica de <strong>{{ $paciente->nombres . ' ' .  $paciente->apellidos}}? </strong>
+                  También se eliminarán sus odontogramas y sus presupuestos.
             </div>
         
             <div class="modal-footer">

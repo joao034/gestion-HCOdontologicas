@@ -52,11 +52,6 @@
                         <!--editar-->
                         <a href="{{ route('presupuestos.edit', $presupuesto->id) }}" class="btn btn-success">Editar</a>
 
-                        <!--eliminar-->
-                        <button type="button" class="btn btn-danger" data-bs-toggle="modal" data-bs-target="#delete{{$presupuesto->id}}">
-                            Eliminar
-                        </button>
-
                     </td>
                 </tr>
 

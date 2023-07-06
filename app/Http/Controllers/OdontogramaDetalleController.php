@@ -73,7 +73,9 @@ class OdontogramaDetalleController extends Controller
 
         $detalles_odontograma = OdontogramaDetalle::query()
                              ->where('odontograma_cabecera_id', '=', "$id")
-                             ->where('estado', '!=', 'presupuesto')
+                             ->where('estado', '=', 'necesario')
+                             ->orWhere('estado', '=', 'realizado')
+                             ->orWhere('estado', '=', 'fuera_presupuesto')
                              ->get();
 
         return view('odontogramas.edit', compact(['tratamientos', 'odontograma', 'detalles_odontograma',

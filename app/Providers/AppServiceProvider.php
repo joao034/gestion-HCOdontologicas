@@ -23,12 +23,11 @@ class AppServiceProvider extends ServiceProvider
      */
     public function boot(): void
     {
-        //
-
-        /*if(env('APP_ENV') !== 'local') {
+        // Fuerza el uso de HTTPS en produccion
+        if(env('APP_ENV') !== 'local') {
             //$this->app['request']->server->set('HTTPS', true);
             URL::forceScheme('https');
-        }*/
+        }
 
         Paginator::useBootstrapFive();
 

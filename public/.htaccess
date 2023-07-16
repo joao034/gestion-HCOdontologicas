@@ -1,12 +1,10 @@
+<IfModule mod_headers.c>
+    Header set Access-Control-Allow-Origin "https://www.saudemedicalgroup.site/"
+</IfModule>
+
 <IfModule mod_rewrite.c>
     <IfModule mod_negotiation.c>
         Options -MultiViews -Indexes
-    </IfModule>
-
-    <IfModule mod_headers.c>
-        RewriteEngine on
-        RewriteCond %{HTTP_HOST} ^saudemedicalgroup\.site$ [NC]
-        Header set Access-Control-Allow-Origin "https://www.saudemedicalgroup.site/"
     </IfModule>
 
     RewriteEngine On

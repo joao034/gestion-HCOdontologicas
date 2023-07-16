@@ -25,7 +25,7 @@ class PresupuestoController extends Controller
     public function index( Request $request )
     {
         $search = trim( $request->get('search') );
-        //devulve todos los odontogramas del paciente a buscar
+        //devulve todos los presupuestos del paciente a buscar
         $presupuestos = Odontograma::join('pacientes', 'odontograma_cabecera.paciente_id', '=', 'pacientes.id')
             ->select('odontograma_cabecera.*', 'pacientes.cedula as paciente_cedula', 'pacientes.nombres as paciente_nombres', 'pacientes.apellidos as paciente_apellidos') 
             ->where('pacientes.nombres', 'LIKE', '%'.$search.'%')
@@ -41,7 +41,6 @@ class PresupuestoController extends Controller
     public function store( Request $request ){
 
         try{
-            //utilizar la tabla presupuestos detalles o hacer ahi mismo en los detalles del odontograma
             $detalle_presupuesto = new OdontogramaDetalle();
             $detalle_presupuesto->odontograma_cabecera_id = $request->presupuesto_id;
             $detalle_presupuesto->tratamiento_id = $request->tratamiento_id;

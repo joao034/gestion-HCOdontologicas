@@ -15,7 +15,7 @@ class CorsMiddleware
      */
     public function handle(Request $request, Closure $next): Response
     {
-        $allowedOrigins = ["https://www.saudemedicalgroup.site"];
+        $allowedOrigins = ['https://gestion-hcodontologicas-production.up.railway.app'];
         $origin = $request->header('Origin');
 
         if (in_array($origin, $allowedOrigins)) {

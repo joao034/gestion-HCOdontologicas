@@ -10,8 +10,10 @@ use App\Models\OdontogramaDetalle;
 use App\Models\Odontologo;
 use App\Models\Simbolo;
 use App\Models\Tratamiento;
+use App\Models\Paciente;
 use Carbon\Carbon;
 use Exception;
+use Barryvdh\DomPDF\Facade\Pdf;
 
 class PresupuestoController extends Controller
 {
@@ -35,6 +37,18 @@ class PresupuestoController extends Controller
             ->get();
         
         return view('presupuestos.index', compact(['search', 'presupuestos']));
+    }
+
+    //Exporta a pdf el presupuesto
+    public function pdf( $id ){
+
+        $presupuesto = Odontograma::find( $id );
+        $paciente = Paciente::find( $presupuesto->paciente_id );
+        $detalles_presupuesto = $this->getDetallesPresupuesto( $id );
+
+        $pdf = Pdf::loadView('presupuestos.pdf', compact('paciente', 'presupuesto', 'detalles_presupuesto'));
+        return $pdf->stream();
+        
     }
 
     //almacena los detalles del presupuesto
@@ -61,11 +75,7 @@ class PresupuestoController extends Controller
     public function edit( int $id ){
         //Buscar el odontograma del paciente
         $presupuesto = Odontograma::find( $id );
-        $detalles_presupuesto = OdontogramaDetalle::query()
-                                                ->where('odontograma_cabecera_id', '=', "$id")
-                                                ->where('estado', '=', 'necesario')
-                                                ->orWhere('estado', '=', 'presupuesto')
-                                                ->get();
+        $detalles_presupuesto = $this->getDetallesPresupuesto( $id );
         $tratamientos = Tratamiento::orderBy('nombre', 'asc')->get();
 
         return view('presupuestos.detalle_presupuesto', compact('detalles_presupuesto', 'presupuesto', 'tratamientos'));
@@ -94,6 +104,13 @@ class PresupuestoController extends Controller
         }
     }
 
-    
+    private function getDetallesPresupuesto ( int $id ){
+        $detalles_presupuesto = OdontogramaDetalle::query()
+                                                ->where('odontograma_cabecera_id', '=', "$id")
+                                                ->where('estado', '=', 'necesario')
+                                                ->orWhere('estado', '=', 'presupuesto')
+                                                ->get();
+        return $detalles_presupuesto;
+    }
 
 }

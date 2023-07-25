@@ -1,3 +1,4 @@
+DELIMITER $$
 CREATE TRIGGER `sumar_total_presupuesto` AFTER INSERT ON `odontograma_detalle`
  FOR EACH ROW BEGIN
     -- variables
@@ -14,7 +15,9 @@ CREATE TRIGGER `sumar_total_presupuesto` AFTER INSERT ON `odontograma_detalle`
         WHERE id = NEW.odontograma_cabecera_id;
     END IF;
 END
+$$
 
+DELIMITER $$
 CREATE TRIGGER `restar_total_presupuesto_update` AFTER UPDATE ON `odontograma_detalle`
  FOR EACH ROW BEGIN
     -- variables
@@ -31,7 +34,9 @@ CREATE TRIGGER `restar_total_presupuesto_update` AFTER UPDATE ON `odontograma_de
         WHERE id = OLD.odontograma_cabecera_id;
     END IF;
 END
+$$
 
+DELIMITER $$
 CREATE TRIGGER `restar_total_presupuesto_delete` AFTER DELETE ON `odontograma_detalle`
  FOR EACH ROW BEGIN
     -- variables
@@ -49,3 +54,4 @@ CREATE TRIGGER `restar_total_presupuesto_delete` AFTER DELETE ON `odontograma_de
         WHERE id = OLD.odontograma_cabecera_id;
      END IF;
 END
+$$

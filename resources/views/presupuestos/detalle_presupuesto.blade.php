@@ -21,8 +21,15 @@
                     <button id="" class="btn btn-primary" type="submit">Agregar</button>
                 </div>
             </div>
+            <div class="col">
+                <a href="{{ route('presupuestos.pdf', $presupuesto->id) }}" class="btn btn-primary" target="_blank">Descargar PDF</a>
+            </div>
         </div>
     </form>
+
+
+
+    
 
     <div class="table-responsive">
         <br>

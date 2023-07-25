@@ -38,14 +38,24 @@
                     <!-- Left Side Of Navbar -->
                     <ul class="navbar-nav me-auto">
                         
-                        @auth
-                          <a class="nav-link active text-white" href="{{ route('hclinicas.index') }}" aria-current="page">Historias Clínicas</a>
-                          <a class="nav-link active text-white" href="{{ route('odontogramas.index') }}">Odontogramas</a>
-                          <a class="nav-link active text-white" href="{{ route('presupuestos.index') }}">Presupuestos</a>
-                          <a class="nav-link active text-white" href="{{ route('tratamientos.index') }}">Tratamientos</a>
-                          <a class="nav-link active text-white" href="{{ route('especialidades.index') }}">Especialidades</a>
-                          <a class="nav-link active text-white" href="{{ route('odontologos.index') }}">Odontólogos</a>
-                        @endauth
+                        @php
+                            $user = Auth::user();
+                        @endphp
+
+                        @if ($user && $user->role === 'admin')
+                            <a class="nav-link active text-white" href="{{ route('hclinicas.index') }}" aria-current="page">Historias Clínicas</a>
+                            <a class="nav-link active text-white" href="{{ route('odontogramas.index') }}">Odontogramas</a>
+                            <a class="nav-link active text-white" href="{{ route('presupuestos.index') }}">Presupuestos</a>
+                            <a class="nav-link active text-white" href="{{ route('tratamientos.index') }}">Tratamientos</a>
+                            <a class="nav-link active text-white" href="{{ route('especialidades.index') }}">Especialidades</a>
+                            <a class="nav-link active text-white" href="{{ route('odontologos.index') }}">Odontólogos</a>
+                        @endif
+
+                        @if ($user && $user->role === 'odontologo')
+                            <a class="nav-link active text-white" href="{{ route('hclinicas.index') }}" aria-current="page">Historias Clínicas</a>
+                            <a class="nav-link active text-white" href="{{ route('odontogramas.index') }}">Odontogramas</a>
+                            <a class="nav-link active text-white" href="{{ route('presupuestos.index') }}">Presupuestos</a>
+                        @endif
                   
                     </ul>
 

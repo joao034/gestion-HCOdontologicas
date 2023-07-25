@@ -1,4 +1,4 @@
-CREATE TRIGGER `actualizar_total_presupuesto` AFTER INSERT ON `odontograma_detalle`
+CREATE TRIGGER `sumar_total_presupuesto` AFTER INSERT ON `odontograma_detalle`
  FOR EACH ROW BEGIN
     -- variables
     DECLARE precio_tratamiento FLOAT;
@@ -15,7 +15,7 @@ CREATE TRIGGER `actualizar_total_presupuesto` AFTER INSERT ON `odontograma_detal
     END IF;
 END
 
-CREATE TRIGGER `restar_total_presupuesto` AFTER UPDATE ON `odontograma_detalle`
+CREATE TRIGGER `restar_total_presupuesto_update` AFTER UPDATE ON `odontograma_detalle`
  FOR EACH ROW BEGIN
     -- variables
     DECLARE precio_tratamiento FLOAT;
@@ -37,14 +37,12 @@ CREATE TRIGGER `restar_total_presupuesto_delete` AFTER DELETE ON `odontograma_de
     -- variables
     DECLARE precio_tratamiento FLOAT;
     DECLARE estado_tratamiento VARCHAR(255);
-        
-        -- Obtener el precio y el estado del tratamiento
-        SELECT precio INTO precio_tratamiento FROM tratamientos WHERE id = OLD.tratamiento_id;
-        
-        SELECT estado INTO estado_tratamiento FROM odontograma_detalle WHERE id = OLD.id;
+    
+    -- Obtener el precio y el estado del tratamiento
+    SELECT precio INTO precio_tratamiento FROM tratamientos WHERE id = OLD.tratamiento_id;
+    SELECT estado INTO estado_tratamiento FROM odontograma_detalle WHERE id = OLD.id;
 
-        -- Actualizar el total en la tabla odontograma_cabecera
-        
+    -- Actualizar el total en la tabla odontograma_cabecera
      IF estado_tratamiento = 'necesario' THEN   
         UPDATE odontograma_cabecera
         SET total = total - precio_tratamiento

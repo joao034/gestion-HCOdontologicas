@@ -9,6 +9,7 @@ namespace App\Models;
 use Carbon\Carbon;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Foundation\Auth\User as Authenticatable;
+use Spatie\Permission\Traits\HasRoles;
 
 /**
  * Class User
@@ -18,6 +19,7 @@ use Illuminate\Foundation\Auth\User as Authenticatable;
  * @property string $email
  * @property Carbon|null $email_verified_at
  * @property string $password
+ * @property string $role
  * @property string|null $remember_token
  * @property Carbon|null $created_at
  * @property Carbon|null $updated_at
@@ -26,6 +28,9 @@ use Illuminate\Foundation\Auth\User as Authenticatable;
  */
 class User extends Authenticatable
 {
+	//Spatie roles
+	//use HasRoles;
+
 	protected $table = 'users';
 
 	protected $casts = [
@@ -42,6 +47,7 @@ class User extends Authenticatable
 		'email',
 		'email_verified_at',
 		'password',
-		'remember_token'
+		'role',
+		'remember_token',
 	];
 }

@@ -9,6 +9,8 @@ use Illuminate\Foundation\Auth\RegistersUsers;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Validator;
 
+use Spatie\Permission\Models\Role; // Importar el modelo "Role" de Spatie
+
 class RegisterController extends Controller
 {
     /*
@@ -53,6 +55,7 @@ class RegisterController extends Controller
             'name' => ['required', 'string', 'max:255'],
             'email' => ['required', 'string', 'email', 'max:255', 'unique:users'],
             'password' => ['required', 'string', 'min:8', 'confirmed'],
+            'role' => ['in:admin,odontologo', 'required', 'string']
         ]);
     }
 
@@ -68,6 +71,12 @@ class RegisterController extends Controller
             'name' => $data['name'],
             'email' => $data['email'],
             'password' => Hash::make($data['password']),
+            'role' => $data['role']
         ]);
+
+         // Asignar el rol "admin" al usuario
+        /*$adminRole = Role::findByName('admin'); // Buscar el rol "admin" en la base de datos
+        $user->assignRole($adminRole);
+        return $user;*/
     }
 }

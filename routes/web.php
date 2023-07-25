@@ -49,9 +49,9 @@ Auth::routes();
 Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
 
 Route::resource("hclinicas", HClinicaController::class);
-Route::resource("tratamientos", TratamientoController::class);
-Route::resource("especialidades", EspecialidadController::class);
-Route::resource("odontologos", OdontologoController::class);
+Route::resource("tratamientos", TratamientoController::class)->middleware('role.admin');
+Route::resource("especialidades", EspecialidadController::class)->middleware('role.admin');
+Route::resource("odontologos", OdontologoController::class)->middleware('role.admin');
 Route::resource("odontogramas", OdontogramaController::class);
 Route::resource("detalleOdontogramas", OdontogramaDetalleController::class);
 Route::resource("presupuestos", PresupuestoController::class);

@@ -39,6 +39,25 @@
                             </div>
                         </div>
 
+                    
+                        <div class="row mb-3">
+                            <label for="tipo" class="col-md-4 col-form-label text-md-end">Tipo de usuario</label>
+                            <div class="col-md-6">
+                                <select name="role" id="tipo" class="form-select form-select-md">
+                                    <option value="">Seleccione un tipo de usuario</option>
+                                    <option value="admin">Administrador</option>
+                                    <option value="odontologo">Odontólogo</option>
+                                </select>
+
+                                @error('role')
+                                    <span class="invalid-feedback" role="alert">
+                                        <strong>{{ $message }}</strong>
+                                    </span>
+                                @enderror
+
+                            </div>
+                        </div>
+
                         <div class="row mb-3">
                             <label for="password" class="col-md-4 col-form-label text-md-end">{{ __('Contraseña') }}</label>
 

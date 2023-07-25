@@ -49,6 +49,12 @@
                             <a class="nav-link active text-white" href="{{ route('tratamientos.index') }}">Tratamientos</a>
                             <a class="nav-link active text-white" href="{{ route('especialidades.index') }}">Especialidades</a>
                             <a class="nav-link active text-white" href="{{ route('odontologos.index') }}">Odontólogos</a>
+                            
+                            @if (Route::has('register'))
+                                <li class="nav-item">
+                                    <a class="nav-link text-white" href="{{ route('register') }}">{{ __('Registro') }}</a>
+                                </li>
+                            @endif
                         @endif
 
                         @if ($user && $user->role === 'odontologo')
@@ -69,11 +75,6 @@
                                 </li>
                             @endif
 
-                            @if (Route::has('register'))
-                                <li class="nav-item">
-                                    <a class="nav-link text-white" href="{{ route('register') }}">{{ __('Registro') }}</a>
-                                </li>
-                            @endif
                         @else
                             <li class="nav-item dropdown">
                                 <a id="navbarDropdown" class="nav-link dropdown-toggle text-white" href="#" role="button" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false" v-pre>

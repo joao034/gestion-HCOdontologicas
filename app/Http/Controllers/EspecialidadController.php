@@ -9,6 +9,14 @@ use Illuminate\Support\Facades\Validator;
 
 class EspecialidadController extends Controller
 {
+
+
+    public function __construct()
+    {
+        $this->middleware('auth');
+        $this->middleware('role.admin');
+    }
+
     /**
      * Valida los datos de la especialidad del formulario.
      *

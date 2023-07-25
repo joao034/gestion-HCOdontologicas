@@ -40,7 +40,7 @@ class RegisterController extends Controller
      */
     public function __construct()
     {
-        $this->middleware('guest');
+        $this->middleware('role.admin');
     }
 
     /**
@@ -73,10 +73,5 @@ class RegisterController extends Controller
             'password' => Hash::make($data['password']),
             'role' => $data['role']
         ]);
-
-         // Asignar el rol "admin" al usuario
-        /*$adminRole = Role::findByName('admin'); // Buscar el rol "admin" en la base de datos
-        $user->assignRole($adminRole);
-        return $user;*/
     }
 }

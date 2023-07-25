@@ -31,7 +31,7 @@
 
     .company-logo img {
         max-width: 200px;
-        max-height: 80px;
+        max-height: 100px;
     }
 
     .invoice-info {
@@ -47,30 +47,32 @@
         margin: 5px 0;
     }
 
+    .center{
+        text-align: center;
+    }
 </style>
 
 <div class="invoice-body">
-    <!-- Cabecera de la factura -->
+    <!-- Cabecera del presupuesto -->
     <div class="invoice-header">
         <div class="company-logo">
-            <p>Saúde Medical Group</p>
+            <img src="assets/img/logo.png" alt="Logo de la empresa">
         </div>
         <div class="invoice-info">
             <h3>Presupuesto No. {{ $presupuesto->id }}</h3>
-            <p>Fecha: {{$presupuesto->fecha_creacion}}</p>
-            <!-- Otras informaciones de la factura -->
+            <p> <b>Fecha:</b> {{ \Carbon\Carbon::parse($presupuesto->fecha_creacion)->format('d/m/Y') }}</p>
         </div>
     </div>
 
-    <!-- Datos del cliente -->
+    <!-- Datos del paciente --> 
     <div class="client-info">
-        <h4>Información del Paciente</h4>
-        <p><b>Nombre:</b> {{ $paciente->nombres }} {{ $paciente->apellidos }}</p>
+        <h3>Información del Paciente</h3>
+        <p><b>Paciente:</b> {{ $paciente->nombres }} {{ $paciente->apellidos }}</p>
         <p><b>Celular:</b> {{ $paciente->celular }}</p>
         <p><b>Dirección:</b> {{ $paciente->direccion }}</p>
     </div>
 
-    <!-- Tabla de detalles de la factura -->
+    <!-- Tabla de detalles del presupuesto -->
     <table class="invoice-table">
         <thead class="bg-dark text-white">
             <tr>
@@ -97,7 +99,7 @@
                     </tr>
                 @endforeach
                 <tr>
-                    <td colspan="3" class="text-right"><b>Total</b></td>
+                    <td colspan="3" class="center"><b>Total</b></td>
                     <td><b>${{$presupuesto->total}}</b></td>
                 </tr>
             @endif

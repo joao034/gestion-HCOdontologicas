@@ -24,6 +24,8 @@ return new class extends Migration
             $table->string('direccion', 100);
             $table->string('celular', 10)->nullable();
             $table->string('telef_convencional', 10)->nullable();
+            $table->string('representante', 50)->nullable();
+            $table->string('cedula_representante', 10)->nullable();
 
             $table->timestamps();
 

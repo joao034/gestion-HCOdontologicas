@@ -1,6 +1,6 @@
 @extends('layouts.app')
 @section('content')
-    <h1 class="text-center">Presupuestos</h1>
+    <h1 class="text-center"> <img class="svg-icon-index" src="assets/icons/presupuesto.svg" alt=""> Presupuestos</h1>
     
     <!--Input para buscar una historia-->
 <form action="{{ route('presupuestos.index') }}" method="GET">
@@ -12,8 +12,8 @@
                 <input type="text" class="form-control" name="search" placeholder="Buscar por cédula, nombres o apellidos" 
                     value= "{{ $search }}" aria-label="Recipient's username" aria-describedby="button-addon2">
             </div>
-            <div class="col-3">
-                <button class="btn btn-warning" type="submit" id="button-addon2">Buscar</button>
+            <div class="col-md-3">
+                <button class="btn btn-secondary" type="submit" id="button-addon2"><i class="fa-solid fa-magnifying-glass"></i> Buscar</button>
             </div>
         </div>
     </div>
@@ -50,7 +50,9 @@
                     <td>
                         
                         <!--editar-->
-                        <a href="{{ route('presupuestos.edit', $presupuesto->id) }}" class="btn btn-success">Editar</a>
+                        <a href="{{ route('presupuestos.edit', $presupuesto->id) }}" class="btn btn-secondary">
+                            <i class="fa-regular fa-pen-to-square"></i> Editar
+                        </a>
 
                     </td>
                 </tr>

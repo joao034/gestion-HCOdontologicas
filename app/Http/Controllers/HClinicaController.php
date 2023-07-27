@@ -32,8 +32,10 @@ class HClinicaController extends Controller
             'nombres' => ['required', 'string', 'max:255'],
             'apellidos' => ['required', 'string', 'max:255'],
             'cedula' => ['required', 'string', 'min:10', 'max:10'],
+            'cedula_representante' => ['nullable', 'string', 'min:10', 'max:10'],
+            'representante' => ['nullable', 'string', 'max:100'],
             'fecha_nacimiento' => ['required', 'date'],
-            'edad' => ['required', 'integer'],
+            'edad' => ['required', 'integer', 'min:0', 'max:120'],
             'estado_civil' => ['required', 'string', 'max:255'],
             'direccion' => ['required', 'string', 'max:255'],
             'ocupacion' => ['nullable', 'string', 'max:255'],
@@ -102,7 +104,7 @@ class HClinicaController extends Controller
             return to_route('hclinicas.index')->with('message', 'Historia Clinica creado exitosamente');
         } catch (\Exception $e) {
             DB::rollback();
-            return to_route('hclinicas.create')->with('danger', 'No se pudo crear la Historia Clinica' . $e->getMessage() . ' ');
+            return to_route('hclinicas.create')->with('danger', 'No se pudo crear la Historia Clinica');
             throw $e;
         }
     }
@@ -220,6 +222,8 @@ class HClinicaController extends Controller
             $paciente->nombres = $request->input('nombres');
             $paciente->apellidos = $request->input('apellidos');
             $paciente->cedula = $request->input('cedula');
+            $paciente->representante = $request->input('representante');
+            $paciente->cedula_representante = $request->input('cedula_representante');
             $paciente->sexo = $request->input('sexo');
             $paciente->fecha_nacimiento =  $request->input('fecha_nacimiento');
             $paciente->calcularEdad();

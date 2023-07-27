@@ -1,7 +1,7 @@
 @extends('layouts.app')
 @section('content')
 
-<h1 class="text-center">Historias Clínicas Odontológicas</h1>
+<h1 class="text-center"> <img src="assets/icons/historia.png"> Historias Clínicas Odontológicas</h1>
 
 <!--Input para buscar una historia-->
 <form action="{{ route('hclinicas.index') }}" method="GET">
@@ -14,14 +14,14 @@
                 <input type="text" class="form-control" name="buscador" placeholder="Buscar por cédula, nombres o apellidos" 
                     value= "{{ $search }}" aria-label="Recipient's username" aria-describedby="button-addon2">
             </div>
-            <div class="col-3">
-                <button class="btn btn-warning" type="submit" id="button-addon2">Buscar</button>
+            <div class="col-md-3">
+                <button class="btn btn-secondary" type="submit" id="button-addon2"><i class="fa-solid fa-magnifying-glass"></i> Buscar</button>
             </div>
         </div>
     </div>
 </form>
 
-<a href="{{ route('hclinicas.create') }}" class="btn btn-primary">Nueva historia clínica</a>
+<a href="{{ route('hclinicas.create') }}" class="btn btn-primary"><i class="fa-solid fa-plus"></i> Nueva historia clínica</a>
 
 
 <div class="table-responsive">
@@ -57,16 +57,13 @@
                     <td>
                         
                         <!--editar-->
-                        <a href="{{ route('hclinicas.edit', $paciente->id) }}" class="btn btn-success">Editar</a>
-
+                        <a href="{{ route('hclinicas.edit', $paciente->id) }}" class="btn btn-secondary"><i class="fa-regular fa-pen-to-square"></i> Editar</a>
                         <!--eliminar-->
-                        <button type="button" class="btn btn-danger" data-bs-toggle="modal" data-bs-target="#delete{{$paciente->id}}">
-                            Eliminar
-                        </button>
-
+                        <a class="btn btn-danger" data-bs-toggle="modal" data-bs-target="#delete{{$paciente->id}}">
+                            <i class="fa-regular fa-trash-can"></i> Eliminar</a>
                     </td>
                 </tr>
-                @include('hclinicas.destroy')
+                @include('hclinicas.destroy') 
                 @endforeach
             @endif
         </tbody>

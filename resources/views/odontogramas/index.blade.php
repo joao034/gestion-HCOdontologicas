@@ -1,6 +1,6 @@
 @extends('layouts.app')
 @section('content')
-    <h1 class="text-center">Lista de odontogramas</h1>
+    <h1 class="text-center"><img src="assets/icons/diente.png"> Lista de odontogramas</h1>
 
     <form action="{{ route('odontogramas.index') }}" method="GET">
         @csrf
@@ -11,8 +11,8 @@
                     <input type="text" class="form-control" name="search" placeholder="Buscar por cédula, nombres o apellidos" 
                         value= "{{ $search }}" aria-label="Recipient's username" aria-describedby="button-addon2">
                 </div>
-                <div class="col-3">
-                    <button class="btn btn-warning" type="submit" id="button-addon2">Buscar</button>
+                <div class="col-md-3">
+                    <button class="btn btn-secondary" type="submit" id="button-addon2"><i class="fa-solid fa-magnifying-glass"></i> Buscar</button>
                 </div>
             </div>
         </div>
@@ -45,16 +45,18 @@
                         
                         <td>
                             <!--editar-->
-                            <a href=" {{ route('detalleOdontogramas.edit', $odontograma->id) }} " id="" class="btn btn-success" href="#" role="button">Editar</a>
+                            <a href=" {{ route('detalleOdontogramas.edit', $odontograma->id) }} " id="" class="btn btn-secondary" href="#" role="button">
+                                <i class="fa-regular fa-pen-to-square"></i> Editar
+                            </a>
         
                             <!--eliminar-->
                             <button type="button" class="btn btn-danger" data-bs-toggle="modal" data-bs-target="#delete{{$odontograma->id}}">
-                                Eliminar
+                                <i class="fa-regular fa-trash-can"></i> Eliminar
                             </button>
 
                             <!--nuevo-->
-                            <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#nuevo{{$odontograma->id}}">
-                                Nuevo
+                            <button type="button" class="btn btn-info text-white" data-bs-toggle="modal" data-bs-target="#nuevo{{$odontograma->id}}">
+                                <i class="fa-solid fa-plus"></i> Nuevo
                             </button>
         
                         </td>

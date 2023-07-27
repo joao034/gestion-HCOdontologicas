@@ -49,8 +49,8 @@
                           </div>
                           
                           <div class="row">
-                              <div class="col-md-5">
-                                  <div class="mb-3">
+                                <div class="col-md-5">
+                                    <div class="mb-3">
                                       <label for="" class="form-label">Cédula</label>
                                       <input type="text" class="form-control" name="cedula" minlength="10" maxlength="10" id="" 
                                       aria-describedby="helpId" placeholder="" pattern="^[0-9]+$">
@@ -60,34 +60,61 @@
                                         @enderror
 
                                     </div>
-                              </div>
-                              <div class="col-md-5">
-                                  <div class="mb-3">
+                                </div>
+                                <div class="col-md-5">
+                                    <div class="mb-3">
                                       <label for="" class="form-label">Fecha de Nacimiento</label>
                                       <input type="date"
-                                        class="form-control" name="fecha_nacimiento"  max="<?php echo date('Y-m-d')?>" id="fechaNacimiento" placeholder="dd/mm/aaaa" 
-                                            pattern="\d{2}/\d{2}/\d{4}" onchange="calcularEdad()" required>
+                                        class="form-control" name="fecha_nacimiento" id="fecha_nacimiento"  max="<?php echo date('Y-m-d')?>" id="fechaNacimiento" placeholder="dd/mm/aaaa" 
+                                            pattern="\d{2}/\d{2}/\d{4}" required>
 
                                         @error('fecha_nacimiento')
                                             <small class="text-danger"> {{ $message }}</small>
                                         @enderror
                                         
                                     </div>
-                              </div>
-                              <div class="col-md-2">
-                                <div class="mb-3">
+                                 </div>
+                                <div class="col-md-2">
+                                    <div class="mb-3">
                                     <label for="" class="form-label">Edad</label>
                                     <input type="text"
-                                      class="form-control" name="edad" id="edad" aria-describedby="helpId" placeholder="" readonly>
+                                      class="form-control" name="edad" id="edad" aria-describedby="helpId" placeholder="" readonly min="0" max="120" required>
 
                                     @error('edad')
                                         <small class="text-danger"> {{ $message }}</small>
                                     @enderror
 
-                                  </div>
-                            </div>
-                          </div>
+                                    </div>
+                                </div>
+
+                        
+                            <div class="row" id="representanteDiv" style="display: none;">
+                                <div class="col-md-6">
+                                    <div class="mb-3">
+                                        <label for="" class="form-label">Cédula del Representante</label>
+                                        <input type="text" class="form-control" name="cedula_representante" minlength="10" maxlength="10" id="" 
+                                        aria-describedby="helpId" placeholder="" pattern="^[0-9]+$">
   
+                                          @error('cedula_representante')
+                                              <small class="text-danger"> {{ $message }}</small>
+                                          @enderror
+  
+                                      </div>
+                                </div>
+                                <div class="col-md-6">
+                                    <div class="mb-3">
+                                        <label for="" class="form-label">Representante</label>
+                                        <input type="text" class="form-control" name="representante" id="representante" aria-describedby="helpId" placeholder="Nombre del representante" >
+  
+                                          @error('representante')
+                                              <small class="text-danger"> {{ $message }}</small>
+                                          @enderror
+  
+                                    </div>
+                                </div>
+                            </div>
+
+                        </div>
 
                     <div class="row">
                         <div class="col-md-8">
@@ -621,12 +648,52 @@
     </form>
 
     <script>
-        function calcularEdad() {
-            var fechaNacimiento = document.getElementById('fechaNacimiento').value;
-            var fechaActual = new Date();
-            var edad = fechaActual.getFullYear() - new Date(fechaNacimiento).getFullYear();
-            document.getElementById('edad').value = edad;
+
+        $(document).ready(function() {
+            // Obtener los elementos necesarios
+            const fechaInput = $('#fecha_nacimiento');
+            const edadInput = $('#edad');
+            const representanteDiv = $('#representanteDiv');
+        
+
+       function calcularEdad(nacimiento) {
+            const fechaNacimiento = new Date(nacimiento);
+            const fechaActual = new Date();
+            let edad = fechaActual.getFullYear() - fechaNacimiento.getFullYear();
+
+            const mesActual = fechaActual.getMonth() + 1;
+            const mesNacimiento = fechaNacimiento.getMonth() + 1;
+
+            if (mesNacimiento > mesActual || (mesNacimiento === mesActual  
+                    && fechaNacimiento.getDate() > fechaActual.getDate())) {
+                edad--;
+            }
+            return edad;
         }
+
+        function controlarVisibilidadRepresentante() {
+            const edad = parseInt(edadInput.val());
+
+            if (edad < 12) {
+                representanteDiv.show();
+            } else {
+                representanteDiv.hide();
+            }
+        }
+            // Evento que se dispara al cambiar el valor del input de fecha
+            fechaInput.on('change', function() {
+            // Obtener el valor de la fecha de nacimiento
+            const fechaNacimiento = fechaInput.val();
+
+            // Calcular la edad y actualizar el input correspondiente
+            const edad = calcularEdad(fechaNacimiento);
+            edadInput.val(edad);
+
+            // Controlar la visibilidad del div del representante según la edad calculada
+            controlarVisibilidadRepresentante();
+            });
+        });
     </script>
 
 @endsection
+

@@ -1,11 +1,11 @@
 @extends('layouts.app')
 @section('content')
 
-<h1 class="text-center">Especialidades</h1>
+<h1 class="text-center"><img class="svg-icon-index" src="assets/icons/especialidad.svg" alt=""> Especialidades</h1>
 
 <!-- Agregar tratamiento -->
 <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#create">
-    Nueva Especialidad
+    <i class="fa-solid fa-plus"></i> Nueva Especialidad
 </button>
 
 <div class="table-responsive">
@@ -27,13 +27,13 @@
                 <td>{{$especialidad->descripcion}}</td>
                 <td>
                     <!--editar-->
-                    <button type="button" class="btn btn-success" data-bs-toggle="modal" data-bs-target="#edit{{$especialidad->id}}">
-                        Editar
+                    <button type="button" class="btn btn-secondary" data-bs-toggle="modal" data-bs-target="#edit{{$especialidad->id}}">
+                        <i class="fa-regular fa-pen-to-square"></i> Editar
                     </button>
 
                     <!--eliminar-->
                     <button type="button" class="btn btn-danger" data-bs-toggle="modal" data-bs-target="#delete{{$especialidad->id}}">
-                        Eliminar
+                        <i class="fa-regular fa-trash-can"></i> Eliminar
                     </button>
 
                 </td>

@@ -80,3 +80,13 @@ background: #eee;
 	width: 300px; /* Ancho deseado */
 	height: 200px; /* Alto deseado */
 }
+
+.svg-icon {
+	width: 20px;
+	height: auto;
+}
+
+.svg-icon-index {
+	width: 32px;
+	height: auto;
+}

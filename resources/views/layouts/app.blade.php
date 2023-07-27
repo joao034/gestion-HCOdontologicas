@@ -28,10 +28,11 @@
         <nav class="navbar navbar-expand-md navbar-light bg-primary shadow-sm">
             <div class="container">
                 <a class="navbar-brand text-white" href="{{ url('/hclinicas') }}">
-                    Saúde Medical Group
+                    <img src="{{asset('assets/img/logo.png')}}" width="35px" height="auto" style="border-radius: 5px" alt="">
+                    <span class=""> Saúde Medical Group</span>
                 </a>
                 <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="{{ __('Toggle navigation') }}">
-                    <span class="navbar-toggler-icon"></span>
+                    <i class="fa-solid fa-bars text-white"></i>
                 </button>
 
                 <div class="collapse navbar-collapse" id="navbarSupportedContent">
@@ -43,24 +44,34 @@
                         @endphp
 
                         @if ($user && $user->role === 'admin')
-                            <a class="nav-link active text-white" href="{{ route('hclinicas.index') }}" aria-current="page">Historias Clínicas</a>
-                            <a class="nav-link active text-white" href="{{ route('odontogramas.index') }}">Odontogramas</a>
-                            <a class="nav-link active text-white" href="{{ route('presupuestos.index') }}">Presupuestos</a>
-                            <a class="nav-link active text-white" href="{{ route('tratamientos.index') }}">Tratamientos</a>
-                            <a class="nav-link active text-white" href="{{ route('especialidades.index') }}">Especialidades</a>
-                            <a class="nav-link active text-white" href="{{ route('odontologos.index') }}">Odontólogos</a>
+                            <a class="nav-link active text-white" href="{{ route('hclinicas.index') }}" aria-current="page"> 
+                             <img class="svg-icon" src="{{asset('assets/icons/historia.png')}}" alt=""> Historias Clínicas</a>
+                            <a class="nav-link active text-white" href="{{ route('odontogramas.index') }}"> 
+                                <img class="svg-icon" src="{{asset('assets/icons/diente.png')}}"> Odontogramas</a>
+                            <a class="nav-link active text-white" href="{{ route('presupuestos.index') }}">
+                                <img class="svg-icon" src="{{asset('assets/icons/presupuesto.svg')}}"> Presupuestos</a>
+                            <a class="nav-link active text-white" href="{{ route('tratamientos.index') }}">
+                                <img class="svg-icon" src="{{asset('assets/icons/tratamiento.svg')}}"> Tratamientos</a>
+                            <a class="nav-link active text-white" href="{{ route('especialidades.index') }}">
+                                <img class="svg-icon" src="{{asset('assets/icons/especialidad.svg')}}"> Especialidades</a>
+                            <a class="nav-link active text-white" href="{{ route('odontologos.index') }}">
+                                <img class="svg-icon" src="{{asset('assets/icons/odontologo.svg')}}"> Odontólogos</a>
                             
                             @if (Route::has('register'))
                                 <li class="nav-item">
-                                    <a class="nav-link text-white" href="{{ route('register') }}">{{ __('Registro') }}</a>
+                                    <a class="nav-link text-white" href="{{ route('register') }}">
+                                        <img class="svg-icon" src="{{asset('assets/icons/user.svg')}}" alt=""> {{ __('Registro') }}</a>
                                 </li>
                             @endif
                         @endif
 
                         @if ($user && $user->role === 'odontologo')
-                            <a class="nav-link active text-white" href="{{ route('hclinicas.index') }}" aria-current="page">Historias Clínicas</a>
-                            <a class="nav-link active text-white" href="{{ route('odontogramas.index') }}">Odontogramas</a>
-                            <a class="nav-link active text-white" href="{{ route('presupuestos.index') }}">Presupuestos</a>
+                        <a class="nav-link active text-white" href="{{ route('hclinicas.index') }}" aria-current="page"> 
+                            <img class="svg-icon" src="{{asset('assets/icons/historia.png')}}" alt=""> Historias Clínicas</a>
+                           <a class="nav-link active text-white" href="{{ route('odontogramas.index') }}"> 
+                               <img class="svg-icon" src="{{asset('assets/icons/diente.png')}}"> Odontogramas</a>
+                           <a class="nav-link active text-white" href="{{ route('presupuestos.index') }}">
+                               <img class="svg-icon" src="{{asset('assets/icons/presupuesto.svg')}}"> Presupuestos</a>
                         @endif
                   
                     </ul>

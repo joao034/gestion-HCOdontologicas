@@ -44,14 +44,14 @@
                                   <div class="mb-3">
                                       <label for="" class="form-label">Cédula</label>
                                       <input type="text"
-                                        class="form-control" name="cedula" minlength="10" id="" aria-describedby="helpId" placeholder="" required value="{{ $paciente->cedula }}">
+                                        class="form-control" name="cedula" minlength="10" maxlength="10" id="" aria-describedby="helpId" placeholder="" required value="{{ $paciente->cedula }}">
                                     </div>
                               </div>
                               <div class="col-md-5">
                                   <div class="mb-3">
                                       <label for="" class="form-label">Fecha de Nacimiento</label>
-                                      <input type="date" value="{{ $paciente->fecha_nacimiento }}" class="form-control" max="<?php echo date('Y-m-d')?>" name="fecha_nacimiento" id="fechaNacimiento"
-                                         placeholder="dd-mm-aaaa" pattern="\d{4}-\d{2}-\d{2}" required onchange="calcularEdad()">
+                                      <input type="date" id="fecha_nacimiento" value="{{ $paciente->fecha_nacimiento }}" class="form-control" max="<?php echo date('Y-m-d')?>" name="fecha_nacimiento" id="fechaNacimiento"
+                                         placeholder="dd-mm-aaaa" pattern="\d{4}-\d{2}-\d{2}" required>
                                     </div>
                               </div>
                               <div class="col-md-2">
@@ -62,8 +62,36 @@
                                   </div>
                             </div>
                           </div>
-  
+ 
+                        @if ( $paciente->edad < 12 )
+                            <div class="row" id="representanteDiv">
+                                <div class="col-md-6">
+                                    <div class="mb-3">
+                                        <label for="" class="form-label">Cédula del Representante</label>
+                                        <input type="text" class="form-control" name="cedula_representante" minlength="10" maxlength="10" id="" 
+                                        aria-describedby="helpId" placeholder="" pattern="^[0-9]+$" value="{{$paciente->cedula_representante}}">
 
+                                        @error('cedula_representante')
+                                            <small class="text-danger"> {{ $message }}</small>
+                                        @enderror
+
+                                    </div>
+                                </div>
+                                <div class="col-md-6">
+                                    <div class="mb-3">
+                                        <label for="" class="form-label">Representante</label>
+                                        <input type="text" class="form-control" name="representante" id="representante" 
+                                        value="{{$paciente->representante}}" aria-describedby="helpId" placeholder="Nombre del representante" >
+
+                                        @error('representante')
+                                            <small class="text-danger"> {{ $message }}</small>
+                                        @enderror
+
+                                    </div>
+                                </div>
+                            </div> 
+                        @endif  
+                        
                     <div class="row">
                         <div class="col-md-8">
                           <h6 class="card-title">Estado Civil</h6>
@@ -155,14 +183,16 @@
                                 <div class="mb-3">
                                     <label for="" class="form-label">Celular</label>
                                     <input type="text"
-                                      class="form-control" name="celular" minlength="10" id="" aria-describedby="helpId" placeholder="" value="{{$paciente->celular}}">
+                                      class="form-control" name="celular" minlength="10" id="" minlength="10" maxlength="10"
+                                      aria-describedby="helpId" placeholder="" value="{{$paciente->celular}}">
                                 </div>
                             </div>
                             <div class="col-md-6">
                                 <div class="mb-3">
                                     <label for="" class="form-label">Teléfono Convencional</label>
                                     <input type="text"
-                                      class="form-control" name="telef_convencional" id="" aria-describedby="helpId" placeholder="" value="{{$paciente->telef_convencional}}">
+                                      class="form-control" name="telef_convencional" id="" aria-describedby="helpId" maxlength="9"
+                                      placeholder="" value="{{$paciente->telef_convencional}}">
                                 </div>
                             </div>
                           </div>
@@ -589,16 +619,54 @@
         </div>
       </div>
     
-    
     </form>
 
     <script>
-        function calcularEdad() {
-            var fechaNacimiento = document.getElementById('fechaNacimiento').value;
-            var fechaActual = new Date();
-            var edad = fechaActual.getFullYear() - new Date(fechaNacimiento).getFullYear();
-            document.getElementById('edad').value = edad;
+
+        $(document).ready(function() {
+            // Obtener los elementos necesarios
+            const fechaInput = $('#fecha_nacimiento');
+            const edadInput = $('#edad');
+            const representanteDiv = $('#representanteDiv');
+        
+
+       function calcularEdad(nacimiento) {
+            const fechaNacimiento = new Date(nacimiento);
+            const fechaActual = new Date();
+            let edad = fechaActual.getFullYear() - fechaNacimiento.getFullYear();
+
+            const mesActual = fechaActual.getMonth() + 1;
+            const mesNacimiento = fechaNacimiento.getMonth() + 1;
+
+            if (mesNacimiento > mesActual || (mesNacimiento === mesActual  
+                    && fechaNacimiento.getDate() > fechaActual.getDate())) {
+                edad--;
+            }
+            return edad;
         }
+
+        function controlarVisibilidadRepresentante() {
+            const edad = parseInt(edadInput.val());
+
+            if (edad < 12) {
+                representanteDiv.show();
+            } else {
+                representanteDiv.hide();
+            }
+        }
+            // Evento que se dispara al cambiar el valor del input de fecha
+            fechaInput.on('change', function() {
+            // Obtener el valor de la fecha de nacimiento
+            const fechaNacimiento = fechaInput.val();
+
+            // Calcular la edad y actualizar el input correspondiente
+            const edad = calcularEdad(fechaNacimiento);
+            edadInput.val(edad);
+
+            // Controlar la visibilidad del div del representante según la edad calculada
+            controlarVisibilidadRepresentante();
+            });
+        });
     </script>
 
 @endsection

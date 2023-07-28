@@ -14,7 +14,7 @@
                 <input type="text" class="form-control" name="buscador" placeholder="Buscar por cédula, nombres o apellidos" 
                     value= "{{ $search }}" aria-label="Recipient's username" aria-describedby="button-addon2">
             </div>
-            <div class="col-md-3">
+            <div class="col-lg-3 col-md-3 col-sm-3  col-xs-3">
                 <button class="btn btn-secondary" type="submit" id="button-addon2"><i class="fa-solid fa-magnifying-glass"></i> Buscar</button>
             </div>
         </div>

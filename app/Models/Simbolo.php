@@ -24,10 +24,6 @@ class Simbolo extends Model{
 		return Simbolo::where('color', $color)->get();
 	}
 
-	public function getSimbolosPorTipo( $tipo ){
-		return Simbolo::where('tipo', $tipo)->get();
-	}
-
 }
 
 

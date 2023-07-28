@@ -69,6 +69,12 @@ class OdontogramaDetalleController extends Controller
         $simbolosRojos = $simbolo->getSimbolosPorTipo( $necesario );
         $simbolosAzules = $simbolo->getSimbolosPorTipo( $realizado );
 
+        $colorRojo = '#dc3545';
+        $colorAzul = '#3243a6';
+
+        $simboloRojo = $simbolosRojos->where('color', $colorRojo)->first();
+        $simboloAzul = $simbolosAzules->where('color', $colorAzul)->first();
+
         $detalles_odontograma = OdontogramaDetalle::query()
                              ->where('odontograma_cabecera_id', '=', "$id")
                              ->where('estado', '=', 'necesario')
@@ -77,7 +83,7 @@ class OdontogramaDetalleController extends Controller
                              ->get();
 
         return view('odontogramas.edit', compact(['tratamientos', 'odontograma', 'detalles_odontograma',
-                                        'odontologos', 'simbolosRojos', 'simbolosAzules']));
+                            'odontologos', 'simbolosRojos', 'simbolosAzules', 'simboloRojo', 'simboloAzul']));
     }
 
     public function destroy( int $id ){

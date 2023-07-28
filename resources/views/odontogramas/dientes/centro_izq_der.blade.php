@@ -2,7 +2,6 @@
     //Encotrar el detalle del odontograma pintado
     $color = $odontograma->getColorCaraDentalAPintar('izquierda', $i, $odontograma->id);
 ?>
-
 <!-- Cara izquierda-->
 <button style="height: 25px;padding: 5px; {{ $color != '' ? 'background-color: ' . $color . ';' : '' }}" class="btn_diente" data-bs-toggle="modal" 
     data-bs-target="#detalle_odontograma" onclick="crear( 'izquierda', {{ $i }} , {{ $odontograma->id }})"></button>

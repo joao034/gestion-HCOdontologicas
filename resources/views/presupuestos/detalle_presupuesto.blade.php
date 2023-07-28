@@ -18,18 +18,14 @@
                     </div>
                 </div>
                 <div class="col-3">
-                    <button id="" class="btn btn-primary" type="submit">Agregar</button>
+                    <button id="" class="btn btn-primary" type="submit"><i class="fa-regular fa-plus"></i> Agregar</button>
                 </div>
             </div>
             <div class="col">
-                <a href="{{ route('presupuestos.pdf', $presupuesto->id) }}" class="btn btn-primary" target="_blank">Descargar PDF</a>
+                <a href="{{ route('presupuestos.pdf', $presupuesto->id) }}" class="btn btn-danger" target="_blank"><i class="fa-solid fa-file-pdf"></i> Descargar PDF</a>
             </div>
         </div>
     </form>
-
-
-
-    
 
     <div class="table-responsive">
         <br>
@@ -63,7 +59,7 @@
     
                             <!--eliminar-->
                             <button type="button" class="btn btn-danger" data-bs-toggle="modal" data-bs-target="#borrar{{$detalle->id}}">
-                                Eliminar
+                                <i class="fa-regular fa-trash-can"></i> Eliminar
                             </button>
     
                         </td>

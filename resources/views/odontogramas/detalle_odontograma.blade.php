@@ -16,6 +16,7 @@
             <input type="hidden" name="num_pieza_dental" id="num_pieza_dental">
             <input type="hidden" name="simbolo_id" id="simbolo_id">
 
+          <!--Tratamientos-->
           <div class="row">
              <div class="mb-3">
               <label for="" class="form-label">Tratamientos</label>
@@ -24,7 +25,7 @@
                 @foreach ( $tratamientos as $tratamiento )
                   <option value="{{ $tratamiento->id }}">{{ $tratamiento->nombre.' - $'. $tratamiento->precio }}</option>
                 @endforeach
-              </select>
+              </select> 
              </div>
           </div>
 
@@ -38,11 +39,18 @@
                     <div class="col-lg-6 col-md-6 col-sm-6 col-xs-6"><label for="">Necesarios</label>
                       <br>
                       <div class="contenedor-botones">
-                        <div class="row">
+                        <div class="row" id="div_simbolo_rojo" style="display: none;">
+                          <button type="button" class="btn_simbolo_necesario" id="btn_simbolo" data-bs-placement="bottom"
+                            onclick="agregar_simbolo( event, {{$simboloRojo->id}})">
+                        </div>
+                        <div class="row" style="display: none;" id="div_simbolos">
                           @foreach ( $simbolosRojos as $simboloRojo )
                           <div class="col-5 col-sm-4 col-md-3 col-lg-2">
-                              <button type="button" class="btn_simbolo_necesario tt" id="btn_simbolo" data-bs-placement="bottom" title="{{ $simboloRojo->nombre }}}}"
-                              onclick="agregar_simbolo( event, {{$simboloRojo->id}})"> @if ($simboloRojo->simbolo != 'ss') {{ $simboloRojo->simbolo }} @endif </button>
+                              <button type="button" class="btn_simbolo_necesario" id="btn_simbolo" data-bs-placement="bottom" title="{{ $simboloRojo->nombre }}"
+                                onclick="agregar_simbolo( event, {{$simboloRojo->id}})">
+                                <!-- Comprueba que solo aparezca con simbolos los botones que tengan uno --> 
+                                @if ($simboloRojo->simbolo != 'ss') {{ $simboloRojo->simbolo }} @endif 
+                            </button>
                           </div>    
                           @endforeach
                         </div>
@@ -52,7 +60,11 @@
                       <div class="col-lg-6 col-md-6 col-sm-6 col-xs-6"><label for="">Realizados</label>
                         <br>
                         <div class="contenedor-botones">
-                          <div class="row">
+                          <div class="row" id="div_simbolo_azul" style="display: none;">
+                            <button type="button" class="btn_simbolo_realizado" id="btn_simbolo" data-bs-placement="bottom"
+                              onclick="agregar_simbolo( event, {{$simboloAzul->id}})">
+                          </div>
+                          <div class="row" style="display: none;" id="div_simboloss">
                             @foreach ( $simbolosAzules as $simboloAzul )
                               <div class="col-5 col-sm-4 col-md-3 col-lg-2">
                                 <button type="button" class="btn_simbolo_realizado" id="btn_simbolo" title=" {{ $simboloAzul->nombre }}"
@@ -67,6 +79,7 @@
               </div>
             </div>  
 
+          <!--Odontologos-->
           <div class="row mt-2">
             <div class="mb-3">
              <label for="" class="form-label">Odontólogos</label>
@@ -79,6 +92,7 @@
             </div>
          </div>
 
+         <!--Observacion-->
           <div class="row">
             <div class="mb-3">
               <label for="" class="form-label">Observación</label>
@@ -103,12 +117,13 @@
     $('#simbolo_id').val( simbolo_id );
     //al hacer clicked se agrega o se quita el hover al boton 
     var boton = event.target;
-    console.log(simbolo_id);
     if (boton.classList.contains("clicked")) {
       boton.classList.remove("clicked");
     } else {
       boton.classList.add("clicked");
     }
+
+    console.log( $('#simbolo_id').val() );
   }
 
   function crear( cara_dental, num_pieza_dental, odontograma_id ){
@@ -116,6 +131,22 @@
     $('#num_pieza_dental').val(num_pieza_dental);
     $('#odontograma_cabecera_id').val(odontograma_id);
     $('#simbolo').val('');
+
+    mostrarSimboloSegunCaraDental( cara_dental );
+  }
+
+  function mostrarSimboloSegunCaraDental( cara_dental ){
+    if( cara_dental == 'central' ){
+      $('#div_simbolos').show();
+      $('#div_simboloss').show();
+      $('#div_simbolo_rojo').hide();
+      $('#div_simbolo_azul').hide();
+    }else{
+      $('#div_simbolos').hide();
+      $('#div_simboloss').hide();
+      $('#div_simbolo_rojo').show();
+      $('#div_simbolo_azul').show();
+    }
   }
 
 </script>

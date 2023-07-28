@@ -28,11 +28,18 @@ class OdontologoController extends Controller
         return Validator::make($data, [
             'nombres' => ['required', 'string', 'max:255'],
             'apellidos' => ['required', 'string', 'max:255'],
-            'cedula' => ['required', 'string', 'min:10', 'max:10'],
+            'cedula' => ['required', 'string', 'min:10', 'max:10', 'validar_cedula'],
             'sexo' => ['required', 'string', 'max:255'],
             'celular' => ['required', 'string', 'min:10', 'max:10'],
             'especialidad_id' => ['required', 'integer'],
         ]);
+    }
+
+    private function mostrarErroresDeValidacion( $request ){
+        $validator = $this->validator($request->all());
+        if ($validator->fails()) {
+            return redirect()->back()->withErrors($validator)->withInput();
+        }
     }
 
     public function index()
@@ -52,6 +59,7 @@ class OdontologoController extends Controller
         try{
             $odontologo = new Odontologo();
             //valida el ingreso de los datos
+            $this->mostrarErroresDeValidacion( $request );
             $this->validator($request->all())->validate();
             $this->storeAndUpdate($request, $odontologo);
 

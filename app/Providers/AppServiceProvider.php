@@ -6,7 +6,8 @@ use Illuminate\Pagination\Paginator;
 use Illuminate\Support\ServiceProvider;
 
 use Illuminate\Support\Facades\URL;
-
+use Illuminate\Support\Facades\Validator;
+use App\Models\Validador;
 
 class AppServiceProvider extends ServiceProvider
 {
@@ -25,11 +26,14 @@ class AppServiceProvider extends ServiceProvider
     {
         // Fuerza el uso de HTTPS en produccion
         if(env('APP_ENV') !== 'local') {
-            //$this->app['request']->server->set('HTTPS', true);
             URL::forceScheme('https');
         }
 
         Paginator::useBootstrapFive();
+
+        Validator::extend('validar_cedula', function($attribute, $cedula, $parameters, $validator) {
+            return Validador::validarCedula($cedula);
+        });
 
     }
 }

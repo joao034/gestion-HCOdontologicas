@@ -247,7 +247,7 @@
 
                         <div class="mb-3">
                             <label for="" class="form-label">Prefesión u Oficio</label>
-                            <input type="text"
+                            <input type="text" required
                               class="form-control" name="ocupacion" id="" aria-describedby="helpId" placeholder="">
 
                                 @error('ocupacion')

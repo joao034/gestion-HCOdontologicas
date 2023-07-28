@@ -31,26 +31,26 @@ class HClinicaController extends Controller
         return Validator::make($data, [
             'nombres' => ['required', 'string', 'max:255'],
             'apellidos' => ['required', 'string', 'max:255'],
-            'cedula' => ['required', 'string', 'min:10', 'max:10'],
-            'cedula_representante' => ['nullable', 'string', 'min:10', 'max:10'],
+            'cedula' => ['validar_cedula','required', 'string', 'min:10', 'max:10'],
+            'cedula_representante' => ['nullable', 'string', 'min:10', 'max:10', 'validar_cedula'],
             'representante' => ['nullable', 'string', 'max:100'],
             'fecha_nacimiento' => ['required', 'date'],
             'edad' => ['required', 'integer', 'min:0', 'max:120'],
             'estado_civil' => ['required', 'string', 'max:255'],
             'direccion' => ['required', 'string', 'max:255'],
-            'ocupacion' => ['nullable', 'string', 'max:255'],
+            'ocupacion' => ['required', 'string', 'max:255'],
             'sexo' => ['required', 'string', 'max:255'],
             'celular' => ['nullable', 'min:10', 'max:10'],
             'telef_convencional' => ['nullable', 'min:6', 'max:9'],
         ]);
     }
 
-    private function validarDatos( $request ){
+    private function mostrarErroresDeValidacion( $request ){
         $validator = $this->validator($request->all());
         if ($validator->fails()) {
             return redirect()->back()->withErrors($validator)->withInput();
         }
-    }
+    } 
     
     /**
      * Despliega la lista de pacientes.
@@ -92,8 +92,9 @@ class HClinicaController extends Controller
             DB::beginTransaction();
             $paciente = new Paciente();
             //validar los datos
-            $this->validarDatos($request);           
-
+            $this->mostrarErroresDeValidacion($request);  
+            $this->validator($request->all())->validate();
+                     
             $this->guardarOActualizarPaciente( $paciente, $request );
             //insertar antecedentes
             $this->almacenarAntecedentesInfecciosos( $request, $paciente->id );
@@ -104,7 +105,7 @@ class HClinicaController extends Controller
             return to_route('hclinicas.index')->with('message', 'Historia Clinica creado exitosamente');
         } catch (\Exception $e) {
             DB::rollback();
-            return to_route('hclinicas.create')->with('danger', 'No se pudo crear la Historia Clinica');
+            return to_route('hclinicas.create')->with('danger', 'No se pudo crear la Historia Clinica. ');
             throw $e;
         }
     }
@@ -149,19 +150,18 @@ class HClinicaController extends Controller
             DB::beginTransaction();   
             $paciente = Paciente::findOrFail($id_paciente);
             //validar el ingreso de los datos
+            $this->mostrarErroresDeValidacion($request);  
             $this->validator($request->all())->validate();
+
             $this->guardarOActualizarPaciente($paciente, $request);
-
             $this->actualizarAntecedenteInfeccioso($request, $paciente->id);
-
             $this->actualizarAntecedentePersonal($request, $paciente->id);
 
             DB::commit();
             return to_route('hclinicas.index')->with('message', 'Historia Clínica actualizada exitosamente');
-
         } catch (\Exception $e) {
             DB::rollback();
-            return to_route('hclinicas.index')->with('danger', 'No se pudo actualizar la Historia Clínica.' . $e->getMessage() . ' ');
+            return back()->with('danger', 'No se pudo actualizar la Historia Clínica. ');
             throw $e;
         }
     }
@@ -190,7 +190,7 @@ class HClinicaController extends Controller
 
         } catch (\Exception $e) {
             DB::rollback();
-            return to_route('hclinicas.index')->with('danger', 'No se pudo eliminar la Historia Clínica' . $e->getMessage() . ' ');
+            return to_route('hclinicas.index')->with('danger', 'No se pudo eliminar la Historia Clínica. ');
             throw $e;
         }
     }
@@ -218,7 +218,6 @@ class HClinicaController extends Controller
     }
 
     private function guardarOActualizarPaciente( Paciente $paciente ,Request $request){
-            
             $paciente->nombres = $request->input('nombres');
             $paciente->apellidos = $request->input('apellidos');
             $paciente->cedula = $request->input('cedula');

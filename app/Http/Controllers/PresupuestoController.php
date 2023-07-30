@@ -34,8 +34,7 @@ class PresupuestoController extends Controller
             ->orWhere('pacientes.apellidos', 'LIKE', '%'.$search.'%')
             ->orWhere('pacientes.cedula', 'LIKE', '%'.$search.'%')
             ->orderBy('apellidos', 'asc')
-            ->paginate(10)
-            ->get();
+            ->paginate(10);
         
         return view('presupuestos.index', compact(['search', 'presupuestos']));
     }

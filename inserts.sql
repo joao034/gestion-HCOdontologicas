@@ -1,0 +1,42 @@
+
+INSERT INTO tratamientos (nombre, precio) VALUES
+('PROFILAXIS', 25),
+('PROFILAXIS PROFUNDA (2 o 3 sesiones)', 80),
+('BLANQUEAMIENTO NORMAL', 120),
+('BLANQUEAMIENTO + MICROABRASION', 250),
+('RESINA SIMPLE', 20),
+('RESINA COMPUESTA', 25),
+('RESINA COMPLEJA', 30),
+('RESINA 4 PAREDES', 35),
+('ENDODONCIA UNIRADICULAR', 130),
+('ENDODONCIA BIRRADICULAR', 150),
+('ENDODONCIA MOLAR', 180),
+('RETRATAMIENTO I', 150),
+('RETRATAMIENTO P', 180),
+('RETRATAMIENTO M', 200),
+('PERNO DE FIBRA DE VIDRIO', 100),
+('EXODONCIA SIMPLE', 30),
+('EXODONCIA COMPLEJA', 40),
+('EXTRACCION DE 3ROS MOLARES SIMPLE', 90),
+('CIRUGIA DE 3ROS MOLARES SIMPLE', 110),
+('ALARGAMIENTO ANTERIOR', 60),
+('ALARGAMIENTO POSTERIOR', 70),
+('IMPLANTE REHABILITADO', 1200),
+('PROTESIS TOTAL 1', 300),
+('PROTESIS TOTAL 2', 400),
+('PROTESIS TOTAL 3', 500),
+('PROTESIS REMOVIBLE 1', 300),
+('PROTESIS REMOVIBLE 2', 400),
+('PROTESIS REMOVIBLE 3', 500),
+('CORONA METAL/PORCELANA', 190),
+('CORONA CERAMICA PURA', 380),
+('INCRUSTACION', 190);
+
+
+INSERT INTO especialidades (nombre, descripcion) VALUES
+    ('Odontopediatría', ' Se encarga del cuidado de la salud bucal de los niños.'),
+    ('Ortodoncia', 'Se enfoca en corregir la posición de los dientes y la mandíbula.'),
+    ('Endodoncia', 'Trata las enfermedades y problemas de la pulpa dental.'),
+    ('Periodoncia', 'Diagnóstico y tratamiento de las enfermedades de las encías y los tejidos de soporte de los dientes.'),
+    ('Implantología', 'Se ocupa de la colocación de implantes dentales.'),
+     ('Odontología General', 'Diagnóstico, prevención y tratamiento de problemas dentales comunes.');;

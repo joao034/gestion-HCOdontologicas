@@ -40,10 +40,7 @@ class OdontogramaDetalleController extends Controller
 
     public function index( int $odontograma_cabecera_id )
     {
-       $detalles_odontograma = OdontogramaDetalle::query()
-                             ->where('odontograma_cabecera_id', '=', "$odontograma_cabecera_id")
-                             ->get();
-        return view('odontogramas.index_detalle', compact(['detalles_odontograma']));
+       
     }
 
     //guarda el detalle del odontograma
@@ -61,6 +58,7 @@ class OdontogramaDetalleController extends Controller
 
     }
 
+    //construye la vista modal del detalle del odontograma
     public function edit ( int $id ){
 
         $odontograma = Odontograma::find($id);
@@ -78,12 +76,7 @@ class OdontogramaDetalleController extends Controller
         $simboloRojo = $simbolosRojos->where('color', $colorRojo)->first();
         $simboloAzul = $simbolosAzules->where('color', $colorAzul)->first();
 
-        $detalles_odontograma = OdontogramaDetalle::query()
-                             ->where('odontograma_cabecera_id', '=', "$id")
-                             ->where('estado', '=', 'necesario')
-                             ->orWhere('estado', '=', 'realizado')
-                             ->orWhere('estado', '=', 'fuera_presupuesto')
-                             ->get();
+        $detalles_odontograma = $this->getDetallesOdontograma( $id );
 
         return view('odontogramas.edit', compact(['tratamientos', 'odontograma', 'detalles_odontograma',
                             'odontologos', 'simbolosRojos', 'simbolosAzules', 'simboloRojo', 'simboloAzul']));
@@ -114,11 +107,22 @@ class OdontogramaDetalleController extends Controller
 
         //consultar el tipo del simbolo
         $simbolo = Simbolo::find($request->simbolo_id);
-        if($simbolo->tipo == 'necesario'){ //si es rojo
-            $detalle_odontograma->estado = 'necesario';
-        }else if($simbolo->tipo == 'realizado'){ //si es azul
-             $detalle_odontograma->estado = 'realizado';
-        }
+        //almacena el tipo del simbolo dependiendo si es realizado o necesario
+        $detalle_odontograma->estado = $simbolo->tipo;
+        
         $detalle_odontograma->save();
+    }
+
+    private function getDetallesOdontograma( int $odontograma_cabecera_id ){
+        $detalles_odontograma = OdontogramaDetalle::query()
+        ->where('odontograma_cabecera_id', '=', "$odontograma_cabecera_id")
+        ->where( function( $query ){
+           $query->where('estado', '=', 'necesario') 
+                 ->orWhere('estado', '=', 'realizado')
+                 ->orWhere('estado', '=', 'fuera_presupuesto');
+        })
+        ->get();
+
+        return $detalles_odontograma;
     }
 }

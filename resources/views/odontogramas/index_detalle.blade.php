@@ -29,7 +29,7 @@
                     <td>{{$detalle->num_pieza_dental}}</td>
                     <td>{{$detalle->cara_dental}}</td>
                     <td>{{$detalle->odontologo->nombres . ' '. $detalle->odontologo->apellidos }}</td>
-                    <td>{{$detalle->estado }}</td>
+                    <td>{{$detalle->estado}}</td>
                     <td>
 
                         <!--eliminar-->

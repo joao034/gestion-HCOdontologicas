@@ -68,6 +68,7 @@
             </tbody>
         </table>
         <!--Paginacion-->
+        {{$odontogramas->links()}}}
     </div>
 
 

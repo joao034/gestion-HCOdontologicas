@@ -25,7 +25,7 @@
                               <div class="col-md-6">
                                   <div class="mb-3">
                                       <label for="" class="form-label">Nombres</label>
-                                      <input type="text"
+                                      <input type="text" value="{{ old('nombres') }}"
                                         class="form-control" name="nombres" id="" aria-describedby="helpId" placeholder="" required>
                                         
                                         @error('nombres')
@@ -37,7 +37,7 @@
                               <div class="col-md-6">
                                   <div class="mb-3">
                                       <label for="" class="form-label">Apellidos</label>
-                                      <input type="text"
+                                      <input type="text" value="{{ old('apellidos') }}"
                                         class="form-control" name="apellidos" id="" aria-describedby="helpId" placeholder="">
                                         
                                         @error('apellidos')
@@ -52,8 +52,8 @@
                                 <div class="col-md-5">
                                     <div class="mb-3">
                                       <label for="" class="form-label">Cédula</label>
-                                      <input type="text" class="form-control" name="cedula" minlength="10" maxlength="10" id="" 
-                                      aria-describedby="helpId" placeholder="" pattern="^[0-9]+$">
+                                      <input type="text" class="form-control" name="cedula" value="{{ old('cedula') }}"
+                                      minlength="10" maxlength="10" id="" aria-describedby="helpId" placeholder="" pattern="^[0-9]+$">
 
                                         @error('cedula')
                                             <small class="text-danger"> {{ $message }}</small>
@@ -64,8 +64,8 @@
                                 <div class="col-md-5">
                                     <div class="mb-3">
                                       <label for="" class="form-label">Fecha de Nacimiento</label>
-                                      <input type="date"
-                                        class="form-control" name="fecha_nacimiento" id="fecha_nacimiento"  max="<?php echo date('Y-m-d')?>" id="fechaNacimiento" placeholder="dd/mm/aaaa" 
+                                      <input type="date" value="{{ old('fecha_nacimiento') }}"
+                                        class="form-control" name="fecha_nacimiento"  id="fecha_nacimiento"  max="<?php echo date('Y-m-d')?>" id="fechaNacimiento" placeholder="dd/mm/aaaa" 
                                             pattern="\d{2}/\d{2}/\d{4}" required>
 
                                         @error('fecha_nacimiento')
@@ -77,7 +77,7 @@
                                 <div class="col-md-2">
                                     <div class="mb-3">
                                     <label for="" class="form-label">Edad</label>
-                                    <input type="text"
+                                    <input type="text" value="{{ old('edad') }}"
                                       class="form-control" name="edad" id="edad" aria-describedby="helpId" placeholder="" readonly min="0" max="120" required>
 
                                     @error('edad')
@@ -92,7 +92,7 @@
                                 <div class="col-md-6">
                                     <div class="mb-3">
                                         <label for="" class="form-label">Cédula del Representante</label>
-                                        <input type="text" class="form-control" name="cedula_representante" minlength="10" maxlength="10" id="" 
+                                        <input type="text" class="form-control" value="{{old('cedula_representante')}}" name="cedula_representante" minlength="10" maxlength="10" id="" 
                                         aria-describedby="helpId" placeholder="" pattern="^[0-9]+$">
   
                                           @error('cedula_representante')
@@ -104,8 +104,9 @@
                                 <div class="col-md-6">
                                     <div class="mb-3">
                                         <label for="" class="form-label">Representante</label>
-                                        <input type="text" class="form-control" name="representante" id="representante" aria-describedby="helpId" placeholder="Nombre del representante" >
-  
+                                        <input type="text" class="form-control" value="{{old('representante')}}" name="representante" id="representante"
+                                         aria-describedby="helpId" placeholder="Nombre del representante" >
+
                                           @error('representante')
                                               <small class="text-danger"> {{ $message }}</small>
                                           @enderror
@@ -113,7 +114,6 @@
                                     </div>
                                 </div>
                             </div>
-
                         </div>
 
                     <div class="row">
@@ -208,7 +208,7 @@
                             <div class="col-md-6">
                                 <div class="mb-3">
                                     <label for="" class="form-label">Celular</label>
-                                    <input type="text"
+                                    <input type="text" value="{{ old('celular') }}"
                                       class="form-control" name="celular" minlength="10" maxlength="10" id="" 
                                       aria-describedby="helpId" placeholder="" pattern="^[0-9]+$">
                                         
@@ -221,22 +221,20 @@
                             <div class="col-md-6">
                                 <div class="mb-3">
                                     <label for="" class="form-label">Teléfono Convencional</label>
-                                    <input type="text"
+                                    <input type="text" value="{{ old('telef_convencional') }}"
                                       class="form-control" name="telef_convencional" id="" aria-describedby="helpId" 
                                         minlength="6" maxlength="9" pattern="^[0-9]+$">
 
                                         @error('telef_convencional')
                                             <small class="text-danger"> {{ $message }}</small>
                                         @enderror
-
                                 </div>
                             </div>
                           </div>
                           
-  
                           <div class="mb-3">
                             <label for="" class="form-label">Direción (Ciudad / Barrio)</label>
-                            <input type="text"
+                            <input type="text" value="{{ old('direccion') }}"
                               class="form-control" name="direccion" id="" aria-describedby="helpId" placeholder="" required>
 
                                 @error('direccion')
@@ -247,15 +245,13 @@
 
                         <div class="mb-3">
                             <label for="" class="form-label">Prefesión u Oficio</label>
-                            <input type="text" required
+                            <input type="text" required value="{{ old('ocupacion') }}"
                               class="form-control" name="ocupacion" id="" aria-describedby="helpId" placeholder="">
 
                                 @error('ocupacion')
                                     <small class="text-danger"> {{ $message }}</small>
                                 @enderror
                         </div>
-  
-  
                         </div>
                       </div>
                   </div>

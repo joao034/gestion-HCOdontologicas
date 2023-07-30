@@ -45,7 +45,6 @@ class OdontologoController extends Controller
     public function index()
     {
         $odontologos = Odontologo::all();    
-
         $especialidades = Especialidad::all();
         return view('odontologos.index', compact('odontologos', 'especialidades'));
     }
@@ -82,6 +81,7 @@ class OdontologoController extends Controller
         try{
             $odontologo = Odontologo::find($id);
             //valida el ingreso de los datos
+            $this->mostrarErroresDeValidacion( $request );
             $this->validator($request->all())->validate();
             $this->storeAndUpdate($request, $odontologo);
 

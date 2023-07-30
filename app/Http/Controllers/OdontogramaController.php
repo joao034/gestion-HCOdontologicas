@@ -26,8 +26,9 @@ class OdontogramaController extends Controller
             ->orWhere('pacientes.apellidos', 'LIKE', '%'.$search.'%')
             ->orWhere('pacientes.cedula', 'LIKE', '%'.$search.'%')
             ->orderBy('pacientes.apellidos', 'asc')
+            ->paginate(10)
             ->get();
-        
+
         return view('odontogramas.index', compact(['search', 'odontogramas']));
     }
 

@@ -31,7 +31,7 @@ class HClinicaController extends Controller
         return Validator::make($data, [
             'nombres' => ['required', 'string', 'max:255'],
             'apellidos' => ['required', 'string', 'max:255'],
-            'cedula' => ['validar_cedula','required', 'string', 'min:10', 'max:10'],
+            'cedula' => ['validar_cedula','nullable', 'string', 'min:10', 'max:10'],
             'cedula_representante' => ['nullable', 'string', 'min:10', 'max:10', 'validar_cedula'],
             'representante' => ['nullable', 'string', 'max:100'],
             'fecha_nacimiento' => ['required', 'date'],

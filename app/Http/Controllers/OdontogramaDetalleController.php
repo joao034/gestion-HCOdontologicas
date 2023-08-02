@@ -121,7 +121,8 @@ class OdontogramaDetalleController extends Controller
                  ->orWhere('estado', '=', 'realizado')
                  ->orWhere('estado', '=', 'fuera_presupuesto');
         })
-        ->get();
+        ->orderBy('created_at', 'desc')
+        ->paginate(10);
 
         return $detalles_odontograma;
     }

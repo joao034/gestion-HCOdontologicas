@@ -54,10 +54,8 @@ class Odontograma extends Model
 		return $this->hasMany(OdontogramaDetalle::class);
 	}
 
-	//devuelve el color a pintar en la cara dental
+	//devuelve el color pintado en la cara dental
     public function getColorCaraDentalAPintar( $cara_dental, $num_diente, $id_odontograma ){
-
-        //encontrar el ultimo detalle del odontograma a pintar
 		try{
 			$color = '';
 			$ultimo_detalle = $this->getUltimoDetalleOdontograma( $cara_dental, $num_diente, $id_odontograma );
@@ -68,9 +66,9 @@ class Odontograma extends Model
 			return $e->getMessage();
 		}
 	}	
-
+	
+	//devuelve la ruta de la imagen del simbolo pintado en la cara dental
 	public function getRutaImagenSimbolo( $num_diente, $id_odontograma ){
-		//encontrar el ultimo detalle del odontograma
 		try{
 			$rutaImagen = '';
 			$ultimo_detalle = $this->getUltimoDetalleOdontograma( 'central', $num_diente, $id_odontograma );

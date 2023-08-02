@@ -36,7 +36,6 @@
                         <button type="button" class="btn btn-danger" data-bs-toggle="modal" data-bs-target="#borrar{{$detalle->id}}">
                             <i class="fa-regular fa-trash-can"></i> Eliminar
                         </button>
-
                     </td>
                 </tr>
                 @include('odontogramas.destroy_detalle')
@@ -44,4 +43,5 @@
             @endif
         </tbody>
     </table>
+    {{$detalles_odontograma->links()}}
 </div>

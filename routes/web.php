@@ -37,7 +37,7 @@ use Illuminate\Support\Facades\Auth;
 });*/
 
 Route::get('/inicio', function () {
-    return view('login');
+    return view('components.diente');
 });
 
 Route::get('/', function () {

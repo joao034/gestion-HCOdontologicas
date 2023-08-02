@@ -24,7 +24,7 @@
             <tr class="">
                 <td scope="row">{{$tratamiento->id}}</td>
                 <td>{{$tratamiento->nombre}}</td>
-                <td>{{$tratamiento->precio}}</td>
+                <td>$ {{$tratamiento->precio}}</td>
                 <td>
                     <!--editar-->
                     <button type="button" class="btn btn-secondary" data-bs-toggle="modal" data-bs-target="#edit{{$tratamiento->id}}">

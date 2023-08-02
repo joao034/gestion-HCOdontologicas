@@ -26,8 +26,7 @@
             <tr>
                 <th scope="col">Nº</th>
                 <th scope="col">Cédula</th>
-                <th scope="col">Nombres</th>
-                <th scope="col">Apellidos</th>
+                <th scope="col">Paciente</th>
                 <th scope="col">Total</th>
                 <th>Acciones</th>
             </tr>
@@ -44,8 +43,7 @@
                 <tr class="">
                     <td scope="row">{{$presupuesto->id}}</td>
                     <td>{{$presupuesto->paciente->cedula}}</td>
-                    <td>{{$presupuesto->paciente->nombres}}</td>
-                    <td>{{$presupuesto->paciente->apellidos}}</td>
+                    <td>{{$presupuesto->paciente->nombres . ' ' . $presupuesto->paciente->apellidos}}</td>
                     <td>${{$presupuesto->total}}</td>
                     <td>
                         

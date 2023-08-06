@@ -12,15 +12,15 @@
             @method('POST')
 
             <input type="hidden" name="odontograma_cabecera_id" id="odontograma_cabecera_id">
-            <input type="hidden" name="cara_dental" id="cara_dental">
+            <input type="hidden" name="cara_dental[]" id="cara_dental">
             <input type="hidden" name="num_pieza_dental" id="num_pieza_dental">
             <input type="hidden" name="simbolo_id" id="simbolo_id">
 
           <!--Tratamientos-->
           <div class="row">
              <div class="mb-3">
-              <label for="" class="form-label">Tratamientos</label>
-              <select class="form-select form-select-md" name="tratamiento_id" id="" required>
+              
+              <select class="form-select form-select-md" name="tratamiento_id" id="tratamientos" required>
                 <option selected>Seleccione un tratamiento</option>
                 @foreach ( $tratamientos as $tratamiento )
                   <option value="{{ $tratamiento->id }}">{{ $tratamiento->nombre.' - $'. $tratamiento->precio }}</option>
@@ -28,6 +28,46 @@
               </select> 
              </div>
           </div>
+
+          <!--Caras dentales-->
+          <div class="row" id="div_caras_dentales" style="display:none">
+            <label for="" class="form-label">Caras dentales</label>
+            <div class="col-md-3">
+              <div class="form-check">
+                <input class="form-check-input" type="checkbox" id="checkCentral" name="cara_dental[]" value="central">
+                <label class="form-check-label" for="checkCentral">
+                  Central
+                </label>
+              </div>
+            </div>
+            <div class="col-md-3">
+              <div class="form-check">
+                  <input class="form-check-input" type="checkbox" id="checkSuperior" name="cara_dental[]" value="superior">
+                  <label class="form-check-label" for="checkSuperior">
+                    Superior
+                  </label>
+                </div>
+              </div>
+            <div class="col-md-3">
+              <input class="form-check-input" type="checkbox" id="checkInferior" name="cara_dental[]" value="inferior">
+              <label class="form-check-label" for="checkInferior">
+                Inferior
+              </label>
+            </div>
+            <div class="col-md-3">
+              <input class="form-check-input" type="checkbox" id="checkIzquierda" name="cara_dental[]" value="izquierda">
+              <label class="form-check-label" for="checkIzquierda">
+                Izquierda
+              </label>
+            </div>
+            <div class="col-md-3">
+              <input class="form-check-input" type="checkbox" id="checkDerecha" name="cara_dental[]" value="derecha">
+              <label class="form-check-label" for="checkDerecha">
+                Derecha
+              </label>
+            </div>
+          </div>
+
 
           <!--Simbolos-->
           <div class="row" style="margin-top: 5px;border-top:"> 
@@ -77,7 +117,7 @@
                   </div>
                 </div>
               </div>
-            </div>  
+          </div>  
 
           <!--Odontologos-->
           <div class="row mt-2">
@@ -113,6 +153,18 @@
 </div>
 
 <script>
+
+$(document).ready(function(){
+    $('#tratamientos').change(function(){
+      var selectedOptionText = $(this).find(':selected').text();
+      if (selectedOptionText.includes('RESINA') && !selectedOptionText.includes('RESINA SIMPLE')) {
+          $('#div_caras_dentales').show();
+      } else {
+          $('#div_caras_dentales').hide();
+      }
+    });
+  });
+
   function agregar_simbolo( event, simbolo_id ) {
     $('#simbolo_id').val( simbolo_id );
     //al hacer clicked se agrega o se quita el hover al boton 
@@ -123,8 +175,9 @@
       boton.classList.add("clicked");
     }
 
-    console.log( $('#simbolo_id').val() );
+    console.log( $('#simbolo_id').val() ); 
   }
+
 
   function crear( cara_dental, num_pieza_dental, odontograma_id ){
     $('#cara_dental').val(cara_dental);
@@ -132,8 +185,11 @@
     $('#odontograma_cabecera_id').val(odontograma_id);
     $('#simbolo').val('');
 
+    console.log( $('#num_pieza_dental').val() );
+
     mostrarSimboloSegunCaraDental( cara_dental );
   }
+
 
   function mostrarSimboloSegunCaraDental( cara_dental ){
     if( cara_dental == 'central' ){

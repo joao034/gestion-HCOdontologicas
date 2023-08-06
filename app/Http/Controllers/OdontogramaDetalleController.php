@@ -26,6 +26,7 @@ class OdontogramaDetalleController extends Controller
         return Validator::make($data, [
             'tratamiento_id' => ['required'],
             'odontologo_id' => ['required'],
+            'cara_dental' => ['required'],
             'simbolo_id' => ['required'],
             'observacion' => ['nullable', 'string', 'max:255'],
         ]);
@@ -96,9 +97,14 @@ class OdontogramaDetalleController extends Controller
     private function guardarDetalle( $request ){
         $detalle_odontograma = new OdontogramaDetalle();
 
+        //dd($request->all());
+
         $detalle_odontograma->fecha = Carbon::now();
         $detalle_odontograma->num_pieza_dental = $request->num_pieza_dental;
         $detalle_odontograma->cara_dental = $request->cara_dental;
+        if(isset( $request->cara_dental)){
+            $detalle_odontograma->cara_dental = implode(",", $request->cara_dental);
+        }
         $detalle_odontograma->simbolo_id = $request->simbolo_id;
         $detalle_odontograma->odontograma_cabecera_id = $request->odontograma_cabecera_id;
         $detalle_odontograma->tratamiento_id = $request->tratamiento_id;
@@ -109,7 +115,7 @@ class OdontogramaDetalleController extends Controller
         $simbolo = Simbolo::find($request->simbolo_id);
         //almacena el tipo del simbolo dependiendo si es realizado o necesario
         $detalle_odontograma->estado = $simbolo->tipo;
-        
+
         $detalle_odontograma->save();
     }
 

@@ -3,8 +3,6 @@
 
 <h1 class="text-center">Odontograma Geométrico</h1>
 
-@include('odontogramas.detalle_odontograma')
-
 <!-- Cuadrante Superior dentadura adulta -->
 <div class="row">
     <div  class="col-lg-1 col-md-1 col-sm-12 col-xs-12"></div>
@@ -14,6 +12,7 @@
                 <div style="flex-grow: 1;margin-left: 20px;">{{ $i }}</div>
             @endfor
         </div>
+        
         <!-- dientes -->
         <div style="display: flex;padding: 10px;justify-content: center;border-top: 1px solid #BAB9B9;">
             @for($i=18;$i>10;$i--)
@@ -26,22 +25,13 @@
                  ?>
                     
                     <div style="width: 40px;height: auto;background: url('{{ $imagen }}');background-repeat: no-repeat;background-position: center center;background-size: cover;">
-
-                        <div style="display: flex;justify-content: center;">
-                            @include('odontogramas.dientes.superior')
-                        </div>
-
-                        <div style="display: flex;justify-content: center;align-items: center;">
-                            @include('odontogramas.dientes.centro_izq_der')
-                        </div>
-                        <div style="display: flex;justify-content: center;">
-                            @include('odontogramas.dientes.inferior')
-                        </div>
-
+                        @include('components.diente')
                     </div>
                 </div>
+                
             @endfor
         </div>
+        
     </div>
 
     <div  class="col-lg-5 col-md-5 col-sm-12 col-xs-12" style="background-color: #fff;">
@@ -62,19 +52,7 @@
                  ?> 
                     
                     <div style="width: 40px;height: auto; background: url('{{ $imagen }}'); background-repeat: no-repeat;background-position: center center;background-size: cover;">
-
-                        <div style="display: flex;justify-content: center;">
-                            @include('odontogramas.dientes.superior')
-                        </div>
-
-                        <div style="display: flex;justify-content: center;align-items: center;">
-                            @include('odontogramas.dientes.centro_izq_der')
-                        </div>
-                        <div style="display: flex;justify-content: center;">
-                            @include('odontogramas.dientes.inferior')
-                        </div>
-
-
+                        @include('components.diente')
                     </div>
                 </div>
             @endfor
@@ -107,21 +85,9 @@
                     $imagen = asset("assets/img/".$ruta);
                     ?>
                    
-
                      <!-- graficar el cuadrante III con los datos que hay en el -->
                     <div style="width: 40px;height: auto; background: url('{{ $imagen }}');background-repeat: no-repeat;background-position: center center;background-size: cover;">
-
-                        <div style="display: flex;justify-content: center;">
-                            @include('odontogramas.dientes.superior')
-                        </div>
-
-                        <div style="display: flex;justify-content: center;align-items: center;">
-                            @include('odontogramas.dientes.centro_izq_der')
-                        </div>
-                        <div style="display: flex;justify-content: center;">
-                            @include('odontogramas.dientes.inferior')
-                        </div>
-
+                        @include('components.diente')
                     </div>
                 </div>
                     @else
@@ -152,23 +118,10 @@
                     $ruta = $odontograma->getRutaImagenSimbolo( $i, $odontograma->id);
                     $imagen = asset("assets/img/".$ruta);
                  ?>
-               
-
                      <!-- graficar el cuadrante IV con los datos que hay en el -->
                     
                     <div style="width: 40px;height: auto; background: url('{{ $imagen }}'); background-repeat: no-repeat;background-position: center center;background-size: cover;">
-
-                        <div style="display: flex;justify-content: center;">
-                            @include('odontogramas.dientes.superior')
-                        </div>
-
-                        <div style="display: flex;justify-content: center;align-items: center;">
-                            @include('odontogramas.dientes.centro_izq_der')
-                        </div>
-                        <div style="display: flex;justify-content: center;">
-                            @include('odontogramas.dientes.inferior')
-                        </div>
-
+                        @include('components.diente')
                     </div>
                 </div>
                     @else
@@ -206,18 +159,7 @@
                  ?>
 
                     <div style="width: 40px;height: auto; background: url('{{ $imagen }}'); background-repeat: no-repeat;background-position: center center;background-size: cover;">
-
-                        <div style="display: flex;justify-content: center;">
-                            @include('odontogramas.dientes.superior')
-                        </div>
-
-                        <div style="display: flex;justify-content: center;align-items: center;">
-                            @include('odontogramas.dientes.centro_izq_der')
-                        </div>
-                        <div style="display: flex;justify-content: center;">
-                            @include('odontogramas.dientes.inferior')
-                        </div>
-
+                        @include('components.diente')
                     </div>
                 </div>
                     @else
@@ -250,18 +192,7 @@
                  ?>
                     
                     <div style="width: 40px;height: auto; background: url('{{ $imagen }}'); background-repeat: no-repeat;background-position: center center;background-size: cover;">
-
-                        <div style="display: flex;justify-content: center;">
-                            @include('odontogramas.dientes.superior')
-                        </div>
-
-                        <div style="display: flex;justify-content: center;align-items: center;">
-                            @include('odontogramas.dientes.centro_izq_der')
-                        </div>
-                        <div style="display: flex;justify-content: center;">
-                            @include('odontogramas.dientes.inferior')
-                        </div>
-
+                        @include('components.diente')
                     </div>
                 </div>
                     @else
@@ -295,18 +226,7 @@
                  ?>         
                     
                     <div style="width: 40px;height: auto; background: url('{{ $imagen }}'); background-repeat: no-repeat;background-position: center center;background-size: cover;">
-
-                        <div style="display: flex;justify-content: center;">
-                            @include('odontogramas.dientes.superior')
-                        </div>
-
-                        <div style="display: flex;justify-content: center;align-items: center;">
-                            @include('odontogramas.dientes.centro_izq_der')
-                        </div>
-                        <div style="display: flex;justify-content: center;">
-                            @include('odontogramas.dientes.inferior')
-                        </div>
-
+                        @include('components.diente')
                     </div>
                 </div>
             @endfor
@@ -331,19 +251,7 @@
                  ?>
                     
                     <div style="width: 40px;height: auto; background: url('{{ $imagen }}'); background-repeat: no-repeat;background-position: center center;background-size: cover;">
-
-                        <div style="display: flex;justify-content: center;">
-                            @include('odontogramas.dientes.superior')
-                        </div>
-
-                        <div style="display: flex;justify-content: center;align-items: center;">
-                            @include('odontogramas.dientes.centro_izq_der')
-                        </div>
-                        <div style="display: flex;justify-content: center;">
-                            @include('odontogramas.dientes.inferior')
-                        </div>
-
-
+                        @include('components.diente')
                     </div>
                 </div>
             @endfor
@@ -371,5 +279,5 @@
 
 <!-- Lista de Detalles -->
 @include('odontogramas.index_detalle')
-
+@include('odontogramas.detalle_odontograma', ['i' => $i])
 @endsection

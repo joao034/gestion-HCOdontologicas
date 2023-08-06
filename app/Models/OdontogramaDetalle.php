@@ -74,4 +74,18 @@ class OdontogramaDetalle extends Model
 	{
 		return $this->belongsTo(Simbolo::class);
 	}
+
+	public function retornar_caras_dentales($cara_dental_buscar) {
+		
+		$caras_dentales_array = explode(',', $this->cara_dental);
+		
+		foreach ($caras_dentales_array as $cara_dental) {
+			if ( (trim( $cara_dental ) === trim( $cara_dental_buscar ))) {
+				return true;
+			}
+		}
+		return false;
+		
+	}
+
 }

@@ -50,7 +50,7 @@ class Odontograma extends Model
 	}
 
 	public function odontograma_detalles()
-	{
+	{ 
 		return $this->hasMany(OdontogramaDetalle::class);
 	}
 
@@ -60,7 +60,7 @@ class Odontograma extends Model
 			$color = '';
 			$ultimo_detalle = $this->getUltimoDetalleOdontograma( $cara_dental, $num_diente, $id_odontograma );
 			$simbolo = Simbolo::find($ultimo_detalle->simbolo_id);
-			$color = $simbolo->color; 
+			$color = $simbolo->color;
 			return $color;
 		}catch(\Exception $e){
 			return $e->getMessage();
@@ -80,10 +80,10 @@ class Odontograma extends Model
 		}
 	}
 
-	public function getUltimoDetalleOdontograma( $cara_dental, $num_diente, $id_odontograma ){
+	private function getUltimoDetalleOdontograma( $cara_dental, $num_diente, $id_odontograma ){
 		$detalles_odontograma = DB::table('odontograma_detalle')
 								->where('num_pieza_dental', $num_diente)
-								->where('cara_dental', $cara_dental)
+								->where('cara_dental', 'like', '%'.$cara_dental.'%')
 								->where('odontograma_cabecera_id', $id_odontograma)
 								->get(); 
 		if( !$detalles_odontograma->isEmpty() )
@@ -96,6 +96,6 @@ class Odontograma extends Model
 								->where('paciente_id', $paciente_id)
 								->get(); 
 		return $odontogramas->count();
-	}
+	}	
 
 }

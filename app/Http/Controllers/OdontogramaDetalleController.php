@@ -97,13 +97,11 @@ class OdontogramaDetalleController extends Controller
     private function guardarDetalle( $request ){
         $detalle_odontograma = new OdontogramaDetalle();
 
-        //dd($request->all());
-
         $detalle_odontograma->fecha = Carbon::now();
         $detalle_odontograma->num_pieza_dental = $request->num_pieza_dental;
-        $detalle_odontograma->cara_dental = $request->cara_dental;
-        if(isset( $request->cara_dental)){
-            $detalle_odontograma->cara_dental = implode(",", $request->cara_dental);
+        $detalle_odontograma->cara_dental = $this->eliminarElementosRepetidos($request->cara_dental);
+        if(isset( $detalle_odontograma->cara_dental )){
+            $detalle_odontograma->cara_dental = implode(",", $detalle_odontograma->cara_dental);
         }
         $detalle_odontograma->simbolo_id = $request->simbolo_id;
         $detalle_odontograma->odontograma_cabecera_id = $request->odontograma_cabecera_id;
@@ -115,7 +113,6 @@ class OdontogramaDetalleController extends Controller
         $simbolo = Simbolo::find($request->simbolo_id);
         //almacena el tipo del simbolo dependiendo si es realizado o necesario
         $detalle_odontograma->estado = $simbolo->tipo;
-
         $detalle_odontograma->save();
     }
 
@@ -131,5 +128,9 @@ class OdontogramaDetalleController extends Controller
         ->paginate(10);
 
         return $detalles_odontograma;
+    }
+
+    private function eliminarElementosRepetidos( $array ){
+        return array_unique($array);
     }
 }

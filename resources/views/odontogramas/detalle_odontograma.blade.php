@@ -19,7 +19,6 @@
           <!--Tratamientos-->
           <div class="row">
              <div class="mb-3">
-              
               <select class="form-select form-select-md" name="tratamiento_id" id="tratamientos" required>
                 <option selected>Seleccione un tratamiento</option>
                 @foreach ( $tratamientos as $tratamiento )
@@ -32,42 +31,41 @@
           <!--Caras dentales-->
           <div class="row" id="div_caras_dentales" style="display:none">
             <label for="" class="form-label">Caras dentales</label>
-            <div class="col-md-3">
+            <div class="col-md-4">
               <div class="form-check">
-                <input class="form-check-input" type="checkbox" id="checkCentral" name="cara_dental[]" value="central">
-                <label class="form-check-label" for="checkCentral">
-                  Central
+                <input class="form-check-input" type="checkbox" id="checkOclusal" name="cara_dental[]" value="oclusal">
+                <label class="form-check-label" for="checkOclusal">
+                  Oclusal
                 </label>
               </div>
             </div>
-            <div class="col-md-3">
+            <div class="col-md-4">
               <div class="form-check">
-                  <input class="form-check-input" type="checkbox" id="checkSuperior" name="cara_dental[]" value="superior">
-                  <label class="form-check-label" for="checkSuperior">
-                    Superior
-                  </label>
+                <input class="form-check-input" type="checkbox" id="checkVestibular" name="cara_dental[]" value="vestibular">
+                <label class="form-check-label" for="checkVestibular">
+                  Vestibular
+                </label>
                 </div>
               </div>
-            <div class="col-md-3">
-              <input class="form-check-input" type="checkbox" id="checkInferior" name="cara_dental[]" value="inferior">
-              <label class="form-check-label" for="checkInferior">
-                Inferior
+            <div class="col-md-4">
+              <input class="form-check-input" type="checkbox" id="checkMesial" name="cara_dental[]" value="mesial">
+              <label class="form-check-label" for="checkMesial">
+                Mesial
               </label>
             </div>
-            <div class="col-md-3">
-              <input class="form-check-input" type="checkbox" id="checkIzquierda" name="cara_dental[]" value="izquierda">
-              <label class="form-check-label" for="checkIzquierda">
-                Izquierda
+            <div class="col-md-4">
+              <input class="form-check-input" type="checkbox" id="checkPalatino" name="cara_dental[]">
+              <label class="form-check-label" for="checkPalatino">
+                Palatino/Lingual
               </label>
             </div>
-            <div class="col-md-3">
-              <input class="form-check-input" type="checkbox" id="checkDerecha" name="cara_dental[]" value="derecha">
-              <label class="form-check-label" for="checkDerecha">
-                Derecha
+            <div class="col-md-4">
+              <input class="form-check-input" type="checkbox" id="checkDistal" name="cara_dental[]" value="distal">
+              <label class="form-check-label" for="checkDistal">
+                Distal
               </label>
             </div>
           </div>
-
 
           <!--Simbolos-->
           <div class="row" style="margin-top: 5px;border-top:"> 
@@ -153,15 +151,14 @@
 </div>
 
 <script>
-
+//muestra el div de caras dentales si el tratamiento es resina
 $(document).ready(function(){
     $('#tratamientos').change(function(){
       var selectedOptionText = $(this).find(':selected').text();
-      if (selectedOptionText.includes('RESINA') && !selectedOptionText.includes('RESINA SIMPLE')) {
-          $('#div_caras_dentales').show();
-      } else {
-          $('#div_caras_dentales').hide();
-      }
+      if (selectedOptionText.includes('RESINA') && !selectedOptionText.includes('RESINA SIMPLE')) 
+        $('#div_caras_dentales').show();
+      else 
+        $('#div_caras_dentales').hide();
     });
   });
 
@@ -169,30 +166,25 @@ $(document).ready(function(){
     $('#simbolo_id').val( simbolo_id );
     //al hacer clicked se agrega o se quita el hover al boton 
     var boton = event.target;
-    if (boton.classList.contains("clicked")) {
+    if (boton.classList.contains("clicked")) 
       boton.classList.remove("clicked");
-    } else {
+    else 
       boton.classList.add("clicked");
-    }
-
-    console.log( $('#simbolo_id').val() ); 
+    
   }
-
 
   function crear( cara_dental, num_pieza_dental, odontograma_id ){
     $('#cara_dental').val(cara_dental);
     $('#num_pieza_dental').val(num_pieza_dental);
     $('#odontograma_cabecera_id').val(odontograma_id);
     $('#simbolo').val('');
-
-    console.log( $('#num_pieza_dental').val() );
-
+    asignarValueCaraDental( num_pieza_dental );
     mostrarSimboloSegunCaraDental( cara_dental );
   }
 
 
   function mostrarSimboloSegunCaraDental( cara_dental ){
-    if( cara_dental == 'central' ){
+    if( cara_dental == 'oclusal' ){
       $('#div_simbolos').show();
       $('#div_simboloss').show();
       $('#div_simbolo_rojo').hide();
@@ -203,6 +195,15 @@ $(document).ready(function(){
       $('#div_simbolo_rojo').show();
       $('#div_simbolo_azul').show();
     }
+  }
+
+  //asigna el value al check palatino o lingual segun el numero de pieza dental
+  function asignarValueCaraDental ( num_pieza_dental ){
+    let check_palatino = document.getElementById('checkPalatino');
+    if( (num_pieza_dental >= 11 && num_pieza_dental <= 28) || (num_pieza_dental >= 51 && num_pieza_dental <= 65) )
+      check_palatino.value = 'palatino';
+    else 
+      check_palatino.value = 'lingual';
   }
 
 </script>

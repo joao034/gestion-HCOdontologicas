@@ -71,7 +71,7 @@ class Odontograma extends Model
 	public function getRutaImagenSimbolo( $num_diente, $id_odontograma ){
 		try{
 			$rutaImagen = '';
-			$ultimo_detalle = $this->getUltimoDetalleOdontograma( 'central', $num_diente, $id_odontograma );
+			$ultimo_detalle = $this->getUltimoDetalleOdontograma( 'oclusal', $num_diente, $id_odontograma );
 			$simbolo = Simbolo::find($ultimo_detalle->simbolo_id);
 			$rutaImagen = $simbolo->ruta_imagen; 
 			return $rutaImagen;

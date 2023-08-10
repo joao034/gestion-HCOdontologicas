@@ -48,7 +48,7 @@ Auth::routes();
 
 Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
 
-Route::get('presupuestos/pdf/{odontograma_cabecera_id}', 'App\Http\Controllers\PresupuestoController@pdf')->name('presupuestos.pdf');
+Route::get('presupuestos/pdf/{odontograma_cabecera_id}', [PresupuestoController::class, 'pdf'])->name('presupuestos.pdf');
 
 Route::resource("hclinicas", HClinicaController::class);
 Route::resource("tratamientos", TratamientoController::class);
@@ -59,7 +59,7 @@ Route::resource("detalleOdontogramas", OdontogramaDetalleController::class);
 Route::resource("presupuestos", PresupuestoController::class);
 Route::post('odontogramas/nuevo/{paciente_id}', 'App\Http\Controllers\OdontogramaController@nuevo')->name('odontogramas.nuevo');
 
-
+Route::put('presupuestos/update-precio/{id_detalle_presupuesto}', [PresupuestoController::class, 'updatePrecio'])->name('update.precio');
 
 
 

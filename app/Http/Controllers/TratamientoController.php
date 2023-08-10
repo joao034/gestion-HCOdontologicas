@@ -32,7 +32,8 @@ class TratamientoController extends Controller
 
     public function index()
     {
-        $tratamientos = Tratamiento::all();
+        //retornar en orden alfabético los tratamientos
+        $tratamientos = Tratamiento::orderBy('nombre', 'asc')->get();
         return view('tratamientos.index', compact('tratamientos'));
     }
 

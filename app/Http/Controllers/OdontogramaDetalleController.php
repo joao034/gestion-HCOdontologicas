@@ -106,6 +106,7 @@ class OdontogramaDetalleController extends Controller
         $detalle_odontograma->simbolo_id = $request->simbolo_id;
         $detalle_odontograma->odontograma_cabecera_id = $request->odontograma_cabecera_id;
         $detalle_odontograma->tratamiento_id = $request->tratamiento_id;
+        $detalle_odontograma->precio = Tratamiento::find($request->tratamiento_id)->precio;
         $detalle_odontograma->odontologo_id = $request->odontologo_id;
         $detalle_odontograma->observacion = $request->observacion;
 

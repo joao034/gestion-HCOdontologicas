@@ -39,4 +39,22 @@ INSERT INTO especialidades (nombre, descripcion) VALUES
     ('Endodoncia', 'Trata las enfermedades y problemas de la pulpa dental.'),
     ('Periodoncia', 'Diagnóstico y tratamiento de las enfermedades de las encías y los tejidos de soporte de los dientes.'),
     ('Implantología', 'Se ocupa de la colocación de implantes dentales.'),
-     ('Odontología General', 'Diagnóstico, prevención y tratamiento de problemas dentales comunes.');;
+     ('Odontología General', 'Diagnóstico, prevención y tratamiento de problemas dentales comunes.');
+
+INSERT INTO `simbolos` (`id`, `simbolo`, `color`, `ruta_imagen`, `nombre`, `tipo`) VALUES
+(1, '*', '', 'sellante_n.png', 'Sellante necesario', 'necesario'),
+(2, '*', '', 'sellante_r.png', 'Sellante realizado', 'realizado'),
+(6, 'X', '', 'extraccion_n.png', 'Extracción necesaria', 'necesario'),
+(7, 'X', '', 'extraccion_r.png', 'Extracción realizada', 'realizado'),
+(8, '▲', '', 'endodoncia_n.png', 'Endodoncia necesaria', 'necesario'),
+(9, '▲', '', 'endodoncia_r.png', 'Endodoncia realizada', 'realizado'),
+(10, '●', '', 'caries_n.png', 'Caries', 'necesario'),
+(11, '●', '', 'caries_r.png', 'Obturación realizada', 'realizado'),
+(12, 'C', '', 'corona_n.png', 'Corona', 'necesario'),
+(13, 'C', '', 'corona_r.png', 'Corona', 'realizado'),
+(14, 'I', '', 'implante_n.png', 'Implante', 'necesario'),
+(15, 'I', '', 'implante_r.png', 'Implante', 'realizado'),
+(16, 'i', '', 'incrustacion_n.png', 'Incrustación', 'necesario'),
+(17, 'i', '', 'incrustacion_r.png', 'Incrustación', 'realizado'),
+(4, 'ss', '#3243a6', '', 'Restauración realizada', 'realizado'),
+(3, 'ss', '#dc3545', '', 'Restauración necesaria', 'necesario');

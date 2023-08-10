@@ -30,12 +30,12 @@
         <table class="table">
             <thead class="bg-dark text-white">
                 <tr>
-                    <th scope="col">Nº</th>
-                    <th scope="col">Tratamiento</th>
-                    <th scope="col">Nº Diente</th>
-                    <th scope="col">Valor Unitario</th>
-                    <th scope="col">Total</th>
-                    <th>Acciones</th>
+                    <th scope="col" class="col-1">Nº</th>
+                    <th scope="col" class="col-3">Tratamiento</th>
+                    <th scope="col" class="col-1">Nº Diente</th>
+                    <th scope="col" class="col-2">Valor Unitario</th>
+                    <th scope="col" class="col-1">Total</th>
+                    <th scope="col" class="col-4">Acciones</th>
                 </tr>
             </thead>
             <tbody>
@@ -51,8 +51,15 @@
                         <td scope="row">{{$detalle->id}}</td>
                         <td>{{$detalle->tratamiento->nombre}}</td>
                         <td>{{$detalle->num_pieza_dental}}</td>
-                        <td>${{$detalle->tratamiento->precio}}</td>
-                        <td>${{$detalle->tratamiento->precio}}</td>
+                        <td>
+                            <form action="{{ route('update.precio', $detalle->id )}}" id="form" method="POST">
+                                @method('PUT')
+                                @csrf
+                                <input class="form-control form-control-md" type="number" id="precio"
+                                    name="precio" step="any" value="{{$detalle->precio}}">
+                            </form>
+                        </td>
+                        <td>${{$detalle->precio}}</td>
                         <td>
     
                             <!--eliminar-->
@@ -71,5 +78,23 @@
             </tbody>
         </table>
     </div>
+
+<script>
+    document.addEventListener('DOMContentLoaded', function() {
+        let precioInput = document.getElementById('precio');
+        let form = document.getElementById('form');
+        
+        valorInput.addEventListener('keydown', function(event) {
+            if (event.key === 'Enter') {
+                event.preventDefault(); // Prevenir el comportamiento predeterminado de Enter
+                form.submit();
+            }
+        });
+
+        precioInput.addEventListener('blur', function() {
+            form.submit();
+        });
+    });
+</script>
 
 @endsection

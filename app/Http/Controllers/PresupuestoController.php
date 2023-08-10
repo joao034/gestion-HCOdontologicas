@@ -61,6 +61,7 @@ class PresupuestoController extends Controller
             $detalle_presupuesto->fecha = Carbon::now();
             $detalle_presupuesto->num_pieza_dental = "-";
             $detalle_presupuesto->cara_dental = "-";
+            $detalle_presupuesto->precio = Tratamiento::find( $request->tratamiento_id )->precio;
             $detalle_presupuesto->simbolo_id = Simbolo::first()->id;
             $detalle_presupuesto->odontologo_id = Odontologo::first()->id;
             $detalle_presupuesto->estado = 'presupuesto';
@@ -111,6 +112,17 @@ class PresupuestoController extends Controller
                                                 ->orWhere('estado', '=', 'presupuesto')
                                                 ->get();
         return $detalles_presupuesto;
+    }
+
+    public function updatePrecio ( int $id_detalle_presupuesto, Request $request ){
+        try{
+            $detalle_presupuesto = OdontogramaDetalle::find( $id_detalle_presupuesto );
+            $detalle_presupuesto->precio = $request->precio;
+            $detalle_presupuesto->save();
+            return back()->with('message' , 'Precio actualizado correctamente');
+        }catch(\Exception $e){
+            return back()->with('error' , 'No se pudo actualizar el precio');
+        }
     }
 
 }

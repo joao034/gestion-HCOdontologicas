@@ -19,6 +19,7 @@ return new class extends Migration
             $table->string('cara_dental', 100)->nullable();
             $table->string('observacion', 255)->nullable();
             $table->string('estado', 25)->nullable();
+            $table->float('precio', 8, 2);
 
             //claves foraneas
             $table->foreignId('odontograma_cabecera_id')->constrained('odontograma_cabecera');

@@ -95,7 +95,7 @@
                         <td scope="row">{{$detalle->id}}</td>
                         <td>{{$detalle->tratamiento->nombre}}</td>
                         <td>{{$detalle->num_pieza_dental}}</td>
-                        <td>${{$detalle->tratamiento->precio}}</td>
+                        <td>${{$detalle->precio}}</td>
                     </tr>
                 @endforeach
                 <tr>

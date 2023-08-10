@@ -13,20 +13,18 @@
     <table class="table">
         <thead class="bg-dark text-white">
             <tr>
-                <th scope="col">Cédula</th>
-                <th scope="col">Nombres</th>
-                <th scope="col">Apellidos</th>
-                <th scope="col">Especialidad</th>
-                <th scope="col">Celular</th>
-                <th>Acciones</th>
+                <th scope="col" class="col-md-2">Cédula</th>
+                <th scope="col" class="col-md-3">Odontologo</th>
+                <th scope="col" class="col-md-2">Especialidad</th>
+                <th scope="col" class="col-md-2">Celular</th>
+                <th scope="col" class="col-md-3">Acciones</th>
             </tr>
         </thead>
         <tbody>
             @foreach ($odontologos as $odontologo)
             <tr class="">
                 <td scope="row">{{$odontologo->cedula}}</td>
-                <td>{{$odontologo->nombres}}</td>
-                <td>{{$odontologo->apellidos}}</td>
+                <td>{{$odontologo->nombres . ' ' . $odontologo->apellidos}}</td>
                 <td>{{$odontologo->especialidad->nombre}}</td>
                 <td>{{$odontologo->celular}}</td>
                 <td>

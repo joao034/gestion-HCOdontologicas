@@ -5,8 +5,8 @@
 
 <!-- Cuadrante Superior dentadura adulta -->
 <div class="row">
-    <div  class="col-lg-1 col-md-1 col-sm-12 col-xs-12"></div>
-    <div  class="col-lg-5 col-md-5 col-sm-12 col-xs-12" style="background-color: #fff;">
+    <div  class="col-lg-1 col-md-12 col-sm-12 col-xs-12"></div>
+    <div  class="col-lg-5 col-md-12 col-sm-12 col-xs-12" style="background-color: #fff;">
         <div style="display: flex;background-color: #fff;padding: 10px;justify-content: center;">
             @for($i=18;$i>10;$i--)
                 <div style="flex-grow: 1;margin-left: 20px;">{{ $i }}</div>
@@ -34,7 +34,7 @@
         
     </div>
 
-    <div  class="col-lg-5 col-md-5 col-sm-12 col-xs-12" style="background-color: #fff;">
+    <div  class="col-lg-5 col-md-12 col-sm-12 col-xs-12" style="background-color: #fff;">
         <div style="display: flex;background-color: #fff;padding: 10px;justify-content: center;">
             @for($i=21;$i<=28;$i++)
                 <div style="flex-grow: 1;margin-left: 20px;">{{ $i }}</div>
@@ -63,8 +63,8 @@
 
 <!-- Cuadrante Superior dentadura niño -->
 <div class="row">
-    <div  class="col-lg-1 col-md-1 col-sm-12 col-xs-12"></div>
-    <div  class="col-lg-5 col-md-5 col-sm-12 col-xs-12" style="background-color: #fff;">
+    <div  class="col-lg-1 col-md-12 col-sm-12 col-xs-12"></div>
+    <div  class="col-lg-5 col-md-12 col-sm-12 col-xs-12" style="background-color: #fff;">
         <div style="display: flex;background-color: #fff;padding: 10px;justify-content: center;">
             @for($i=58;$i>50;$i--)
                 <div style="flex-grow: 1;margin-left: 5px;">
@@ -98,7 +98,7 @@
         </div>
     </div>
 
-    <div  class="col-lg-5 col-md-5 col-sm-12 col-xs-12" style="background-color: #fff;">
+    <div  class="col-lg-5 col-md-12 col-sm-12 col-xs-12" style="background-color: #fff;">
         <div style="display: flex;background-color: #fff;padding: 10px;justify-content: center;">
             @for($i=61;$i<69;$i++)
                 <div style="flex-grow: 1;margin-left: 20px;">
@@ -136,8 +136,8 @@
 
 <!-- Cuadrante Inferior dentadura niño -->
 <div class="row">
-    <div  class="col-lg-1 col-md-1 col-sm-12 col-xs-12"></div>
-    <div  class="col-lg-5 col-md-5 col-sm-12 col-xs-12" style="background-color: #fff;">
+    <div  class="col-lg-1 col-md-12 col-sm-12 col-xs-12"></div>
+    <div  class="col-lg-5 col-md-12 col-sm-12 col-xs-12" style="background-color: #fff;">
         <div style="display: flex;background-color: #fff;padding: 10px;justify-content: center;">
             @for($i=88;$i>80;$i--)
                 <div style="flex-grow: 1;margin-left: 5px;">
@@ -170,7 +170,7 @@
         </div>
     </div>
 
-    <div  class="col-lg-5 col-md-5 col-sm-12 col-xs-12" style="background-color: #fff;">
+    <div  class="col-lg-5 col-md-12 col-sm-12 col-xs-12" style="background-color: #fff;">
         <div style="display: flex;background-color: #fff;padding: 10px;justify-content: center;">
             @for($i=71;$i<79;$i++)
                 <div style="flex-grow: 1;margin-left: 20px;">
@@ -207,8 +207,8 @@
 
 <!-- Cuadrante Inferior dentadura adulta -->
 <div class="row">
-    <div  class="col-lg-1 col-md-1 col-sm-12 col-xs-12"></div>
-    <div  class="col-lg-5 col-md-5 col-sm-12 col-xs-12" style="background-color: #fff;">
+    <div  class="col-lg-1 col-md-12 col-sm-12 col-xs-12"></div>
+    <div  class="col-lg-5 col-md-12 col-sm-12 col-xs-12" style="background-color: #fff;">
         <div style="display: flex;background-color: #fff;padding: 10px;justify-content: center;">
             @for($i=48;$i>40;$i--)
                 <div style="flex-grow: 1;margin-left: 20px;">{{ $i }}</div>
@@ -233,7 +233,7 @@
         </div>
     </div>
 
-    <div  class="col-lg-5 col-md-5 col-sm-12 col-xs-12" style="background-color: #fff;">
+    <div  class="col-lg-5 col-md-12 col-sm-12 col-xs-12" style="background-color: #fff;">
         <div style="display: flex;background-color: #fff;padding: 10px;justify-content: center;">
             @for($i=31;$i<39;$i++)
                 <div style="flex-grow: 1;margin-left: 20px;">{{ $i }}</div>

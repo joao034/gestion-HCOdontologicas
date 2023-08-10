@@ -41,14 +41,10 @@ CREATE TRIGGER `restar_total_presupuesto_delete` AFTER DELETE ON `odontograma_de
  FOR EACH ROW BEGIN
     -- variables
     DECLARE precio_tratamiento FLOAT;
-    DECLARE estado_tratamiento VARCHAR(255);
-    
-    -- Obtener el precio y el estado del tratamiento
-    SELECT precio INTO precio_tratamiento FROM tratamientos WHERE id = OLD.tratamiento_id;
-    SELECT estado INTO estado_tratamiento FROM odontograma_detalle WHERE id = OLD.id;
 
-    -- Actualizar el total en la tabla odontograma_cabecera
-     IF estado_tratamiento = 'necesario' THEN   
+     IF OLD.estado = 'necesario' THEN   
+        SELECT precio INTO precio_tratamiento FROM tratamientos WHERE id = OLD.tratamiento_id;
+        -- Actualizar el total en la tabla odontograma_cabecera
         UPDATE odontograma_cabecera
         SET total = total - precio_tratamiento
         WHERE id = OLD.odontograma_cabecera_id;

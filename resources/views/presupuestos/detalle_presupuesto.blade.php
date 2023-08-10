@@ -5,26 +5,24 @@
     <form action="{{ route('presupuestos.store') }}" method="POST">
         @csrf
         <input type="hidden" name="presupuesto_id" value="{{$presupuesto->id}}">
-        <div class="container mt-4">
-            <div class="row">
-                <div class="col-9 col-md-7 col-lg-5">
-                    <div class="mb-3">
-                        <select class="form-select form-select-md" name="tratamiento_id" required>
-                            <option selected> ¿Desea agregar otro tratamiento?</option>
-                            @foreach ($tratamientos as $tratamiento)
-                                <option value="{{$tratamiento->id}}">{{ $tratamiento->nombre .' - $ '. $tratamiento->precio }}</option>
-                            @endforeach
-                        </select>
-                    </div>
+        <div class="row">
+            <div class="input-group mb-3">
+                <div class="col-9 col-lg-5 col-md-7">
+                    <select class="form-select form-select-md" name="tratamiento_id" required>
+                        <option selected> ¿Desea agregar otro tratamiento?</option>
+                        @foreach ($tratamientos as $tratamiento)
+                            <option value="{{$tratamiento->id}}">{{ $tratamiento->nombre .' - $ '. $tratamiento->precio }}</option>
+                        @endforeach
+                    </select>
                 </div>
                 <div class="col-3">
-                    <button id="" class="btn btn-primary" type="submit"><i class="fa-regular fa-plus"></i> Agregar</button>
+                    <button class="btn btn-primary" type="submit"><i class="fa-regular fa-plus"></i> Agregar</button>
                 </div>
             </div>
-            <div class="col">
-                <a href="{{ route('presupuestos.pdf', $presupuesto->id) }}" class="btn btn-danger" target="_blank"><i class="fa-solid fa-file-pdf"></i> Descargar PDF</a>
-            </div>
         </div>
+        <a href="{{ route('presupuestos.pdf', $presupuesto->id) }}" class="btn btn-danger" target="_blank">
+            <i class="fa-solid fa-file-pdf"></i> Descargar PDF
+        </a>
     </form>
 
     <div class="table-responsive">

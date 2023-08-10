@@ -10,11 +10,11 @@
     
     <div class="row">
         <div class="input-group mb-3">
-            <div class="col-9 col-md-7 col-lg-5">
+            <div class="col-lg-5 col-md-7 col-sm-9 col-xs-9">
                 <input type="text" class="form-control" name="buscador" placeholder="Buscar por cédula, nombres o apellidos" 
                     value= "{{ $search }}" aria-label="Recipient's username" aria-describedby="button-addon2">
             </div>
-            <div class="col-lg-3 col-md-3 col-sm-3  col-xs-3">
+            <div class="col-3">
                 <button class="btn btn-secondary" type="submit" id="button-addon2"><i class="fa-solid fa-magnifying-glass"></i> Buscar</button>
             </div>
         </div>
@@ -29,13 +29,12 @@
     <table class="table">
         <thead class="bg-dark text-white">
             <tr>
-                <th scope="col">Nº</th>
-                <th scope="col">Cédula</th>
-                <th scope="col">Nombres</th>
-                <th scope="col">Apellidos</th>
-                <th scope="col">Edad</th>
-                <th scope="col">Celular</th>
-                <th>Acciones</th>
+                <th scope="col" class="col-md-1">Nº</th>
+                <th scope="col" class="col-md-2">Cédula</th>
+                <th scope="col" class="col-md-2">Paciente</th>
+                <th scope="col" class="col-md-1">Edad</th>
+                <th scope="col" class="col-md-2">Celular</th>
+                <th scope="col" class="col-md-4">Acciones</th>
             </tr>
         </thead>
         <tbody>
@@ -50,12 +49,10 @@
                 <tr class="">
                     <td scope="row">{{$paciente->id}}</td>
                     <td>{{$paciente->cedula}}</td>
-                    <td>{{$paciente->nombres}}</td>
-                    <td>{{$paciente->apellidos}}</td>
+                    <td>{{$paciente->apellidos . ' ' . $paciente->nombres}}</td>
                     <td>{{$paciente->edad}}</td>
                     <td>{{$paciente->celular}}</td>
                     <td>
-                        
                         <!--editar-->
                         <a href="{{ route('hclinicas.edit', $paciente->id) }}" class="btn btn-secondary"><i class="fa-regular fa-pen-to-square"></i> Editar</a>
                         <!--eliminar-->

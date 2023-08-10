@@ -13,16 +13,14 @@
     <table class="table">
         <thead class="bg-dark text-white">
             <tr>
-                <th scope="col">Nº</th>
-                <th scope="col">Especialidad</th>
-                <th scope="col">Descripción</th>
-                <th>Acciones</th>
+                <th scope="col" class="col-md-3">Especialidad</th>
+                <th scope="col" class="col-md-4">Descripción</th>
+                <th scope="col" class="col-md-5">Acciones</th>
             </tr>
         </thead>
         <tbody>
             @foreach ($especialidades as $especialidad)
             <tr class="">
-                <td scope="row">{{$especialidad->id}}</td>
                 <td>{{$especialidad->nombre}}</td>
                 <td>{{$especialidad->descripcion}}</td>
                 <td>

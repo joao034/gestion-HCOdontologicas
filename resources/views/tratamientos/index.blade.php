@@ -13,10 +13,10 @@
     <table class="table">
         <thead class="bg-dark text-white">
             <tr>
-                <th scope="col">Nº</th>
-                <th scope="col">Tratamiento</th>
-                <th scope="col">Precio</th>
-                <th>Acciones</th>
+                <th scope="col" class="col-md-1">Nº</th>
+                <th scope="col" class="col-md-4">Tratamiento</th>
+                <th scope="col" class="col-md-1">Precio</th>
+                <th scope="col" class="col-md-6">Acciones</th>
             </tr>
         </thead>
         <tbody>

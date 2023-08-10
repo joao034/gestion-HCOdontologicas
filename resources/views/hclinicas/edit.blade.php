@@ -17,7 +17,7 @@
               
               <!--Datos Generales-->
               <div class="row">
-                  <div class="col-md-6">
+                  <div class="col-md-12 col-lg-6">
                       <div class="card text-start">
                         <div class="card-body">
                           <h5 class="card-title">Datos Personales</h5>
@@ -216,7 +216,7 @@
                   </div>
       
                   <!--Antecedentes Infecciosos-->
-                  <div class="col-md-6">
+                  <div class="col-md-12 col-lg-6 mt-3">
                       <div class="card text-start">
                           <div class="card-body">
                             <h5 class="card-title">Antecedentes Infecciosos</h5>
@@ -389,23 +389,22 @@
                             <p>¿USTED, SUS PADRES O ABUELOS PADECE O HA PADECIDO ALGUNA DE LAS SIGUIENTES ENFERMEDADES?</p>
                             
                             <div class="row">
-                              <div class="col-md-3">
-                                <div class="form-check">
-                                    <input class="form-check-input" type="checkbox" id="" name="enfermedades[]" 
-                                        value="hipertension" {{ $antPersonales->retornar_enfermedades('hipertension') == true ? 'checked' : '' }}>
-                                    <label class="form-check-label" for="">
-                                      Hipertensión
-                                    </label>
-                                  </div>
+                              <div class="col-lg-3 col-md-6">
+                                <input class="form-check-input" type="checkbox" id="" name="enfermedades[]" 
+                                    value="hipertension" {{ $antPersonales->retornar_enfermedades('hipertension') == true ? 'checked' : '' }}>
+                                <label class="form-check-label" for="">
+                                    Hipertensión
+                                </label>
+                                
                               </div>
-                              <div class="col-3">
+                              <div class="col-lg-3 col-md-6">
                                 <input class="form-check-input" type="checkbox" id="" name="enfermedades[]" 
                                     value="enfermedades cardiacas" {{ $antPersonales->retornar_enfermedades('enfermedades cardiacas') == true ? 'checked' : '' }} >
                                 <label class="form-check-label" for="">
                                   Enfermedades Cardiacas
                                 </label>
                               </div>
-                              <div class="col-3">
+                              <div class="col-lg-3 col-md-6">
                                 <input class="form-check-input" type="checkbox" id="" name="enfermedades[]" 
                                     value="diabetes mellitus" {{ $antPersonales->retornar_enfermedades('diabetes mellitus') == true ? 'checked' : '' }}>
                                 <label class="form-check-label" for="">
@@ -413,7 +412,7 @@
                                 </label>
                               </div>
 
-                              <div class="col-3">
+                              <div class="col-lg-3 col-md-6">
                                 <input class="form-check-input" type="checkbox" id="" name="enfermedades[]" 
                                     value="hepatitis" {{ $antPersonales->retornar_enfermedades('hepatitis') == true ? 'checked' : '' }}>
                                 <label class="form-check-label" for="">
@@ -423,7 +422,7 @@
                             </div>
 
                             <div class="row">
-                                <div class="col-md-3">
+                                <div class="col-lg-3 col-md-6">
                                   <div class="form-check">
                                       <input class="form-check-input" type="checkbox" id="" name="enfermedades[]" 
                                         value="fiebre reumatica" {{ $antPersonales->retornar_enfermedades('fiebre reumatica') == true ? 'checked' : '' }}>
@@ -432,14 +431,14 @@
                                       </label>
                                     </div>
                                 </div>
-                                <div class="col-3">
+                                <div class="col-lg-3 col-md-6">
                                   <input class="form-check-input" type="checkbox" id="" name="enfermedades[]" value="tuberculosis"
                                   {{ $antPersonales->retornar_enfermedades('tuberculosis') == true ? 'checked' : '' }}>
                                   <label class="form-check-label" for="">
                                     Tuberculosis
                                   </label>
                                 </div>
-                                <div class="col-3">
+                                <div class="col-lg-3 col-md-6">
                                   <input class="form-check-input" type="checkbox" id="" name="enfermedades[]" value="asma"
                                   {{ $antPersonales->retornar_enfermedades('asma') == true ? 'checked' : '' }}>
                                   <label class="form-check-label" for="">
@@ -447,7 +446,7 @@
                                   </label>
                                 </div>
   
-                                <div class="col-3">
+                                <div class="col-lg-3 col-md-6">
                                   <input class="form-check-input" type="checkbox" id="" name="enfermedades[]" value="hemorragias"
                                   {{ $antPersonales->retornar_enfermedades('hemorragias') == true ? 'checked' : '' }}>
                                   <label class="form-check-label" for="">
@@ -457,7 +456,7 @@
                             </div>
 
                             <div class="row">
-                                <div class="col-md-3">
+                                <div class="col-lg-3 col-md-6">
                                   <div class="form-check">
                                       <input class="form-check-input" type="checkbox" id="" name="enfermedades[]" value="epilepsias"
                                       {{ $antPersonales->retornar_enfermedades('epilepsias') == true ? 'checked' : '' }}>
@@ -466,14 +465,14 @@
                                       </label>
                                     </div>
                                 </div>
-                                <div class="col-3">
+                                <div class="col-lg-3 col-md-6">
                                   <input class="form-check-input" type="checkbox" id="" name="enfermedades[]" value="alergias"
                                   {{ $antPersonales->retornar_enfermedades('alergias') == true ? 'checked' : '' }}>
                                   <label class="form-check-label" for="">
                                     Alergias
                                   </label>
                                 </div>
-                                <div class="col-3">
+                                <div class="col-lg-3 col-md-6">
                                     <div class="mb-3">
                                         <input type="text"
                                           class="form-control" name="otra_enfermedad" id="" aria-describedby="helpId" 
@@ -481,7 +480,7 @@
                                       </div>
                                 </div>
 
-                                <div class="col-3">
+                                <div class="col-lg-3 col-md-6">
                                     <div class="mb-3">
                                         <input type="text"
                                           class="form-control" name="parentesco" id="" aria-describedby="helpId" 
@@ -493,10 +492,10 @@
   
                             <div class="row">
 
-                                    <div class="col-md-3">
+                                    <div class="col-lg-3 col-md-4">
                                         <p>¿Está Ud embarazada?</p>
                                     </div>
-                                    <div class="col-md-1">
+                                    <div class="col-1">
                                         <div class="col-sm">
                                             <div class="form-check">
                                             <input class="form-check-input" type="radio" id=""  name="embarazada" value="0" {{ $antPersonales['embarazada'] == '0' ? 'checked' : '' }}>
@@ -506,7 +505,7 @@
                                             </div>
                                         </div>
                                     </div>
-                                    <div class="col-md-1">
+                                    <div class="col-1">
                                         <div class="col-sm">
                                             <div class="form-check">
                                             <input class="form-check-input" type="radio" id=""  name="embarazada" value="1" {{ $antPersonales['embarazada'] == '1' ? 'checked' : '' }}>
@@ -517,7 +516,7 @@
                                         </div>
                                     </div>
        
-                                    <div class="col-md-3">
+                                    <div class="col-md-6 col-lg-3">
                                             <div class="mb-3">
                                                 <input type="number"
                                                     class="form-control" name="semanas_embarazo" id="" aria-describedby="helpId" 
@@ -548,7 +547,7 @@
                             <p>HÁBITOS</p>
                             
                             <div class="row">
-                              <div class="col-md-3">
+                              <div class="col-lg-3 col-md-6">
                                 <div class="form-check">
                                     <input class="form-check-input" type="checkbox" id="" name="habitos[]" value="tabaquismo"
                                        {{ $antPersonales->retornar_habitos('tabaquismo') == true ? 'checked' : '' }}>
@@ -557,14 +556,14 @@
                                     </label>
                                   </div>
                               </div>
-                              <div class="col-3">
+                              <div class="col-lg-3 col-md-6">
                                 <input class="form-check-input" type="checkbox" id="" name="habitos[]" value="alcohol"
                                 {{ $antPersonales->retornar_habitos('alcohol') == true ? 'checked' : '' }}>
                                 <label class="form-check-label" for="">
                                   Alcohol
                                 </label>
                               </div>
-                              <div class="col-3">
+                              <div class="col-lg-3 col-md-6">
                                 <input class="form-check-input" type="checkbox" id="" name="habitos[]" value="duglucion atipica"
                                 {{ $antPersonales->retornar_habitos('duglucion atipica') == true ? 'checked' : '' }}>
                                 <label class="form-check-label" for="">
@@ -572,7 +571,7 @@
                                 </label>
                               </div>
 
-                              <div class="col-3">
+                              <div class="col-lg-3 col-md-6">
                                 <input class="form-check-input" type="checkbox" id="" name="habitos[]" value="respiracion bucal"
                                 {{ $antPersonales->retornar_habitos('respiracion bucal') == true ? 'checked' : '' }}>
                                 <label class="form-check-label" for="">
@@ -582,7 +581,7 @@
                             </div>
 
                             <div class="row">
-                                <div class="col-md-3">
+                                <div class="col-lg-3 col-md-6">
                                   <div class="form-check">
                                       <input class="form-check-input" type="checkbox" id="" name="habitos[]" value="bruxismo"
                                       {{ $antPersonales->retornar_habitos('bruxismo') == true ? 'checked' : '' }}>
@@ -591,14 +590,14 @@
                                       </label>
                                     </div>
                                 </div>
-                                <div class="col-md-3">
+                                <div class="col-lg-3 col-md-6">
                                   <input class="form-check-input" type="checkbox" id="" name="habitos[]" value="succion digital"
                                   {{ $antPersonales->retornar_habitos('succion digital') == true ? 'checked' : '' }}>
                                   <label class="form-check-label" for="">
                                     Succión Digital
                                   </label>
                                 </div>
-                                <div class="col-md-3">
+                                <div class="col-lg-3 col-md-6">
                                     <div class="mb-3">
                                         <input type="text"
                                             class="form-control" name="otro_habito" id="" aria-describedby="helpId" placeholder="Otro"
@@ -612,8 +611,9 @@
                   </div>
               </div>
                   
-              <button type="submit" class="btn btn-primary mt-3"> Actualizar Historia Clínica</button>
-                  
+              <div class="text-end">
+                <button type="submit" class="btn btn-primary mt-3"><i class="fa-solid fa-check"></i> Actualizar Historia Clínica</button>
+              </div>
           </div>
           
         </div>

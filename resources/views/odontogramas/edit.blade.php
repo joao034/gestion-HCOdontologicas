@@ -277,6 +277,11 @@
     </div>
 </div>
 
+<!-- Boton ir presupuesto -->
+<div class="text-end mt-2">
+    <a class="btn btn-secondary" href="{{ route('presupuestos.edit', $odontograma->id) }}"> Presupuesto </a>
+</div>
+
 <!-- Lista de Detalles -->
 @include('odontogramas.index_detalle')
 @include('odontogramas.detalle_odontograma', ['i' => $i])

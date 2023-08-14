@@ -24,7 +24,6 @@ use Illuminate\Support\Facades\Auth;
 */
 
 
-
 //idioma
 /*Route::get('/greeting/{locale}', function (string $locale) {
     if (! in_array($locale, ['es',])) {
@@ -36,17 +35,11 @@ use Illuminate\Support\Facades\Auth;
     // ...
 });*/
 
-Route::get('/inicio', function () {
-    return view('components.diente');
-});
-
-Route::get('/', function () {
-    return view('auth.login');
-});
+Route::redirect('/', 'login');
 
 Auth::routes();
 
-Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
+//Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
 
 Route::get('presupuestos/pdf/{odontograma_cabecera_id}', [PresupuestoController::class, 'pdf'])->name('presupuestos.pdf');
 

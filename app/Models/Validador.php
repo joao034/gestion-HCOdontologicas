@@ -5,11 +5,8 @@ use Illuminate\Database\Eloquent\Model;
 
 class Validador extends Model
 {
-    
-    public function __construct( $request ){
-        $this->validarDatos( $request );
-    }
 
+    //deprecated
     public function validarDatos( $request ){
         $validator = $this->validator($request->all());
         if ($validator->fails()) {

@@ -7,7 +7,9 @@
 namespace App\Models;
 
 use Carbon\Carbon;
+use Illuminate\Contracts\Broadcasting\Factory;
 use Illuminate\Database\Eloquent\Collection;
+use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
 /**
@@ -26,6 +28,8 @@ use Illuminate\Database\Eloquent\Model;
  */
 class Tratamiento extends Model
 {
+	use HasFactory;
+	
 	protected $table = 'tratamientos';
 
 	protected $casts = [

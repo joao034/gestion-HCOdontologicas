@@ -671,13 +671,13 @@
     </script>
 
     <script>
-        const cedulaInput = document.getElementById('cedula');
+        let cedulaInput = document.getElementById('cedula');
         apply_input_filter(cedulaInput);
     
-        const celularInput = document.getElementById('celular');
+        let celularInput = document.getElementById('celular');
         apply_input_filter(celularInput);
 
-        const telefonoInput = document.getElementById('telefono');
+        let telefonoInput = document.getElementById('telefono');
         apply_input_filter(telefonoInput);
 
 

@@ -110,10 +110,10 @@
   </div>
 
   <script>
-    const cedulaInput = document.getElementById('cedula');
+    let cedulaInput = document.getElementById('cedula');
     apply_input_filter(cedulaInput);
    
-    const celularInput = document.getElementById('celular');
+    let celularInput = document.getElementById('celular');
     apply_input_filter(celularInput);
 
     function apply_input_filter( input ){

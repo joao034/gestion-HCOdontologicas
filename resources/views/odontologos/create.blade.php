@@ -84,11 +84,11 @@
   </div>
 
 <script>
-    const cedulaInput = document.getElementById('cedula');
-    apply_input_filter(cedulaInput);
+    const cedula = document.getElementById('cedula');
+    apply_input_filter(cedula);
    
-    const celularInput = document.getElementById('celular');
-    apply_input_filter(celularInput);
+    const celular = document.getElementById('celular');
+    apply_input_filter(celular);
 
     function apply_input_filter( input ){
         input.addEventListener('input', function() {

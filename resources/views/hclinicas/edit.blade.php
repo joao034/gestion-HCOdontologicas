@@ -44,7 +44,8 @@
                                   <div class="mb-3">
                                       <label for="" class="form-label">Cédula</label>
                                       <input type="text"
-                                        class="form-control" name="cedula" minlength="10" maxlength="10" id="" aria-describedby="helpId" placeholder="" required value="{{ $paciente->cedula }}">
+                                        class="form-control" name="cedula" minlength="10" maxlength="10" id="cedula" 
+                                        aria-describedby="helpId" placeholder="" required value="{{ $paciente->cedula }}">
                                     </div>
                               </div>
                               <div class="col-md-5">
@@ -183,7 +184,7 @@
                                 <div class="mb-3">
                                     <label for="" class="form-label">Celular</label>
                                     <input type="text"
-                                      class="form-control" name="celular" minlength="10" id="" minlength="10" maxlength="10"
+                                      class="form-control" name="celular" minlength="10" id="celular" minlength="10" maxlength="10"
                                       aria-describedby="helpId" placeholder="" value="{{$paciente->celular}}">
                                 </div>
                             </div>
@@ -191,7 +192,7 @@
                                 <div class="mb-3">
                                     <label for="" class="form-label">Teléfono Convencional</label>
                                     <input type="text"
-                                      class="form-control" name="telef_convencional" id="" aria-describedby="helpId" maxlength="9"
+                                      class="form-control" name="telef_convencional" id="telefono" aria-describedby="helpId" maxlength="9"
                                       placeholder="" value="{{$paciente->telef_convencional}}">
                                 </div>
                             </div>
@@ -667,6 +668,26 @@
             controlarVisibilidadRepresentante();
             });
         });
+    </script>
+
+    <script>
+        const cedulaInput = document.getElementById('cedula');
+        apply_input_filter(cedulaInput);
+    
+        const celularInput = document.getElementById('celular');
+        apply_input_filter(celularInput);
+
+        const telefonoInput = document.getElementById('telefono');
+        apply_input_filter(telefonoInput);
+
+
+        function apply_input_filter( input ){
+            input.addEventListener('input', function() {
+            // Filtrar y mantener solo los dígitos
+            const filteredValue = this.value.replace(/\D/g, '');
+            this.value = filteredValue;
+            });
+        }
     </script>
 
 @endsection

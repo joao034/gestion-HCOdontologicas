@@ -57,13 +57,8 @@
                                 <img class="svg-icon" src="{{asset('assets/icons/especialidad.svg')}}"> Especialidades</a>
                             <a class="nav-link active text-white" href="{{ route('odontologos.index') }}">
                                 <img class="svg-icon" src="{{asset('assets/icons/odontologo.svg')}}"> Odontólogos</a>
-                            
-                            @if (Route::has('register'))
-                                <li class="nav-item">
-                                    <a class="nav-link text-white" href="{{ route('register') }}">
-                                        <img class="svg-icon" src="{{asset('assets/icons/user.svg')}}" alt=""> {{ __('Registro') }}</a>
-                                </li>
-                            @endif
+                            <a class="nav-link text-white" href="{{ route('users.index') }}">
+                                <img class="svg-icon" src="{{asset('assets/icons/user.svg')}}" alt=""> {{ __('Usuarios') }}</a>
                         @endif
 
                         @if ($user && $user->role === 'odontologo')

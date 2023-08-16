@@ -8,11 +8,11 @@
     @method('GET')
     <div class="row">
         <div class="input-group mb-3">
-            <div class="col-lg-5 col-md-7 col-sm-9 col-xs-9">
+            <div class="col-9 col-md-7 col-lg-5">
                 <input type="text" class="form-control" name="search" placeholder="Buscar por cédula, nombres o apellidos" 
                     value= "{{ $search }}" aria-label="Recipient's username" aria-describedby="button-addon2">
             </div>
-            <div class="col-3">
+            <div class="col-md-3">
                 <button class="btn btn-secondary" type="submit" id="button-addon2"><i class="fa-solid fa-magnifying-glass"></i> Buscar</button>
             </div>
         </div>

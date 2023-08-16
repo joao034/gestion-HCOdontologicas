@@ -12,7 +12,9 @@
                         value= "{{ $search }}" aria-label="Recipient's username" aria-describedby="button-addon2">
                 </div>
                 <div class="col-md-3">
-                    <button class="btn btn-secondary" type="submit" id="button-addon2"><i class="fa-solid fa-magnifying-glass"></i> Buscar</button>
+                    <button class="btn btn-secondary" type="submit" id="button-addon2">
+                        <i class="fa-solid fa-magnifying-glass"></i> Buscar
+                    </button>
                 </div>
             </div>
         </div>
@@ -26,7 +28,7 @@
                     <th scope="col">Nº</th>
                     <th scope="col">Fecha de Creación</th>
                     <th scope="col">Paciente</th>
-                    <th>Acciones</th>
+                    <th scope="col">Acciones</th>
                 </tr>
             </thead>
             <tbody>

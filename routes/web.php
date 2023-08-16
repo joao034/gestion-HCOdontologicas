@@ -8,6 +8,7 @@ use App\Http\Controllers\OdontogramaDetalleController;
 use App\Http\Controllers\OdontologoController;
 use App\Http\Controllers\PresupuestoController;
 use App\Http\Controllers\TratamientoController;
+use App\Http\Controllers\UserController;
 use Illuminate\Support\Facades\Auth;
 
 //use Illuminate\Support\Facades\App;
@@ -50,6 +51,7 @@ Route::resource("odontologos", OdontologoController::class);
 Route::resource("odontogramas", OdontogramaController::class);
 Route::resource("detalleOdontogramas", OdontogramaDetalleController::class);
 Route::resource("presupuestos", PresupuestoController::class);
+Route::resource("users", UserController::class);
 Route::post('odontogramas/nuevo/{paciente_id}', 'App\Http\Controllers\OdontogramaController@nuevo')->name('odontogramas.nuevo');
 
 Route::put('presupuestos/update-precio/{id_detalle_presupuesto}', [PresupuestoController::class, 'updatePrecio'])->name('update.precio');

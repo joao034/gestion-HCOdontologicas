@@ -31,7 +31,7 @@
                 <div class="col-6">
                   <div class="mb-3">
                     <label for="" class="form-label">Cédula</label>
-                    <input type="text"class="form-control form-control-sm" name="cedula" id="" minlength="10"
+                    <input type="text"class="form-control form-control-sm" name="cedula" id="cedula" minlength="10" maxlength="10"
                     value="{{$odontologo->cedula}}" aria-describedby="helpId" placeholder="" required>
                 </div>
                 </div>
@@ -39,7 +39,7 @@
                   <div class="mb-3">
                     <label for="" class="form-label">Celular</label>
                     <input type="text"
-                        class="form-control form-control-sm" name="celular" id="" minlength="10"
+                        class="form-control form-control-sm" name="celular" id="celular" minlength="10" maxlength="10"
                         value="{{$odontologo->celular}}" aria-describedby="helpId" placeholder="" required>
                 </div>
                 </div>
@@ -108,3 +108,19 @@
       </div>
     </div>
   </div>
+
+  <script>
+    const cedulaInput = document.getElementById('cedula');
+    apply_input_filter(cedulaInput);
+   
+    const celularInput = document.getElementById('celular');
+    apply_input_filter(celularInput);
+
+    function apply_input_filter( input ){
+        input.addEventListener('input', function() {
+        // Filtrar y mantener solo los dígitos
+        const filteredValue = this.value.replace(/\D/g, '');
+        this.value = filteredValue;
+        });
+    }
+</script>

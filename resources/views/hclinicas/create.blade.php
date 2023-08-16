@@ -53,7 +53,7 @@
                                     <div class="mb-3">
                                       <label for="" class="form-label">Cédula</label>
                                       <input type="text" class="form-control" name="cedula" value="{{ old('cedula') }}"
-                                      minlength="10" maxlength="10" id="" aria-describedby="helpId" placeholder="" pattern="^[0-9]+$">
+                                      minlength="10" maxlength="10" id="cedula" aria-describedby="helpId" placeholder="" pattern="^[0-9]+$">
 
                                         @error('cedula')
                                             <small class="text-danger"> {{ $message }}</small>
@@ -209,7 +209,7 @@
                                 <div class="mb-3">
                                     <label for="" class="form-label">Celular</label>
                                     <input type="text" value="{{ old('celular') }}"
-                                      class="form-control" name="celular" minlength="10" maxlength="10" id="" 
+                                      class="form-control" name="celular" minlength="10" maxlength="10" id="celular" 
                                       aria-describedby="helpId" placeholder="" pattern="^[0-9]+$">
                                         
                                     @error('celular')
@@ -221,7 +221,7 @@
                             <div class="col-md-6">
                                 <div class="mb-3">
                                     <label for="" class="form-label">Teléfono Convencional</label>
-                                    <input type="text" value="{{ old('telef_convencional') }}"
+                                    <input type="text" value="{{ old('telef_convencional') }}" id="telefono"
                                       class="form-control" name="telef_convencional" id="" aria-describedby="helpId" 
                                         minlength="6" maxlength="9" pattern="^[0-9]+$">
 
@@ -699,6 +699,27 @@
             controlarVisibilidadRepresentante();
             });
         });
+
+    </script>
+    
+    <script>
+        const cedulaInput = document.getElementById('cedula');
+        apply_input_filter(cedulaInput);
+       
+        const celularInput = document.getElementById('celular');
+        apply_input_filter(celularInput);
+
+        const telefonoInput = document.getElementById('telefono');
+        apply_input_filter(telefonoInput);
+
+
+        function apply_input_filter( input ){
+            input.addEventListener('input', function() {
+            // Filtrar y mantener solo los dígitos
+            const filteredValue = this.value.replace(/\D/g, '');
+            this.value = filteredValue;
+            });
+        }
     </script>
 
 @endsection

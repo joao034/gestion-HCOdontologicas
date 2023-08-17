@@ -13,11 +13,11 @@
     <table class="table">
         <thead class="bg-dark text-white">
             <tr>
-                <th scope="col" class="col-md-2">Cédula</th>
-                <th scope="col" class="col-md-3">Odontologo</th>
-                <th scope="col" class="col-md-2">Especialidad</th>
-                <th scope="col" class="col-md-2">Celular</th>
-                <th scope="col" class="col-md-3">Acciones</th>
+                <th scope="col">Cédula</th>
+                <th scope="col">Odontologo</th>
+                <th scope="col">Especialidad</th>
+                <th scope="col">Celular</th>
+                <th scope="col">Acciones</th>
             </tr>
         </thead>
         <tbody>

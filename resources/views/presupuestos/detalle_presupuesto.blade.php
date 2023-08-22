@@ -63,9 +63,9 @@
                         <td>
     
                             <!--eliminar -->
-                            {{-- <button type="button" class="btn btn-danger" data-bs-toggle="modal" data-bs-target="#borrar{{$detalle->id}}">
+                            <button type="button" class="btn btn-danger" data-bs-toggle="modal" data-bs-target="#borrar{{$detalle->id}}">
                                 <i class="fa-regular fa-trash-can"></i> Eliminar
-                            </button> --}}
+                            </button>
     
                         </td>
                     </tr>

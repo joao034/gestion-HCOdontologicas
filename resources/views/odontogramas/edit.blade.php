@@ -261,7 +261,7 @@
 <!-- Fin Cuadrante Inferior dentadura adulta -->
 
 <!-- Diagnostico y Enfermedad Actual -->
-<div class="row">
+{{-- <div class="row">
     <div class="col-md-6">
         <div class="form-floating mt-3">
             <input type="text" class="form-control" id="floatingDiagnostico" placeholder="Diagnóstico" value="{{ $odontograma->diagnostico }}">
@@ -275,7 +275,7 @@
             <label for="floatingEnfermedadActual">Enfermedad Actual</label>
           </div>
     </div>
-</div>
+</div> --}}
 
 <!-- Boton ir presupuesto -->
 <div class="text-end mt-2">

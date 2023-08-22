@@ -80,7 +80,7 @@
     </div>
 
 <script>
-    document.addEventListener('DOMContentLoaded', function() {
+    /* document.addEventListener('DOMContentLoaded', function() {
         let precioInput = document.getElementById('precio');
         let form = document.getElementById('form');
         
@@ -94,7 +94,7 @@
         precioInput.addEventListener('blur', function() {
             form.submit();
         });
-    });
+    }); */
 </script>
 
 @endsection

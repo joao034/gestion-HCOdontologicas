@@ -63,4 +63,4 @@ END
 $$
 
 //eliminar un TRIGGER
-DROP TRIGGER IF EXISTS `restar_total_presupuesto_update`;
+DROP TRIGGER IF EXISTS `restar_total_presupuesto_delete`;

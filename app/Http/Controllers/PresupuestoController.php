@@ -82,14 +82,16 @@ class PresupuestoController extends Controller
         return view('presupuestos.detalle_presupuesto', compact('detalles_presupuesto', 'presupuesto', 'tratamientos'));
     }
 
-    //actualiza el estado del detalle del presupuesto a fuera de presupuesto al momento de eliminarlo en la interfaz
     public function update( Request $request, int $id ){}
 
 
-    public function updateEstado ( int $id, Request $request ){
+    //actualiza el estado del detalle del presupuesto a fuera de presupuesto al momento de eliminarlo en la interfaz
+    public function updateEstado ( int $id ){
         try{
             $detalle_presupuesto = OdontogramaDetalle::find( $id );
             $detalle_presupuesto->estado = 'fuera_presupuesto';
+
+            dd( $detalle_presupuesto );
 
             //encontrar el presupuesto al que pertenece el detalle
             $presupuesto = Odontograma::find( $detalle_presupuesto->odontograma_cabecera_id );

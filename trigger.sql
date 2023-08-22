@@ -28,7 +28,7 @@ CREATE OR REPLACE TRIGGER `restar_total_presupuesto_update` AFTER UPDATE ON `odo
 
     IF NEW.precio > OLD.precio THEN
        UPDATE odontograma_cabecera
-       SET total = total + dif_precio
+       SET total = total + (dif_precio * (-1))
        WHERE id = NEW.odontograma_cabecera_id; 
     
     ELSEIF NEW.precio < OLD.precio THEN
@@ -60,3 +60,6 @@ CREATE OR REPLACE TRIGGER `restar_total_presupuesto_delete` AFTER DELETE ON `odo
      END IF;
 END
 $$
+
+//eliminar un TRIGGER
+DROP TRIGGER IF EXISTS `restar_total_presupuesto_update`;

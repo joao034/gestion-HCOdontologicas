@@ -108,13 +108,19 @@ class PresupuestoController extends Controller
     private function getDetallesPresupuesto ( int $id ){
         $detalles_presupuesto = OdontogramaDetalle::query()
                                                 ->where('odontograma_cabecera_id', '=', "$id")
-                                                ->where('estado', '=', 'necesario')
-                                                ->orWhere('estado', '=', 'presupuesto')
-                                                ->get();
+                                                ->where( function( $query ) {
+                                                    $query->where('estado', '=', 'necesario')
+                                                    ->orWhere('estado', '=', 'presupuesto');
+                                                })->get(); 
         return $detalles_presupuesto;
     }
 
     public function updatePrecio ( int $id_detalle_presupuesto, Request $request ){
+        //validar que el precio sea mayor a cero
+        $request->validate([
+            'precio' => 'required|numeric|min:1'
+        ]);
+        
         try{
             $detalle_presupuesto = OdontogramaDetalle::find( $id_detalle_presupuesto );
             $detalle_presupuesto->precio = $request->precio;

@@ -91,8 +91,6 @@ class PresupuestoController extends Controller
             $detalle_presupuesto = OdontogramaDetalle::find( $id );
             $detalle_presupuesto->estado = 'fuera_presupuesto';
 
-            dd( $detalle_presupuesto );
-
             //encontrar el presupuesto al que pertenece el detalle
             $presupuesto = Odontograma::find( $detalle_presupuesto->odontograma_cabecera_id );
             $presupuesto->total = $presupuesto->total - $detalle_presupuesto->precio;

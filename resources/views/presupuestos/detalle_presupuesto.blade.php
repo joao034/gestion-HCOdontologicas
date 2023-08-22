@@ -35,7 +35,7 @@
                     <th scope="col" class="col-1">Nº Diente</th>
                     <th scope="col" class="col-2">Valor Unitario</th>
                     <th scope="col" class="col-1">Total</th>
-                    <th scope="col" class="col-4">Acciones</th>
+                    {{-- <th scope="col" class="col-4">Acciones</th> --}}
                 </tr>
             </thead>
             <tbody>
@@ -62,10 +62,10 @@
                         <td>${{$detalle->precio}}</td>
                         <td>
     
-                            <!--eliminar-->
-                            <button type="button" class="btn btn-danger" data-bs-toggle="modal" data-bs-target="#borrar{{$detalle->id}}">
+                            <!--eliminar -->
+                            {{-- <button type="button" class="btn btn-danger" data-bs-toggle="modal" data-bs-target="#borrar{{$detalle->id}}">
                                 <i class="fa-regular fa-trash-can"></i> Eliminar
-                            </button>
+                            </button> --}}
     
                         </td>
                     </tr>

@@ -20,8 +20,25 @@ class UserController extends Controller
         return view('auth.register');
     }
 
-    //usa el metodo de auth
-    public function store(Request $request){}
+    public function store(Request $request){
+        $this->validate($request, [
+            'name' => 'required|string|max:255',
+            'role' => 'required|in:admin,odontologo|string|max:255',
+            'email' => 'required|string|email|max:255|unique:users',
+            'password' => 'required|string|min:8|confirmed',
+        ]);
+        try{
+            User::create([
+                'name' => $request->name,
+                'role' => $request->role,
+                'email' => $request->email,
+                'password' => bcrypt($request->password),
+            ]);
+            return to_route('users.index')->with('message', 'Usuario creado correctamente');
+        }catch(\Exception $e){
+            return back()->with('error', 'Error al crear usuario');
+        }
+    }
 
     public function update( Request $request, int $id )
     {

@@ -32,8 +32,8 @@
                   <div class="col-6">
                     <div class="mb-3">
                       <label for="" class="form-label">Cédula</label>
-                      <input type="text"class="form-control form-control-sm" name="cedula" 
-                              minlength="10" maxlength="10" id="cedula" 
+                      <input type="text"class="form-control form-control-sm" name="cedula" id="cedula_odo" 
+                              minlength="10" maxlength="10" 
                               aria-describedby="helpId" placeholder="" required>
                   </div>
                   </div>
@@ -41,7 +41,7 @@
                     <div class="mb-3">
                       <label for="" class="form-label">Celular</label>
                       <input type="text"
-                          class="form-control form-control-sm" name="celular" id="celular" minlength="10" maxlength="10" 
+                          class="form-control form-control-sm" name="celular" id="celu" minlength="10" maxlength="10" 
                           aria-describedby="helpId" placeholder="" required>
                   </div>
                   </div>
@@ -84,17 +84,17 @@
   </div>
 
 <script>
-    let cedula = document.getElementById('cedula');
-    apply_input_filter(cedula);
-   
-    let celular = document.getElementById('celular');
-    apply_input_filter(celular);
+    let cedulaOdo = document.getElementById('cedula_odo');
+    apply_input_filter(cedulaOdo);
+    
+    let celu = document.getElementById('celu');
+    apply_input_filter(celu);
 
     function apply_input_filter( input ){
-        input.addEventListener('input', function() {
-        // Filtrar y mantener solo los dígitos
-        const filteredValue = this.value.replace(/\D/g, '');
-        this.value = filteredValue;
-        });
+      input.addEventListener('input', function() {
+      // Filtrar y mantener solo los dígitos
+      const filteredValue = this.value.replace(/\D/g, '');
+      this.value = filteredValue;
+      });
     }
 </script>

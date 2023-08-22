@@ -46,8 +46,14 @@
                             <div class="col-md-6">
                                 <select name="role" id="tipo" class="form-select form-select-md">
                                     <option value="">Seleccione un tipo de usuario</option>
-                                    <option value="admin">Administrador</option>
-                                    <option value="odontologo">Odontólogo</option>
+                                    @if ($user->role == 'admin')
+                                        <option value="admin" selected>Administrador</option>
+                                        <option value="odontologo">Odontólogo</option>
+                                    @endif
+                                    @if ($user->role == 'odontologo')
+                                        <option value="odontologo" selected>Odontólogo</option>
+                                        <option value="admin">Administrador</option>
+                                    @endif
                                 </select>
 
                                 @error('role')

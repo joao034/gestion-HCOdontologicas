@@ -7,9 +7,9 @@
         </div>
 
         <!--Formulario-->
-        <form action="{{ route('presupuestos.destroy', $detalle->id ) }}" method="POST">
+        <form action="{{route('update.estado', $detalle->id )}}" method="POST">
             @csrf  
-            @method('DELETE')
+            @method('PUT')
             <div class="modal-body">
                 ¿Está seguro de eliminar el tratamiento <strong>{{ $detalle->tratamiento->nombre }} </strong> del presupuesto?
             </div>

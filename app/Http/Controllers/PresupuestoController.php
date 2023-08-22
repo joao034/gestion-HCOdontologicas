@@ -86,7 +86,7 @@ class PresupuestoController extends Controller
     public function update( Request $request, int $id ){}
 
 
-    public function destroy ( int $id ){
+    public function updateEstado ( int $id, Request $request ){
         try{
             $detalle_presupuesto = OdontogramaDetalle::find( $id );
             $detalle_presupuesto->estado = 'fuera_presupuesto';

@@ -56,6 +56,9 @@ Route::post('odontogramas/nuevo/{paciente_id}', 'App\Http\Controllers\Odontogram
 
 Route::put('presupuestos/update-precio/{id_detalle_presupuesto}', [PresupuestoController::class, 'updatePrecio'])->name('update.precio');
 
+Route::put('presupuestos/update-estado/{id_detalle_presupuesto}', [PresupuestoController::class, 'updateEstado'])->name('update.estado');
+
+
 
 
 

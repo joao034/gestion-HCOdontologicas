@@ -9,6 +9,7 @@ namespace App\Models;
 use Carbon\Carbon;
 use Illuminate\Database\Eloquent\Collection;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Factories\HasFactory;
 
 /**
  * Class Paciente
@@ -37,6 +38,9 @@ use Illuminate\Database\Eloquent\Model;
  */
 class Paciente extends Model
 {
+
+	use HasFactory;
+
 	protected $table = 'pacientes';
 
 	protected $casts = [

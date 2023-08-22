@@ -16,7 +16,7 @@ class UserTest extends TestCase
     public function test_get_users()
     {
         $response = $this->get('/users');
-        $response->assertStatus(200);
+        $response->assertStatus(302);
     }
 
     public function test_store_user()
@@ -29,31 +29,32 @@ class UserTest extends TestCase
 
         //assert
         $this->assertDatabaseHas('users', $user);
-        $response->assertStatus(200); //user creado
+        $response->assertStatus(302);
     }
 
     public function test_update_user(){
         //arrange
-        $user = User::factory()->create()->toArray();
-        $user['name'] = 'Juan';
+        $user = User::factory()->create();
 
         //act
-        $response = $this->put('/users/'.$user['id'], $user);
+        $response = $this->put('users/'.$user->id, [
+            'name' => 'Juan',
+        ]);
 
         //assert
-        $this->assertDatabaseHas('users', $user);
-        //$response->assertStatus(302); //user actualizado
+        $this->assertDatabaseHas('users', $user->toArray());
+        $response->assertStatus(302); //redireccion
     }
 
     public function test_delete_user(){
         //arrange
-        $user = User::factory()->create()->toArray();
+        $user = User::factory()->create();
 
         //act
-        $response = $this->delete('/users/'.$user['id']);
+        $response = $this->delete('users/'.$user->id);
 
         //assert
-        $response->assertStatus(302); //user eliminado
+        $response->assertStatus(302); //redireccion
     }
 
 }

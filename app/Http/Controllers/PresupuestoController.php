@@ -82,22 +82,20 @@ class PresupuestoController extends Controller
         return view('presupuestos.detalle_presupuesto', compact('detalles_presupuesto', 'presupuesto', 'tratamientos'));
     }
 
-    public function update( Request $request, int $id ){
-        try{
-            $detalle_presupuesto = OdontogramaDetalle::find( $id );
-            $detalle_presupuesto->estado = 'fuera_presupuesto';
-            $detalle_presupuesto->save();
-            return back()->with('message', 'Tratamiento eliminado del presupuesto.');
-        }catch(\Exception $e){
-            return back()->with('danger', 'No se pudo eliminar el tratamiento del presupuesto.');
-        }
-    }
+    //actualiza el estado del detalle del presupuesto a fuera de presupuesto al momento de eliminarlo en la interfaz
+    public function update( Request $request, int $id ){}
 
 
     public function destroy ( int $id ){
         try{
             $detalle_presupuesto = OdontogramaDetalle::find( $id );
             $detalle_presupuesto->estado = 'fuera_presupuesto';
+
+            //encontrar el presupuesto al que pertenece el detalle
+            $presupuesto = Odontograma::find( $detalle_presupuesto->odontograma_cabecera_id );
+            $presupuesto->total = $presupuesto->total - $detalle_presupuesto->precio;
+            
+            $presupuesto->save();
             $detalle_presupuesto->save();
             return back()->with('message', 'Tratamiento eliminado del presupuesto.');
         }catch(\Exception $e){
@@ -123,6 +121,21 @@ class PresupuestoController extends Controller
         
         try{
             $detalle_presupuesto = OdontogramaDetalle::find( $id_detalle_presupuesto );
+
+            $dif_precio = $detalle_presupuesto->precio - $request->precio;
+
+            $presupuesto = Odontograma::find( $detalle_presupuesto->odontograma_cabecera_id );
+
+            if( $request->precio > $detalle_presupuesto->precio ){
+                $presupuesto->total = $presupuesto->total + ($dif_precio * (-1));
+                $presupuesto->save();
+            }
+
+            if( $request->precio < $detalle_presupuesto->precio ){
+                $presupuesto->total = $presupuesto->total - $dif_precio;
+                $presupuesto->save();
+            }
+
             $detalle_presupuesto->precio = $request->precio;
             $detalle_presupuesto->save();
             return back()->with('message' , 'Precio actualizado correctamente');

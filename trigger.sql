@@ -17,6 +17,7 @@ CREATE OR REPLACE TRIGGER `sumar_total_presupuesto` AFTER INSERT ON `odontograma
 END
 $$
 
+//funciona solo en local
 DELIMITER $$
 CREATE OR REPLACE TRIGGER `restar_total_presupuesto_update` AFTER UPDATE ON `odontograma_detalle`
  FOR EACH ROW BEGIN
@@ -37,7 +38,7 @@ CREATE OR REPLACE TRIGGER `restar_total_presupuesto_update` AFTER UPDATE ON `odo
         WHERE id = NEW.odontograma_cabecera_id;
     END IF;
         
-    -- Verificar el estado antes de actualizar el total
+    -- Verificar el estado antes de actualizar el total (FUNCION BORRADA EN LOCAL Y EN PROD)
     IF NEW.estado = 'fuera_presupuesto' THEN
 
         -- Actualizar el total en la tabla odontograma_cabecera

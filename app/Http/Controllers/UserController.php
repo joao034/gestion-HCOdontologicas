@@ -9,6 +9,13 @@ use App\Models\User;
 
 class UserController extends Controller
 {
+
+    public function __construct()
+    {
+        $this->middleware('auth');
+        $this->middleware('role.admin');
+    }
+
     public function index()
     {
         $users = User::all();

@@ -61,9 +61,9 @@
                 </div>
                   <div class="col-6">
                     <div class="mb-3">
-                      <label for="" class="form-label">Sexo</label>
+                      <label for="" class="form-label">Género</label>
                       <select class="form-select form-select-sm" name="sexo" required aria-label=".form-select-sm example">
-                        <option>Seleccione el sexo</option>
+                        <option>Seleccione el género</option>
                         <option value="masculino">Masculino</option>
                         <option value="femenino">Femenino</option>
                       </select>

@@ -150,7 +150,7 @@
                         </div>
                         
                         <div class="col-md-4">
-                            <h6 class="card-title">Sexo</h6>
+                            <h6 class="card-title">Género</h6>
                             <div class="card">
                                 <div class="card-body">
                                     <div class="row">

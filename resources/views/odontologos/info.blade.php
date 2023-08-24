@@ -62,7 +62,7 @@
               </div>
                 <div class="col-6">
                   <div class="mb-3">
-                    <label for="" class="form-label">Sexo</label>
+                    <label for="" class="form-label">Género</label>
                     <select class="form-select form-select-sm" name="sexo" required aria-label=".form-select-sm example">
                         <option value="masculino" {{ $odontologo['sexo'] == 'masculino' ? 'selected' : '' }}>Masculino</option>
                         <option value="femenino" {{ $odontologo['sexo'] == 'femenino' ? 'selected' : '' }}>Femenino</option>

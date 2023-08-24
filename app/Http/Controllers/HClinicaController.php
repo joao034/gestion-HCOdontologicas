@@ -60,13 +60,7 @@ class HClinicaController extends Controller
     public function index( Request $request )
     {
         $search = trim($request->get('buscador'));
-        $pacientes = DB::table('pacientes')->select('id', 'cedula', 'nombres', 'apellidos','edad', 'celular')
-                        ->where( 'cedula' , 'LIKE', '%' . $search . '%' )
-                        ->orWhere( 'nombres' , 'LIKE', '%' . $search . '%' )
-                        ->orWhere( 'apellidos' , 'LIKE', '%' . $search . '%' )
-                        ->orderBy('apellidos', 'asc')
-                        ->paginate(10);
-
+        $pacientes = Paciente::getAllPacientesWithPagination( $search );
         return view('hclinicas.index', compact(['pacientes', 'search']));
     }
 

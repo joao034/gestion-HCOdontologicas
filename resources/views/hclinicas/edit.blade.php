@@ -20,7 +20,7 @@
                   <div class="col-md-12 col-lg-6">
                       <div class="card text-start">
                         <div class="card-body">
-                          <h5 class="card-title">Datos Personales</h5>
+                          <h5 class="card-title fw-bolder">Datos Personales</h5>
                           
                           <div class="row">
                               <div class="col-md-6">
@@ -220,7 +220,7 @@
                   <div class="col-md-12 col-lg-6 mt-3">
                       <div class="card text-start">
                           <div class="card-body">
-                            <h5 class="card-title">Antecedentes Infecciosos</h5>
+                            <h5 class="card-title fw-bolder">Antecedentes Infecciosos</h5>
                             
                             <div class="row">
                                 <div class="col-md-9">
@@ -386,7 +386,7 @@
                   <div class="col-12">
                       <div class="card text-start">
                           <div class="card-body">
-                            <h5 class="card-title">Antecedentes Personales y Familiares</h5>
+                            <h5 class="card-title fw-bolder">Antecedentes Personales y Familiares</h5>
                             <p>¿USTED, SUS PADRES O ABUELOS PADECE O HA PADECIDO ALGUNA DE LAS SIGUIENTES ENFERMEDADES?</p>
                             
                             <div class="row">

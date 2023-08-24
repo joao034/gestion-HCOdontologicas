@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Http\Controllers\Controller;
 use App\Models\Odontograma;
+use App\Models\Paciente;
 use Illuminate\Http\Request;
 use App\Models\OdontogramaDetalle;
 use Carbon\Carbon;
@@ -19,16 +20,8 @@ class OdontogramaController extends Controller
     public function index( Request $request)
     {
         $search = trim( $request->get('search') );
-        //devulve todos los odontogramas del paciente a buscar
-        $odontogramas = Odontograma::join('pacientes', 'odontograma_cabecera.paciente_id', '=', 'pacientes.id')
-            ->select('odontograma_cabecera.*', 'pacientes.cedula as paciente_cedula', 'pacientes.nombres as paciente_nombres', 'pacientes.apellidos as paciente_apellidos') 
-            ->where('pacientes.nombres', 'LIKE', '%'.$search.'%')
-            ->orWhere('pacientes.apellidos', 'LIKE', '%'.$search.'%')
-            ->orWhere('pacientes.cedula', 'LIKE', '%'.$search.'%')
-            ->orderBy('pacientes.apellidos', 'asc')
-            ->paginate(10);
-
-        return view('odontogramas.index', compact(['search', 'odontogramas']));
+        $pacientes = Paciente::getAllPacientesWithPagination( $search );
+        return view('odontogramas.index', compact(['search', 'pacientes']));
     }
 
     public function nuevo ( int $paciente_id ){

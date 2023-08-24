@@ -26,51 +26,68 @@
             <thead class="bg-dark text-white">
                 <tr>
                     <th scope="col">Nº</th>
-                    <th scope="col">Fecha de Creación</th>
+                    <th scope="col">Fecha de actualización</th>
                     <th scope="col">Paciente</th>
+                    <th scope="col">Odontogramas</th>
                     <th scope="col">Acciones</th>
                 </tr>
             </thead>
             <tbody>
                 <!--Si no hay resultados-->
-                @if($odontogramas->count() <= 0)
+                @if($pacientes->count() <= 0)
                     <tr>
                         <td colspan="6">No hay resultados</td>
                     </tr>
                 @else
                     <!--Si hay resultados-->
-                    @foreach ($odontogramas as $odontograma)
+                    @foreach ($pacientes as $paciente)
                     <tr class="">
-                        <td scope="row">{{$odontograma->id}}</td>
-                        <td>{{$odontograma->fecha_creacion}}</td>
-                        <td>{{$odontograma->paciente->nombres}} {{$odontograma->paciente->apellidos}}</td>
-                        
+                        <td scope="row">{{$paciente->id}}</td>
+                        <td>{{$paciente->odontogramasCabecera->last()->updated_at}}</td>
+                        <td>{{$paciente->nombres}} {{$paciente->apellidos}}</td>
+                        <td>
+                            <div class="dropdown">
+                                <button class="btn btn-secondary dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false">
+                                  Odontogramas
+                                </button>
+                            <ul class="dropdown-menu">
+                            @foreach ($paciente->odontogramasCabecera as $odontograma)
+                                <li>
+                                    <a class="dropdown-item" href="{{route('detalleOdontogramas.edit', $odontograma->id)}}">
+                                        Odontograma - {{ $odontograma->fecha_creacion }}
+                                    </a>
+                                </li>
+                            @endforeach  
+                            </ul>
+                            </div>
+                        </td>
+
                         <td>
                             <!--editar-->
-                            <a href=" {{ route('detalleOdontogramas.edit', $odontograma->id) }} " id="" class="btn btn-secondary" href="#" role="button">
+                            {{-- <a href="{{route('detalleOdontogramas.edit', $odontograma->id)}}" id="" class="btn btn-secondary" href="#" role="button">
                                 <i class="fa-regular fa-pen-to-square"></i> Editar
-                            </a>
+                            </a> --}}
         
                             <!--eliminar-->
-                            <button type="button" class="btn btn-danger" data-bs-toggle="modal" data-bs-target="#delete{{$odontograma->id}}">
+                            {{-- <button type="button" class="btn btn-danger" data-bs-toggle="modal" data-bs-target="#delete{{$paciente->id}}">
                                 <i class="fa-regular fa-trash-can"></i> Eliminar
-                            </button>
+                            </button> --}}
 
                             <!--nuevo-->
                             <button type="button" class="btn btn-info text-white" data-bs-toggle="modal" data-bs-target="#nuevo{{$odontograma->id}}">
                                 <i class="fa-solid fa-plus"></i> Nuevo
-                            </button>
+                            </button> 
         
                         </td>
                     </tr>
-                    @include('odontogramas.destroy')
+                    {{-- @include('odontogramas.destroy') --}}
                     @include('odontogramas.nuevo')
                     @endforeach
                 @endif
             </tbody>
         </table>
         <!--Paginacion-->
-        {{$odontogramas->links()}}
+     {{--    {{$pacientes->links()}} --}}
     </div>
 
 

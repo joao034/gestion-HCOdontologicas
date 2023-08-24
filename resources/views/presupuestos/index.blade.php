@@ -27,32 +27,38 @@
                 <th scope="col">Nº</th>
                 <th scope="col">Cédula</th>
                 <th scope="col">Paciente</th>
-                <th scope="col">Total</th>
-                <th>Acciones</th>
+                <th scope="col">Presupuestos</th>
             </tr>
         </thead>
         <tbody>
             <!--Si no hay resultados-->
-            @if($presupuestos->count() <= 0)
+            @if($pacientes->count() <= 0)
                 <tr>
                     <td colspan="6">No hay resultados</td>
                 </tr>
             @else
                 <!--Si hay resultados-->
-                @foreach ($presupuestos as $presupuesto)
+                @foreach ($pacientes as $paciente)
                 <tr class="">
-                    <td scope="row">{{$presupuesto->id}}</td>
-                    <td>{{$presupuesto->paciente->cedula}}</td>
-                    <td>{{$presupuesto->paciente->nombres . ' ' . $presupuesto->paciente->apellidos}}</td>
-                    <td>${{$presupuesto->total}}</td>
+                    <td scope="row">{{$paciente->id}}</td>
+                    <td>{{$paciente->cedula}}</td>
+                    <td>{{$paciente->nombres . ' ' . $paciente->apellidos}}</td>
                     <td>
-                        
-                        <!--editar-->
-                        <a href="{{ route('presupuestos.edit', $presupuesto->id) }}" class="btn btn-secondary">
-                            <i class="fa-regular fa-pen-to-square"></i> Editar
-                        </a>
-
-                    </td>
+                        <div class="dropdown">
+                            <button class="btn btn-secondary dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false">
+                                Presupuestos
+                            </button>
+                        <ul class="dropdown-menu">
+                        @foreach ($paciente->odontogramasCabecera as $presupuesto)
+                            <li>
+                                <a class="dropdown-item" href="{{route('presupuestos.edit', $presupuesto->id)}}">
+                                    Presupuesto - $ {{ $presupuesto->total }}
+                                </a>
+                            </li>
+                        @endforeach  
+                        </ul>
+                        </div>
+              
                 </tr>
 
                 @endforeach
@@ -60,7 +66,7 @@
         </tbody>
     </table>
     <!--Paginacion-->
-    {{$presupuestos->links()}}
+    {{$pacientes->links()}}
 </div>
 
 

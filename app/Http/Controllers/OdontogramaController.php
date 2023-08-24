@@ -20,7 +20,7 @@ class OdontogramaController extends Controller
     public function index( Request $request)
     {
         $search = trim( $request->get('search') );
-        $pacientes = Paciente::getAllPacientesWithPagination( $search );
+        $pacientes = Paciente::getAllPacientesWithPagination( $search, 'updated_at', 'desc' );
         return view('odontogramas.index', compact(['search', 'pacientes']));
     }
 

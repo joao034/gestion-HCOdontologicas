@@ -60,7 +60,7 @@ class HClinicaController extends Controller
     public function index( Request $request )
     {
         $search = trim($request->get('buscador'));
-        $pacientes = Paciente::getAllPacientesWithPagination( $search );
+        $pacientes = Paciente::getAllPacientesWithPagination( $search, 'updated_at', 'desc' );
         return view('hclinicas.index', compact(['pacientes', 'search']));
     }
 

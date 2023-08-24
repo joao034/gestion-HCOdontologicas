@@ -87,7 +87,7 @@
             </tbody>
         </table>
         <!--Paginacion-->
-     {{--    {{$pacientes->links()}} --}}
+        {{$pacientes->links()}}
     </div>
 
 

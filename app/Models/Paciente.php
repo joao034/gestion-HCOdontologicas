@@ -92,11 +92,11 @@ class Paciente extends Model
 
 	}
 
-	public static function getAllPacientesWithPagination( $search ){
+	public static function getAllPacientesWithPagination( $search, $ordeBay = 'apellidos', $order = 'asc'){
 		return Paciente::where('nombres', 'LIKE', '%'.$search.'%')
         ->orWhere('apellidos', 'LIKE', '%'.$search.'%')
         ->orWhere('cedula', 'LIKE', '%'.$search.'%')
-        ->orderBy('apellidos', 'asc')
+        ->orderBy($ordeBay, $order)
         ->paginate(10);
 	}
 

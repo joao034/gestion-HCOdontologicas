@@ -27,16 +27,9 @@ class PresupuestoController extends Controller
     public function index( Request $request )
     {
         $search = trim( $request->get('search') );
-        //devulve todos los presupuestos del paciente a buscar
-        $presupuestos = Odontograma::join('pacientes', 'odontograma_cabecera.paciente_id', '=', 'pacientes.id')
-            ->select('odontograma_cabecera.*', 'pacientes.cedula as paciente_cedula', 'pacientes.nombres as paciente_nombres', 'pacientes.apellidos as paciente_apellidos') 
-            ->where('pacientes.nombres', 'LIKE', '%'.$search.'%')
-            ->orWhere('pacientes.apellidos', 'LIKE', '%'.$search.'%')
-            ->orWhere('pacientes.cedula', 'LIKE', '%'.$search.'%')
-            ->orderBy('apellidos', 'asc')
-            ->paginate(10);
-        
-        return view('presupuestos.index', compact(['search', 'presupuestos']));
+        //devulve el paciente con sus presupuestos
+        $pacientes = Paciente::getAllPacientesWithPagination( $search, 'updated_at', 'desc' );
+        return view('presupuestos.index', compact(['search', 'pacientes']));
     }
 
     //Exporta a pdf el presupuesto

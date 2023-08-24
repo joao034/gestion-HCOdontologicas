@@ -60,8 +60,9 @@
                                 <img class="svg-icon" src="{{asset('assets/icons/tratamiento.svg')}}"> Tratamientos</a>
                             <a class="nav-link active text-white" href="{{ route('especialidades.index') }}">
                                 <img class="svg-icon" src="{{asset('assets/icons/especialidad.svg')}}"> Especialidades</a>
-                            <a class="nav-link active text-white" href="{{ route('odontologos.index') }}">
-                                <img class="svg-icon" src="{{asset('assets/icons/odontologo.svg')}}"> Odontólogos</a>
+                            {{-- <a class="nav-link active text-white" href="{{ route('odontologos.index') }}">
+                                <img class="svg-icon" src="{{asset('assets/icons/odontologo.svg')}}"> Odontólogos
+                            </a> --}}
                             <a class="nav-link text-white" href="{{ route('users.index') }}">
                                 <img class="svg-icon" src="{{asset('assets/icons/user.svg')}}" alt=""> {{ __('Usuarios') }}</a>
                         @endif

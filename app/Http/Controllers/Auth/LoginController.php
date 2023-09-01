@@ -6,6 +6,8 @@ use App\Http\Controllers\Controller;
 use App\Providers\RouteServiceProvider;
 use Illuminate\Foundation\Auth\AuthenticatesUsers;
 
+use Illuminate\Http\Request; // Importante para poder usar el Request
+
 class LoginController extends Controller
 {
     /*
@@ -36,5 +38,18 @@ class LoginController extends Controller
     public function __construct()
     {
         $this->middleware('guest')->except('logout');
+    }
+
+    //valida que el login de usuarios activos
+    protected function attemptLogin(Request $request)
+    {
+        $credentials = $this->credentials($request);
+
+        // Verifica si el usuario tiene un estado activo
+        $credentials['active'] = 1;
+
+        return $this->guard()->attempt(
+            $credentials, $request->filled('remember')
+        );
     }
 }

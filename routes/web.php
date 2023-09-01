@@ -48,7 +48,7 @@ Route::get('presupuestos/pdf/{odontograma_cabecera_id}', [PresupuestoController:
 Route::resource("hclinicas", HClinicaController::class);
 Route::resource("tratamientos", TratamientoController::class);
 Route::resource("especialidades", EspecialidadController::class);
-Route::resource("odontologos", OdontologoController::class);
+//Route::resource("odontologos", OdontologoController::class);
 Route::resource("odontogramas", OdontogramaController::class);
 Route::resource("detalleOdontogramas", OdontogramaDetalleController::class);
 Route::resource("presupuestos", PresupuestoController::class);

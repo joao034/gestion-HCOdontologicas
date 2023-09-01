@@ -9,43 +9,12 @@
                 <div class="card-body">
                     <form action="{{ route('users.update', $user->id) }}" method="POST">
                         @csrf
-                        @method('PATCH')
-                        <div class="row mb-3">
-                            <label for="name" class="col-md-4 col-form-label text-md-end">{{ __('Nombre') }}</label>
-
-                            <div class="col-md-6">
-                                <input id="name" type="text" class="form-control @error('name') is-invalid @enderror" name="name" 
-                                value="{{ $user->name }}" required autocomplete="name" autofocus>
-
-                                @error('name')
-                                    <span class="invalid-feedback" role="alert">
-                                        <strong>{{ $message }}</strong>
-                                    </span>
-                                @enderror
-                            </div>
-                        </div>
+                        @method('PATCH') 
 
                         <div class="row mb-3">
-                            <label for="email" class="col-md-4 col-form-label text-md-end">{{ __('Correo electrónico') }}</label>
-
                             <div class="col-md-6">
-                                <input id="email" type="email" class="form-control @error('email') is-invalid @enderror"
-                                 name="email" value=" {{ $user->email }}" required autocomplete="email">
-
-                                @error('email')
-                                    <span class="invalid-feedback" role="alert">
-                                        <strong>{{ $message }}</strong>
-                                    </span>
-                                @enderror
-                            </div>
-                        </div>
-
-                    
-                        <div class="row mb-3">
-                            <label for="tipo" class="col-md-4 col-form-label text-md-end">Tipo de usuario</label>
-                            <div class="col-md-6">
-                                <select name="role" id="tipo" class="form-select form-select-md">
-                                    <option value="">Seleccione un tipo de usuario</option>
+                                <label for="" class="form-label ">Tipo de usuario</label>
+                                <select name="role" id="roles" class="form-select form-select-md" disabled>
                                     @if ($user->role == 'admin')
                                         <option value="admin" selected>Administrador</option>
                                         <option value="odontologo">Odontólogo</option>
@@ -62,7 +31,57 @@
                                     </span>
                                 @enderror
                             </div>
+
+                            <div class="col-md-6">
+                                <label for="" class="form-label ">Estado</label>
+                                <select name="active" class="form-select form-select-md">
+                                    @if ($user->active == 1)
+                                        <option value=1 selected>Activo</option>
+                                        <option value=2>Inactivo</option>
+                                    @endif
+                                    @if ($user->active == 2)
+                                        <option value=2 selected>Inactivo</option>
+                                        <option value=1>Activo</option>
+                                    @endif
+                                </select>
+
+                                @error('role')
+                                    <span class="invalid-feedback" role="alert">
+                                        <strong>{{ $message }}</strong>
+                                    </span>
+                                @enderror
+                            </div>
+
                         </div>
+
+                        <div class="row">
+                            <div class="col-md-6">
+                                <div class="mb-3">
+                                    <label for="" class="form-label">{{ __('Usuario') }}</label>
+                                    <input id="name" type="text" value="{{ $user->name }}" class="form-control @error('name') is-invalid 
+                                    @enderror" name="name" value="{{ old('name') }}" required autocomplete="name">
+                                    
+                                    @error('name')
+                                        <span class="invalid-feedback" role="alert">
+                                            <strong>{{ $message }}</strong>
+                                        </span>
+                                    @enderror
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <div class="mb-3">
+                                    <label for="" class="form-label">{{ __('Correo electrónico') }}</label>
+                                    <input id="email" type="email" value="{{ $user->email }}" class="form-control @error('email') is-invalid @enderror" name="email" value="{{ old('email') }}" required autocomplete="email">
+
+                                    @error('email')
+                                        <span class="invalid-feedback" role="alert">
+                                            <strong>{{ $message }}</strong>
+                                        </span>
+                                    @enderror
+                                </div>
+                            </div>
+                        </div>
+
 
                         <div class="row mb-3">
                             <label for="password" class="col-md-4 col-form-label text-md-end">{{ __('Nueva Contraseña') }}</label>
@@ -78,13 +97,83 @@
                             </div>
                         </div>
 
-                        <!--<div class="row mb-3">
-                            <label for="password-confirm" class="col-md-4 col-form-label text-md-end">{{ __('Confirmar Contraseña') }}</label>
-
-                            <div class="col-md-6">
-                                <input id="password-confirm" type="password" class="form-control" name="password_confirmation" autocomplete="new-password">
+                        <!-- Datos odontologo -->
+                        @if ($user->role == 'odontologo')
+                        <div id="datos_odontologo" style="display">
+                            <h5 class="card-title fw-bold">{{ __('Información del odontólogo') }}</h5>
+                            <hr>    
+                                <div class="row mt-2">
+                                    <div class="col-md-6">
+                                    <div class="mb-3">
+                                        <label for="" class="form-label">{{ __('Nombres') }}</label>
+                                        <input type="text"class="form-control form-control-sm" name="nombres" id="" 
+                                            aria-describedby="helpId" placeholder="" value="{{ $user->odontologo->nombres }}">
+                                    </div>
+                                    </div>
+                                    <div class="col-md-6">
+                                    <div class="mb-3">
+                                        <label for="" class="form-label">{{ __('Apellidos') }}</label>
+                                        <input type="text"
+                                            class="form-control form-control-sm" name="apellidos" id="" 
+                                            aria-describedby="helpId" value="{{$user->odontologo->apellidos}}">
+                                    </div>
+                                    </div>
+                                </div>
+    
+                                <div class="row">
+                                    <div class="col-md-6">
+                                    <div class="mb-3">
+                                        <label for="" class="form-label">{{ __('Cédula') }}</label>
+                                        <input type="text"class="form-control form-control-sm @error('cedula') is-invalid @enderror" name="cedula" id="cedula_odo"minlength="10" maxlength="10" pattern="^[0-9]+$"
+                                                aria-describedby="helpId" value="{{ $user->odontologo->cedula }}">
+                                        @error('cedula')
+                                            <small class="text-danger"> {{ $message }}</small>
+                                        @enderror
+                                    </div>
+                                    </div>
+                                    <div class="col-md-6">
+                                    <div class="mb-3">
+                                        <label for="" class="form-label">{{ __('Celular') }}</label>
+                                        <input type="text"
+                                            class="form-control form-control-sm" name="celular" id="celu" minlength="10" maxlength="10" 
+                                            aria-describedby="helpId" value="{{ $user->odontologo->celular }}">
+                                            @error('celular')
+                                            <span class="invalid-feedback" role="alert">
+                                                <strong>{{ $message }}</strong>
+                                            </span>
+                                            @enderror
+                                    </div>
+                                    </div>
+                                </div>
+                
+                                <div class="row">
+                                    <div class="col-md-6">
+                                        <div class="mb-3">
+                                            <label for="" class="form-label">{{ __('Especialidad') }}</label>
+                                            <select class="form-select form-select-sm" name="especialidad_id" required aria-label=".form-select-sm example" >
+                                                @foreach ($especialidades as $especialidad)
+                                                  @if ($especialidad->id === $user->odontologo->especialidad_id)
+                                                    <option value="{{$especialidad->id}}" selected>{{$especialidad->nombre}}</option>
+                                                  @else                       
+                                                    <option value="{{$especialidad->id}}">{{$especialidad->nombre}}</option>
+                                                  @endif
+                                                @endforeach
+                                              </select>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-6">
+                                        <div class="mb-3">
+                                            <label for="" class="form-label">{{ __('Género') }}</label>
+                                            <select class="form-select form-select-sm" name="sexo" required aria-label=".form-select-sm example">
+                                                <option value="masculino" {{ $user->odontologo['sexo'] == 'masculino' ? 'selected' : '' }}>Masculino</option>
+                                                <option value="femenino" {{ $user->odontologo['sexo'] == 'femenino' ? 'selected' : '' }}>Femenino</option>
+                                            </select>
+                                        </div>
+                                        </div>
+                                    </div>
                             </div>
-                        </div>-->
+    
+                        @endif
 
                         <div class="row mb-0 text-end">
                             <div class="col-md-6 offset-md-4">
@@ -100,4 +189,26 @@
         </div>
     </div>
 </div>
+
+<script>
+$(document).ready(function(){
+$('#roles').change(function(){
+    var selectedOptionText = $(this).find(':selected').text();
+    if (selectedOptionText.includes('Odontólogo')) {
+    $('#datos_odontologo').show();
+    setRequieredOdontologoInputs();
+    }
+    else 
+    $('#datos_odontologo').hide();
+});
+});
+
+function setRequieredOdontologoInputs(){
+const inputs = document.querySelectorAll('#datos_odontologo input');
+inputs.forEach(input => {
+    input.required = true;
+});
+  }
+
+</script>
 @endsection

@@ -13,10 +13,11 @@
     <table class="table">
         <thead class="bg-dark text-white">
             <tr>
-                <th scope="col" class="col-md-2">Usuario</th>
-                <th scope="col" class="col-md-2">Email</th>
-                <th scope="col" class="col-md-2">Rol</th>
-                <th scope="col" class="col-md-6">Acciones</th>
+                <th scope="col" class="col">Usuario</th>
+                <th scope="col" class="col">Email</th>
+                <th scope="col" class="col">Rol</th>
+                <th scope="col" class="col">Estado</th>
+                <th scope="col" class="col">Acciones</th>
             </tr>
         </thead>
         <tbody>
@@ -24,7 +25,8 @@
             <tr class="">
                 <td scope="row">{{$user->name}}</td>
                 <td>{{$user->email}}</td>
-                <td>{{$user->role}}</td>
+                <td>{{strtoupper($user->role)}}</td>
+                <td>{{$user->active == 1 ? 'ACTIVO' : 'INACTIVO'}}</td>
                 <td>
                     <!--editar-->
                     <a type="button" class="btn btn-secondary" href="{{ route('users.edit', $user->id) }}">

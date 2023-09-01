@@ -7,6 +7,7 @@ use App\Http\Controllers\OdontogramaController;
 use App\Http\Controllers\OdontogramaDetalleController;
 use App\Http\Controllers\OdontologoController;
 use App\Http\Controllers\PresupuestoController;
+use App\Http\Controllers\ReportController;
 use App\Http\Controllers\TratamientoController;
 use App\Http\Controllers\UserController;
 use Illuminate\Support\Facades\Auth;
@@ -57,6 +58,9 @@ Route::post('odontogramas/nuevo/{paciente_id}', 'App\Http\Controllers\Odontogram
 Route::put('presupuestos/update-precio/{id_detalle_presupuesto}', [PresupuestoController::class, 'updatePrecio'])->name('update.precio');
 
 Route::put('presupuestos/update-estado/{id_detalle_presupuesto}', [PresupuestoController::class, 'updateEstado'])->name('update.estado');
+
+Route::get('reportes', [ReportController::class, 'index'])->name('reportes');
+Route::get('total-presupuesto', [ReportController::class, 'get_total_por_rango_de_fechas'])->name('total-presupuesto');
 
 
 

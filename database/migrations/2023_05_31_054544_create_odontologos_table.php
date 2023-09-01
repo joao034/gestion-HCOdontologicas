@@ -20,9 +20,11 @@ return new class extends Migration
             $table->string('celular', 10);
             $table->string('sexo', 20);
             $table->unsignedBigInteger('especialidad_id');
+            $table->unsignedBigInteger('user_id');
 
             //llave foranea
             $table->foreign('especialidad_id')->references('id')->on('especialidades');
+            $table->foreign('user_id')->references('id')->on('users');
         });
     }
 

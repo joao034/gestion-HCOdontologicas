@@ -182,7 +182,7 @@ $(document).ready(function(){
     mostrarSimboloSegunCaraDental( cara_dental );
   }
 
-
+  
   function mostrarSimboloSegunCaraDental( cara_dental ){
     if( cara_dental == 'oclusal' ){
       $('#div_simbolos').show();

@@ -33,7 +33,8 @@ class Odontologo extends Model
 	protected $table = 'odontologos';
 
 	protected $casts = [
-		'especialidad_id' => 'int'
+		'especialidad_id' => 'int',
+		'user_id' => 'int'
 	];
 
 	protected $fillable = [
@@ -41,13 +42,18 @@ class Odontologo extends Model
 		'apellidos',
 		'cedula',
 		'sexo',
+		'celular',
 		'especialidad_id',
-		'celular'
+		'user_id'
 	];
 
 	public function especialidad()
 	{
 		return $this->belongsTo(Especialidad::class, 'especialidad_id');
+	}
+
+	public function usuario(){
+		return $this->belongsTo(User::class, 'user_id');
 	}
 
 	public function odontograma_detalles()

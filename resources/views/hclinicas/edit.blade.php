@@ -102,7 +102,7 @@
                                         <div class="col-sm-6">
                                             <div class="form-check">
                                                 <input class="form-check-input" type="radio" id="checkSoltero" name="estado_civil" value="soltero" 
-                                                {{ $paciente['estado_civil'] == 'soltero' ? 'checked' : '' }} required>
+                                                {{ $paciente->estado_civil == 'soltero' ? 'checked' : '' }} required>
                                                 <label class="form-check-label" for="checkSoltero">Soltero/a </label>
                                             </div>
                                         </div>
@@ -110,7 +110,7 @@
                                         <div class="col-sm-6">
                                             <div class="form-check">
                                                 <input class="form-check-input" type="radio" id="checkCasado"  name="estado_civil" 
-                                                value="casado" {{ $paciente['estado_civil'] == 'casado' ? 'checked' : '' }}>
+                                                value="casado" {{ $paciente->estado_civil == 'casado' ? 'checked' : '' }}>
                                                 <label class="form-check-label" for="checkCasado">Casado/a</label>
                                             </div>
                                         </div>
@@ -118,7 +118,7 @@
                                         <div class="col-sm-6">
                                             <div class="form-check">
                                             <input class="form-check-input" type="radio" id="checkDivorciado" name="estado_civil" 
-                                            value="divorciado" {{ $paciente['estado_civil'] == 'divorciado' ? 'checked' : '' }}>
+                                            value="divorciado" {{ $paciente->estado_civil == 'divorciado' ? 'checked' : '' }}>
                                             <label class="form-check-label" for="checkDivorciado">
                                                 Divorciado/a
                                             </label>
@@ -128,7 +128,7 @@
                                         <div class="col-sm-6">
                                             <div class="form-check">
                                             <input class="form-check-input" type="radio" id="checkViudo" name="estado_civil" 
-                                            value="viudo" {{ $paciente['estado_civil'] == 'viudo' ? 'checked' : '' }}>
+                                            value="viudo" {{ $paciente->estado_civil == 'viudo' ? 'checked' : '' }}>
                                             <label class="form-check-label" for="checkViudo" >
                                                 Viudo/a
                                             </label>
@@ -137,7 +137,7 @@
                                         <div class="col-sm-6">
                                             <div class="form-check">
                                             <input class="form-check-input" type="radio" id="checkUnionLibre" name="estado_civil" 
-                                            value="unionlibre" {{ $paciente['estado_civil'] == 'unionlibre' ? 'checked' : '' }}>
+                                            value="unionlibre" {{ $paciente->estado_civil == 'unionlibre' ? 'checked' : '' }}>
                                             <label class="form-check-label" for="checkUnionLibre">
                                             Unión Libre
                                             </label>
@@ -157,7 +157,7 @@
                                         <div class="col-sm">
                                             <div class="form-check">
                                             <input class="form-check-input" type="radio" id="checkMasculino" name="sexo" 
-                                            value="masculino" required {{ $paciente['sexo'] == 'masculino' ? 'checked' : '' }}>
+                                            value="masculino" required {{ $paciente->sexo == 'masculino' ? 'checked' : '' }}>
                                             <label class="form-check-label" for="checkMasculino">
                                                 Masculino
                                             </label>
@@ -167,7 +167,7 @@
                                         <div class="col-sm">
                                             <div class="form-check">
                                             <input class="form-check-input" type="radio" id="checkFemenino"  name="sexo" 
-                                            value="femenino" {{ $paciente['sexo'] == 'femenino' ? 'checked' : '' }}>
+                                            value="femenino" {{ $paciente->sexo == 'femenino' ? 'checked' : '' }}>
                                             <label class="form-check-label" for="checkFemenino">
                                                 Femenino
                                             </label>

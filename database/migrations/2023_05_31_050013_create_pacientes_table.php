@@ -18,7 +18,6 @@ return new class extends Migration
             $table->string('cedula', 10)->unique();
             $table->string('sexo', 20);
             $table->date('fecha_nacimiento');
-            $table->integer('edad');
             $table->string('estado_civil', 30);
             $table->string('ocupacion', 50);
             $table->string('direccion', 100);

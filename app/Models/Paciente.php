@@ -83,15 +83,7 @@ class Paciente extends Model
 		return $this->hasMany(PresupuestoCabecera::class);
 	}
 
-	public function calcularEdad()
-	{
-
-		$fecha_nacimiento = Carbon::parse($this->fecha_nacimiento);
-		$fecha_actual = Carbon::now();
-		$edad = $fecha_nacimiento->diffInYears($fecha_actual, false);
-		$this->edad = $edad;
-	}
-
+	//Devuelve la lista de pacientes con paginacion mediante eloquent
 	public static function getAllPacientesWithPagination($search, $ordeBay = 'apellidos', $order = 'asc')
 	{
 		return Paciente::where('nombres', 'LIKE', '%' . $search . '%')
@@ -101,6 +93,7 @@ class Paciente extends Model
 			->paginate(10);
 	}
 
+	//Devuelve la lista de pacientes con paginacion mediante Query Builder
 	public static function getAllPacientesWithPaginationDB($search, $ordeBay = 'apellidos', $order = 'asc')
 	{
 		return DB::table('pacientes')->select('id', 'nombres', 'apellidos', 'cedula', 'celular', DB::raw('YEAR(CURDATE()) - YEAR(fecha_nacimiento) - IF(DATE_FORMAT(CURDATE(), "%m-%d") < DATE_FORMAT(fecha_nacimiento, "%m-%d"), 1, 0) as edad'))

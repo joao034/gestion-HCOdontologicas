@@ -18,7 +18,6 @@ class OdontogramaDetalleController extends Controller
 
     public function __construct()
     {
-        $this->middleware('auth');
     }
 
     protected function validator(array $data)

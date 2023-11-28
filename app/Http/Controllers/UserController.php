@@ -15,7 +15,6 @@ class UserController extends Controller
 
     public function __construct()
     {
-        $this->middleware('auth');
         $this->middleware('role.admin');
     }
 
@@ -31,7 +30,8 @@ class UserController extends Controller
         return view('auth.register', compact('especialidades'));
     }
 
-    public function store(Request $request){
+    public function store(Request $request)
+    {
 
         $this->validate($request, [
             'name' => 'required|string|max:255',
@@ -40,7 +40,7 @@ class UserController extends Controller
             'password' => 'required|string|min:8|confirmed',
         ]);
         DB::beginTransaction();
-        try{
+        try {
             $user = User::create([
                 'name' => $request->name,
                 'role' => $request->role,
@@ -49,32 +49,33 @@ class UserController extends Controller
             ]);
 
             //valida y crea un odontologo
-            if( $request->role === 'odontologo' )
+            if ($request->role === 'odontologo')
                 $this->createOdontologo($user, $request);
-            
-        DB::commit();
-        return to_route('users.index')->with('message', 'Usuario creado correctamente');
-        }catch(\Exception $e){
-            return back()->with('danger', 'Error al crear el usuario'. $e->getMessage());
+
+            DB::commit();
+            return to_route('users.index')->with('message', 'Usuario creado correctamente');
+        } catch (\Exception $e) {
+            return back()->with('danger', 'Error al crear el usuario' . $e->getMessage());
         }
     }
 
-    public function update( Request $request, User $user )
+    public function update(Request $request, User $user)
     {
-        try{
+        try {
             $this->update_user_data($request, $user);
             return to_route('users.index')->with('message', 'Usuario actualizado correctamente');
-        }catch(\Exception $e){
-            return back()->with('danger', 'Error al actualizar usuario'. $e->getMessage());
+        } catch (\Exception $e) {
+            return back()->with('danger', 'Error al actualizar usuario' . $e->getMessage());
         }
     }
 
-    public function edit( User $user ) {
+    public function edit(User $user)
+    {
         $especialidades = Especialidad::query()->orderBy('nombre')->get();
         return view('users.edit', compact(['user', 'especialidades']));
     }
 
-    public function destroy( int $id )
+    public function destroy(int $id)
     {
         //elimina el usuario y el odontologo
         DB::beginTransaction();
@@ -85,22 +86,23 @@ class UserController extends Controller
         return to_route('users.index')->with('message', 'Usuario eliminado correctamente');
     }
 
-    private function update_user_data ( Request $request, User $user )
+    private function update_user_data(Request $request, User $user)
     {
         //si el usuario ingresa un nuevo password, lo hashea
-        if( isset($request->password ) )
+        if (isset($request->password))
             $user->password = bcrypt($request->password);
 
         $user->name = $request->name;
         $user->email = $request->email;
         $user->active = $request->active;
 
-        if( $user->role === 'odontologo' )
+        if ($user->role === 'odontologo')
             $this->store_update_data_odontologo($user, $request);
         $user->save();
     }
 
-    private function store_update_data_odontologo( User $user, Request $request){
+    private function store_update_data_odontologo(User $user, Request $request)
+    {
         $this->validate($request, $this->validate_odontologo_data());
         $user->odontologo->nombres = $request->nombres;
         $user->odontologo->apellidos = $request->apellidos;
@@ -112,7 +114,8 @@ class UserController extends Controller
         $user->odontologo->save();
     }
 
-    private function validate_odontologo_data(){
+    private function validate_odontologo_data()
+    {
         return [
             'nombres' => 'required|string|max:255',
             'apellidos' => 'required|string|max:255',
@@ -123,18 +126,17 @@ class UserController extends Controller
         ];
     }
 
-    private function createOdontologo( User $user, Request $request ){
+    private function createOdontologo(User $user, Request $request)
+    {
         $this->validate($request, $this->validate_odontologo_data());
-                Odontologo::create([
-                    'nombres' => $request->nombres,
-                    'apellidos' => $request->apellidos,
-                    'cedula' => $request->cedula,
-                    'sexo' => $request->sexo,
-                    'celular' => $request->celular,
-                    'especialidad_id' => $request->especialidad_id,
-                    'user_id' => $user->id,
-                ]);
+        Odontologo::create([
+            'nombres' => $request->nombres,
+            'apellidos' => $request->apellidos,
+            'cedula' => $request->cedula,
+            'sexo' => $request->sexo,
+            'celular' => $request->celular,
+            'especialidad_id' => $request->especialidad_id,
+            'user_id' => $user->id,
+        ]);
     }
-
-
 }

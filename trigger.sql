@@ -17,7 +17,31 @@ CREATE OR REPLACE TRIGGER `sumar_total_presupuesto` AFTER INSERT ON `odontograma
 END
 $$
 
-//funciona solo en local
+DELIMITER $$
+CREATE OR REPLACE TRIGGER `restar_total_presupuesto_delete` AFTER DELETE ON `odontograma_detalle`
+ FOR EACH ROW BEGIN
+
+     IF OLD.estado = 'necesario' THEN   
+        -- Actualizar el total en la tabla odontograma_cabecera
+        UPDATE odontograma_cabecera
+        SET total = total - OLD.precio
+        WHERE id = OLD.odontograma_cabecera_id;
+     END IF;
+END
+$$
+
+//crear el trigger y borrar la funcion store del controlador odontograma
+DELIMITER $$
+CREATE OR REPLACE TRIGGER `crear_odontograma` AFTER INSERT ON `pacientes`
+ FOR EACH ROW BEGIN
+    INSERT INTO `odontograma_cabecera` (fecha_creacion, total, paciente_id) VALUES (NOW(), 0, NEW.id);
+END
+$$
+
+//eliminar un TRIGGER
+DROP TRIGGER IF EXISTS `crear_odontograma`;
+
+//Funcion que no se ocupa
 DELIMITER $$
 CREATE OR REPLACE TRIGGER `restar_total_presupuesto_update` AFTER UPDATE ON `odontograma_detalle`
  FOR EACH ROW BEGIN
@@ -39,7 +63,7 @@ CREATE OR REPLACE TRIGGER `restar_total_presupuesto_update` AFTER UPDATE ON `odo
     END IF;
         
     -- Verificar el estado antes de actualizar el total (FUNCION BORRADA EN LOCAL Y EN PROD)
-    IF NEW.estado = 'fuera_presupuesto' THEN
+    IF NEW.estado = 'fuera_presupuesto' THEN 
 
         -- Actualizar el total en la tabla odontograma_cabecera
         UPDATE odontograma_cabecera
@@ -48,19 +72,3 @@ CREATE OR REPLACE TRIGGER `restar_total_presupuesto_update` AFTER UPDATE ON `odo
     END IF;
 END
 $$
-
-DELIMITER $$
-CREATE OR REPLACE TRIGGER `restar_total_presupuesto_delete` AFTER DELETE ON `odontograma_detalle`
- FOR EACH ROW BEGIN
-
-     IF OLD.estado = 'necesario' THEN   
-        -- Actualizar el total en la tabla odontograma_cabecera
-        UPDATE odontograma_cabecera
-        SET total = total - OLD.precio
-        WHERE id = OLD.odontograma_cabecera_id;
-     END IF;
-END
-$$
-
-//eliminar un TRIGGER
-DROP TRIGGER IF EXISTS `restar_total_presupuesto`;

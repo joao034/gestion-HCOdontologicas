@@ -11,13 +11,13 @@ use App\Models\OdontogramaDetalle;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Validator;
+use Illuminate\Validation\Rule;
 
 class HClinicaController extends Controller
 {
     //
     public function __construct()
     {
-        $this->middleware('auth');
     }
 
     /**
@@ -34,13 +34,25 @@ class HClinicaController extends Controller
             'cedula' => ['validar_cedula', 'nullable', 'string', 'min:10', 'max:10'],
             'cedula_representante' => ['nullable', 'string', 'min:10', 'max:10', 'validar_cedula'],
             'representante' => ['nullable', 'string', 'max:100'],
-            'fecha_nacimiento' => ['required', 'date'],
             'estado_civil' => ['required', 'string', 'max:255'],
             'direccion' => ['required', 'string', 'max:255'],
             'ocupacion' => ['required', 'string', 'max:255'],
             'sexo' => ['required', 'string', 'max:255'],
             'celular' => ['nullable', 'min:10', 'max:10'],
             'telef_convencional' => ['nullable', 'min:6', 'max:9'],
+            'fecha_nacimiento' => ['required', 'date', 'before:today'],
+                /* //Agregar una regla personalizada para verificar el rango de edad
+                Rule::custom(function ($value) {
+                // Convertir la fecha de nacimiento a objeto DateTime
+                $fechaNacimiento = new \DateTime($value);
+
+                // Calcular la edad en años
+                $edad = now()->diff($fechaNacimiento)->y;
+
+                // Establecer un rango razonable, por ejemplo, entre 18 y 100 años
+                return ($edad >= 1 && $edad <= 120);
+                }), */
+        
         ]);
     }
 
@@ -62,6 +74,19 @@ class HClinicaController extends Controller
         $search = trim($request->get('buscador'));
         $pacientes = Paciente::getAllPacientesWithPaginationDB($search, 'updated_at', 'desc');
         return view('hclinicas.index', compact(['pacientes', 'search']));
+    }
+
+    public function indexPaciente(int $id){
+        $paciente = DB::table('pacientes')
+            ->select('*', DB::raw('YEAR(CURDATE()) - YEAR(fecha_nacimiento) - IF(DATE_FORMAT(CURDATE(), "%m-%d") < DATE_FORMAT(fecha_nacimiento, "%m-%d"), 1, 0) as edad'))
+            ->where('id', $id)
+            ->first();
+        $antecendentes = AntecedentesPersonalesFamiliare::where('paciente_id', $id)->first();
+        return view('hclinicas.index-paciente', compact(['paciente', 'antecendentes']));
+    }
+
+    public function hclinica(){
+        return view('hclinicas.hclinica');
     }
 
     /**
@@ -91,15 +116,15 @@ class HClinicaController extends Controller
 
             $this->guardarOActualizarPaciente($paciente, $request);
             //insertar antecedentes
-            $this->almacenarAntecedentesInfecciosos($request, $paciente->id);
+            //$this->almacenarAntecedentesInfecciosos($request, $paciente->id);
             $this->almacenarAntecedentePersonales($request, $paciente->id);
             //inserta el registro en la tabla odontogramaCabecera
             $this->crearOdontograma($paciente->id);
             DB::commit();
-            return to_route('hclinicas.index')->with('message', 'Historia Clinica creado exitosamente');
+            return to_route('hclinicas.index')->with('message', 'Historia Clinica creado exitosamente.');
         } catch (\Exception $e) {
             DB::rollback();
-            return to_route('hclinicas.create')->with('danger', 'No se pudo crear la Historia Clinica. ');
+            return to_route('hclinicas.create')->with('danger', 'No se pudo crear la Historia Clinica.' . $e->getMessage());
             throw $e;
         }
     }
@@ -110,9 +135,17 @@ class HClinicaController extends Controller
      * @param  \App\Models\  $autor
      * @return \Illuminate\Http\
      */
-    public function show()
+    public function show(int $id)
     {
-        //
+        $paciente = DB::table('pacientes')
+            ->select('*', DB::raw('YEAR(CURDATE()) - YEAR(fecha_nacimiento) - IF(DATE_FORMAT(CURDATE(), "%m-%d") < DATE_FORMAT(fecha_nacimiento, "%m-%d"), 1, 0) as edad'))
+            ->where('id', $id)
+            ->first();
+        //$paciente = Paciente::find($id); // Obtener el registro específico a editar
+        //buscar los antecedentes infecciosos del paciente
+        //buscar los antecedentes personales y familiares del paciente
+        $antPersonales = AntecedentesPersonalesFamiliare::where('paciente_id', $paciente->id)->first();
+        return view('hclinicas.show', compact(['paciente', 'antPersonales']));
     }
 
     /**
@@ -152,7 +185,7 @@ class HClinicaController extends Controller
             $this->validator($request->all())->validate();
 
             $this->guardarOActualizarPaciente($paciente, $request);
-            $this->actualizarAntecedenteInfeccioso($request, $paciente->id);
+            //$this->actualizarAntecedenteInfeccioso($request, $paciente->id);
             $this->actualizarAntecedentePersonal($request, $paciente->id);
 
             DB::commit();
@@ -177,8 +210,7 @@ class HClinicaController extends Controller
             //buscar paciente
             $paciente = Paciente::findOrFail($id);
             if ($paciente) {
-
-                $this->eliminarAntecedenteInfeccioso($id);
+                //$this->eliminarAntecedenteInfeccioso($id);
                 $this->eliminarAntecedentePersonal($id);
                 $this->eliminarOdontogramas($id);
                 $paciente->delete();
@@ -223,7 +255,6 @@ class HClinicaController extends Controller
         $paciente->cedula_representante = $request->input('cedula_representante');
         $paciente->sexo = $request->input('sexo');
         $paciente->fecha_nacimiento =  $request->input('fecha_nacimiento');
-        //$paciente->calcularEdad();
         $paciente->estado_civil = $request->input('estado_civil');
         $paciente->ocupacion = $request->input('ocupacion');
         $paciente->direccion = $request->input('direccion');

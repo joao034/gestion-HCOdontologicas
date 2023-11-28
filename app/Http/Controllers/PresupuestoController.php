@@ -20,7 +20,6 @@ class PresupuestoController extends Controller
 
     public function __construct()
     {
-        $this->middleware('auth');
     }
 
 
@@ -78,7 +77,7 @@ class PresupuestoController extends Controller
     public function update( Request $request, int $id ){}
 
 
-    //actualiza el estado del detalle del presupuesto a fuera de presupuesto al momento de eliminarlo en la interfaz
+    //actualiza el estado del detalle del presupuesto a fuera de presupuesto al momento de eliminarlo un detalle del presupuesto
     public function updateEstado ( int $id ){
         try{
             $detalle_presupuesto = OdontogramaDetalle::find( $id );
@@ -106,6 +105,7 @@ class PresupuestoController extends Controller
         return $detalles_presupuesto;
     }
 
+    //actualiza el precio de un detalle del presupuesto
     public function updatePrecio ( int $id_detalle_presupuesto, Request $request ){
         //validar que el precio sea mayor a cero
         $request->validate([

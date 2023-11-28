@@ -36,7 +36,17 @@ class OdontogramaController extends Controller
         }
     }
 
-    
+    public function show( int $paciente_id ){
+        $paciente = Paciente::find($paciente_id);
+        /* $odontogramas = Odontograma::where('paciente_id', $paciente_id)->orderBy('fecha_creacion', 'desc')->get(); */
+        if($paciente->odontogramasCabecera->count() > 1){
+            return view('odontogramas.show', compact(['paciente']));     
+        }
+
+        //redirige a la ruta de detallesOdontograma.edit con el id del odontograma cabecera
+        return to_route('detalleOdontogramas.edit', $paciente->odontogramasCabecera->first()->id);    
+    }
+
     public function store( Request $request ){
 
     }

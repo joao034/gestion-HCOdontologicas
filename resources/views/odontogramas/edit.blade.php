@@ -1,6 +1,9 @@
 @extends('layouts.app')
 @section('content')
 
+<x-navegacion-paciente :paciente="$odontograma->paciente" />
+
+
 <h1 class="text-center">Odontograma Geométrico</h1>
 
 <!-- Cuadrante Superior dentadura adulta -->

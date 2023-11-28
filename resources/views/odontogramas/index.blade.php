@@ -43,9 +43,10 @@
                     @foreach ($pacientes as $paciente)
                     <tr class="">
                         <td scope="row">{{$paciente->id}}</td>
-                        <td>{{$paciente->odontogramasCabecera->last()->updated_at}}</td>
+                        <td>{{$paciente->nombres}}</td>
                         <td>{{$paciente->nombres}} {{$paciente->apellidos}}</td>
                         <td>
+                            <!--Dropdown de odontogramas-->
                             <div class="dropdown">
                                 <button class="btn btn-secondary dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false">
                                   Odontogramas

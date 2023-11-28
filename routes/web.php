@@ -10,6 +10,7 @@ use App\Http\Controllers\PresupuestoController;
 use App\Http\Controllers\ReportController;
 use App\Http\Controllers\TratamientoController;
 use App\Http\Controllers\UserController;
+use App\Models\Odontograma;
 use Illuminate\Support\Facades\Auth;
 
 //use Illuminate\Support\Facades\App;
@@ -53,13 +54,8 @@ Route::middleware('auth')->group(function () {
 
     Route::get('reportes', [ReportController::class, 'index'])->name('reportes');
     Route::get('total-presupuesto', [ReportController::class, 'get_total_por_rango_de_fechas'])->name('total-presupuesto');
-
-    //vista indexPaciente / borrar
-    Route::get('/hclinica', function () {
-        return view('hclinicas.hclinica');
-    });
  
-
+    Route::get('odontogramas/{paciente_id}', [Odontograma::class, 'odontograma'])->name('odontogramas.odontograma');
 });
 
 //Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');

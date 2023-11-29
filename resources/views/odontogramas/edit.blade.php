@@ -3,8 +3,7 @@
 
 <x-navegacion-paciente :paciente="$odontograma->paciente" />
 
-
-<h1 class="text-center">Odontograma Geométrico</h1>
+<h2 class="text-center mt-3">Odontograma Geométrico</h2>
 
 <!-- Cuadrante Superior dentadura adulta -->
 <div class="row">
@@ -280,12 +279,19 @@
     </div>
 </div> --}}
 
-<!-- Boton ir presupuesto -->
-<div class="text-end mt-2">
-    <a class="btn btn-secondary" href="{{ route('presupuestos.edit', $odontograma->id) }}"> Presupuesto </a>
+<!-- Botones -->
+<div class="d-flex justify-content-between mt-2">
+
+    <button type="button" class="btn btn-info text-white" data-bs-toggle="modal" data-bs-target="#nuevo{{$odontograma->id}}">
+        <i class="fa-solid fa-plus"></i> Nuevo
+    </button>
+    <div class="mt-2">
+        <a class="btn btn-secondary" href="{{ route('presupuestos.edit', $odontograma->id) }}"> Presupuesto </a>
+    </div> 
 </div>
 
 <!-- Lista de Detalles -->
 @include('odontogramas.index_detalle')
 @include('odontogramas.detalle_odontograma')
+@include('odontogramas.nuevo')
 @endsection

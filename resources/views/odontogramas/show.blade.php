@@ -18,19 +18,18 @@
     @endforeach   --}}
     <!--Odontograma, si tiene solo uno que se muestre directamente-->
 
-    @if (count($paciente->odontogramasCabecera) > 1)
-        @foreach ($paciente->odontogramasCabecera as $odontograma)
-        <div class="d-flex justify-content-center mt-3">
-            <a href="{{ route('detalleOdontogramas.edit', $odontograma->id) }}">
-                <x-card :title="'ODONTOGRAMA Nº ' . $odontograma->id" 
-                    :content="'<p><strong>Última actualización: </strong>'. $odontograma->updated_at->format('d-m-Y'). '</p>'" width="25rem" />
-            </a>
-        </div>
-         @endforeach
+    @if ($odontogramas->count() < 1)
+        p>No hay odontogramas</p>
+    
     @else
-        @php
-            return to_route('detalleOdontogramas.edit', $paciente->odontogramasCabecera->id)
-        @endphp
+        @foreach ($odontogramas as $odontograma)
+            <div class="d-flex justify-content-center mt-3">
+                <a href="{{ route('detalleOdontogramas.edit', $odontograma->id) }}">
+                    <x-card :title="'ODONTOGRAMA Nº ' . $odontograma->id" :content="'<p><strong>Última actualización: </strong>' .
+                        $odontograma->updated_at->format('d-m-Y') .
+                        '</p>'" width="25rem" />
+                </a>
+            </div>
+        @endforeach
     @endif
-
 @endsection

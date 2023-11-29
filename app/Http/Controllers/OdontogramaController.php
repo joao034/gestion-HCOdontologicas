@@ -30,21 +30,26 @@ class OdontogramaController extends Controller
             $odontograma->paciente_id = $paciente_id;
             $odontograma->total = 0;
             $odontograma->save();
-            return to_route('odontogramas.index')->with('message', 'Odontograma creado correctamente');
+            return to_route('detalleOdontogramas.edit', $odontograma->id)->with('message', 'Odontograma creado correctamente');
         }catch(\Exception $e){
-            return to_route('odontogramas.index')->with('message', 'Error al crear el odontograma', $e->getMessage());
+            return back()->with('danger', 'No se pudo crear el nuevo odontograma. ');
         }
     }
 
     public function show( int $paciente_id ){
         $paciente = Paciente::find($paciente_id);
-        /* $odontogramas = Odontograma::where('paciente_id', $paciente_id)->orderBy('fecha_creacion', 'desc')->get(); */
-        if($paciente->odontogramasCabecera->count() > 1){
-            return view('odontogramas.show', compact(['paciente']));     
-        }
 
-        //redirige a la ruta de detallesOdontograma.edit con el id del odontograma cabecera
-        return to_route('detalleOdontogramas.edit', $paciente->odontogramasCabecera->first()->id);    
+        
+        // Ordenar los odontogramas por fecha en orden descendente
+        $odontogramas = $paciente->odontogramasCabecera()->latest('updated_at')->get();
+
+        //si el paciente tiene mas de un odontograma muestra la vista show
+        if($odontogramas->count() > 1){
+            return view('odontogramas.show', compact(['paciente', 'odontogramas']));     
+        }
+        
+        //Si tiene solo un odontograma redirije directamente al unico odontograma disponible
+        return to_route('detalleOdontogramas.edit', $odontogramas->first()->id);    
     }
 
     public function store( Request $request ){

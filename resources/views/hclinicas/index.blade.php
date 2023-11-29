@@ -41,7 +41,7 @@
             <!--Si no hay resultados-->
             @if($pacientes->count() <= 0)
                 <tr>
-                    <td colspan="6">No hay resultados</td>
+                    <td colspan="6">No hay historias clínicas</td>
                 </tr>
             @else
                 <!--Si hay resultados-->
@@ -50,7 +50,7 @@
                     <td scope="row">{{$paciente->id}}</td>
                     <td>{{$paciente->cedula}}</td>
                     <td>{{$paciente->apellidos . ' ' . $paciente->nombres}}</td>
-                    <td>{{$paciente->edad}}</td>
+                    <td>{{$paciente->edad}} años</td>
                     <td>{{$paciente->celular}}</td>
                     <td>
                         <!--editar-->

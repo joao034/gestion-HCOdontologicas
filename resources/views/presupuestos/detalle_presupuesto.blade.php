@@ -1,6 +1,7 @@
 @extends('layouts.app')
 @section('content')
-    <h2 class="text-center">Detalle Presupuesto</h2>
+<x-navegacion-paciente :paciente="$presupuesto->paciente" />
+    <h2 class="text-center mt-4">Detalle Presupuesto</h2>
 
     <form action="{{ route('presupuestos.store') }}" method="POST">
         @csrf

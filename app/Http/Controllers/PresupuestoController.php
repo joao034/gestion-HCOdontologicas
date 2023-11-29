@@ -43,6 +43,21 @@ class PresupuestoController extends Controller
         
     }
 
+    public function show ( int $paciente_id ){
+        $paciente = Paciente::find($paciente_id);
+
+        // Ordenar los presupuestos por fecha en orden descendente
+        $presupuestos = $paciente->odontogramasCabecera()->latest('updated_at')->get();
+
+        //si el paciente tiene mas de un presupuesto muestra la vista show
+        if($presupuestos->count() > 1){
+            return view('presupuestos.show', compact(['paciente', 'presupuestos']));     
+        }
+
+        //Si tiene solo un presupuesto redirije directamente al unico presupuesto disponible
+        return to_route('presupuestos.edit', $presupuestos->first()->id);    
+    }
+
     //almacena los detalles del presupuesto
     public function store( Request $request ){
 

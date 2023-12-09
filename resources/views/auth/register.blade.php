@@ -10,7 +10,7 @@
                         @csrf
 
                         <div class="row mb-3">
-                            <label for="" class="col-md-4 col-form-label text-md-end">{{ __('Tipo de usuario') }}</label>
+                            <label for="" class="col-md-4 col-form-label text-md-end fw-bold">{{ __('Tipo de usuario') }}</label>
                             <div class="col-md-6">
                                 <select name="role" class="form-select form-select-md" id="roles" 
                                         value="{{ old('role') }}" autofocus required>
@@ -29,8 +29,9 @@
                         <div class="row">
                             <div class="col-md-6">
                                 <div class="mb-3">
-                                    <label for="" class="form-label">{{ __('Usuario') }}</label>
-                                    <input id="name" type="text" class="form-control @error('name') is-invalid @enderror" name="name" value="{{ old('name') }}" required autocomplete="name">
+                                    <label for="" class="form-label fw-bold">{{ __('Usuario') }}</label>
+                                    <input id="name" type="text" class="form-control @error('name') is-invalid @enderror" name="name" value="{{ old('name') }}" required autocomplete="name"
+                                    placeholder="Ejemplo: Odontologo Admin">
                                     @error('name')
                                         <span class="invalid-feedback" role="alert">
                                             <strong>{{ $message }}</strong>
@@ -40,8 +41,9 @@
                             </div>
                             <div class="col-md-6">
                                 <div class="mb-3">
-                                    <label for="" class="form-label">{{ __('Correo electrónico') }}</label>
-                                    <input id="email" type="email" class="form-control @error('email') is-invalid @enderror" name="email" value="{{ old('email') }}" required autocomplete="email">
+                                    <label for="" class="form-label fw-bold">{{ __('Correo electrónico') }}</label>
+                                    <input id="email" type="email" class="form-control @error('email') is-invalid @enderror" name="email" value="{{ old('email') }}" required autocomplete="email"
+                                    placeholder="Ejemplo: admin@gmail.com">
 
                                     @error('email')
                                         <span class="invalid-feedback" role="alert">
@@ -55,8 +57,8 @@
                         <div class="row">
                             <div class="col-md-6">
                                 <div class="mb-3">
-                                    <label for="" class="form-label">{{ __('Contraseña') }}</label>
-                                    <input id="password" type="password" class="form-control @error('password') is-invalid @enderror" name="password" required autocomplete="new-password">
+                                    <label for="" class="form-label fw-bold">{{ __('Contraseña') }}</label>
+                                    <input id="password" type="password" class="form-control @error('password') is-invalid @enderror" name="password" required autocomplete="new-password" placeholder="Contraseña (mínimo 8 caracteres)">
 
                                     @error('password')
                                         <span class="invalid-feedback" role="alert">
@@ -67,8 +69,8 @@
                             </div>
                             <div class="col-md-6">
                                 <div class="mb-3">
-                                    <label for="" class="form-label">{{ __('Confirmar contraseña') }}</label>
-                                    <input id="password-confirm" type="password" class="form-control" name="password_confirmation" required autocomplete="new-password">
+                                    <label for="" class="form-label fw-bold">{{ __('Confirmar contraseña') }}</label>
+                                    <input id="password-confirm" type="password" class="form-control" name="password_confirmation" required autocomplete="new-password" placeholder="Repita la misma contraseña">
                                 </div>
                             </div>
                         </div>
@@ -80,14 +82,14 @@
                                 <div class="row mt-2">
                                     <div class="col-md-6">
                                     <div class="mb-3">
-                                        <label for="" class="form-label">{{ __('Nombres') }}</label>
+                                        <label for="" class="form-label fw-bold">{{ __('Nombres') }}</label>
                                         <input type="text"class="form-control form-control-sm" name="nombres" id="" 
                                             aria-describedby="helpId" placeholder="" value="{{ old('nombres') }}">
                                     </div>
                                     </div>
                                     <div class="col-md-6">
                                     <div class="mb-3">
-                                        <label for="" class="form-label">{{ __('Apellidos') }}</label>
+                                        <label for="" class="form-label fw-bold">{{ __('Apellidos') }}</label>
                                         <input type="text"
                                             class="form-control form-control-sm" name="apellidos" id="" 
                                             aria-describedby="helpId" placeholder="" value="{{ old('apellidos') }}">
@@ -97,7 +99,7 @@
                                 <div class="row">
                                     <div class="col-md-6">
                                     <div class="mb-3">
-                                        <label for="" class="form-label">{{ __('Cédula') }}</label>
+                                        <label for="" class="form-label fw-bold">{{ __('Cédula') }}</label>
                                         <input type="text"class="form-control form-control-sm" name="cedula"    id="cedula_odo" minlength="10" maxlength="10" aria-describedby="helpId" placeholder="" value="{{ old('cedula') }}">
                                         @error('cedula')
                                             <span class="invalid-feedback" role="alert">
@@ -108,7 +110,7 @@
                                     </div>
                                     <div class="col-md-6">
                                     <div class="mb-3">
-                                        <label for="" class="form-label">{{ __('Celular') }}</label>
+                                        <label for="" class="form-label fw-bold">{{ __('Celular') }}</label>
                                         <input type="text"
                                             class="form-control form-control-sm" name="celular" id="celu" minlength="10" maxlength="10" value="{{ old('celular') }}"
                                             aria-describedby="helpId" placeholder="">
@@ -119,7 +121,7 @@
                                 <div class="row">
                                     <div class="col-md-6">
                                         <div class="mb-3">
-                                            <label for="" class="form-label">{{ __('Especialidad') }}</label>
+                                            <label for="" class="form-label fw-bold">{{ __('Especialidad') }}</label>
                                             <select class="form-select form-select-sm" name="especialidad_id" aria-label=".form-select-sm example">
                                             <option>Seleccione una especialidad</option>
                                             @foreach ($especialidades as $especialidad)
@@ -130,7 +132,7 @@
                                     </div>
                                     <div class="col-md-6">
                                         <div class="mb-3">
-                                            <label for="" class="form-label">{{ __('Género') }}</label>
+                                            <label for="" class="form-label fw-bold">{{ __('Género') }}</label>
                                             <select class="form-select form-select-sm" name="sexo" aria-label=".form-select-sm example">
                                                 <option>Seleccione el género</option>
                                                 <option value="masculino">Masculino</option>
@@ -143,6 +145,7 @@
                         
                        
                             <!--Registrar Button -->
+
                             <div class="row mb-0 text-end">
                                 <div class="col-md-6 offset-md-4">
                                     <button type="submit" class="btn btn-primary">

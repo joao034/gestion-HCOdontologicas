@@ -76,15 +76,6 @@ class HClinicaController extends Controller
         return view('hclinicas.index', compact(['pacientes', 'search']));
     }
 
-    public function indexPaciente(int $id){
-        $paciente = DB::table('pacientes')
-            ->select('*', DB::raw('YEAR(CURDATE()) - YEAR(fecha_nacimiento) - IF(DATE_FORMAT(CURDATE(), "%m-%d") < DATE_FORMAT(fecha_nacimiento, "%m-%d"), 1, 0) as edad'))
-            ->where('id', $id)
-            ->first();
-        $antecendentes = AntecedentesPersonalesFamiliare::where('paciente_id', $id)->first();
-        return view('hclinicas.index-paciente', compact(['paciente', 'antecendentes']));
-    }
-
     public function hclinica(){
         return view('hclinicas.hclinica');
     }
@@ -141,8 +132,6 @@ class HClinicaController extends Controller
             ->select('*', DB::raw('YEAR(CURDATE()) - YEAR(fecha_nacimiento) - IF(DATE_FORMAT(CURDATE(), "%m-%d") < DATE_FORMAT(fecha_nacimiento, "%m-%d"), 1, 0) as edad'))
             ->where('id', $id)
             ->first();
-        //$paciente = Paciente::find($id); // Obtener el registro específico a editar
-        //buscar los antecedentes infecciosos del paciente
         //buscar los antecedentes personales y familiares del paciente
         $antPersonales = AntecedentesPersonalesFamiliare::where('paciente_id', $paciente->id)->first();
         return view('hclinicas.show', compact(['paciente', 'antPersonales']));
@@ -160,8 +149,6 @@ class HClinicaController extends Controller
             ->select('*', DB::raw('YEAR(CURDATE()) - YEAR(fecha_nacimiento) - IF(DATE_FORMAT(CURDATE(), "%m-%d") < DATE_FORMAT(fecha_nacimiento, "%m-%d"), 1, 0) as edad'))
             ->where('id', $id)
             ->first();
-        //$paciente = Paciente::find($id); // Obtener el registro específico a editar
-        //buscar los antecedentes infecciosos del paciente
         $antInfecciosos = AntecedentesInfeccioso::where('paciente_id', $paciente->id)->first();
         //buscar los antecedentes personales y familiares del paciente
         $antPersonales = AntecedentesPersonalesFamiliare::where('paciente_id', $paciente->id)->first();

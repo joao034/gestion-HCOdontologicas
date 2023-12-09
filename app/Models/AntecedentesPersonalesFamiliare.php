@@ -67,9 +67,7 @@ class AntecedentesPersonalesFamiliare extends Model
 				return true;
 			}
 		}
-		return false;
-		
-			
+		return false;	
 	}
 
 	public function retornar_habitos($habitoABuscar) {

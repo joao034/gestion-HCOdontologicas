@@ -50,12 +50,19 @@ class User extends Authenticatable
 		'email_verified_at',
 		'password',
 		'role',
+		//'rol_id', 
 		'estado',
+		'active',
 		'remember_token',
 	];
 
 	public function odontologo()
 	{
 		return $this->hasOne(Odontologo::class);
+	}
+
+	public function rol()
+	{
+		return $this->belongsTo(Rol::class, 'rol_id');
 	}
 }

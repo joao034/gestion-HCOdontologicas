@@ -31,17 +31,17 @@
             <tr>
                 <th scope="col" class="col-md-1">Nº</th>
                 <th scope="col" class="col-md-2">Cédula</th>
-                <th scope="col" class="col-md-2">Paciente</th>
+                <th scope="col" class="col-md-3">Paciente</th>
                 <th scope="col" class="col-md-1">Edad</th>
                 <th scope="col" class="col-md-2">Celular</th>
-                <th scope="col" class="col-md-4">Acciones</th>
+                <th scope="col" class="col-md-3">Acciones</th>
             </tr>
         </thead>
         <tbody>
             <!--Si no hay resultados-->
             @if($pacientes->count() <= 0)
                 <tr>
-                    <td colspan="6">No hay historias clínicas</td>
+                    <td colspan="6">No hay resultados</td>
                 </tr>
             @else
                 <!--Si hay resultados-->
@@ -56,9 +56,9 @@
                         <!--editar-->
                         <a href="{{ route('hclinicas.show', $paciente->id) }}" class="btn btn-secondary"><i class="fa-regular fa-pen-to-square"></i> Editar</a>
                         <!--eliminar-->
-                        <a class="btn btn-danger" data-bs-toggle="modal" data-bs-target="#delete{{$paciente->id}}">
+                        {{-- <a class="btn btn-danger" data-bs-toggle="modal" data-bs-target="#delete{{$paciente->id}}">
                             <i class="fa-regular fa-trash-can"></i> Eliminar
-                        </a>
+                        </a> --}}
                     </td>
                 </tr>
                 @include('hclinicas.destroy') 

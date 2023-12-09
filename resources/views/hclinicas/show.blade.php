@@ -1,6 +1,7 @@
 @extends('layouts.app')
 @section('content')
 
+    <x-info-paciente :paciente="$paciente" :antecedentes="$antPersonales"/>
     <x-navegacion-paciente :paciente="$paciente" />
 
     <form>

@@ -1,6 +1,4 @@
-@extends('layouts.app')
-@section('content')
-
+<div>
     @php
         $contentPaciente = '<div class="d-lg-flex justify-content-evenly">
                                 <p><strong>CI:</strong> ' . $paciente->cedula .'</p>
@@ -10,12 +8,7 @@
 
     <div class="d-md-flex justify-content-around">
         <x-card :title="'PACIENTE: ' . $paciente->nombres . ' ' .  $paciente->apellidos" :content="$contentPaciente"/>
-        <x-card title="ENFERMEDADES: " :content="$antecendentes->enfermedades"/>
-        <x-card title="MEDICAMENTOS: " :content="$antecendentes->medicamento"/>
+        <x-card title="ENFERMEDADES: " :content="$antecedentes->enfermedades"/>
+        <x-card title="MEDICAMENTOS: " :content="$antecedentes->medicamento"/>
     </div>
-    
-    <x-navegacion-paciente/>
-    @yield('content-paciente')
-@endsection
-
-
+</div>

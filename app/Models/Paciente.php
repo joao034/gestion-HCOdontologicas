@@ -65,12 +65,12 @@ class Paciente extends Model
 
 	public function antecedentes_infecciosos()
 	{
-		return $this->hasMany(AntecedentesInfeccioso::class);
+		return $this->hasOne(AntecedentesInfeccioso::class);
 	}
 
 	public function antecedentes_personales_familiares()
 	{
-		return $this->hasMany(AntecedentesPersonalesFamiliare::class);
+		return $this->hasOne(AntecedentesPersonalesFamiliare::class);
 	}
 
 	public function odontogramasCabecera()
@@ -97,6 +97,7 @@ class Paciente extends Model
 	public static function getAllPacientesWithPaginationDB($search, $ordeBay = 'apellidos', $order = 'asc')
 	{
 		return DB::table('pacientes')->select('id', 'nombres', 'apellidos', 'cedula', 'celular', DB::raw('YEAR(CURDATE()) - YEAR(fecha_nacimiento) - IF(DATE_FORMAT(CURDATE(), "%m-%d") < DATE_FORMAT(fecha_nacimiento, "%m-%d"), 1, 0) as edad'))
+			->orWhere('nombres', 'LIKE', '%' . $search . '%')
 			->orWhere('apellidos', 'LIKE', '%' . $search . '%')
 			->orWhere('cedula', 'LIKE', '%' . $search . '%')
 			->orderBy($ordeBay, $order)

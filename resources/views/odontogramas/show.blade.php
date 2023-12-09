@@ -19,8 +19,7 @@
     <!--Odontograma, si tiene solo uno que se muestre directamente-->
 
     @if ($odontogramas->count() < 1)
-        p>No hay odontogramas</p>
-    
+        <p>No hay odontogramas</p>
     @else
         @foreach ($odontogramas as $odontograma)
             <div class="d-flex justify-content-center mt-3">

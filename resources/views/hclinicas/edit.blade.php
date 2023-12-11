@@ -4,25 +4,24 @@
     <form method="post" action="{{ route('hclinicas.update', $paciente->id) }}">
         @csrf
         @method('PUT')
-        <div class="card border-primary">
+        <div class="card">
             <div class="card-body">
 
                 <div class="container">
                     <!--Titulo-->
-                    <h2 class="text-center">Historia Clínica Odontológica Editable</h2>
-
+                    <h3 class="text-center fw-bold">Historia Clínica Odontológica Editable</h3>
 
                     <!--Datos Generales-->
                     <div class="row justify-content-center">
                         <div class="col-md-12 col-lg-10">
                             <div class="card text-start">
                                 <div class="card-body">
-                                    <h5 class="card-title fw-bolder">Datos Personales</h5>
+                                    <h5 class="card-title fw-bold">Datos Personales</h5>
 
                                     <div class="row">
                                         <div class="col-md-6">
                                             <div class="mb-3">
-                                                <label for="" class="form-label">Nombres</label>
+                                                <label for="" class="form-label fw-bold">Nombres</label>
                                                 <input type="text" class="form-control" name="nombres" id=""
                                                     aria-describedby="helpId" placeholder="" required
                                                     value="{{ $paciente->nombres }}">
@@ -30,7 +29,7 @@
                                         </div>
                                         <div class="col-md-6">
                                             <div class="mb-3">
-                                                <label for="" class="form-label">Apellidos</label>
+                                                <label for="" class="form-label fw-bold">Apellidos</label>
                                                 <input type="text" class="form-control" name="apellidos" id=""
                                                     aria-describedby="helpId" placeholder=""
                                                     value="{{ $paciente->apellidos }}">
@@ -41,7 +40,7 @@
                                     <div class="row">
                                         <div class="col-md-5">
                                             <div class="mb-3">
-                                                <label for="" class="form-label">Cédula</label>
+                                                <label for="" class="form-label fw-bold">Cédula</label>
                                                 <input type="text" class="form-control" name="cedula" minlength="10"
                                                     maxlength="10" id="cedula" aria-describedby="helpId" placeholder=""
                                                     required value="{{ $paciente->cedula }}">
@@ -49,7 +48,7 @@
                                         </div>
                                         <div class="col-md-5">
                                             <div class="mb-3">
-                                                <label for="" class="form-label">Fecha de Nacimiento</label>
+                                                <label for="" class="form-label fw-bold">Fecha de Nacimiento</label>
                                                 <input type="date" id="fecha_nacimiento"
                                                     value="{{ $paciente->fecha_nacimiento }}" class="form-control"
                                                     max="<?php echo date('Y-m-d'); ?>" name="fecha_nacimiento" id="fechaNacimiento"
@@ -58,7 +57,7 @@
                                         </div>
                                         <div class="col-md-2">
                                             <div class="mb-3">
-                                                <label for="" class="form-label">Edad</label>
+                                                <label for="" class="form-label fw-bold">Edad</label>
                                                 <input type="text" class="form-control" name="edad" id="edad"
                                                     aria-describedby="helpId" placeholder="" readonly
                                                     value="{{ $paciente->edad }}">
@@ -70,7 +69,7 @@
                                         <div class="row" id="representanteDiv">
                                             <div class="col-md-6">
                                                 <div class="mb-3">
-                                                    <label for="" class="form-label">Cédula del
+                                                    <label for="" class="form-label fw-bold">Cédula del
                                                         Representante</label>
                                                     <input type="text" class="form-control" name="cedula_representante"
                                                         minlength="10" maxlength="10" id=""
@@ -85,7 +84,7 @@
                                             </div>
                                             <div class="col-md-6">
                                                 <div class="mb-3">
-                                                    <label for="" class="form-label">Representante</label>
+                                                    <label for="" class="form-label fw-bold">Representante</label>
                                                     <input type="text" class="form-control" name="representante"
                                                         id="representante" value="{{ $paciente->representante }}"
                                                         aria-describedby="helpId" placeholder="Nombre del representante">
@@ -100,108 +99,60 @@
                                     @endif
 
                                     <div class="row">
-                                        <div class="col-md-8">
-                                            <h6 class="card-title">Estado Civil</h6>
-                                            <div class="card">
-                                                <div class="card-body">
-                                                    <div class="row">
-                                                        <div class="col-sm-6">
-                                                            <div class="form-check">
-                                                                <input class="form-check-input" type="radio"
-                                                                    id="checkSoltero" name="estado_civil" value="soltero"
-                                                                    {{ $paciente->estado_civil == 'soltero' ? 'checked' : '' }}
-                                                                    required>
-                                                                <label class="form-check-label"
-                                                                    for="checkSoltero">Soltero/a </label>
-                                                            </div>
-                                                        </div>
 
-                                                        <div class="col-sm-6">
-                                                            <div class="form-check">
-                                                                <input class="form-check-input" type="radio"
-                                                                    id="checkCasado" name="estado_civil" value="casado"
-                                                                    {{ $paciente->estado_civil == 'casado' ? 'checked' : '' }}>
-                                                                <label class="form-check-label"
-                                                                    for="checkCasado">Casado/a</label>
-                                                            </div>
-                                                        </div>
+                                        <div class="col-md-6">
+                                            <label for="" class="form-label fw-bold">Estado civil</label>
+                                            <select name="estado_civil" id="" class="form-select form-select-md"
+                                                required>
 
-                                                        <div class="col-sm-6">
-                                                            <div class="form-check">
-                                                                <input class="form-check-input" type="radio"
-                                                                    id="checkDivorciado" name="estado_civil"
-                                                                    value="divorciado"
-                                                                    {{ $paciente->estado_civil == 'divorciado' ? 'checked' : '' }}>
-                                                                <label class="form-check-label" for="checkDivorciado">
-                                                                    Divorciado/a
-                                                                </label>
-                                                            </div>
-                                                        </div>
+                                                <option>Seleccione el estado civil del paciente</option>
+                                                <option value="soltero"
+                                                    {{ $paciente->estado_civil === 'soltero' ? 'selected' : '' }}>
+                                                    Soltero/a</option>
+                                                <option value="casado"
+                                                    {{ $paciente->estado_civil === 'casado' ? 'selected' : '' }}>Casado/a
+                                                </option>
+                                                <option value="unionlibre"
+                                                    {{ $paciente->estado_civil === 'unionlibre' ? 'selected' : '' }}>Unión
+                                                    Libre</option>
+                                                <option value="divorciado"
+                                                    {{ $paciente->estado_civil === 'divorciado' ? 'selected' : '' }}>
+                                                    Divorciado/a</option>
+                                                <option value="viudo"
+                                                    {{ $paciente->estado_civil === 'viudo' ? 'selected' : '' }}>Viudo/a
+                                                </option>
 
-                                                        <div class="col-sm-6">
-                                                            <div class="form-check">
-                                                                <input class="form-check-input" type="radio"
-                                                                    id="checkViudo" name="estado_civil" value="viudo"
-                                                                    {{ $paciente->estado_civil == 'viudo' ? 'checked' : '' }}>
-                                                                <label class="form-check-label" for="checkViudo">
-                                                                    Viudo/a
-                                                                </label>
-                                                            </div>
-                                                        </div>
-                                                        <div class="col-sm-6">
-                                                            <div class="form-check">
-                                                                <input class="form-check-input" type="radio"
-                                                                    id="checkUnionLibre" name="estado_civil"
-                                                                    value="unionlibre"
-                                                                    {{ $paciente->estado_civil == 'unionlibre' ? 'checked' : '' }}>
-                                                                <label class="form-check-label" for="checkUnionLibre">
-                                                                    Unión Libre
-                                                                </label>
-                                                            </div>
-                                                        </div>
-                                                    </div>
 
-                                                </div>
-                                            </div>
+                                            </select>
+
+                                            @error('estado_civil')
+                                                <small class="text-danger"> {{ $message }}</small>
+                                            @enderror
                                         </div>
 
-                                        <div class="col-md-4">
-                                            <h6 class="card-title">Género</h6>
-                                            <div class="card">
-                                                <div class="card-body">
-                                                    <div class="row">
-                                                        <div class="col-sm">
-                                                            <div class="form-check">
-                                                                <input class="form-check-input" type="radio"
-                                                                    id="checkMasculino" name="sexo" value="masculino"
-                                                                    required
-                                                                    {{ $paciente->sexo == 'masculino' ? 'checked' : '' }}>
-                                                                <label class="form-check-label" for="checkMasculino">
-                                                                    Masculino
-                                                                </label>
-                                                            </div>
-                                                        </div>
+                                        <div class="col-md-6">
+                                            <div class="mb-3">
+                                                <label for="" class="form-label fw-bold">Género</label>
+                                                <select class="form-select form-select-md" name="sexo" required
+                                                    aria-label=".form-select-md example">
+                                                    <option value="masculino"
+                                                        {{ $paciente->sexo === 'masculino' ? 'selected' : '' }}>
+                                                        Masculino</option>
+                                                    <option value="femenino"
+                                                        {{ $paciente->sexo === 'femenino' ? 'selected' : '' }}>
+                                                        Femenino</option>
+                                                </select>
 
-                                                        <div class="col-sm">
-                                                            <div class="form-check">
-                                                                <input class="form-check-input" type="radio"
-                                                                    id="checkFemenino" name="sexo" value="femenino"
-                                                                    {{ $paciente->sexo == 'femenino' ? 'checked' : '' }}>
-                                                                <label class="form-check-label" for="checkFemenino">
-                                                                    Femenino
-                                                                </label>
-                                                            </div>
-                                                        </div>
-                                                    </div>
-                                                </div>
+                                                @error('sexo')
+                                                    <small class="text-danger"> {{ $message }}</small>
+                                                @enderror
                                             </div>
                                         </div>
                                     </div>
-                                    <br>
                                     <div class="row">
                                         <div class="col-md-6">
                                             <div class="mb-3">
-                                                <label for="" class="form-label">Celular</label>
+                                                <label for="" class="form-label fw-bold">Celular</label>
                                                 <input type="text" class="form-control" name="celular" minlength="10"
                                                     id="celular" minlength="10" maxlength="10"
                                                     aria-describedby="helpId" placeholder=""
@@ -210,10 +161,11 @@
                                         </div>
                                         <div class="col-md-6">
                                             <div class="mb-3">
-                                                <label for="" class="form-label">Teléfono Convencional</label>
+                                                <label for="" class="form-label fw-bold">Teléfono
+                                                    Convencional</label>
                                                 <input type="text" class="form-control" name="telef_convencional"
                                                     id="telefono" aria-describedby="helpId" maxlength="9"
-                                                    placeholder="" value="{{ $paciente->telef_convencional }}">
+                                                    placeholder="Por ejemplo: 2831373" value="{{ $paciente->telef_convencional }}">
                                             </div>
                                         </div>
                                     </div>
@@ -222,7 +174,7 @@
                                     <div class="row">
                                         <div class="col-md-6">
                                             <div class="mb-3">
-                                                <label for="" class="form-label">Direción</label>
+                                                <label for="" class="form-label fw-bold">Direción</label>
                                                 <input type="text" class="form-control" name="direccion"
                                                     id="" aria-describedby="helpId" placeholder=""
                                                     value="{{ $paciente->direccion }}">
@@ -230,7 +182,8 @@
                                         </div>
                                         <div class="col-md-6">
                                             <div class="mb-3">
-                                                <label for="" class="form-label">Prefesión u Oficio</label>
+                                                <label for="" class="form-label fw-bold">Prefesión u
+                                                    Oficio</label>
                                                 <input type="text" class="form-control" name="ocupacion"
                                                     id="" aria-describedby="helpId" placeholder=""
                                                     value="{{ $paciente->ocupacion }}">
@@ -413,7 +366,8 @@
                             <div class="card text-start">
                                 <div class="card-body">
                                     <h5 class="card-title fw-bolder">Antecedentes Personales y Familiares</h5>
-                                    <p>¿USTED, SUS PADRES O ABUELOS PADECE O HA PADECIDO ALGUNA DE LAS SIGUIENTES
+                                    <p class="fw-bold">¿USTED, SUS PADRES O ABUELOS PADECE O HA PADECIDO ALGUNA DE LAS
+                                        SIGUIENTES
                                         ENFERMEDADES?</p>
 
                                     <div class="row">
@@ -421,7 +375,7 @@
                                             <input class="form-check-input" type="checkbox" id=""
                                                 name="enfermedades[]" value="hipertension"
                                                 {{ $antPersonales->retornar_enfermedades('hipertension') == true ? 'checked' : '' }}>
-                                            <label class="form-check-label" for="">
+                                            <label class="form-check-label" for="hipertension">
                                                 Hipertensión
                                             </label>
 
@@ -532,9 +486,9 @@
                                     <div class="row">
 
                                         <div class="col-lg-3 col-md-4">
-                                            <p>¿Está Ud embarazada?</p>
+                                            <p class="fw-bold">¿Está Ud embarazada?</p>
                                         </div>
-                                        <div class="col-1">
+                                        <div class="col-lg-1 col-md-5">
                                             <div class="col-sm">
                                                 <div class="form-check">
                                                     <input class="form-check-input" type="radio" id=""
@@ -546,7 +500,7 @@
                                                 </div>
                                             </div>
                                         </div>
-                                        <div class="col-1">
+                                        <div class="col-lg-1 col-md-5">
                                             <div class="col-sm">
                                                 <div class="form-check">
                                                     <input class="form-check-input" type="radio" id=""
@@ -572,27 +526,29 @@
                                         <div class="row">
                                             <div class="col-md-6">
                                                 <div class="mb-3">
-                                                    <label for="" class="form-label">¿Toma algún
+                                                    <label for="" class="form-label fw-bold">¿Toma algún
                                                         medicamento?</label>
                                                     <input type="text" class="form-control" name="medicamento"
-                                                        id="" aria-describedby="helpId" placeholder=""
+                                                        id="" aria-describedby="helpId"
+                                                        placeholder="Escriba el o los medicamentos que toma."
                                                         value="{{ $antPersonales->medicamento }}">
                                                 </div>
                                             </div>
 
                                             <div class="col-md-6">
                                                 <div class="mb-3">
-                                                    <label for="" class="form-label">¿Algún otro
+                                                    <label for="" class="form-label fw-bold">¿Algún otro
                                                         antecedente?</label>
                                                     <input type="text" class="form-control" name="otro_antecedente"
-                                                        id="" aria-describedby="helpId" placeholder=""
+                                                        id="" aria-describedby="helpId"
+                                                        placeholder="Escriba si posee otro antecedente que no se encuentre en la lista."
                                                         value="{{ $antPersonales->otro_antecendente }}">
                                                 </div>
                                             </div>
                                         </div>
 
 
-                                        <p>HÁBITOS</p>
+                                        <h6 class="fw-bold">HÁBITOS (Seleccione los hábitos del paciente)</h6>
 
                                         <div class="row">
                                             <div class="col-lg-3 col-md-6">

@@ -211,6 +211,7 @@ class HClinicaController extends Controller
         }
     }
 
+    //deprecated
     private function almacenarAntecedentesInfecciosos(Request $request, int $paciente_id)
     {
 

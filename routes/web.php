@@ -10,6 +10,7 @@ use App\Http\Controllers\PresupuestoController;
 use App\Http\Controllers\ReportController;
 use App\Http\Controllers\TratamientoController;
 use App\Http\Controllers\UserController;
+use App\Http\Controllers\WhatsappController;
 use App\Models\Odontograma;
 use Illuminate\Support\Facades\Auth;
 
@@ -36,9 +37,6 @@ Route::middleware('auth')->group(function () {
 
     Route::resource("hclinicas", HClinicaController::class);
 
-    //Llena las tarjetas de los pacientes
-    Route::get('hclinicas/index-paciente/{paciente_id}', [HClinicaController::class, 'indexPaciente'])->name('hclinicas.indexPaciente');
-
     Route::resource("tratamientos", TratamientoController::class);
     Route::resource("especialidades", EspecialidadController::class);
     //Route::resource("odontologos", OdontologoController::class);
@@ -55,7 +53,7 @@ Route::middleware('auth')->group(function () {
     Route::get('reportes', [ReportController::class, 'index'])->name('reportes');
     Route::get('total-presupuesto', [ReportController::class, 'get_total_por_rango_de_fechas'])->name('total-presupuesto');
  
-    Route::get('odontogramas/{paciente_id}', [Odontograma::class, 'odontograma'])->name('odontogramas.odontograma');
+    Route::get('enviar-mensaje/{presupusto_id}', [WhatsappController::class, 'sendMessage'])->name('presupuestos.enviar-mensaje');
 });
 
 //Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');

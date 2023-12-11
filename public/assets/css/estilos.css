@@ -1,3 +1,23 @@
+.nav-link {
+    text-decoration: none; 
+    transition: border-bottom 0.3s ease; 
+}
+
+.nav-link:hover {
+    background-color: #86B6F3; 
+    color: #fff; 
+}
+
+input[type="checkbox"]:hover {
+    cursor: pointer;
+    border: 2px solid #86B6F3;
+}
+
+input[type="radio"]:hover {
+    cursor: pointer;
+    border: 2px solid #86B6F3;
+}
+
 .divider:after,
 .divider:before {
 content: "";

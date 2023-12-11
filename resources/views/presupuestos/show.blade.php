@@ -9,7 +9,7 @@
     @else
         @foreach ($presupuestos as $presupuesto)
             <div class="d-flex justify-content-center mt-3">
-                <a href="{{ route('detalleOdontogramas.edit', $presupuesto->id) }}">
+                <a href="{{ route('presupuestos.edit', $presupuesto->id) }}">
                     <x-card :title="'Presupuesto Nº ' . $presupuesto->id" :content="
                     '<p><strong>Última actualización: </strong>' .
                         $presupuesto->updated_at->format('d-m-Y') .

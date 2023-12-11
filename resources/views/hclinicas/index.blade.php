@@ -1,7 +1,7 @@
 @extends('layouts.app')
 @section('content')
 
-<h1 class="text-center"> <img src="assets/icons/historia.png"> Historias Clínicas Odontológicas</h1>
+<h2 class="text-center"> <img src="assets/icons/historia.png"> Historias Clínicas Odontológicas</h2>
 
 <!--Input para buscar una historia-->
 <form action="{{ route('hclinicas.index') }}" method="GET">

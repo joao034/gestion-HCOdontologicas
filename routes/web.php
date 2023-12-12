@@ -12,6 +12,7 @@ use App\Http\Controllers\TratamientoController;
 use App\Http\Controllers\UserController;
 use App\Http\Controllers\WhatsappController;
 use Illuminate\Support\Facades\Auth;
+use App\Http\Controllers\PresupuestoPorTiempoController;
 
 //use Illuminate\Support\Facades\App;
 
@@ -53,7 +54,7 @@ Route::middleware('auth')->group(function () {
 
     Route::get('reportes/pdf/pacientes-por-odontologo', [PacientesPorOdontologoController::class, 'generate_pdf'])->name('reportes.pacientes-por-odontologo.pdf');
     
-    /* Route::get('total-presupuesto', [ReportController::class, 'get_total_por_rango_de_fechas'])->name('total-presupuesto'); */
+    Route::get('reportes/total-presupuesto-por-meses', [PresupuestoPorTiempoController::class, 'get_total_por_meses'])->name('reportes.total-presupuesto-por-meses');
  
     Route::get('enviar-mensaje/{presupusto_id}', [WhatsappController::class, 'sendMessage'])->name('presupuestos.enviar-mensaje');
 });

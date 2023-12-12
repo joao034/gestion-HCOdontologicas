@@ -11,7 +11,7 @@
                     <label for="odontologo_id" class="form-label fw-bold">{{ __('Odontólogo') }}</label>
                     <select class="form-select form-select-md" name="odontologo_id" required
                         aria-label=".form-select-md example" id="odontologo_id">
-                        <option>Seleccione un odontólogo</option>
+                        <option value="0">Seleccione un odontólogo</option>
                         @foreach ($odontologos as $odontologo)
                             <option value="{{ $odontologo->id }}">
                                 {{ $odontologo->nombres . ' ' . $odontologo->apellidos . '  - ' . $odontologo->especialidad->nombre }}
@@ -20,8 +20,9 @@
                     </select>
                 </div>
 
-                <a type="button" target="" id="generatePdfBtn">PDF</a>
-
+                <a type="button" class="btn btn-danger" target="_blank" id="generatePdfBtn">
+                    <i class="fa-solid fa-file-pdf"></i> Descargar PDF
+                </a>
                 {{-- <p class="fw-bold">Seleccione un rango de fechas:</p>
                 <div class="mb-3">
                     <label for="" class="form-label fw-bold">Fecha de inicio</label>

@@ -9,7 +9,6 @@ $(document).ready(function () {
             },
             dataType: "json",
             success: function (data) {
-                console.log(data);
                 actualizarTabla(data.pacientes);
             },
             error: function (error) {

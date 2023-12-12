@@ -33,6 +33,11 @@ class PacientesPorOdontologoController extends Controller
 
     public function generate_pdf(Request $request)
     {
+
+        if($request->odontologo_id == "0"){
+            return back()->with('danger', 'Debe seleccionar un odontólogo');
+        }
+
         $odontologo = Odontologo::findOrFail($request->odontologo_id);
 
         $odontogramaDetalleIds = OdontogramaDetalle::where('odontologo_id', $request->odontologo_id)

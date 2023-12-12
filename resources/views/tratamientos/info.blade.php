@@ -2,7 +2,7 @@
     <div class="modal-dialog">
       <div class="modal-content">
         <div class="modal-header">
-          <h5 class="modal-title">Editar Tratamiento</h5>
+          <h5 class="modal-title fw-bold">Editar Tratamiento</h5>
           <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
         </div>
         <form action="{{ route('tratamientos.update', $tratamiento->id) }}" method="post">
@@ -10,16 +10,16 @@
             @method('put')
             <div class="modal-body">
                 <div class="mb-3">
-                    <label for="" class="form-label">Nombre</label>
+                    <label for="" class="form-label fw-bold">Nombre</label>
                     <input type="text"
-                        class="form-control form-control-sm" name="nombre" id="" 
+                        class="form-control form-control-md" name="nombre" id="" 
                         value="{{ $tratamiento->nombre }}" aria-describedby="helpId" placeholder="" required>
                 </div>
 
                 <div class="mb-3">
-                    <label for="" class="form-label">Precio</label>
+                    <label for="" class="form-label fw-bold">Precio ($)</label>
                     <input type="number" step="any" value="{{ $tratamiento->precio }}"
-                        class="form-control form-control-sm" name="precio" id="" 
+                        class="form-control form-control-md" name="precio" id="" 
                         aria-describedby="helpId" placeholder="" required>
                 </div>
                 

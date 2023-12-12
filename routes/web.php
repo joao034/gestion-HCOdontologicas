@@ -7,11 +7,10 @@ use App\Http\Controllers\OdontogramaController;
 use App\Http\Controllers\OdontogramaDetalleController;
 use App\Http\Controllers\OdontologoController;
 use App\Http\Controllers\PresupuestoController;
-use App\Http\Controllers\ReportController;
+use App\Http\Controllers\PacientesPorOdontologoController;
 use App\Http\Controllers\TratamientoController;
 use App\Http\Controllers\UserController;
 use App\Http\Controllers\WhatsappController;
-use App\Models\Odontograma;
 use Illuminate\Support\Facades\Auth;
 
 //use Illuminate\Support\Facades\App;
@@ -50,8 +49,11 @@ Route::middleware('auth')->group(function () {
 
     Route::put('presupuestos/update-estado/{id_detalle_presupuesto}', [PresupuestoController::class, 'updateEstado'])->name('update.estado');
 
-    Route::get('reportes', [ReportController::class, 'index'])->name('reportes');
-    Route::get('total-presupuesto', [ReportController::class, 'get_total_por_rango_de_fechas'])->name('total-presupuesto');
+    Route::get('reportes/pacientes-por-odontologo', [PacientesPorOdontologoController::class, 'get_pacientes_por_odontologo'])->name('reportes.get_pacientes_por_odontologo');
+
+    Route::get('reportes/pdf/pacientes-por-odontologo', [PacientesPorOdontologoController::class, 'generate_pdf'])->name('reportes.pacientes-por-odontologo.pdf');
+    
+    /* Route::get('total-presupuesto', [ReportController::class, 'get_total_por_rango_de_fechas'])->name('total-presupuesto'); */
  
     Route::get('enviar-mensaje/{presupusto_id}', [WhatsappController::class, 'sendMessage'])->name('presupuestos.enviar-mensaje');
 });

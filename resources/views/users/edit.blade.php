@@ -4,7 +4,7 @@
     <div class="row justify-content-center">
         <div class="col-md-12 col-lg-8">
             <div class="card">
-                <div class="card-header">{{ __('Editar Usuario') }}</div>
+                <div class="card-header fw-bold">{{ __('Editar Usuario') }}</div>
 
                 <div class="card-body">
                     <form action="{{ route('users.update', $user->id) }}" method="POST">
@@ -13,7 +13,7 @@
 
                         <div class="row mb-3">
                             <div class="col-md-6">
-                                <label for="" class="form-label ">Tipo de usuario</label>
+                                <label for="" class="form-label fw-bold">Tipo de usuario</label>
                                 <select name="role" id="roles" class="form-select form-select-md" disabled>
                                     @if ($user->role == 'admin')
                                         <option value="admin" selected>Administrador</option>
@@ -33,7 +33,7 @@
                             </div>
 
                             <div class="col-md-6">
-                                <label for="" class="form-label ">Estado</label>
+                                <label for="" class="form-label fw-bold">Estado</label>
                                 <select name="active" class="form-select form-select-md">
                                     @if ($user->active == 1)
                                         <option value=1 selected>Activo</option>
@@ -57,7 +57,7 @@
                         <div class="row">
                             <div class="col-md-6">
                                 <div class="mb-3">
-                                    <label for="" class="form-label">{{ __('Usuario') }}</label>
+                                    <label for="" class="form-label fw-bold">{{ __('Nombre de usuario') }}</label>
                                     <input id="name" type="text" value="{{ $user->name }}" class="form-control @error('name') is-invalid 
                                     @enderror" name="name" value="{{ old('name') }}" required autocomplete="name">
                                     
@@ -70,7 +70,7 @@
                             </div>
                             <div class="col-md-6">
                                 <div class="mb-3">
-                                    <label for="" class="form-label">{{ __('Correo electrónico') }}</label>
+                                    <label for="" class="form-label fw-bold">{{ __('Correo electrónico') }}</label>
                                     <input id="email" type="email" value="{{ $user->email }}" class="form-control @error('email') is-invalid @enderror" name="email" value="{{ old('email') }}" required autocomplete="email">
 
                                     @error('email')
@@ -84,7 +84,7 @@
 
 
                         <div class="row mb-3">
-                            <label for="password" class="col-md-4 col-form-label text-md-end">{{ __('Nueva Contraseña') }}</label>
+                            <label for="password" class="col-md-4 col-form-label text-md-end fw-bold">{{ __('Nueva Contraseña') }}</label>
 
                             <div class="col-md-6">
                                 <input id="password" type="password" class="form-control @error('password') is-invalid @enderror" name="password" autocomplete="new-password">
@@ -98,21 +98,21 @@
                         </div>
 
                         <!-- Datos odontologo -->
-                        @if ($user->role == 'odontologo')
+                        @if ($user->role === 'odontologo')
                         <div id="datos_odontologo" style="display">
                             <h5 class="card-title fw-bold">{{ __('Información del odontólogo') }}</h5>
                             <hr>    
                                 <div class="row mt-2">
                                     <div class="col-md-6">
                                     <div class="mb-3">
-                                        <label for="" class="form-label">{{ __('Nombres') }}</label>
+                                        <label for="" class="form-label fw-bold">{{ __('Nombres') }}</label>
                                         <input type="text"class="form-control form-control-sm" name="nombres" id="" 
                                             aria-describedby="helpId" placeholder="" value="{{ $user->odontologo->nombres }}">
                                     </div>
                                     </div>
                                     <div class="col-md-6">
                                     <div class="mb-3">
-                                        <label for="" class="form-label">{{ __('Apellidos') }}</label>
+                                        <label for="" class="form-label fw-bold">{{ __('Apellidos') }}</label>
                                         <input type="text"
                                             class="form-control form-control-sm" name="apellidos" id="" 
                                             aria-describedby="helpId" value="{{$user->odontologo->apellidos}}">
@@ -123,7 +123,7 @@
                                 <div class="row">
                                     <div class="col-md-6">
                                     <div class="mb-3">
-                                        <label for="" class="form-label">{{ __('Cédula') }}</label>
+                                        <label for="" class="form-label fw-bold">{{ __('Cédula') }}</label>
                                         <input type="text"class="form-control form-control-sm @error('cedula') is-invalid @enderror" name="cedula" id="cedula_odo"minlength="10" maxlength="10" pattern="^[0-9]+$"
                                                 aria-describedby="helpId" value="{{ $user->odontologo->cedula }}">
                                         @error('cedula')
@@ -133,7 +133,7 @@
                                     </div>
                                     <div class="col-md-6">
                                     <div class="mb-3">
-                                        <label for="" class="form-label">{{ __('Celular') }}</label>
+                                        <label for="" class="form-label fw-bold">{{ __('Celular') }}</label>
                                         <input type="text"
                                             class="form-control form-control-sm" name="celular" id="celu" minlength="10" maxlength="10" 
                                             aria-describedby="helpId" value="{{ $user->odontologo->celular }}">
@@ -149,7 +149,7 @@
                                 <div class="row">
                                     <div class="col-md-6">
                                         <div class="mb-3">
-                                            <label for="" class="form-label">{{ __('Especialidad') }}</label>
+                                            <label for="" class="form-label fw-bold">{{ __('Especialidad') }}</label>
                                             <select class="form-select form-select-sm" name="especialidad_id" required aria-label=".form-select-sm example" >
                                                 @foreach ($especialidades as $especialidad)
                                                   @if ($especialidad->id === $user->odontologo->especialidad_id)
@@ -163,7 +163,7 @@
                                     </div>
                                     <div class="col-md-6">
                                         <div class="mb-3">
-                                            <label for="" class="form-label">{{ __('Género') }}</label>
+                                            <label for="" class="form-label fw-bold">{{ __('Género') }}</label>
                                             <select class="form-select form-select-sm" name="sexo" required aria-label=".form-select-sm example">
                                                 <option value="masculino" {{ $user->odontologo['sexo'] == 'masculino' ? 'selected' : '' }}>Masculino</option>
                                                 <option value="femenino" {{ $user->odontologo['sexo'] == 'femenino' ? 'selected' : '' }}>Femenino</option>

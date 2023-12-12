@@ -14,7 +14,11 @@
             <!-- Left Side Of Navbar -->
             <ul class="navbar-nav me-auto">
 
-                @if (Auth::user()->role === 'admin')
+                @php
+                    $user = Auth::user();
+                @endphp
+
+                @if ($user && $user->role === 'admin')
                     <a class="nav-link active text-white" href="{{ route('hclinicas.index') }}" aria-current="page">
                         <img class="svg-icon" src="{{ asset('assets/icons/hclinica.svg') }}" alt=""> Historias
                         Clínicas</a>
@@ -26,9 +30,9 @@
 
                         <!-- Submenú -->
                         <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
-                            <li><a class="dropdown-item" href="{{route('hclinicas.create')}}">Reporte 1</a></li>
+                            <li><a class="dropdown-item" href="{{route('reportes.get_pacientes_por_odontologo')}}">Pacientes por odontólogo</a></li>
                             <li><a class="dropdown-item" href="#">Reporte 2</a></li>
-                            <!-- Agrega más subitems según sea necesario -->
+                            <li><a class="dropdown-item" href="#">Reporte 3</a></li>
                         </ul>
                     </li>
 
@@ -51,7 +55,7 @@
                         <img class="svg-icon" src="{{asset('assets/icons/presupuesto.svg')}}"> Presupuestos</a> --}}
                 @endif
 
-                @if (Auth::user()->role === 'odontologo')
+                @if ($user && $user->role === 'odontologo')
                     <a class="nav-link active text-white" href="{{ route('hclinicas.index') }}" aria-current="page">
                         <img class="svg-icon" src="{{ asset('assets/icons/hclinica.svg') }}" alt=""> Historias
                         Clínicas</a>

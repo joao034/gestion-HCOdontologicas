@@ -3,24 +3,24 @@
     <div class="modal-dialog">
       <div class="modal-content">
         <div class="modal-header">
-          <h5 class="modal-title">Nuevo Tratamiento</h5>
+          <h5 class="modal-title fw-bold">Nuevo Tratamiento</h5>
           <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
         </div>
         <form action="{{ route('tratamientos.store') }}" method="post">
             @csrf
             <div class="modal-body">
                 <div class="mb-3">
-                    <label for="" class="form-label">Nombre</label>
+                    <label for="" class="form-label fw-bold">Nombre</label>
                     <input type="text"
-                        class="form-control form-control-sm" name="nombre" id="" 
-                        aria-describedby="helpId" placeholder="" required>
+                        class="form-control form-control-md" name="nombre" id="" 
+                        aria-describedby="helpId" placeholder="Ingrese el nombre del tratamiento" required>
                 </div>
 
                 <div class="mb-3">
-                    <label for="" class="form-label">Precio</label>
+                    <label for="" class="form-label fw-bold">Precio ($)</label>
                     <input type="number" step="any"
-                        class="form-control form-control-sm" name="precio" id="" 
-                        aria-describedby="helpId" placeholder="" required>
+                        class="form-control form-control-md" name="precio" id="" 
+                        aria-describedby="helpId" placeholder="Por ejempplo: $40" required>
                 </div>
                 
                 </div>

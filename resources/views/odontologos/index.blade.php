@@ -45,5 +45,6 @@
         </tbody>
     </table>
 </div>
+
 @include('odontologos.create')
 @endsection

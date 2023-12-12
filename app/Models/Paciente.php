@@ -78,11 +78,6 @@ class Paciente extends Model
 		return $this->hasMany(Odontograma::class);
 	}
 
-	public function presupuesto_cabeceras()
-	{
-		return $this->hasMany(PresupuestoCabecera::class);
-	}
-
 	//Devuelve la lista de pacientes con paginacion mediante eloquent
 	public static function getAllPacientesWithPagination($search, $ordeBay = 'apellidos', $order = 'asc')
 	{

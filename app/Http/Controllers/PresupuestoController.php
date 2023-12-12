@@ -40,7 +40,7 @@ class PresupuestoController extends Controller
 
         $pdf = Pdf::loadView('presupuestos.pdf', compact('paciente', 'presupuesto', 'detalles_presupuesto'));
         return $pdf->stream();
-        
+        //return $pdf->download('archivo.pdf');
     }
 
     public function show ( int $paciente_id ){

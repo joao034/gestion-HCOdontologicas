@@ -55,7 +55,7 @@ class UserController extends Controller
             DB::commit();
             return to_route('users.index')->with('message', 'Usuario creado correctamente');
         } catch (\Exception $e) {
-            return back()->with('danger', 'Error al crear el usuario' . $e->getMessage());
+            return back()->with('danger', 'Error al crear el usuario ' . $e->getMessage());
         }
     }
 

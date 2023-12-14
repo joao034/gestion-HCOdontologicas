@@ -3,7 +3,7 @@
         <a class="navbar-brand text-white" href="{{ url('/hclinicas') }}">
             <img src="{{ asset('assets/img/logo.png') }}" width="35px" height="auto" style="border-radius: 5px"
                 alt="">
-            <span class=""> Clínica Odontológica</span>
+            <span class=""> Saúde Medical Group</span>
         </a>
         <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent"
             aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="{{ __('Toggle navigation') }}">

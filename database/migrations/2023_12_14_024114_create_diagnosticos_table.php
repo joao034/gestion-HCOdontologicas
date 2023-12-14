@@ -11,17 +11,15 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('odontograma_cabecera', function (Blueprint $table) {
+        Schema::create('diagnosticos', function (Blueprint $table) {
             $table->id();
             $table->timestamps();
-            /* $table->string('diagnostico')->nullable();
-            $table->string('enfermedad_actual')->nullable(); */
-            $table->date('fecha_creacion');
-            $table->float('total');
-            
+            $table->string('diagnostico')->nullable();
+            $table->string('enfermedad_actual')->nullable();
+
             //clave foranea
-            $table->foreignId('paciente_id')->constrained('pacientes');
-            
+            $table->unsignedBigInteger('paciente_id');
+            $table->foreign('paciente_id')->references('id')->on('pacientes')->onDelete('cascade');
         });
     }
 
@@ -30,6 +28,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('odontograma_cabecera');
+        Schema::dropIfExists('diagnosticos');
     }
 };

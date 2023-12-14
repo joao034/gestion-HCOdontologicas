@@ -8,6 +8,7 @@ use App\Models\AntecedentesPersonalesFamiliare;
 use App\Models\Paciente;
 use App\Models\Odontograma;
 use App\Models\OdontogramaDetalle;
+use App\Models\Representante;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Validator;
@@ -31,7 +32,7 @@ class HClinicaController extends Controller
         return Validator::make($data, [
             'nombres' => ['required', 'string', 'max:255'],
             'apellidos' => ['required', 'string', 'max:255'],
-            'cedula' => ['validar_cedula', 'nullable', 'string', 'min:10', 'max:10'],
+            'cedula' => ['validar_cedula', 'string', 'min:10', 'max:10', 'unique:pacientes'],
             'cedula_representante' => ['nullable', 'string', 'min:10', 'max:10', 'validar_cedula'],
             'representante' => ['nullable', 'string', 'max:100'],
             'estado_civil' => ['required', 'string', 'max:255'],
@@ -41,7 +42,7 @@ class HClinicaController extends Controller
             'celular' => ['nullable', 'min:10', 'max:10'],
             'telef_convencional' => ['nullable', 'min:6', 'max:9'],
             'fecha_nacimiento' => ['required', 'date', 'before:today'],
-                /* //Agregar una regla personalizada para verificar el rango de edad
+            /* //Agregar una regla personalizada para verificar el rango de edad
                 Rule::custom(function ($value) {
                 // Convertir la fecha de nacimiento a objeto DateTime
                 $fechaNacimiento = new \DateTime($value);
@@ -52,7 +53,7 @@ class HClinicaController extends Controller
                 // Establecer un rango razonable, por ejemplo, entre 18 y 100 años
                 return ($edad >= 1 && $edad <= 120);
                 }), */
-        
+
         ]);
     }
 
@@ -76,7 +77,8 @@ class HClinicaController extends Controller
         return view('hclinicas.index', compact(['pacientes', 'search']));
     }
 
-    public function hclinica(){
+    public function hclinica()
+    {
         return view('hclinicas.hclinica');
     }
 
@@ -105,9 +107,15 @@ class HClinicaController extends Controller
             $this->mostrarErroresDeValidacion($request);
             $this->validator($request->all())->validate();
 
+            //verificar que la cedula del representante no sea la misma que la del paciente
+            if ($request->input('cedula') == $request->input('cedula_representante')) {
+                return back()->with('danger', 'La cédula del representante no puede ser la misma que la del paciente.');
+            }
+
             $this->guardarOActualizarPaciente($paciente, $request);
             //insertar antecedentes
             //$this->almacenarAntecedentesInfecciosos($request, $paciente->id);
+            $this->almacenarRepresentante($request, $paciente->id);
             $this->almacenarAntecedentePersonales($request, $paciente->id);
             //inserta el registro en la tabla odontogramaCabecera
             $this->crearOdontograma($paciente->id);
@@ -132,9 +140,9 @@ class HClinicaController extends Controller
             ->select('*', DB::raw('YEAR(CURDATE()) - YEAR(fecha_nacimiento) - IF(DATE_FORMAT(CURDATE(), "%m-%d") < DATE_FORMAT(fecha_nacimiento, "%m-%d"), 1, 0) as edad'))
             ->where('id', $id)
             ->first();
-        //buscar los antecedentes personales y familiares del paciente
+        $representante = Representante::where('paciente_id', $paciente->id)->first();
         $antPersonales = AntecedentesPersonalesFamiliare::where('paciente_id', $paciente->id)->first();
-        return view('hclinicas.show', compact(['paciente', 'antPersonales']));
+        return view('hclinicas.show', compact(['paciente', 'antPersonales', 'representante']));
     }
 
     /**
@@ -149,10 +157,9 @@ class HClinicaController extends Controller
             ->select('*', DB::raw('YEAR(CURDATE()) - YEAR(fecha_nacimiento) - IF(DATE_FORMAT(CURDATE(), "%m-%d") < DATE_FORMAT(fecha_nacimiento, "%m-%d"), 1, 0) as edad'))
             ->where('id', $id)
             ->first();
-        $antInfecciosos = AntecedentesInfeccioso::where('paciente_id', $paciente->id)->first();
-        //buscar los antecedentes personales y familiares del paciente
+        $representante = Representante::where('paciente_id', $paciente->id)->first();
         $antPersonales = AntecedentesPersonalesFamiliare::where('paciente_id', $paciente->id)->first();
-        return view('hclinicas.edit', compact(['paciente', 'antInfecciosos', 'antPersonales']));
+        return view('hclinicas.edit', compact(['paciente', 'representante', 'antPersonales']));
     }
 
     /**
@@ -171,12 +178,18 @@ class HClinicaController extends Controller
             $this->mostrarErroresDeValidacion($request);
             $this->validator($request->all())->validate();
 
+            //verificar que la cedula del representante no sea la misma que la del paciente
+            if ($request->input('cedula') == $request->input('cedula_representante')) {
+                return back()->with('danger', 'La cédula del representante no puede ser la misma que la del paciente.');
+            }
+
             $this->guardarOActualizarPaciente($paciente, $request);
+            $this->actualizarRepresentante($request, $paciente->id);
             //$this->actualizarAntecedenteInfeccioso($request, $paciente->id);
             $this->actualizarAntecedentePersonal($request, $paciente->id);
 
             DB::commit();
-            return to_route('hclinicas.index')->with('message', 'Historia Clínica actualizada exitosamente');
+            return back()->with('message', 'Historia Clínica actualizada exitosamente');
         } catch (\Exception $e) {
             DB::rollback();
             return back()->with('danger', 'No se pudo actualizar la Historia Clínica. ');
@@ -214,23 +227,31 @@ class HClinicaController extends Controller
     //deprecated
     private function almacenarAntecedentesInfecciosos(Request $request, int $paciente_id)
     {
-
         $antInfecciosos = new AntecedentesInfeccioso();
         $antInfecciosos->paciente_id = $paciente_id;
-
         $this->asignarVariablesDeAntecedentesInfecciosos($antInfecciosos, $request);
-
         $antInfecciosos->save();
+    }
+
+    private function almacenarRepresentante(Request $request, int $paciente_id)
+    {
+        //verificar que la cedula del representante no sea la misma que la del paciente
+        if ($request->input('cedula') == $request->input('cedula_representante')) {
+            return back()->with('danger', 'La cédula del representante no puede ser la misma que la del paciente.');
+        }
+
+        $representante = new Representante();
+        $representante->paciente_id = $paciente_id;
+        $representante->representante = $request->input('representante');
+        $representante->cedula_representante = $request->input('cedula_representante');
+        $representante->save();
     }
 
     private function almacenarAntecedentePersonales(Request $request, int $paciente_id)
     {
-
         $antPersonales = new AntecedentesPersonalesFamiliare();
         $antPersonales->paciente_id = $paciente_id;
-
         $this->asignarVariablesDeAntecedentesPersonoles($antPersonales, $request);
-
         $antPersonales->save();
     }
 
@@ -239,8 +260,6 @@ class HClinicaController extends Controller
         $paciente->nombres = $request->input('nombres');
         $paciente->apellidos = $request->input('apellidos');
         $paciente->cedula = $request->input('cedula');
-        $paciente->representante = $request->input('representante');
-        $paciente->cedula_representante = $request->input('cedula_representante');
         $paciente->sexo = $request->input('sexo');
         $paciente->fecha_nacimiento =  $request->input('fecha_nacimiento');
         $paciente->estado_civil = $request->input('estado_civil');
@@ -301,6 +320,15 @@ class HClinicaController extends Controller
         $antPersonales = AntecedentesPersonalesFamiliare::where('paciente_id', $id)->first();
         $this->asignarVariablesDeAntecedentesPersonoles($antPersonales, $request);
         $antPersonales->save();
+    }
+
+    private function actualizarRepresentante(Request $request, int $paciente_id)
+    {
+        $representante = Representante::where('paciente_id', $paciente_id)->first();
+        $representante->paciente_id = $paciente_id;
+        $representante->representante = $request->input('representante');
+        $representante->cedula_representante = $request->input('cedula_representante');
+        $representante->save();
     }
 
     private function eliminarAntecedenteInfeccioso(int $id)

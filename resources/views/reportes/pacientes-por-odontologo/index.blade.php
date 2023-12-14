@@ -2,12 +2,12 @@
 @section('content')
 
     @if (!request()->ajax())
-        <h3 class="text-center">Pacientes por odontólogo</h3>
+        <h3 class="text-center fw-bold">Pacientes por odontólogo</h3>
 
         <form action="" id="odontologoForm" method="GET">
             @csrf
-            <div class="d-f justify-content-between">
-                <div class="mb-3">
+            <div class="row">
+                <div class="col-md-6">
                     <label for="odontologo_id" class="form-label fw-bold">{{ __('Odontólogo') }}</label>
                     <select class="form-select form-select-md" name="odontologo_id" required
                         aria-label=".form-select-md example" id="odontologo_id">
@@ -20,9 +20,6 @@
                     </select>
                 </div>
 
-                <a type="button" class="btn btn-danger" target="_blank" id="generatePdfBtn">
-                    <i class="fa-solid fa-file-pdf"></i> Descargar PDF
-                </a>
                 {{-- <p class="fw-bold">Seleccione un rango de fechas:</p>
                 <div class="mb-3">
                     <label for="" class="form-label fw-bold">Fecha de inicio</label>
@@ -39,6 +36,9 @@
                 </div> --}}
 
             </div>
+            <a type="button" class="mt-3 btn btn-danger" target="_blank" id="generatePdfBtn">
+                <i class="fa-solid fa-file-pdf"></i> Descargar PDF
+            </a>
         </form>
     @endif
 

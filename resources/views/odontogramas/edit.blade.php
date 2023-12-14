@@ -1,9 +1,10 @@
 @extends('layouts.app')
 @section('content')
-
+{{-- 
+<x-container-info-pacientes-navegacion :paciente="$paciente" :antecedentes="$antPersonales"></x-container-info-pacientes-navegacion> --}}
 <x-navegacion-paciente :paciente="$odontograma->paciente" />
 
-<h3 class="text-center mt-3 fw-bold">Odontograma Geométrico</h3>
+<h3 class="text-center mt-3 fw-bold">Odontograma de {{$odontograma->paciente->nombres . ' ' . $odontograma->paciente->apellidos}}</h3>
 
 <!-- Cuadrante Superior dentadura adulta -->
 <div class="row">

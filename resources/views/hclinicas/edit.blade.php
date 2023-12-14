@@ -13,11 +13,11 @@
 
                     <!--Datos Generales-->
                     <div class="row justify-content-center">
-                        <div class="col-md-12 col-lg-10">
+                        <div class="col-md-12 col-lg-12">
                             <div class="card text-start">
                                 <div class="card-body">
                                     <h5 class="card-title fw-bold">Datos Personales</h5>
-
+                                    <hr>
                                     <div class="row">
                                         <div class="col-md-6">
                                             <div class="mb-3">
@@ -74,7 +74,7 @@
                                                     <input type="text" class="form-control" name="cedula_representante"
                                                         minlength="10" maxlength="10" id=""
                                                         aria-describedby="helpId" placeholder="" pattern="^[0-9]+$"
-                                                        value="{{ $paciente->cedula_representante }}">
+                                                        value="{{ $representante->cedula_representante }}">
 
                                                     @error('cedula_representante')
                                                         <small class="text-danger"> {{ $message }}</small>
@@ -86,7 +86,7 @@
                                                 <div class="mb-3">
                                                     <label for="" class="form-label fw-bold">Representante</label>
                                                     <input type="text" class="form-control" name="representante"
-                                                        id="representante" value="{{ $paciente->representante }}"
+                                                        id="representante" value="{{ $representante->representante }}"
                                                         aria-describedby="helpId" placeholder="Nombre del representante">
 
                                                     @error('representante')
@@ -141,6 +141,9 @@
                                                     <option value="femenino"
                                                         {{ $paciente->sexo === 'femenino' ? 'selected' : '' }}>
                                                         Femenino</option>
+                                                    <option value="otro"
+                                                        {{ $paciente->sexo === 'otro' ? 'selected' : '' }}>
+                                                        Otro</option>
                                                 </select>
 
                                                 @error('sexo')
@@ -182,8 +185,8 @@
                                         </div>
                                         <div class="col-md-6">
                                             <div class="mb-3">
-                                                <label for="" class="form-label fw-bold">Prefesión u
-                                                    Oficio</label>
+                                                <label for="" class="form-label fw-bold">Profesión u
+                                                    Ocupación</label>
                                                 <input type="text" class="form-control" name="ocupacion"
                                                     id="" aria-describedby="helpId" placeholder=""
                                                     value="{{ $paciente->ocupacion }}">
@@ -366,6 +369,7 @@
                             <div class="card text-start">
                                 <div class="card-body">
                                     <h5 class="card-title fw-bolder">Antecedentes Personales y Familiares</h5>
+                                    <hr>
                                     <p class="fw-bold">¿USTED, SUS PADRES O ABUELOS PADECE O HA PADECIDO ALGUNA DE LAS
                                         SIGUIENTES
                                         ENFERMEDADES?</p>

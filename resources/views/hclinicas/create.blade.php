@@ -11,11 +11,11 @@
 
                     <!--Datos Generales-->
                     <div class="row justify-content-center">
-                        <div class="col-md-12 col-lg-10">
+                        <div class="col-md-12 col-lg-12">
                             <div class="card text-start">
                                 <div class="card-body">
                                     <h5 class="card-title fw-bolder">Datos Personales</h5>
-
+                                    <hr>
                                     <div class="row">
                                         <div class="col-md-6">
                                             <div class="mb-3">
@@ -161,6 +161,8 @@
                                                         Masculino</option>
                                                     <option value="femenino" {{ old('sexo') ? 'checked' : '' }}>Femenino
                                                     </option>
+                                                    <option value="otro" {{ old('sexo') ? 'checked' : '' }}>Otro
+                                                    </option>
                                                 </select>
 
                                                 @error('sexo')
@@ -221,8 +223,8 @@
                                         </div>
                                         <div class="col-md-6">
                                             <div class="mb-3">
-                                                <label for="" class="form-label fw-bold">Prefesión u
-                                                    Oficio</label>
+                                                <label for="" class="form-label fw-bold">Profesión u
+                                                    Ocupación</label>
                                                 <input type="text" class="form-control" name="ocupacion"
                                                     id="" aria-describedby="helpId"
                                                     placeholder="Escriba la ocupación del paciente"
@@ -409,6 +411,7 @@
                             <div class="card text-start">
                                 <div class="card-body">
                                     <h5 class="card-title fw-bolder">Antecedentes Personales y Familiares</h5>
+                                    <hr>
                                     <p class="fw-bold">¿USTED, SUS PADRES O ABUELOS PADECE O HA PADECIDO ALGUNA DE LAS
                                         SIGUIENTES
                                         ENFERMEDADES?</p>
@@ -638,8 +641,6 @@
                                                 </div>
                                             </div>
                                         </div>
-
-
                                     </div>
                                 </div>
                             </div>
@@ -648,10 +649,7 @@
                                 <button type="submit" class="btn btn-primary mt-3"><i class="fa-solid fa-check"></i>
                                     Guardar Historia Clínica</button>
                             </div>
-
-
                         </div>
-
                     </div>
                 </div>
 

@@ -4,7 +4,7 @@
     <div class="row justify-content-center">
         <div class="col-md-12 col-lg-8">
             <div class="card">
-                <div class="card-header ">{{ __('Registrar Nuevo Usuario') }}</div>
+                <div class="card-header fw-bold">{{ __('Registrar Nuevo Usuario') }}</div>
                 <div class="card-body">
                     <form method="POST" action="{{ route('users.store') }}">
                         @csrf
@@ -29,7 +29,7 @@
                         <div class="row">
                             <div class="col-md-6">
                                 <div class="mb-3">
-                                    <label for="" class="form-label fw-bold">{{ __('Usuario') }}</label>
+                                    <label for="" class="form-label fw-bold">{{ __('Nombre de Usuario') }}</label>
                                     <input id="name" type="text" class="form-control @error('name') is-invalid @enderror" name="name" value="{{ old('name') }}" required autocomplete="name"
                                     placeholder="Ejemplo: Odontologo Admin">
                                     @error('name')
@@ -75,6 +75,7 @@
                             </div>
                         </div>
 
+                        <hr>
                         <!-- datos odontologo -->
                         <div id="datos_odontologo" style="display:none">
                             <h5 class="card-title fw-bold">{{ __('Información del odontólogo') }}</h5>
@@ -83,16 +84,16 @@
                                     <div class="col-md-6">
                                     <div class="mb-3">
                                         <label for="" class="form-label fw-bold">{{ __('Nombres') }}</label>
-                                        <input type="text"class="form-control form-control-sm" name="nombres" id="" 
-                                            aria-describedby="helpId" placeholder="" value="{{ old('nombres') }}">
+                                        <input type="text"class="form-control form-control-md" name="nombres" id="" 
+                                            aria-describedby="helpId" placeholder="Escriba sus nombres" value="{{ old('nombres') }}">
                                     </div>
                                     </div>
                                     <div class="col-md-6">
                                     <div class="mb-3">
                                         <label for="" class="form-label fw-bold">{{ __('Apellidos') }}</label>
                                         <input type="text"
-                                            class="form-control form-control-sm" name="apellidos" id="" 
-                                            aria-describedby="helpId" placeholder="" value="{{ old('apellidos') }}">
+                                            class="form-control form-control-md" name="apellidos" id="" 
+                                            aria-describedby="helpId" placeholder="Escriba sus apellidos" value="{{ old('apellidos') }}">
                                     </div>
                                     </div>
                                 </div>
@@ -100,7 +101,7 @@
                                     <div class="col-md-6">
                                     <div class="mb-3">
                                         <label for="" class="form-label fw-bold">{{ __('Cédula') }}</label>
-                                        <input type="text"class="form-control form-control-sm" name="cedula"    id="cedula_odo" minlength="10" maxlength="10" aria-describedby="helpId" placeholder="" value="{{ old('cedula') }}">
+                                        <input type="text"class="form-control form-control-md" name="cedula"    id="cedula_odo" minlength="10" maxlength="10" aria-describedby="helpId" placeholder="Escriba su cédula" value="{{ old('cedula') }}">
                                         @error('cedula')
                                             <span class="invalid-feedback" role="alert">
                                                 <strong>{{ $message }}</strong>
@@ -113,7 +114,7 @@
                                         <label for="" class="form-label fw-bold">{{ __('Celular') }}</label>
                                         <input type="text"
                                             class="form-control form-control-sm" name="celular" id="celu" minlength="10" maxlength="10" value="{{ old('celular') }}"
-                                            aria-describedby="helpId" placeholder="">
+                                            aria-describedby="helpId" placeholder="Escriba su celular">
                                     </div>
                                     </div>
                                 </div>
@@ -122,7 +123,7 @@
                                     <div class="col-md-6">
                                         <div class="mb-3">
                                             <label for="" class="form-label fw-bold">{{ __('Especialidad') }}</label>
-                                            <select class="form-select form-select-sm" name="especialidad_id" aria-label=".form-select-sm example">
+                                            <select class="form-select form-select-md" name="especialidad_id" aria-label=".form-select-sm example">
                                             <option>Seleccione una especialidad</option>
                                             @foreach ($especialidades as $especialidad)
                                                 <option value="{{$especialidad->id}}">{{$especialidad->nombre}}</option>
@@ -133,10 +134,11 @@
                                     <div class="col-md-6">
                                         <div class="mb-3">
                                             <label for="" class="form-label fw-bold">{{ __('Género') }}</label>
-                                            <select class="form-select form-select-sm" name="sexo" aria-label=".form-select-sm example">
+                                            <select class="form-select form-select-md" name="sexo" aria-label=".form-select-sm example">
                                                 <option>Seleccione el género</option>
                                                 <option value="masculino">Masculino</option>
                                                 <option value="femenino">Femenino</option>
+                                                <option value="otro">Otro</option>
                                             </select>
                                         </div>
                                         </div>

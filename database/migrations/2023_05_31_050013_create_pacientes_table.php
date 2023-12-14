@@ -23,13 +23,25 @@ return new class extends Migration
             $table->string('direccion', 100);
             $table->string('celular', 10)->nullable();
             $table->string('telef_convencional', 10)->nullable();
-            $table->string('representante', 50)->nullable();
+            /* $table->string('representante', 50)->nullable();
             $table->string('cedula_representante', 10)->nullable();
-
+            $table->string('diagnostico')->nullable();
+            $table->string('enfermedad_actual')->nullable(); */
             $table->timestamps();
-
         });
+
+     /*    Schema::create('contacto_paciente', function (Blueprint $table) {
+            $table->id();
+            $table->unsignedBigInteger('paciente_id');
+            $table->foreign('paciente_id')->references('id')->on('pacientes')->onDelete('cascade');
+            $table->string('celular', 10)->nullable();
+            $table->string('telef_convencional', 10)->nullable();
+            $table->timestamps();
+        }); */
+        
     }
+
+    
 
     /**
      * Reverse the migrations.

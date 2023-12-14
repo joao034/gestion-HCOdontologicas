@@ -52,8 +52,6 @@ class Paciente extends Model
 		'nombres',
 		'apellidos',
 		'cedula',
-		'representante',
-		'cedula_representante',
 		'sexo',
 		'fecha_nacimiento',
 		'estado_civil',
@@ -76,6 +74,16 @@ class Paciente extends Model
 	public function odontogramasCabecera()
 	{
 		return $this->hasMany(Odontograma::class);
+	}
+
+	public function diagnostico()
+	{
+		return $this->hasOne(Diagnostico::class);
+	}
+
+	public function representante()
+	{
+		return $this->hasOne(Representante::class);
 	}
 
 	//Devuelve la lista de pacientes con paginacion mediante eloquent

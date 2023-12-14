@@ -1,7 +1,10 @@
 @extends('layouts.app')
 @section('content')
     <x-navegacion-paciente :paciente="$paciente" />
-    <h2 class="text-center mt-4">Odontogramas Geométricos</h2>
+    
+    {{-- <x-container-info-pacientes-navegacion :paciente="$paciente" :antecedentes="$antPersonales"></x-container-info-pacientes-navegacion> --}}
+
+    <h3 class="text-center mt-4 fw-bold">Lista de odontogramas de {{$paciente->nombres . ' ' . $paciente->apellidos}}</h3>
 
     <!--Dropdown de los odontogramas del paciente-->
     {{-- <div class="dropdown d-flex justify-content-center">

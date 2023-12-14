@@ -1,7 +1,7 @@
 @extends('layouts.app')
 @section('content')
     <x-navegacion-paciente :paciente="$paciente" />
-    <h2 class="text-center mt-4">Presupuestos</h2>
+    <h3 class="text-center mt-4 fw-bold">Lista de presupuestos de {{$paciente->nombres . ' ' . $paciente->apellidos}}</h3>
 
     @if ($presupuestos->count() < 1)
         <p>No hay presupuestos</p>

@@ -46,7 +46,7 @@ function actualizarTabla(resultados) {
             tabla += "<tr>";
             tabla += '<td scope="row">' + resultado.year + "</td>";
             tabla += "<td>" + resultado.month + "</td>";
-            tabla += "<td>" + resultado.total_por_mes + "</td>";
+            tabla += "<td>" + "$" + resultado.total_por_mes + "</td>";
             tabla += "</tr>";
         });
     }

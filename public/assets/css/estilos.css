@@ -1,112 +1,121 @@
 .nav-link {
-    text-decoration: none; 
-    transition: border-bottom 0.3s ease; 
+    text-decoration: none;
+    transition: border-bottom 0.3s ease;
 }
 
 .nav-link:hover {
-    background-color: #86B6F3; 
-    color: #fff; 
+    background-color: #86b6f3;
+    color: hsl(0, 0%, 100%);
 }
 
 input[type="checkbox"]:hover {
     cursor: pointer;
-    border: 2px solid #86B6F3;
+    border: 2px solid #86b6f3;
 }
 
 input[type="radio"]:hover {
     cursor: pointer;
-    border: 2px solid #86B6F3;
+    border: 2px solid #86b6f3;
 }
 
 .divider:after,
 .divider:before {
-content: "";
-flex: 1;
-height: 1px;
-background: #eee;
+    content: "";
+    flex: 1;
+    height: 1px;
+    background: #eee;
 }
 
-.btn_diente{
-	cursor: pointer;
-	border: solid 1px #7BC3C2;
-	border-radius: 5px;
-	background-color: transparent;
+.btn_diente {
+    cursor: pointer;
+    border: solid 1px #7bc3c2;
+    border-radius: 5px;
+    background-color: transparent;
 }
 
-
-.btn_diente:hover{
-	cursor: pointer;
-	border: solid 1px #0DB574;
-	border-radius: 5px;
-	background-color: #0DB574;
+.btn_diente:hover {
+    cursor: pointer;
+    border: solid 1px #0db574;
+    border-radius: 5px;
+    background-color: #0db574;
 }
 
 .contenedor-botones {
-	display: flex;
-	justify-content: center;
+    display: flex;
+    justify-content: center;
 }
 
-.btn_simbolo_necesario{
-	display: flex;
-	justify-content: center;
-	align-items: center;
-	border: none;
-	border-radius: 3px;
-	width: 25px;
-	height: 25px;
-	background-color:#dc3545;
-	color: white;
-	margin: 5px;
-	
-
+.btn_simbolo_necesario {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border: none;
+    border-radius: 3px;
+    width: 25px;
+    height: 25px;
+    background-color: #dc3545;
+    color: white;
+    margin: 5px;
 }
 
-.btn_simbolo_realizado{
-	display: flex;
-	justify-content: center;
-	align-items: center;
-	border: none;
-	border-radius: 3px;
-	width: 25px;
-	height: 25px;
-	background-color:#3243a6;
-	color: white;
-	margin: 5px;
+.btn_simbolo_realizado {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border: none;
+    border-radius: 3px;
+    width: 25px;
+    height: 25px;
+    background-color: #3243a6;
+    color: white;
+    margin: 5px;
 }
 
-#btn_simbolo:hover, #btn_simbolo.clicked {
-	background-color: #0DB574;
-	color: white;
+#btn_simbolo:hover,
+#btn_simbolo.clicked {
+    background-color: #0db574;
+    color: white;
 }
 
-.btn_simbolo_necesario:hover{
-	cursor: pointer;
-	border: solid 1px #0DB574;
-	border-radius: 5px;
-	background-color: #0DB574;
+.btn_simbolo_necesario:hover {
+    cursor: pointer;
+    border: solid 1px #0db574;
+    border-radius: 5px;
+    background-color: #0db574;
 }
 
-.btn_simbolo_realizado:hover{
-	cursor: pointer;
-	border: solid 1px #0DB574;
-	border-radius: 5px;
-	background-color: #0DB574;
+.btn_simbolo_realizado:hover {
+    cursor: pointer;
+    border: solid 1px #0db574;
+    border-radius: 5px;
+    background-color: #0db574;
 }
 
 .selector {
-	background: url('{{ $imagen }}');
-	background-size: cover;
-	background-position: center;
-	width: 300px; /* Ancho deseado */
-	height: 200px; /* Alto deseado */
+    background: url("{{ $imagen }}");
+    background-size: cover;
+    background-position: center;
+    width: 300px; /* Ancho deseado */
+    height: 200px; /* Alto deseado */
 }
 
 .svg-icon {
-	width: 20px;
-	height: auto;
+    width: 20px;
+    height: auto;
 }
 
 .svg-icon-index {
-	width: 32px;
-	height: auto;
+    width: 32px;
+    height: auto;
+}
+
+.tarjeta {
+    border: 1px solid #343a40;
+    margin: 10px;
+    padding: 10px 10px 0px 10px;
+    border-radius: 5px;
+}
+.tarjeta:hover {
+    background-color: #3243a6;
+	color: #fff;
 }

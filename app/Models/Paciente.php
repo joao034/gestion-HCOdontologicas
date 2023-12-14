@@ -99,7 +99,7 @@ class Paciente extends Model
 	//Devuelve la lista de pacientes con paginacion mediante Query Builder
 	public static function getAllPacientesWithPaginationDB($search, $ordeBay = 'apellidos', $order = 'asc')
 	{
-		return DB::table('pacientes')->select('id', 'nombres', 'apellidos', 'cedula', 'celular', DB::raw('YEAR(CURRENT_DATE()) - YEAR(fecha_nacimiento) - IF(DATE_FORMAT(CURRENT_DATE(), "%m-%d") < DATE_FORMAT(fecha_nacimiento, "%m-%d"), 1, 0) as edad'))
+		return DB::table('pacientes')->select('id', 'nombres', 'apellidos', 'cedula', 'celular', DB::raw('YEAR(CURRENT_DATE) - YEAR(fecha_nacimiento) - IF(DATE_FORMAT(CURRENT_DATE, "%m-%d") < DATE_FORMAT(fecha_nacimiento, "%m-%d"), 1, 0) as edad'))
 			->orWhere('nombres', 'LIKE', '%' . $search . '%')
 			->orWhere('apellidos', 'LIKE', '%' . $search . '%')
 			->orWhere('cedula', 'LIKE', '%' . $search . '%')

@@ -137,7 +137,7 @@ class HClinicaController extends Controller
     public function show(int $id)
     {
         $paciente = DB::table('pacientes')
-            ->select('*', DB::raw('YEAR(CURRENT_DATE()) - YEAR(fecha_nacimiento) - IF(DATE_FORMAT(CURRENT_DATE(), "%m-%d") < DATE_FORMAT(fecha_nacimiento, "%m-%d"), 1, 0) as edad'))
+            ->select('*', DB::raw('YEAR(CURRENT_DATE) - YEAR(fecha_nacimiento) - IF(DATE_FORMAT(CURRENT_DATE, "%m-%d") < DATE_FORMAT(fecha_nacimiento, "%m-%d"), 1, 0) as edad'))
             ->where('id', $id)
             ->first();
         $representante = Representante::where('paciente_id', $paciente->id)->first();
@@ -154,7 +154,7 @@ class HClinicaController extends Controller
     public function edit(int $id)
     {
         $paciente = DB::table('pacientes')
-            ->select('*', DB::raw('YEAR(CURRENT_DATE()) - YEAR(fecha_nacimiento) - IF(DATE_FORMAT(CURRENT_DATE(), "%m-%d") < DATE_FORMAT(fecha_nacimiento, "%m-%d"), 1, 0) as edad'))
+            ->select('*', DB::raw('YEAR(CURRENT_DATE) - YEAR(fecha_nacimiento) - IF(DATE_FORMAT(CURRENT_DATE, "%m-%d") < DATE_FORMAT(fecha_nacimiento, "%m-%d"), 1, 0) as edad'))
             ->where('id', $id)
             ->first();
         $representante = Representante::where('paciente_id', $paciente->id)->first();

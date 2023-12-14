@@ -13,6 +13,7 @@ return new class extends Migration
     {
         Schema::create('simbolos', function (Blueprint $table) {
             $table->id();
+            $table->timestamps();
             $table->string('simbolo', 10);
             $table->string('color', 10)->nullable();
             $table->string('ruta_imagen', 100)->nullable();

@@ -106,4 +106,12 @@ class Paciente extends Model
 			->orderBy($ordeBay, $order)
 			->paginate(10);
 	}
+
+	public static function getPacienteFormateado(int $id)
+	{
+		return DB::table('pacientes')
+			->selectRaw('*, EXTRACT(YEAR FROM CURRENT_DATE) - EXTRACT(YEAR FROM fecha_nacimiento) - CASE WHEN EXTRACT(MONTH FROM CURRENT_DATE) * 100 + EXTRACT(DAY FROM CURRENT_DATE) < EXTRACT(MONTH FROM fecha_nacimiento) * 100 + EXTRACT(DAY FROM fecha_nacimiento) THEN 1 ELSE 0 END as edad')
+			->where('id', $id)
+			->first();
+	}
 }

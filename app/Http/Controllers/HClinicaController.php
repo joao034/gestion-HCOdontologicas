@@ -32,7 +32,7 @@ class HClinicaController extends Controller
         return Validator::make($data, [
             'nombres' => ['required', 'string', 'max:255'],
             'apellidos' => ['required', 'string', 'max:255'],
-            'cedula' => ['validar_cedula', 'string', 'min:10', 'max:10', 'unique:pacientes'],
+            'cedula' => ['validar_cedula', 'string', 'min:10', 'max:10'],
             'cedula_representante' => ['nullable', 'string', 'min:10', 'max:10', 'validar_cedula'],
             'representante' => ['nullable', 'string', 'max:100'],
             'estado_civil' => ['required', 'string', 'max:255'],
@@ -136,10 +136,7 @@ class HClinicaController extends Controller
      */
     public function show(int $id)
     {
-        $paciente = DB::table('pacientes')
-        ->selectRaw('*, EXTRACT(YEAR FROM CURRENT_DATE) - EXTRACT(YEAR FROM fecha_nacimiento) - CASE WHEN EXTRACT(MONTH FROM CURRENT_DATE) * 100 + EXTRACT(DAY FROM CURRENT_DATE) < EXTRACT(MONTH FROM fecha_nacimiento) * 100 + EXTRACT(DAY FROM fecha_nacimiento) THEN 1 ELSE 0 END as edad')
-            ->where('id', $id)
-            ->first();
+        $paciente = Paciente::getPacienteFormateado($id);
         $representante = Representante::where('paciente_id', $paciente->id)->first();
         $antPersonales = AntecedentesPersonalesFamiliare::where('paciente_id', $paciente->id)->first();
         return view('hclinicas.show', compact(['paciente', 'antPersonales', 'representante']));
@@ -153,10 +150,7 @@ class HClinicaController extends Controller
      */
     public function edit(int $id)
     {
-        $paciente = DB::table('pacientes')
-            ->select('*', DB::raw('YEAR(CURRENT_DATE) - YEAR(fecha_nacimiento) - IF(DATE_FORMAT(CURRENT_DATE, "%m-%d") < DATE_FORMAT(fecha_nacimiento, "%m-%d"), 1, 0) as edad'))
-            ->where('id', $id)
-            ->first();
+        $paciente = Paciente::getPacienteFormateado($id);
         $representante = Representante::where('paciente_id', $paciente->id)->first();
         $antPersonales = AntecedentesPersonalesFamiliare::where('paciente_id', $paciente->id)->first();
         return view('hclinicas.edit', compact(['paciente', 'representante', 'antPersonales']));
@@ -273,7 +267,6 @@ class HClinicaController extends Controller
     //Asignar variables de la vista de informacion que vienen del request
     private function asignarVariablesDeAntecedentesInfecciosos($antInfecciosos, Request $request)
     {
-
         $antInfecciosos->enfermedad_respiratoria = $request->input('enfermedad_respiratoria');
         $antInfecciosos->fiebre = $request->input('fiebre');
         $antInfecciosos->hospitalizado = $request->input('hospitalizado');
@@ -325,7 +318,7 @@ class HClinicaController extends Controller
     private function actualizarRepresentante(Request $request, int $paciente_id)
     {
         $representante = Representante::where('paciente_id', $paciente_id)->first();
-        $representante->paciente_id = $paciente_id;
+        //$representante->paciente_id = $paciente_id;
         $representante->representante = $request->input('representante');
         $representante->cedula_representante = $request->input('cedula_representante');
         $representante->save();

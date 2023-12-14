@@ -61,8 +61,8 @@ class User extends Authenticatable
 		return $this->hasOne(Odontologo::class);
 	}
 
-	public function rol()
+	/* public function rol()
 	{
 		return $this->belongsTo(Rol::class, 'rol_id');
-	}
+	} */
 }

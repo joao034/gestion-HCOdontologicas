@@ -467,7 +467,7 @@
                                             </div>
                                             <div class="col-lg-3 col-md-6">
                                                 <div class="mb-3">
-                                                    <input type="text" class="form-coFntrol" name="otro_habito"
+                                                    <input type="text" class="form-control" name="otro_habito"
                                                         id="" aria-describedby="helpId" placeholder="Escriba otro hábito"
                                                         value="{{ $antPersonales->otro_habito }}" readonly>
                                                 </div>

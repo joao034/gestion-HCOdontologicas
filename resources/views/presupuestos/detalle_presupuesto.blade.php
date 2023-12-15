@@ -45,8 +45,8 @@
                     <th scope="col" class="col-3">Tratamiento</th>
                     <th scope="col" class="col-1">Nº Diente</th>
                     <th scope="col" class="col-2">Valor Unitario ($)</th>
-                    <th scope="col" class="col-1">Total</th>
-                    {{-- <th scope="col" class="col-4">Acciones</th> --}}
+                    <th scope="col" class="col-1">Subtotal</th>
+                    <th scope="col" class="col-4">Acción</th>
                 </tr>
             </thead>
             <tbody>

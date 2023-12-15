@@ -13,7 +13,8 @@
         "laravel/tinker": "^2.8",
         "laravel/ui": "^4.2",
         "spatie/laravel-permission": "^5.10",
-        "ext-gd" : "*"
+        "ext-gd":"*",
+        "ext-bcmath":"*"
     },
     "require-dev": {
         "fakerphp/faker": "^1.9.1",

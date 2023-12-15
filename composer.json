@@ -6,6 +6,8 @@
     "license": "MIT",
     "require": {
         "php": "^8.1",
+        "ext-bcmath": "*",
+        "ext-gd": "*",
         "barryvdh/laravel-dompdf": "^2.0",
         "guzzlehttp/guzzle": "^7.7",
         "laravel/framework": "^10.10",
@@ -13,8 +15,7 @@
         "laravel/tinker": "^2.8",
         "laravel/ui": "^4.2",
         "spatie/laravel-permission": "^5.10",
-        "ext-gd":"*",
-        "ext-bcmath":"*"
+        "twilio/sdk": "*"
     },
     "require-dev": {
         "fakerphp/faker": "^1.9.1",

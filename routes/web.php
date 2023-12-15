@@ -13,6 +13,7 @@ use App\Http\Controllers\UserController;
 use App\Http\Controllers\WhatsappController;
 use Illuminate\Support\Facades\Auth;
 use App\Http\Controllers\PresupuestoPorTiempoController;
+use App\Http\Controllers\SMSController;
 
 //use Illuminate\Support\Facades\App;
 
@@ -33,7 +34,6 @@ Route::redirect('/', 'login');
 Auth::routes();
 
 Route::middleware('auth')->group(function () {
-    Route::get('presupuestos/pdf/{odontograma_cabecera_id}', [PresupuestoController::class, 'pdf'])->name('presupuestos.pdf');
 
     Route::resource("hclinicas", HClinicaController::class);
 
@@ -56,7 +56,11 @@ Route::middleware('auth')->group(function () {
     
     Route::get('reportes/total-presupuesto-por-meses', [PresupuestoPorTiempoController::class, 'get_total_por_meses'])->name('reportes.total-presupuesto-por-meses');
  
-    Route::get('enviar-mensaje/{presupusto_id}', [WhatsappController::class, 'sendMessage'])->name('presupuestos.enviar-mensaje');
+    /* Route::get('enviar-mensaje/{presupusto_id}', [WhatsappController::class, 'sendMessage'])->name('presupuestos.enviar-mensaje'); */
+    
+    Route::get('enviar-mensaje/{presupusto_id}', [SMSController::class, 'send_sms'])->name('presupuestos.enviar-mensaje');
 });
 
 //Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
+
+Route::get('presupuestos/pdf/{odontograma_cabecera_id}', [PresupuestoController::class, 'pdf'])->name('presupuestos.pdf');

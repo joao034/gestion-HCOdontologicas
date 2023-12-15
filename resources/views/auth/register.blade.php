@@ -84,7 +84,7 @@
                                     <div class="col-md-6">
                                     <div class="mb-3">
                                         <label for="" class="form-label fw-bold">{{ __('Nombres') }}</label>
-                                        <input type="text"class="form-control form-control-md" name="nombres" id="" 
+                                        <input type="text"class="form-control form-control-md" name="nombres" id=""
                                             aria-describedby="helpId" placeholder="Escriba sus nombres" value="{{ old('nombres') }}">
                                     </div>
                                     </div>

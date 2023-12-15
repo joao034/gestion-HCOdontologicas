@@ -1,12 +1,22 @@
 @extends('layouts.app')
 @section('content')
     <x-navegacion-paciente :paciente="$presupuesto->paciente" />
-    <h2 class="text-center mt-4">Detalle del Presupuesto</h2>
+    <h3 class="text-center mt-4 mb-3 fw-bold">Presupuesto de {{ $presupuesto->paciente->nombres . ' ' . $presupuesto->paciente->apellidos}}</h3>
+    <h5 class="text-center mt-2 mb-4">Fecha de creación: {{ \Carbon\Carbon::parse($presupuesto->created_at)->format('d/m/Y') }}</h5>
+
+    <div class="d-flex justify-content-between">
+        <a href="{{ route('presupuestos.pdf', $presupuesto->id) }}" class="btn btn-info text-white" target="_blank">
+            <i class="fa-solid fa-file-pdf"></i> Descargar PDF
+        </a>
+        <a href="{{ route('presupuestos.enviar-mensaje', $presupuesto->id) }}" class="btn btn-success text-white">
+            <i class="fa-brands fa-whatsapp"></i> Enviar el presupuesto
+        </a>
+    </div>
 
     <form action="{{ route('presupuestos.store') }}" method="POST">
         @csrf
         <input type="hidden" name="presupuesto_id" value="{{ $presupuesto->id }}">
-        <div class="row">
+        <div class="row mt-3">
             <div class="input-group mb-3">
                 <div class="col-9 col-lg-5 col-md-7">
                     <select class="form-select form-select-md" name="tratamiento_id" required>
@@ -21,15 +31,6 @@
                     <button class="btn btn-primary" type="submit"><i class="fa-regular fa-plus"></i> Agregar</button>
                 </div>
             </div>
-        </div>
-
-        <div class="d-flex justify-content-between">
-            <a href="{{ route('presupuestos.pdf', $presupuesto->id) }}" class="btn btn-danger" target="_blank">
-                <i class="fa-solid fa-file-pdf"></i> Descargar PDF
-            </a>
-            <a href="{{ route('presupuestos.enviar-mensaje', $presupuesto->id) }}" class="btn btn-success text-white">
-                <i class="fa-brands fa-whatsapp"></i> Enviar el presupuesto
-            </a>
         </div>
 
 

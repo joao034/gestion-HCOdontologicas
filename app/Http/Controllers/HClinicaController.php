@@ -118,7 +118,7 @@ class HClinicaController extends Controller
             $this->almacenarRepresentante($request, $paciente->id);
             $this->almacenarAntecedentePersonales($request, $paciente->id);
             //inserta el registro en la tabla odontogramaCabecera
-            $this->crearOdontograma($paciente->id);
+            //$this->crearOdontograma($paciente->id);
             DB::commit();
             return to_route('hclinicas.index')->with('message', 'Historia Clinica creado exitosamente.');
         } catch (\Exception $e) {
@@ -347,14 +347,5 @@ class HClinicaController extends Controller
             OdontogramaDetalle::where('odontograma_cabecera_id', $odontograma->id)->delete();
             $odontograma->delete();
         }
-    }
-
-    private function crearOdontograma(int $id_paciente)
-    {
-        $odontograma = new Odontograma();
-        $odontograma->paciente_id = $id_paciente;
-        $odontograma->fecha_creacion = now();
-        $odontograma->total = 0;
-        $odontograma->save();
     }
 }

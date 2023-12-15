@@ -24,7 +24,7 @@
                 @foreach ($detalles_odontograma as $detalle)
                     <tr class="">
                         <td scope="row">{{ $detalle->id }}</td>
-                        <td>{{ $detalle->fecha }}</td>
+                        <td>{{ $detalle->created_at }}</td>
                         <td>{{ $detalle->tratamiento->nombre }}</td>
                         <td>{{ $detalle->num_pieza_dental }}</td>
                         <td>{{ $detalle->cara_dental }}</td>

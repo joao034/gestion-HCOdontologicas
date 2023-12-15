@@ -24,51 +24,55 @@ class OdontogramaDetalleController extends Controller
     {
         return Validator::make($data, [
             'tratamiento_id' => ['required'],
-            'odontologo_id' => ['required'],
             'cara_dental' => ['required'],
             'simbolo_id' => ['required'],
+            'odontologo_id' => ['required'],
             'observacion' => ['nullable', 'string', 'max:255'],
-        ]);
+        ], $this->messages());
     }
 
-    private function mostrarErroresDeValidacion( $request ){
+    protected function messages()
+    {
+        return [
+            'tratamiento_id.required' => 'Seleccione un tratamiento.',
+            'odontologo_id.required' => 'Seleccione un odontólogo.',
+            'cara_dental.required' => 'Seleccione una cara dental.',
+            'simbolo_id.required' => 'Seleccione un símbolo.',
+            'observacion.max' => 'La observación no puede tener más de :max caracteres.',
+        ];
+    }
+
+    private function mostrarErroresDeValidacion($request)
+    {
         $validator = $this->validator($request->all());
         if ($validator->fails()) {
             return redirect()->back()->withErrors($validator)->withInput();
         }
-    } 
-
-    public function index( int $odontograma_cabecera_id )
-    {
-       
     }
 
     //guarda el detalle del odontograma
-    public function store( Request $request ){
-        
-        try{
-            $this->mostrarErroresDeValidacion( $request );
+    public function store(Request $request)
+    {
+        try {
+            $this->mostrarErroresDeValidacion($request);
             $this->validator($request->all())->validate();
-            $this->guardarDetalle( $request );
+            $this->guardarDetalle($request);
             return back()->with('message', 'Detalle del odontograma agreagado correctamente.');
-
-        }catch(\Exception $e){
+        } catch (\Exception $e) {
             return back()->with('danger', 'No se pudo guardar el detalle del odontograma.');
         }
-
     }
 
     //construye la vista modal del detalle del odontograma
-    public function edit ( int $id ){
-
+    public function edit(int $id)
+    {
         $odontograma = Odontograma::find($id);
         $tratamientos = Tratamiento::orderBy('nombre', 'asc')->get();
         $odontologos = Odontologo::all();
-        $simbolo = new Simbolo();
         $necesario = 'necesario';
         $realizado = 'realizado';
-        $simbolosRojos = $simbolo->getSimbolosPorTipo( $necesario );
-        $simbolosAzules = $simbolo->getSimbolosPorTipo( $realizado );
+        $simbolosRojos = Simbolo::getSimbolosPorTipo($necesario);
+        $simbolosAzules = Simbolo::getSimbolosPorTipo($realizado);
 
         $colorRojo = '#dc3545';
         $colorAzul = '#3243a6';
@@ -76,31 +80,34 @@ class OdontogramaDetalleController extends Controller
         $simboloRojo = $simbolosRojos->where('color', $colorRojo)->first();
         $simboloAzul = $simbolosAzules->where('color', $colorAzul)->first();
 
-        $detalles_odontograma = $this->getDetallesOdontograma( $id );
+        $detalles_odontograma = $this->getDetallesOdontograma($id);
 
-        return view('odontogramas.edit', compact(['tratamientos', 'odontograma', 'detalles_odontograma',
-                            'odontologos', 'simbolosRojos', 'simbolosAzules', 'simboloRojo', 'simboloAzul']));
+        return view('odontogramas.edit', compact([
+            'tratamientos', 'odontograma', 'detalles_odontograma',
+            'odontologos', 'simbolosRojos', 'simbolosAzules', 'simboloRojo', 'simboloAzul'
+        ]));
     }
 
-    public function destroy( int $id ){
-        try{
-           $detalle_odontograma = OdontogramaDetalle::find($id);
-           $detalle_odontograma->delete();
-            return back()->with('message', 'Detalle del odontograma eliminado correctamente.'); 
-        }catch(\Exception $e){
-            return back()->with('danger', 'No se pudo eliminar el detalle del odontograma.'); 
+    public function destroy(int $id)
+    {
+        try {
+            $detalle_odontograma = OdontogramaDetalle::find($id);
+            $detalle_odontograma->delete();
+            return back()->with('message', 'Detalle del odontograma eliminado correctamente.');
+        } catch (\Exception $e) {
+            return back()->with('danger', 'No se pudo eliminar el detalle del odontograma.');
         }
-        
     }
 
-    private function guardarDetalle( $request ){
+    private function guardarDetalle($request)
+    {
         $detalle_odontograma = new OdontogramaDetalle();
 
         $detalle_odontograma->fecha = Carbon::now();
         $detalle_odontograma->num_pieza_dental = $request->num_pieza_dental;
         $detalle_odontograma->cara_dental = $this->eliminarElementosRepetidos($request->cara_dental);
-        if(isset( $detalle_odontograma->cara_dental )){
-            $detalle_odontograma->cara_dental = implode(",", array($detalle_odontograma->cara_dental));
+        if (isset($detalle_odontograma->cara_dental)) {
+            $detalle_odontograma->cara_dental = implode(",", $detalle_odontograma->cara_dental);
         }
         $detalle_odontograma->simbolo_id = $request->simbolo_id;
         $detalle_odontograma->odontograma_cabecera_id = $request->odontograma_cabecera_id;
@@ -116,21 +123,23 @@ class OdontogramaDetalleController extends Controller
         $detalle_odontograma->save();
     }
 
-    private function getDetallesOdontograma( int $odontograma_cabecera_id ){
+    private function getDetallesOdontograma(int $odontograma_cabecera_id)
+    {
         $detalles_odontograma = OdontogramaDetalle::query()
-        ->where('odontograma_cabecera_id', '=', "$odontograma_cabecera_id")
-        ->where( function( $query ){
-           $query->where('estado', '=', 'necesario') 
-                 ->orWhere('estado', '=', 'realizado')
-                 ->orWhere('estado', '=', 'fuera_presupuesto');
-        })
-        ->orderBy('created_at', 'desc')
-        ->paginate(10);
+            ->where('odontograma_cabecera_id', '=', "$odontograma_cabecera_id")
+            ->where(function ($query) {
+                $query->where('estado', '=', 'necesario')
+                    ->orWhere('estado', '=', 'realizado')
+                    ->orWhere('estado', '=', 'fuera_presupuesto');
+            })
+            ->orderBy('created_at', 'desc')
+            ->paginate(10);
 
         return $detalles_odontograma;
     }
 
-    private function eliminarElementosRepetidos( $array ){
+    private function eliminarElementosRepetidos($array)
+    {
         return array_unique($array);
     }
 }

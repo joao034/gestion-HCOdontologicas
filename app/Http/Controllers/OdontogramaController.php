@@ -38,7 +38,6 @@ class OdontogramaController extends Controller
 
     public function show( int $paciente_id ){
         $paciente = Paciente::find($paciente_id);
-
         
         // Ordenar los odontogramas por fecha en orden descendente
         $odontogramas = $paciente->odontogramasCabecera()->latest('updated_at')->get();

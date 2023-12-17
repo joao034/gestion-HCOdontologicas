@@ -142,4 +142,11 @@ class OdontogramaDetalleController extends Controller
     {
         return array_unique($array);
     }
+
+    //do
+    private function get_odontologos_activos()
+    {
+        $odontologos = Odontologo::where('estado', 'activo')->get();
+        return $odontologos;
+    }
 }

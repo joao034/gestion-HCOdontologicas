@@ -51,7 +51,6 @@ class User extends Authenticatable
 		'password',
 		'role',
 		//'rol_id', 
-		'estado',
 		'active',
 		'remember_token',
 	];

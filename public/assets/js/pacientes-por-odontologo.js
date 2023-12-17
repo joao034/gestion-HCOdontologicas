@@ -9,6 +9,7 @@ $(document).ready(function () {
             },
             dataType: "json",
             success: function (data) {
+                console.log(data.pacientes);
                 actualizarTabla(data.pacientes);
             },
             error: function (error) {
@@ -33,7 +34,7 @@ function actualizarTabla(pacientes) {
     tabla += '<th scope="col">Paciente</th>';
     tabla += '<th scope="col">Edad</th>';
     tabla += '<th scope="col">Celular</th>';
-    tabla += '<th scope="col">Representante</th>';
+    tabla += '<th scope="col">Dirección</th>';
     tabla += "</tr>";
     tabla += "</thead>";
     tabla += "<tbody>";
@@ -55,8 +56,8 @@ function actualizarTabla(pacientes) {
                 fechaActual.getFullYear() - fechaNacimiento.getFullYear();
             tabla += "<td>" + edad + "</td>";
             tabla += "<td>" + paciente.celular + "</td>";
-            if (paciente.representante == null) paciente.representante = "-";
-            tabla += "<td>" + paciente.representante + "</td>";
+            //if (paciente.representante == null) paciente.representante = "-";
+            tabla += "<td>" + paciente.direccion + "</td>";
             tabla += "<td></td>";
             tabla += "</tr>";
         });

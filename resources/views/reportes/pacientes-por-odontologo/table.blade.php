@@ -7,7 +7,7 @@
                 <th scope="col">Paciente</th>
                 <th scope="col">Edad</th>
                 <th scope="col">Celular</th>
-                <th scope="col">Representante</th>
+                <th scope="col">Dirección</th>
             </tr>
         </thead>
         <tbody>

@@ -8,8 +8,8 @@
         <a href="{{ route('presupuestos.pdf', $presupuesto->id) }}" class="btn btn-info text-white" target="_blank">
             <i class="fa-solid fa-file-pdf"></i> Descargar PDF
         </a>
-        <a href="{{ route('presupuestos.enviar-mensaje', $presupuesto->id) }}" class="btn btn-success text-white">
-            <i class="fa-brands fa-whatsapp"></i> Enviar el presupuesto
+        <a href="{{ route('presupuestos.enviar-mensaje', $presupuesto->id) }}" class="btn btn-info text-white">
+            <i class="fa-solid fa-comment-sms"></i> Enviar el presupuesto
         </a>
     </div>
 

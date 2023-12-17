@@ -32,8 +32,7 @@ class SMSController extends Controller
             $numero = $this->formatearNumero($numero);
 
             $client = new Client($account_sid, $auth_token);
-            $message = $client->messages->create(
-                // Where to send a text message (your cell phone?)
+            $client->messages->create(
                 $numero,
                 array(
                     'from' => $twilio_number,

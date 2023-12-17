@@ -48,6 +48,7 @@ class PacientesPorOdontologoController extends Controller
 
         $pacientes = Paciente::whereIn('id', $odontogramaCabeceraPacienteIds)
             ->get();
+            
         $pdf = Pdf::loadView('reportes.pacientes-por-odontologo.pdf', compact(['pacientes', 'odontologo']));
         return $pdf->stream();
     }

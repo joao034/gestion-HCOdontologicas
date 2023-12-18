@@ -28,11 +28,9 @@ class PresupuestoPorTiempoController extends Controller
             ->groupBy(DB::raw('YEAR(created_at), MONTHNAME(created_at)'))
             ->get();
 
-
-        if ($request->ajax()) {
+        if ($request->ajax()) 
             return response()->json(['resultados' => $resultados]);
-        }
 
-        return view('reportes.total-presupuesto-por-meses.index', compact(['resultados', 'years']));/*  */
+        return view('reportes.total-presupuesto-por-meses.index', compact(['resultados', 'years']));
     }
 }

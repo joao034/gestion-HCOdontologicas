@@ -24,7 +24,7 @@
                     <td>{{ $paciente->nombres . ' ' . $paciente->apellidos }}</td>
                     <td>{{ $paciente->fecha_nacimiento }}</td>
                     <td>{{ $paciente->celular }}</td>
-                    <td>{{ $paciente->representante }}</td>
+                    <td>{{ $paciente->direccion }}</td>
                     <td>
                     </td>
                 </tr>

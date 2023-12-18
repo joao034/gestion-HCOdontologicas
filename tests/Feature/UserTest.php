@@ -46,7 +46,7 @@ class UserTest extends TestCase
         $response->assertStatus(302); //redireccion
     }
 
-    public function test_delete_user(){
+    public function test_disable_user(){
         //arrange
         $user = User::factory()->create();
 

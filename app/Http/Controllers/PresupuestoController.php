@@ -22,7 +22,7 @@ class PresupuestoController extends Controller
     {
     }
 
-
+    //deprecated
     public function index( Request $request )
     {
         $search = trim( $request->get('search') );
@@ -31,16 +31,12 @@ class PresupuestoController extends Controller
         return view('presupuestos.index', compact(['search', 'pacientes']));
     }
 
-    //Exporta a pdf el presupuesto
     public function pdf( $id ){
-
         $presupuesto = Odontograma::find( $id );
         $paciente = Paciente::find( $presupuesto->paciente_id );
         $detalles_presupuesto = $this->getDetallesPresupuesto( $id );
-
         $pdf = Pdf::loadView('presupuestos.pdf', compact('paciente', 'presupuesto', 'detalles_presupuesto'));
         return $pdf->stream();
-        //return $pdf->download('archivo.pdf');
     }
 
     public function show ( int $paciente_id ){

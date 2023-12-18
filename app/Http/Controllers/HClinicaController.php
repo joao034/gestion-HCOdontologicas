@@ -16,10 +16,6 @@ use Illuminate\Validation\Rule;
 
 class HClinicaController extends Controller
 {
-    //
-    public function __construct()
-    {
-    }
 
     /**
      * Valida los datos de la HCOdontologica del formulario.

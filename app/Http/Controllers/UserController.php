@@ -47,12 +47,11 @@ class UserController extends Controller
                 'password' => bcrypt($request->password),
             ]);
 
-            //valida y crea un odontologo
             if ($request->role === 'odontologo')
                 $this->createOdontologo($user, $request);
 
             DB::commit();
-            return to_route('users.index')->with('message', 'Usuario creado correctamente');
+            return to_route('users.index')->with('message', 'Exito');
         } catch (\Exception $e) {
             return back()->with('danger', 'Error al crear el usuario ' . $e->getMessage());
         }

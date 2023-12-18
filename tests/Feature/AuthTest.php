@@ -33,7 +33,7 @@ class AuthTest extends TestCase
 
     }
 
-    public function test_unauthenticaed_user_cannot_access_moduls(){
+    public function test_unauthenticated_user_cannot_access_moduls(){
         $response = $this->get('/hclinicas');   
         $response = $this->get('/tratamientos');   
         $response = $this->get('/odontogramas');   

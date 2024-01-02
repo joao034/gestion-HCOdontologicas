@@ -8,6 +8,7 @@ use App\Http\Controllers\OdontogramaDetalleController;
 use App\Http\Controllers\OdontologoController;
 use App\Http\Controllers\PresupuestoController;
 use App\Http\Controllers\PacientesPorOdontologoController;
+use App\Http\Controllers\PacientesPorTratamientoController;
 use App\Http\Controllers\TratamientoController;
 use App\Http\Controllers\UserController;
 use App\Http\Controllers\WhatsappController;
@@ -52,7 +53,11 @@ Route::middleware('auth')->group(function () {
 
     Route::get('reportes/pacientes-por-odontologo', [PacientesPorOdontologoController::class, 'get_pacientes_por_odontologo'])->name('reportes.get_pacientes_por_odontologo');
 
+    Route::get('reportes/pacientes-por-tratamiento', [PacientesPorTratamientoController::class, 'get_pacientes_por_tratamiento'])->name('reportes.get_pacientes_por_tratamiento');
+
     Route::get('reportes/pdf/pacientes-por-odontologo', [PacientesPorOdontologoController::class, 'generate_pdf'])->name('reportes.pacientes-por-odontologo.pdf');
+
+    Route::get('reportes/pdf/pacientes-por-tratamiento', [PacientesPorTratamientoController::class, 'generate_pdf'])->name('reportes.pacientes-por-tratamiento.pdf');
     
     Route::get('reportes/total-presupuesto-por-meses', [PresupuestoPorTiempoController::class, 'get_total_por_meses'])->name('reportes.total-presupuesto-por-meses');
  

@@ -31,6 +31,7 @@
                         <!-- Submenú -->
                         <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
                             <li><a class="dropdown-item" href="{{route('reportes.get_pacientes_por_odontologo')}}">Pacientes por odontólogo</a></li>
+                            <li><a class="dropdown-item" href="{{route('reportes.get_pacientes_por_tratamiento')}}">Pacientes por tratamiento</a></li>
                             <li><a class="dropdown-item" href="{{route('reportes.total-presupuesto-por-meses')}}">Total de presupuestos</a></li>
                         </ul>
                     </li>

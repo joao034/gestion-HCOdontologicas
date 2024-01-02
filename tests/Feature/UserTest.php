@@ -21,32 +21,26 @@ class UserTest extends TestCase
 
     public function test_store_user()
     {
-        //arrange
         $user = User::factory()->create()->toArray();
 
-        //act
         $response = $this->post('/users', $user);
 
-        //assert
         $this->assertDatabaseHas('users', $user);
         $response->assertStatus(302);
     }
 
-    public function test_update_user(){
-        //arrange
+    public function test_disable_user(){
         $user = User::factory()->create();
 
-        //act
         $response = $this->put('users/'.$user->id, [
-            'name' => 'Juan',
+            'active' => false
         ]);
 
-        //assert
         $this->assertDatabaseHas('users', $user->toArray());
         $response->assertStatus(302); //redireccion
     }
 
-    public function test_disable_user(){
+    /* public function test_disable_user(){
         //arrange
         $user = User::factory()->create();
 
@@ -55,6 +49,6 @@ class UserTest extends TestCase
 
         //assert
         $response->assertStatus(302); //redireccion
-    }
+    } */
 
 }

@@ -31,5 +31,6 @@ class CedulaTest extends TestCase
         // Prueba con cédulas inválidas
         $this->assertFalse($validator->validarCedula('1719142905'));
         $this->assertFalse($validator->validarCedula('1712345679'));
+        $this->assertTrue($validator->validarCedula('0001321322'));
     }
 }

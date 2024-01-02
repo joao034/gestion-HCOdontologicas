@@ -89,11 +89,7 @@
                         <td>{{$paciente->nombres . ' ' . $paciente->apellidos}}</td>
                         <td>{{$paciente->fecha_nacimiento}}</td>
                         <td>{{$paciente->celular}}</td>
-                        @if ($paciente->representante == null)
-                            <td>No tiene representante</td>
-                        @else
-                            <td>{{$paciente->representante->representante}}</td>
-                        @endif
+                        <td>{{$paciente->direccion}}</td>
                     </tr>
                 @endforeach
             @endif

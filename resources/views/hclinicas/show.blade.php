@@ -1,7 +1,7 @@
 @extends('layouts.app')
 @section('content')
 
-{{-- <x-container-info-pacientes-navegacion :paciente="$paciente" :antecedentes="$antPersonales"></x-container-info-pacientes-navegacion> --}}
+{{-- <x-container-info-pacientes-navegacion :paciente="$paciente" :antecedentes="$antPersonales?"></x-container-info-pacientes-navegacion> --}}
 
 <x-navegacion-paciente :paciente="$paciente" />
     <form>
@@ -66,7 +66,7 @@
                                         </div>
                                     </div>
 
-                                    @if ($paciente->edad < 12)
+                                    @if ( ($paciente->edad < 12) && ($representante != null) )
                                         <div class="row" id="representanteDiv">
                                             <div class="col-md-6">
                                                 <div class="mb-3">
@@ -201,6 +201,7 @@
                     </div>
 
                     <!--Antecedentes Personales y Familiares-->
+
                     <div class="row mt-4">
                         <div class="col-12">
                             <div class="card text-start">
@@ -215,7 +216,7 @@
                                         <div class="col-lg-3 col-md-6">
                                             <input class="form-check-input" type="checkbox" id=""
                                                 name="enfermedades[]" value="hipertension"
-                                                {{ $antPersonales->retornar_enfermedades('hipertension') == true ? 'checked' : '' }}
+                                                {{ $antPersonales?->retornar_enfermedades('hipertension') == true ? 'checked' : '' }}
                                                 readonly>
                                             <label class="form-check-label" for="">
                                                 Hipertensión
@@ -225,7 +226,7 @@
                                         <div class="col-lg-3 col-md-6">
                                             <input class="form-check-input" type="checkbox" id=""
                                                 name="enfermedades[]" value="enfermedades cardiacas"
-                                                {{ $antPersonales->retornar_enfermedades('enfermedades cardiacas') == true ? 'checked' : '' }}
+                                                {{ $antPersonales?->retornar_enfermedades('enfermedades cardiacas') == true ? 'checked' : '' }}
                                                 readonly>
                                             <label class="form-check-label" for="">
                                                 Enfermedades Cardiacas
@@ -234,7 +235,7 @@
                                         <div class="col-lg-3 col-md-6">
                                             <input class="form-check-input" type="checkbox" id=""
                                                 name="enfermedades[]" value="diabetes mellitus"
-                                                {{ $antPersonales->retornar_enfermedades('diabetes mellitus') == true ? 'checked' : '' }}
+                                                {{ $antPersonales?->retornar_enfermedades('diabetes mellitus') == true ? 'checked' : '' }}
                                                 readonly>
                                             <label class="form-check-label" for="">
                                                 Diabetes Mellitus
@@ -244,7 +245,7 @@
                                         <div class="col-lg-3 col-md-6">
                                             <input class="form-check-input" type="checkbox" id=""
                                                 name="enfermedades[]" value="hepatitis"
-                                                {{ $antPersonales->retornar_enfermedades('hepatitis') == true ? 'checked' : '' }}
+                                                {{ $antPersonales?->retornar_enfermedades('hepatitis') == true ? 'checked' : '' }}
                                                 readonly>
                                             <label class="form-check-label" for="">
                                                 Hepatitis
@@ -257,7 +258,7 @@
                                             <div class="form-check">
                                                 <input class="form-check-input" type="checkbox" id=""
                                                     name="enfermedades[]" value="fiebre reumatica"
-                                                    {{ $antPersonales->retornar_enfermedades('fiebre reumatica') == true ? 'checked' : '' }}
+                                                    {{ $antPersonales?->retornar_enfermedades('fiebre reumatica') == true ? 'checked' : '' }}
                                                     readonly>
                                                 <label class="form-check-label" for="">
                                                     Fiebre Reumática
@@ -267,7 +268,7 @@
                                         <div class="col-lg-3 col-md-6">
                                             <input class="form-check-input" type="checkbox" id=""
                                                 name="enfermedades[]" value="tuberculosis"
-                                                {{ $antPersonales->retornar_enfermedades('tuberculosis') == true ? 'checked' : '' }}
+                                                {{ $antPersonales?->retornar_enfermedades('tuberculosis') == true ? 'checked' : '' }}
                                                 readonly>
                                             <label class="form-check-label" for="">
                                                 Tuberculosis
@@ -276,7 +277,7 @@
                                         <div class="col-lg-3 col-md-6">
                                             <input class="form-check-input" type="checkbox" id=""
                                                 name="enfermedades[]" value="asma"
-                                                {{ $antPersonales->retornar_enfermedades('asma') == true ? 'checked' : '' }}
+                                                {{ $antPersonales?->retornar_enfermedades('asma') == true ? 'checked' : '' }}
                                                 readonly>
                                             <label class="form-check-label" for="">
                                                 Asma
@@ -286,7 +287,7 @@
                                         <div class="col-lg-3 col-md-6">
                                             <input class="form-check-input" type="checkbox" id=""
                                                 name="enfermedades[]" value="hemorragias"
-                                                {{ $antPersonales->retornar_enfermedades('hemorragias') == true ? 'checked' : '' }}
+                                                {{ $antPersonales?->retornar_enfermedades('hemorragias') == true ? 'checked' : '' }}
                                                 readonly>
                                             <label class="form-check-label" for="">
                                                 Hemorragias
@@ -299,7 +300,7 @@
                                             <div class="form-check">
                                                 <input class="form-check-input" type="checkbox" id=""
                                                     name="enfermedades[]" value="epilepsias"
-                                                    {{ $antPersonales->retornar_enfermedades('epilepsias') == true ? 'checked' : '' }}
+                                                    {{ $antPersonales?->retornar_enfermedades('epilepsias') == true ? 'checked' : '' }}
                                                     readonly>
                                                 <label class="form-check-label" for="">
                                                     Epilepsias
@@ -309,7 +310,7 @@
                                         <div class="col-lg-3 col-md-6">
                                             <input class="form-check-input" type="checkbox" id=""
                                                 name="enfermedades[]" value="alergias"
-                                                {{ $antPersonales->retornar_enfermedades('alergias') == true ? 'checked' : '' }}
+                                                {{ $antPersonales?->retornar_enfermedades('alergias') == true ? 'checked' : '' }}
                                                 readonly>
                                             <label class="form-check-label" for="">
                                                 Alergias
@@ -319,7 +320,7 @@
                                             <div class="mb-3">
                                                 <input type="text" class="form-control" name="otra_enfermedad"
                                                     id="" aria-describedby="helpId"
-                                                    value="{{ $antPersonales->otra_enfermedad }}"
+                                                    value="{{ $antPersonales?->otra_enfermedad }}"
                                                     placeholder="Otra Enfermedad" readonly>
                                             </div>
                                         </div>
@@ -328,7 +329,7 @@
                                             <div class="mb-3">
                                                 <input type="text" class="form-control" name="parentesco"
                                                     id="" aria-describedby="helpId"
-                                                    value="{{ $antPersonales->parentesco }}" placeholder="Parentesco"
+                                                    value="{{ $antPersonales?->parentesco }}" placeholder="Parentesco"
                                                     readonly>
                                             </div>
                                         </div>
@@ -345,7 +346,7 @@
                                                 <div class="form-check">
                                                     <input class="form-check-input" type="radio" id=""
                                                         name="embarazada" value="0"
-                                                        {{ $antPersonales['embarazada'] == '0' ? 'checked' : '' }}
+                                                        {{ $antPersonales?->embarazada == '0' ? 'checked' : '' }}
                                                         disabled>
                                                     <label readonly="form-check-label" for="">
                                                         Sí
@@ -358,7 +359,7 @@
                                                 <div class="form-check">
                                                     <input class="form-check-input" type="radio" id=""
                                                         name="embarazada" value="1"
-                                                        {{ $antPersonales['embarazada'] == '1' ? 'checked' : '' }}
+                                                        {{ $antPersonales?->embarazada == '1' ? 'checked' : '' }}
                                                         readonly>
                                                     <label class="form-check-label" for="">
                                                         No
@@ -372,7 +373,7 @@
                                                 <input type="number" class="form-control" name="semanas_embarazo"
                                                     id="" aria-describedby="helpId"
                                                     placeholder="Semanas de Embarazo"
-                                                    value="{{ $antPersonales->semanas_embarazo }}" readonly>
+                                                    value="{{ $antPersonales?->semanas_embarazo }}" readonly>
                                             </div>
                                         </div>
 
@@ -384,7 +385,7 @@
                                                         medicamento?</label>
                                                     <input type="text" class="form-control" name="medicamento"
                                                         id="" aria-describedby="helpId" placeholder=""
-                                                        value="{{ $antPersonales->medicamento }}" readonly>
+                                                        value="{{ $antPersonales?->medicamento }}" readonly>
                                                 </div>
                                             </div>
 
@@ -394,7 +395,7 @@
                                                         antecedente?</label>
                                                     <input type="text" class="form-control" name="otro_antecedente"
                                                         id="" aria-describedby="helpId" placeholder=""
-                                                        value="{{ $antPersonales->otro_antecendente }}" readonly>
+                                                        value="{{ $antPersonales?->otro_antecendente }}" readonly>
                                                 </div>
                                             </div>
                                         </div>
@@ -407,7 +408,7 @@
                                                 <div class="form-check">
                                                     <input class="form-check-input" type="checkbox" id=""
                                                         name="habitos[]" value="tabaquismo"
-                                                        {{ $antPersonales->retornar_habitos('tabaquismo') == true ? 'checked' : '' }}
+                                                        {{ $antPersonales?->retornar_habitos('tabaquismo') == true ? 'checked' : '' }}
                                                         readonly>
                                                     <label class="form-check-label" for="">
                                                         Tabaquismo
@@ -417,7 +418,7 @@
                                             <div class="col-lg-3 col-md-6">
                                                 <input class="form-check-input" type="checkbox" id=""
                                                     name="habitos[]" value="alcohol"
-                                                    {{ $antPersonales->retornar_habitos('alcohol') == true ? 'checked' : '' }}
+                                                    {{ $antPersonales?->retornar_habitos('alcohol') == true ? 'checked' : '' }}
                                                     readonly>
                                                 <label class="form-check-label" for="">
                                                     Alcohol
@@ -426,7 +427,7 @@
                                             <div class="col-lg-3 col-md-6">
                                                 <input class="form-check-input" type="checkbox" id=""
                                                     name="habitos[]" value="duglucion atipica"
-                                                    {{ $antPersonales->retornar_habitos('duglucion atipica') == true ? 'checked' : '' }}
+                                                    {{ $antPersonales?->retornar_habitos('duglucion atipica') == true ? 'checked' : '' }}
                                                     readonly>
                                                 <label class="form-check-label" for="">
                                                     Duglución atípica
@@ -436,7 +437,7 @@
                                             <div class="col-lg-3 col-md-6">
                                                 <input class="form-check-input" type="checkbox" id=""
                                                     name="habitos[]" value="respiracion bucal"
-                                                    {{ $antPersonales->retornar_habitos('respiracion bucal') == true ? 'checked' : '' }}
+                                                    {{ $antPersonales?->retornar_habitos('respiracion bucal') == true ? 'checked' : '' }}
                                                     readonly>
                                                 <label class="form-check-label" for="">
                                                     Respiración bucal
@@ -449,7 +450,7 @@
                                                 <div class="form-check">
                                                     <input class="form-check-input" type="checkbox" id=""
                                                         name="habitos[]" value="bruxismo"
-                                                        {{ $antPersonales->retornar_habitos('bruxismo') == true ? 'checked' : '' }}
+                                                        {{ $antPersonales?->retornar_habitos('bruxismo') == true ? 'checked' : '' }}
                                                         readonly>
                                                     <label class="form-check-label" for="">
                                                         Bruxismo
@@ -459,7 +460,7 @@
                                             <div class="col-lg-3 col-md-6">
                                                 <input class="form-check-input" type="checkbox" id=""
                                                     name="habitos[]" value="succion digital"
-                                                    {{ $antPersonales->retornar_habitos('succion digital') == true ? 'checked' : '' }}
+                                                    {{ $antPersonales?->retornar_habitos('succion digital') == true ? 'checked' : '' }}
                                                     readonly>
                                                 <label class="form-check-label" for="">
                                                     Succión Digital
@@ -469,7 +470,7 @@
                                                 <div class="mb-3">
                                                     <input type="text" class="form-control" name="otro_habito"
                                                         id="" aria-describedby="helpId" placeholder="Escriba otro hábito"
-                                                        value="{{ $antPersonales->otro_habito }}" readonly>
+                                                        value="{{ $antPersonales?->otro_habito }}" readonly>
                                                 </div>
                                             </div>
                                         </div>

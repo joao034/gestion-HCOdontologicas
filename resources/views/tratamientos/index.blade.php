@@ -32,9 +32,9 @@
                     </button>
 
                     <!--eliminar-->
-                    <button type="button" class="btn btn-danger" data-bs-toggle="modal" data-bs-target="#delete{{$tratamiento->id}}">
+                    {{-- <button type="button" class="btn btn-danger" data-bs-toggle="modal" data-bs-target="#delete{{$tratamiento->id}}">
                         <i class="fa-regular fa-trash-can"></i> Eliminar
-                    </button>
+                    </button> --}}
 
                 </td>
             </tr>

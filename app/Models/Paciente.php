@@ -39,7 +39,6 @@ use Illuminate\Support\Facades\DB;
  */
 class Paciente extends Model
 {
-
 	use HasFactory;
 
 	protected $table = 'pacientes';

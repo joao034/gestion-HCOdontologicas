@@ -3,25 +3,56 @@
 namespace Tests\Feature;
 
 use Illuminate\Foundation\Testing\RefreshDatabase;
-use Illuminate\Foundation\Testing\WithFaker;
+use App\Models\Odontograma;
+use App\Models\OdontogramaDetalle;
+use App\Models\Paciente;
+use App\Models\Tratamiento;
+use App\Models\Odontologo;
+use App\Models\Simbolo;
+
 use Tests\TestCase;
 
 class OdontogramaControllerTest extends TestCase
 {
     use RefreshDatabase;
 
-    public function get_odontogramas_list()
+    public function test_get_odontograms_of_a_pacient()
     {
-        $response = $this->get('/odontogramas');
+        $paciente = Paciente::factory()->create();
+        Odontograma::factory()->count(3)->create([
+            'paciente_id' => $paciente->id
+        ]);
 
-        $response->assertStatus(200);
+        $response = $this->get('odontogramas/' . $paciente->id);
+
+        $response->assertStatus(302);
     }
 
-    //create una prueba para crear un nuevo odontograma de un paciente
-    public function create_odontograma()
+    public function test_create_odontogram()
     {
-        $response = $this->get('/odontogramas/create');
+        $odontogramaData = Odontograma::factory()->create();
 
-        $response->assertStatus(200);
+        $response = $this->post('odontogramas/nuevo/' .$odontogramaData->paciente_id , $odontogramaData->toArray()); 
+
+        $this->assertDatabaseHas('odontograma_cabecera', $odontogramaData->toArray());
+        $response->assertStatus(302); 
+    }
+
+    public function test_create_odontogram_detail(){
+
+        $odontogramaDetalle = OdontogramaDetalle::factory()->create()->toArray();
+
+        $response = $this->post('detalleOdontogramas', $odontogramaDetalle);
+
+        $this->assertDatabaseHas('odontograma_detalle', $odontogramaDetalle);
+        $response->assertStatus(302); 
+    }
+
+    public function test_delete_odontogram_detail(){
+        $odontogramaDetalle = OdontogramaDetalle::factory()->create();
+
+        $response = $this->delete('detalleOdontogramas/'.$odontogramaDetalle->id);
+        
+        $response->assertStatus(302);
     }
 }

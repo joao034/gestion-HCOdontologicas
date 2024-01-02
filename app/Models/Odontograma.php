@@ -10,6 +10,7 @@ use Carbon\Carbon;
 use Illuminate\Database\Eloquent\Collection;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Database\Eloquent\Factories\HasFactory;
 
 /**
  * Class OdontogramaCabecera
@@ -29,6 +30,7 @@ use Illuminate\Support\Facades\DB;
  */
 class Odontograma extends Model
 {
+	use HasFactory;
 	protected $table = 'odontograma_cabecera';
 
 	protected $casts = [
@@ -37,8 +39,6 @@ class Odontograma extends Model
 	];
 
 	protected $fillable = [
-		'diagnostico',
-		'enfermedad_actual',
 		'fecha_creacion',
 		'paciente_id',
 		'total'

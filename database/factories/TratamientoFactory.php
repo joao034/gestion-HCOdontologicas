@@ -19,7 +19,8 @@ class TratamientoFactory extends Factory
     {
         return [
             'nombre' => fake()->text(20),
-            'precio' => rand(100, 1000),
+            //'precio' => rand(100, 1000),
+            'precio' => 20,
         ];
     }
 }

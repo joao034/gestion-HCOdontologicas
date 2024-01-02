@@ -46,8 +46,5 @@ class Tratamiento extends Model
 		return $this->hasMany(OdontogramaDetalle::class);
 	}
 
-	public function presupuestos_detalles()
-	{
-		return $this->hasMany(PresupuestosDetalle::class);
-	}
+	
 }

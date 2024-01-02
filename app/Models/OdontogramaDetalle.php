@@ -8,6 +8,8 @@ namespace App\Models;
 
 use Carbon\Carbon;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Factories\HasFactory;
+use App\Models\Odontograma;
 
 /**
  * Class OdontogramaDetalle
@@ -33,6 +35,8 @@ use Illuminate\Database\Eloquent\Model;
  */
 class OdontogramaDetalle extends Model
 {
+
+	use HasFactory;
 	protected $table = 'odontograma_detalle';
 
 	protected $casts = [
@@ -52,12 +56,12 @@ class OdontogramaDetalle extends Model
 		'estado',
 		'tratamiento_id',
 		'odontologo_id',
-
+		'precio'
 	];
 
 	public function odontograma_cabecera()
 	{
-		return $this->belongsTo(OdontogramaCabecera::class);
+		return $this->belongsTo(Odontograma::class);
 	}
 
 	public function odontologo()

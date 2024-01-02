@@ -12,8 +12,6 @@ class AuthTest extends TestCase
     use RefreshDatabase;
 
     public function test_redirect_to_login(){
-
-        //arrange
         User::factory()->create([
             'name' => 'admin',
             'email' => 'admin@gmail.com',
@@ -21,16 +19,13 @@ class AuthTest extends TestCase
             'role' => 'admin'
         ]);
 
-        //act
         $response = $this->post('/login', [
             'email' => 'admin@gmail.com',
             'password' => '12345678'
         ]);
 
-        //assert
         $response->assertStatus(302);
         $response->assertRedirect('/hclinicas');
-
     }
 
     public function test_unauthenticated_user_cannot_access_moduls(){
@@ -41,7 +36,8 @@ class AuthTest extends TestCase
         $response = $this->get('/odontologos');   
         $response = $this->get('/presupuestos');   
         $response = $this->get('/especialidades');   
-    
+        $response = $this->get('/reportes/pacientes-por-odontologo');
+        $response = $this->get('/reportes/total-presupuesto-por-meses');
         $response->assertStatus(302);
         $response->assertRedirect('/login');
     }

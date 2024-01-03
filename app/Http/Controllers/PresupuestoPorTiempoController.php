@@ -13,9 +13,7 @@ class PresupuestoPorTiempoController extends Controller
     {
         $yearSelected = $request->year;
 
-        $years = Odontograma::select(
-            DB::raw('YEAR(created_at) as year')
-        )
+        $years = Odontograma::select(DB::raw('YEAR(created_at) as year'))
             ->distinct()
             ->orderBy(DB::raw('year'), 'desc')->get();
 

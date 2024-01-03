@@ -3,7 +3,7 @@
 
     @if (!request()->ajax())
         <h3 class="text-center fw-bold">Pacientes por tratamiemto</h3>
-
+        <hr>
         <form action="" id="tratamientoForm" method="GET">
             @csrf
             <div class="row">

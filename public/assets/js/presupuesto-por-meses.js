@@ -22,7 +22,6 @@ $(document).ready(function () {
         var odontologoId = $("#odontologo_id").val();
         window.location.href = "/reportes/pdf/pacientes-por-odontologo?odontologo_id=" + odontologoId;
     }); */
-
 });
 
 //construye y actualiza la tabla
@@ -45,6 +44,45 @@ function actualizarTabla(resultados) {
         $.each(resultados, function (index, resultado) {
             tabla += "<tr>";
             tabla += '<td scope="row">' + resultado.year + "</td>";
+            //presentar el mes en español
+            switch (resultado.month) {
+                case "January":
+                    resultado.month = "Enero";
+                    break;
+                case "February ":
+                    resultado.month = "Febrero";
+                    break;
+                case "March":
+                    resultado.month = "Marzo";
+                    break;
+                case "April":
+                    resultado.month = "Abril";
+                    break;
+                case "May":
+                    resultado.month = "Mayo";
+                    break;
+                case "June":
+                    resultado.month = "Junio";
+                    break;
+                case "July":
+                    resultado.month = "Julio";
+                    break;
+                case "August":
+                    resultado.month = "Agosto";
+                    break;
+                case "September":
+                    resultado.month = "Septiembre";
+                    break;
+                case "October":
+                    resultado.month = "Octubre";
+                    break;
+                case "November":
+                    resultado.month = "Noviembre";
+                    break;
+                case "December":
+                    resultado.month = "Diciembre";
+                    break;
+            }
             tabla += "<td>" + resultado.month + "</td>";
             tabla += "<td>" + "$" + resultado.total_por_mes + "</td>";
             tabla += "</tr>";

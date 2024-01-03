@@ -1,7 +1,7 @@
 @extends('layouts.app')
 @section('content')
     <h3 class="text-center fw-bold">Monto total de presupuestos por meses</h3>
-    <br>
+    <hr>
     <!-- Select para filtrar por año -->
     <div class="row">
         <div class="col-md-4">

@@ -54,7 +54,7 @@ class TopPacientesPorPresupuesto extends Controller
 
             return view('reportes.top-presupuestos.index', compact(['resultados', 'years']));
         } catch (\Exception $e) {
-            dd($e);
+            return back()->withErrors(['exception' => $e->getMessage()]);
         }
     }
 }

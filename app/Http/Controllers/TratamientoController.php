@@ -47,11 +47,11 @@ class TratamientoController extends Controller
             //valida el ingreso de los datos
             $this->validator($request->all())->validate();
             $this->storeAndUpdate($request, $tratamiento);
-            
+            return to_route('tratamientos.index')->with('message', 'Tratamiento creado correctamente');
         }catch(\Exception $e){
             return to_route('tratamientos.index')->with('danger', 'No se pudo crear el tratamiento');
         }
-        return to_route('tratamientos.index')->with('message', 'Tratamiento creado correctamente');
+        
     }
 
     public function show($id)

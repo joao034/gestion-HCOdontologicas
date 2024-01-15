@@ -582,7 +582,6 @@
                                             </div>
                                         </div>
 
-
                                         <h6 class="fw-bold">HÁBITOS (Seleccione los hábitos del paciente)</h6>
 
                                         <div class="row">
@@ -648,12 +647,29 @@
                                 </div>
                             </div>
 
+                            <div class="row justify-content-center mt-4">
+                                <div class="col-md-12 col-lg-12">
+                                    <div class="card text-start">
+                                        <div class="card-body">
+                                            <h5 class="card-title fw-bolder">Diagnóstico</h5>
+                                            <hr>
+                                            <div class="row">
+                                                
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
                             <div class="text-end">
                                 <button type="submit" class="btn btn-primary mt-3"><i class="fa-solid fa-check"></i>
                                     Guardar Historia Clínica</button>
                             </div>
                         </div>
                     </div>
+
+                    
+                                        
                 </div>
 
 

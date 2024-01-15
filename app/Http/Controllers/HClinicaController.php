@@ -102,18 +102,14 @@ class HClinicaController extends Controller
             //validar los datos
             $this->mostrarErroresDeValidacion($request);
             $this->validator($request->all())->validate();
-
             //verificar que la cedula del representante no sea la misma que la del paciente
             if ($request->input('cedula') == $request->input('cedula_representante')) {
-                return back()->with('danger', 'La cédula del representante no puede ser la misma que la del paciente.');
+                return redirect()->back()->with('danger', 'La cédula del representante no puede ser la misma que la del paciente.');
             }
-
             $this->guardarOActualizarPaciente($paciente, $request);
             //insertar datos otras tablas
             $this->almacenarRepresentante($request, $paciente->id);
             $this->almacenarAntecedentePersonales($request, $paciente->id);
-            //inserta el registro en la tabla odontogramaCabecera
-            //$this->crearOdontograma($paciente->id);
             DB::commit();
             return to_route('hclinicas.index')->with('message', 'Historia Clinica creado exitosamente.');
         } catch (\Exception $e) {
@@ -141,7 +137,6 @@ class HClinicaController extends Controller
             throw $e;
         }
     }
-
 
     /**
      * Muesta la vista info
@@ -174,9 +169,7 @@ class HClinicaController extends Controller
             $this->validator($request->all())->validate();
             $this->guardarOActualizarPaciente($paciente, $request);
             $this->actualizarRepresentante($request, $paciente);
-            //$this->actualizarAntecedenteInfeccioso($request, $paciente->id);
             $this->actualizarAntecedentePersonal($request, $paciente->id);
-
             DB::commit();
             return back()->with('message', 'Historia Clínica actualizada exitosamente');
         } catch (\Exception $e) {
@@ -213,41 +206,6 @@ class HClinicaController extends Controller
         }
     }
 
-    //deprecated
-    private function almacenarAntecedentesInfecciosos(Request $request, int $paciente_id)
-    {
-        $antInfecciosos = new AntecedentesInfeccioso();
-        $antInfecciosos->paciente_id = $paciente_id;
-        $this->asignarVariablesDeAntecedentesInfecciosos($antInfecciosos, $request);
-        $antInfecciosos->save();
-    }
-
-    private function almacenarRepresentante(Request $request, int $paciente_id)
-    {
-        //verificar que la cedula del representante no sea la misma que la del paciente
-        if ($request->input('cedula') == $request->input('cedula_representante')) {
-            return back()->with('danger', 'La cédula del representante no puede ser la misma que la del paciente.');
-        }
-
-        if (null !== $request->input('representante') && null !== $request->input('cedula_representante')) {
-            $representante = new Representante();
-            $representante->paciente_id = $paciente_id;
-            $representante->representante = $request->input('representante');
-            $representante->cedula_representante = $request->input('cedula_representante');
-            $representante->save();
-        }
-    }
-
-    private function almacenarAntecedentePersonales(Request $request, int $paciente_id)
-    {
-        if (null !== $request->input('enfermedades') || null !== $request->input('habitos')) {
-            $antPersonales = new AntecedentesPersonalesFamiliare();
-            $antPersonales->paciente_id = $paciente_id;
-            $this->asignarVariablesDeAntecedentesPersonoles($antPersonales, $request);
-            $antPersonales->save();
-        }
-    }
-
     private function guardarOActualizarPaciente(Paciente $paciente, Request $request)
     {
         $paciente->nombres = $request->input('nombres');
@@ -263,24 +221,48 @@ class HClinicaController extends Controller
         $paciente->save();
     }
 
-    //Asignar variables de la vista de informacion que vienen del request
-    private function asignarVariablesDeAntecedentesInfecciosos($antInfecciosos, Request $request)
+    private function almacenarRepresentante(Request $request, int $paciente_id)
     {
-        $antInfecciosos->enfermedad_respiratoria = $request->input('enfermedad_respiratoria');
-        $antInfecciosos->fiebre = $request->input('fiebre');
-        $antInfecciosos->hospitalizado = $request->input('hospitalizado');
-        $antInfecciosos->razon_hospitalizacion = $request->input('razon_hospitalizacion');
-        $antInfecciosos->detectado_covid = $request->input('detectado_covid');
-        $antInfecciosos->parentesco_covid = $request->input('parentesco_covid');
-        $antInfecciosos->grado_contagio = $request->input('grado_contagio');
+        if (null !== $request->input('representante') && null !== $request->input('cedula_representante')) {
+            $representante = new Representante();
+            $representante->paciente_id = $paciente_id;
+            $representante->representante = $request->input('representante');
+            $representante->cedula_representante = $request->input('cedula_representante');
+            $representante->save();
+        }
+    }
+
+    private function almacenarAntecedentePersonales(Request $request, int $paciente_id)
+    {
+        //verificar que todos los campos dentro de la card de antecedentes personales y familiares no esten vacios
+        if ($this->registraAntecendete($request)) {
+            $antPersonales = new AntecedentesPersonalesFamiliare();
+            $antPersonales->paciente_id = $paciente_id;
+            $this->asignarVariablesDeAntecedentesPersonoles($antPersonales, $request);
+            $antPersonales->save();
+        }
+    }
+
+    private function actualizarAntecedentePersonal(Request $request, int $paciente_id)
+    {
+        //verifico si existe un antecedente personal y familiar del paciente
+        $antPersonales = AntecedentesPersonalesFamiliare::where('paciente_id', $paciente_id)->first();
+        //si no existe, lo creo
+        if ($antPersonales == null) {
+            $antPersonales = new AntecedentesPersonalesFamiliare();
+            $antPersonales->paciente_id = $paciente_id;
+        }
+        if ($this->registraAntecendete($request)) {
+            $this->asignarVariablesDeAntecedentesPersonoles($antPersonales, $request);
+            $antPersonales->save();
+        }
     }
 
     //Asignar variables de la vista de informacion que vienen del request
-    private function asignarVariablesDeAntecedentesPersonoles($antPersonales, Request $request)
+    private function asignarVariablesDeAntecedentesPersonoles(AntecedentesPersonalesFamiliare $antPersonales,   Request $request)
     {
-
         $antPersonales->enfermedades = $request->input('enfermedades');
-        if ($antPersonales->enfermedades != null || $antPersonales->enfermedades != "") {
+        if ($request->input('enfermedades') != null || $request->input('enfermedades') != "") {
             $antPersonales->enfermedades = implode(",", $request->input('enfermedades'));
         }
 
@@ -296,26 +278,6 @@ class HClinicaController extends Controller
         $antPersonales->otro_antecendente = $request->input('otro_antecendente');
         $antPersonales->otra_enfermedad = $request->input('otra_enfermedad');
         $antPersonales->otro_habito = $request->input('otro_habito');
-    }
-
-    private function actualizarAntecedenteInfeccioso(Request $request, int $id)
-    {
-        //buscar los antecedentes infecciosos del paciente
-        $antInfecciosos = AntecedentesInfeccioso::where('paciente_id', $id)->first();
-        $this->asignarVariablesDeAntecedentesInfecciosos($antInfecciosos, $request);
-        $antInfecciosos->save();
-    }
-
-    private function actualizarAntecedentePersonal(Request $request, int $id)
-    {
-        //buscar los antecedentes personales y familiares del paciente
-        $antPersonales = AntecedentesPersonalesFamiliare::where('paciente_id', $id)->first();
-        if( $antPersonales == null ){
-            $antPersonales = new AntecedentesPersonalesFamiliare();
-            $antPersonales->paciente_id = $id;
-        }
-        $this->asignarVariablesDeAntecedentesPersonoles($antPersonales, $request);
-        $antPersonales->save();
     }
 
     private function actualizarRepresentante(Request $request, Paciente $paciente)
@@ -337,11 +299,31 @@ class HClinicaController extends Controller
         }
     }
 
+    private function registraAntecendete(Request $request)
+    {
+        if ($request->input('enfermedades') != null || $request->input('habitos') != null || $request->input('parentesco') != null || $request->input('medicamento') != null || $request->input('embarazada') != null || $request->input('semanas_embarazo') != null || $request->input('otro_antecendente') != null || $request->input('otra_enfermedad') != null || $request->input('otro_habito') != null) {
+            return true;
+        }
+        return false;
+    }
+
     private function eliminarAntecedenteInfeccioso(int $id)
     {
         //buscar antecedentes infecciosos
         $antInfecciosos = AntecedentesInfeccioso::where('paciente_id', $id)->first();
         $antInfecciosos->delete();
+    }
+
+    //Asignar variables de la vista de informacion que vienen del request
+    private function asignarVariablesDeAntecedentesInfecciosos($antInfecciosos, Request $request)
+    {
+        $antInfecciosos->enfermedad_respiratoria = $request->input('enfermedad_respiratoria');
+        $antInfecciosos->fiebre = $request->input('fiebre');
+        $antInfecciosos->hospitalizado = $request->input('hospitalizado');
+        $antInfecciosos->razon_hospitalizacion = $request->input('razon_hospitalizacion');
+        $antInfecciosos->detectado_covid = $request->input('detectado_covid');
+        $antInfecciosos->parentesco_covid = $request->input('parentesco_covid');
+        $antInfecciosos->grado_contagio = $request->input('grado_contagio');
     }
 
     private function eliminarAntecedentePersonal(int $id)
@@ -360,5 +342,21 @@ class HClinicaController extends Controller
             OdontogramaDetalle::where('odontograma_cabecera_id', $odontograma->id)->delete();
             $odontograma->delete();
         }
+    }
+    private function actualizarAntecedenteInfeccioso(Request $request, int $id)
+    {
+        //buscar los antecedentes infecciosos del paciente
+        $antInfecciosos = AntecedentesInfeccioso::where('paciente_id', $id)->first();
+        $this->asignarVariablesDeAntecedentesInfecciosos($antInfecciosos, $request);
+        $antInfecciosos->save();
+    }
+
+    //deprecated
+    private function almacenarAntecedentesInfecciosos(Request $request, int $paciente_id)
+    {
+        $antInfecciosos = new AntecedentesInfeccioso();
+        $antInfecciosos->paciente_id = $paciente_id;
+        $this->asignarVariablesDeAntecedentesInfecciosos($antInfecciosos, $request);
+        $antInfecciosos->save();
     }
 }

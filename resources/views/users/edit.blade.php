@@ -106,7 +106,7 @@
                                     <div class="col-md-6">
                                     <div class="mb-3">
                                         <label for="" class="form-label fw-bold">{{ __('Nombres') }}</label>
-                                        <input type="text"class="form-control form-control-sm" name="nombres" id="" 
+                                        <input type="text"class="form-control form-control" name="nombres" id="" 
                                             aria-describedby="helpId" placeholder="" value="{{ $user->odontologo->nombres }}">
                                     </div>
                                     </div>
@@ -114,7 +114,7 @@
                                     <div class="mb-3">
                                         <label for="" class="form-label fw-bold">{{ __('Apellidos') }}</label>
                                         <input type="text"
-                                            class="form-control form-control-sm" name="apellidos" id="" 
+                                            class="form-control form-control" name="apellidos" id="" 
                                             aria-describedby="helpId" value="{{$user->odontologo->apellidos}}">
                                     </div>
                                     </div>
@@ -124,7 +124,7 @@
                                     <div class="col-md-6">
                                     <div class="mb-3">
                                         <label for="" class="form-label fw-bold">{{ __('Cédula') }}</label>
-                                        <input type="text"class="form-control form-control-sm @error('cedula') is-invalid @enderror" name="cedula" id="cedula_odo"minlength="10" maxlength="10" pattern="^[0-9]+$"
+                                        <input type="text"class="form-control form-control @error('cedula') is-invalid @enderror" name="cedula" id="cedula_odo"minlength="10" maxlength="10" pattern="^[0-9]+$"
                                                 aria-describedby="helpId" value="{{ $user->odontologo->cedula }}">
                                         @error('cedula')
                                             <small class="text-danger"> {{ $message }}</small>
@@ -135,7 +135,7 @@
                                     <div class="mb-3">
                                         <label for="" class="form-label fw-bold">{{ __('Celular') }}</label>
                                         <input type="text"
-                                            class="form-control form-control-sm" name="celular" id="celu" minlength="10" maxlength="10" 
+                                            class="form-control form-control" name="celular" id="celu" minlength="10" maxlength="10" 
                                             aria-describedby="helpId" value="{{ $user->odontologo->celular }}">
                                             @error('celular')
                                             <span class="invalid-feedback" role="alert">
@@ -150,7 +150,7 @@
                                     <div class="col-md-6">
                                         <div class="mb-3">
                                             <label for="" class="form-label fw-bold">{{ __('Especialidad') }}</label>
-                                            <select class="form-select form-select-sm" name="especialidad_id" required aria-label=".form-select-sm example" >
+                                            <select class="form-select form-select" name="especialidad_id" required aria-label=".form-select" >
                                                 @foreach ($especialidades as $especialidad)
                                                   @if ($especialidad->id === $user->odontologo->especialidad_id)
                                                     <option value="{{$especialidad->id}}" selected>{{$especialidad->nombre}}</option>
@@ -164,7 +164,7 @@
                                     <div class="col-md-6">
                                         <div class="mb-3">
                                             <label for="" class="form-label fw-bold">{{ __('Género') }}</label>
-                                            <select class="form-select form-select-sm" name="sexo" required aria-label=".form-select-sm example">
+                                            <select class="form-select form-select" name="sexo" required aria-label=".form-select-sm example">
                                                 <option value="masculino" {{ $user->odontologo['sexo'] == 'masculino' ? 'selected' : '' }}>Masculino</option>
                                                 <option value="femenino" {{ $user->odontologo['sexo'] == 'femenino' ? 'selected' : '' }}>Femenino</option>
                                             </select>

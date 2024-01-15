@@ -1,9 +1,8 @@
 @extends('layouts.app')
 @section('content')
+    {{-- <x-container-info-pacientes-navegacion :paciente="$paciente" :antecedentes="$antPersonales?"></x-container-info-pacientes-navegacion> --}}
 
-{{-- <x-container-info-pacientes-navegacion :paciente="$paciente" :antecedentes="$antPersonales?"></x-container-info-pacientes-navegacion> --}}
-
-<x-navegacion-paciente :paciente="$paciente" />
+    <x-navegacion-paciente :paciente="$paciente" />
     <form>
         <div class="card">
             <div class="card-body">
@@ -66,7 +65,7 @@
                                         </div>
                                     </div>
 
-                                    @if ( ($paciente->edad < 12) && ($representante != null) )
+                                    @if ($paciente->edad < 12 && $representante != null)
                                         <div class="row" id="representanteDiv">
                                             <div class="col-md-6">
                                                 <div class="mb-3">
@@ -316,24 +315,28 @@
                                                 Alergias
                                             </label>
                                         </div>
-                                        <div class="col-lg-3 col-md-6">
-                                            <div class="mb-3">
+                                    </div>
+
+                                    <div class="row mt-2">
+                                        <div class="col-lg-6 col-md-6">
+                                            <div class="form-floating mb-3">
                                                 <input type="text" class="form-control" name="otra_enfermedad"
                                                     id="" aria-describedby="helpId"
                                                     value="{{ $antPersonales?->otra_enfermedad }}"
                                                     placeholder="Otra Enfermedad" readonly>
+                                                <label for="otra_enfermedad" class="fw-bold">Otra Enfermedad</label>
                                             </div>
                                         </div>
 
-                                        <div class="col-lg-3 col-md-6">
-                                            <div class="mb-3">
+                                        <div class="col-lg-6 col-md-6">
+                                            <div class="form-floating mb-3">
                                                 <input type="text" class="form-control" name="parentesco"
                                                     id="" aria-describedby="helpId"
                                                     value="{{ $antPersonales?->parentesco }}" placeholder="Parentesco"
                                                     readonly>
+                                                <label for="parentesco" class="fw-bold">Parentesco</label>
                                             </div>
                                         </div>
-
                                     </div>
 
                                     <div class="row">
@@ -346,8 +349,7 @@
                                                 <div class="form-check">
                                                     <input class="form-check-input" type="radio" id=""
                                                         name="embarazada" value="0"
-                                                        {{ $antPersonales?->embarazada == '0' ? 'checked' : '' }}
-                                                        disabled>
+                                                        {{ $antPersonales?->embarazada == '0' ? 'checked' : '' }} readonly>
                                                     <label readonly="form-check-label" for="">
                                                         Sí
                                                     </label>
@@ -359,8 +361,7 @@
                                                 <div class="form-check">
                                                     <input class="form-check-input" type="radio" id=""
                                                         name="embarazada" value="1"
-                                                        {{ $antPersonales?->embarazada == '1' ? 'checked' : '' }}
-                                                        readonly>
+                                                        {{ $antPersonales?->embarazada == '1' ? 'checked' : '' }} readonly>
                                                     <label class="form-check-label" for="">
                                                         No
                                                     </label>
@@ -368,15 +369,18 @@
                                             </div>
                                         </div>
 
-                                        <div class="col-md-6 col-lg-3">
-                                            <div class="mb-3">
-                                                <input type="number" class="form-control" name="semanas_embarazo"
-                                                    id="" aria-describedby="helpId"
-                                                    placeholder="Semanas de Embarazo"
-                                                    value="{{ $antPersonales?->semanas_embarazo }}" readonly>
+                                        @if ($antPersonales?->embarazada == '0')
+                                            <div class="col-md-6 col-lg-4">
+                                                <div class="input-group mb-3">
+                                                    <span class="input-group-text fw-bold" id="basic-addon1">Semanas de
+                                                        embarazo</span>
+                                                    <input type="number" class="form-control" name="semanas_embarazo"
+                                                        id="" aria-describedby="helpId"
+                                                        placeholder="Ejemplo: 16"
+                                                        value="{{ $antPersonales?->semanas_embarazo }}" readonly>
+                                                </div>
                                             </div>
-                                        </div>
-
+                                        @endif
 
                                         <div class="row">
                                             <div class="col-md-6">
@@ -469,7 +473,8 @@
                                             <div class="col-lg-3 col-md-6">
                                                 <div class="mb-3">
                                                     <input type="text" class="form-control" name="otro_habito"
-                                                        id="" aria-describedby="helpId" placeholder="Escriba otro hábito"
+                                                        id="" aria-describedby="helpId"
+                                                        placeholder="Escriba otro hábito"
                                                         value="{{ $antPersonales?->otro_habito }}" readonly>
                                                 </div>
                                             </div>

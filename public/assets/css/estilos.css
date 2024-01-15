@@ -28,8 +28,8 @@ input[type="radio"]:hover {
 
 .btn_diente {
     cursor: pointer;
-    border: solid 1px #7bc3c2;
-    border-radius: 5px;
+    border: solid 1px #808080;
+    border-radius: 4px;
     background-color: transparent;
 }
 

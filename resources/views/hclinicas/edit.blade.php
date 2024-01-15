@@ -65,7 +65,7 @@
                                         </div>
                                     </div>
 
-                                    @if ( ($paciente->edad < 12) && ($representante) )
+                                    @if ($paciente->edad < 12 && $representante)
                                         <div class="row" id="representanteDiv">
                                             <div class="col-md-6">
                                                 <div class="mb-3">
@@ -168,7 +168,8 @@
                                                     Convencional</label>
                                                 <input type="text" class="form-control" name="telef_convencional"
                                                     id="telefono" aria-describedby="helpId" maxlength="9"
-                                                    placeholder="Por ejemplo: 2831373" value="{{ $paciente->telef_convencional }}">
+                                                    placeholder="Por ejemplo: 2831373"
+                                                    value="{{ $paciente->telef_convencional }}">
                                             </div>
                                         </div>
                                     </div>
@@ -468,23 +469,28 @@
                                                 Alergias
                                             </label>
                                         </div>
-                                        <div class="col-lg-3 col-md-6">
-                                            <div class="mb-3">
+
+                                    </div>
+
+                                    <div class="row mt-2">
+                                        <div class="col-lg-6 col-md-6">
+                                            <div class="form-floating mb-3">
                                                 <input type="text" class="form-control" name="otra_enfermedad"
                                                     id="" aria-describedby="helpId"
                                                     value="{{ $antPersonales?->otra_enfermedad }}"
                                                     placeholder="Otra Enfermedad">
+                                                <label for="otra_enfermedad" class="fw-bold">Otra Enfermedad</label>
                                             </div>
                                         </div>
 
-                                        <div class="col-lg-3 col-md-6">
-                                            <div class="mb-3">
+                                        <div class="col-lg-6 col-md-6">
+                                            <div class="form-floating mb-3">
                                                 <input type="text" class="form-control" name="parentesco"
                                                     id="" aria-describedby="helpId"
                                                     value="{{ $antPersonales?->parentesco }}" placeholder="Parentesco">
+                                                <label for="parentesco" class="fw-bold">Parentesco</label>
                                             </div>
                                         </div>
-
                                     </div>
 
                                     <div class="row">
@@ -495,10 +501,10 @@
                                         <div class="col-lg-1 col-md-5">
                                             <div class="col-sm">
                                                 <div class="form-check">
-                                                    <input class="form-check-input" type="radio" id=""
+                                                    <input class="form-check-input" type="radio" id="radioEmbarazadaSi"
                                                         name="embarazada" value="0"
                                                         {{ $antPersonales?->embarazada == '0' ? 'checked' : '' }}>
-                                                    <label class="form-check-label" for="">
+                                                    <label class="form-check-label" for="radioEmbarazadaSi">
                                                         Sí
                                                     </label>
                                                 </div>
@@ -507,21 +513,25 @@
                                         <div class="col-lg-1 col-md-5">
                                             <div class="col-sm">
                                                 <div class="form-check">
-                                                    <input class="form-check-input" type="radio" id=""
+                                                    <input class="form-check-input" type="radio" id="radioEmbarazadaSi"
                                                         name="embarazada" value="1"
                                                         {{ $antPersonales?->embarazada == '1' ? 'checked' : '' }}>
-                                                    <label class="form-check-label" for="">
+                                                    <label class="form-check-label" for="radioEmbarazadaNo">
                                                         No
                                                     </label>
                                                 </div>
                                             </div>
                                         </div>
 
-                                        <div class="col-md-6 col-lg-3">
-                                            <div class="mb-3">
+
+                                        <div class="col-md-6 col-lg-4" id="embarazada">
+                                            <div class="input-group mb-3">
+                                                <span class="input-group-text fw-bold" id="basic-addon1">Semanas de
+                                                    embarazo</span>
                                                 <input type="number" class="form-control" name="semanas_embarazo"
-                                                    id="" aria-describedby="helpId"
-                                                    placeholder="Semanas de Embarazo"
+                                                    id="semanas_embarazo" aria-describedby="helpId"
+                                                    style="{{ $antPersonales?->embarazada == '0' ? 'display: block' : 'display: none' }}"
+                                                    placeholder="Ejemplo: 16"
                                                     value="{{ $antPersonales?->semanas_embarazo }}">
                                             </div>
                                         </div>
@@ -679,6 +689,16 @@
 
                 // Controlar la visibilidad del div del representante según la edad calculada
                 controlarVisibilidadRepresentante();
+            });
+
+            // Controlar la visibilidad del input semanas de embarazo según la respuesta de embarazada
+            $('input[name="embarazada"]').on('change', function() {
+                const embarazada = $(this).val();
+                if (embarazada === '0') {
+                    $('#embarazada input').show();
+                } else {
+                    $('#embarazada input').hide();
+                }
             });
         });
     </script>

@@ -130,8 +130,8 @@
                                             <label for="" class="form-label fw-bold">Estado civil</label>
                                             <select name="estado_civil" id="" class="form-select form-select-md"
                                                 required>
-
-                                                <option>Seleccione el estado civil del paciente</option>
+                                                <option selected value="">Seleccione el estado civil del paciente
+                                                </option>
                                                 <option value="soltero" {{ old('etado_civil') ? 'checked' : '' }}>
                                                     Soltero/a</option>
                                                 <option value="casado" {{ old('etado_civil') ? 'checked' : '' }}>Casado/a
@@ -142,8 +142,6 @@
                                                     Divorciado/a</option>
                                                 <option value="viudo" {{ old('etado_civil') ? 'checked' : '' }}>Viudo/a
                                                 </option>
-
-
                                             </select>
 
                                             @error('estado_civil')
@@ -156,7 +154,8 @@
                                                 <label for="" class="form-label fw-bold">Género</label>
                                                 <select class="form-select form-select-md" name="sexo" required
                                                     aria-label=".form-select-sm example">
-                                                    <option>Seleccione el género del paciente</option>
+                                                    <option selected value="">Seleccione el género del paciente
+                                                    </option>
                                                     <option value="masculino" {{ old('sexo') ? 'checked' : '' }}>
                                                         Masculino</option>
                                                     <option value="femenino" {{ old('sexo') ? 'checked' : '' }}>Femenino
@@ -501,27 +500,30 @@
                                                     Alergias
                                                 </label>
                                             </div>
-                                            <div class="col-lg-3 col-md-6">
-                                                <div class="mb-3">
+                                        </div>
+
+                                        <div class="row mt-2">
+                                            <div class="col-lg-6 col-md-6">
+                                                <div class="form-floating mb-3">
                                                     <input type="text" class="form-control" name="otra_enfermedad"
-                                                        id="" aria-describedby="helpId"
+                                                        id="otra_enfermedad" aria-describedby="helpId"
                                                         placeholder="Escriba otra enfermedad">
+                                                    <label for="otra_enfermedad" class="fw-bold">Otra Enfermedad</label>
                                                 </div>
                                             </div>
 
-                                            <div class="col-lg-3 col-md-6">
-                                                <div class="mb-3">
+                                            <div class="col-lg-6 col-md-6">
+                                                <div class="form-floating mb-3">
                                                     <input type="text" class="form-control" name="parentesco"
-                                                        id="" aria-describedby="helpId"
+                                                        id="parentesco" aria-describedby="helpId"
                                                         placeholder="Parentesco">
+                                                    <label for="parentesco" class="fw-bold">Parentesco</label>
                                                 </div>
                                             </div>
-
                                         </div>
 
 
                                         <div class="row">
-
                                             <div class="col-lg-3 col-md-4">
                                                 <p class="fw-bold">¿Está Ud embarazada?</p>
                                             </div>
@@ -547,11 +549,12 @@
                                                 </div>
                                             </div>
 
-                                            <div class="col-md-6 col-lg-4">
-                                                <div class="mb-3">
-                                                    <input type="number" class="form-control" name="semanas_embarazo"
-                                                        id="" aria-describedby="helpId"
-                                                        placeholder="Digite las semanas de embarazo">
+                                            <div class="col-md-6 col-lg-4" id="embarazada">
+                                                <div class="input-group mb-3">
+                                                    <span class="input-group-text fw-bold" id="basic-addon1">Semanas de embarazo</span>
+                                                    <input type="number" class="form-control" name="semanas_embarazo" style="display: none;"
+                                                     aria-describedby="helpId"
+                                                        placeholder="Ejemplo: 16">
                                                 </div>
                                             </div>
 
@@ -681,13 +684,13 @@
 
             function controlarVisibilidadRepresentante() {
                 const edad = parseInt(edadInput.val());
-
                 if (edad < 12) {
                     representanteDiv.show();
                 } else {
                     representanteDiv.hide();
                 }
             }
+
             // Evento que se dispara al cambiar el valor del input de fecha
             fechaInput.on('change', function() {
                 // Obtener el valor de la fecha de nacimiento
@@ -700,6 +703,17 @@
                 // Controlar la visibilidad del div del representante según la edad calculada
                 controlarVisibilidadRepresentante();
             });
+
+            // Controlar la visibilidad del input semanas de embarazo según la respuesta de embarazada
+            $('input[name="embarazada"]').on('change', function() {
+                const embarazada = $(this).val();
+                if (embarazada === '0') {
+                    $('#embarazada input').show();
+                } else {
+                    $('#embarazada input').hide();
+                }
+            });
+            
         });
     </script>
 

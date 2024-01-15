@@ -316,7 +316,7 @@
         </div>
 
         <div class="mt-2">
-            <a class="btn btn-secondary" href="{{ route('presupuestos.edit', $odontograma->id) }}">Ir al Presupuesto </a>
+            <a class="btn btn-secondary" href="{{ route('presupuestos.edit', $odontograma->id) }}"><i class="fa-regular fa-file"></i> Ir al Presupuesto </a>
         </div>
     </div>
 

@@ -3,14 +3,15 @@
     <table class="table">
         <thead class="bg-dark text-white">
             <tr>
-                <th scope="col" class="col-md-1">Nº</th>
-                <th scope="col" class="col-md-2">Fecha</th>
-                <th scope="col" class="col-md-1">Tratamiento</th>
-                <th scope="col" class="col-md-1">Diente</th>
-                <th scope="col" class="col-md-2">Cara Dental</th>
-                <th scope="col" class="col-md-2">Odontólogo</th>
-                <th scope="col" class="col-md-1">Estado</th>
-                <th scope="col" class="col-md-2">Acciones</th>
+                <th scope="col">Nº</th>
+                <th scope="col">Fecha</th>
+                <th scope="col">Tratamiento</th>
+                <th scope="col">Diente</th>
+                <th scope="col">Cara Dental</th>
+                <th scope="col">Odontólogo</th>
+                <th scope="col">Estado</th>
+                <th scope="col">Observación</th>
+                <th scope="col">Acciones</th>
             </tr>
         </thead>
         <tbody>
@@ -30,6 +31,7 @@
                         <td>{{ $detalle->cara_dental }}</td>
                         <td>{{ $detalle->odontologo->nombres . ' ' . $detalle->odontologo->apellidos }}</td>
                         <td>{{ strtoupper($detalle->estado) }}</td>
+                        <td>{{ $detalle->observacion }}</td>
                         <td>
 
                             <!--desactivar los botones de los detalles que no pertecen al usuario logueado-->

@@ -9,7 +9,7 @@
         <div class="row">
             <div class="col-md-4">
                 <label for="year" class="fw-bold">Año</label>
-                <select class="form-control" id="year" name="year">
+                <select class="form-select form-select-md mt-2" id="year" name="year" autofocus>
                     <option value="">Seleccione un año</option>
                     @foreach ($years as $year)
                         <!--Seleccionar el año actual-->
@@ -23,7 +23,7 @@
             <!-- Select para filtrar por mes -->
             <div class="col-md-4">
                 <label for="month" class="fw-bold">Mes</label>
-                <select class="form-control" id="month" name="month">
+                <select class="form-select form-select-md mt-2" id="month" name="month">
                     <option value="">Seleccione un mes</option>
                     <option value="1">Enero</option>
                     <option value="2">Febrero</option>
@@ -39,7 +39,7 @@
                     <option value="12">Diciembre</option>
                 </select>
             </div>
-            <div class="col-md-2">
+            <div class="col-md-2 mt-2">
                 <!-- Boton para filtrar -->
                 <label for="month" class="fw-bold">&nbsp;</label>
                 <button type="submit" class="btn btn-primary form-control"><i class="fa-solid fa-magnifying-glass"></i>
@@ -47,7 +47,7 @@
             </div>
     </form>
 
-    <table class="table" id="table_presupuestos">
+    <table class="table mt-4" id="table_presupuestos">
         
         <thead class="bg-dark text-white">
             <tr>

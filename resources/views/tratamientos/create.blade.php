@@ -11,8 +11,8 @@
             <div class="modal-body">
                 <div class="mb-3">
                     <label for="" class="form-label fw-bold">Nombre</label>
-                    <input type="text"
-                        class="form-control form-control-md" name="nombre" id="" 
+                    <input type="text" autofocus
+                        class="form-control form-control-md" name="nombre" id=""
                         aria-describedby="helpId" placeholder="Ingrese el nombre del tratamiento" required>
                 </div>
 

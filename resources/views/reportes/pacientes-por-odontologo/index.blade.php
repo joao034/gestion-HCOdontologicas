@@ -10,7 +10,7 @@
                 <div class="col-md-6">
                     <label for="odontologo_id" class="form-label fw-bold">{{ __('Odontólogo') }}</label>
                     <select class="form-select form-select-md" name="odontologo_id" required
-                        aria-label=".form-select-md example" id="odontologo_id">
+                        aria-label=".form-select-md example" id="odontologo_id" autofocus>
                         <option value="0">Seleccione un odontólogo</option>
                         @foreach ($odontologos as $odontologo)
                             <option value="{{ $odontologo->id }}">

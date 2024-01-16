@@ -43,7 +43,7 @@
                                                 <label for="" class="form-label fw-bold">Cédula</label>
                                                 <input type="text" class="form-control" name="cedula" minlength="10"
                                                     maxlength="10" id="cedula" aria-describedby="helpId" placeholder=""
-                                                    required value="{{ $paciente->cedula }}">
+                                                    value="{{ $paciente->cedula }}">
                                             </div>
                                         </div>
                                         <div class="col-md-5">
@@ -363,6 +363,7 @@
 
                   </div> --}}
                     </div>
+                    <!--Fin Datos Generales-->
 
                     <!--Antecedentes Personales y Familiares-->
                     <div class="row mt-4">
@@ -634,14 +635,52 @@
                                     </div>
                                 </div>
                             </div>
-
-                            <div class="text-end">
-                                <button type="submit" class="btn btn-primary mt-3"><i class="fa-solid fa-check"></i>
-                                    Actualizar Historia Clínica</button>
-                            </div>
                         </div>
 
                     </div>
+                    <!--Fin Antecedentes Personales y Familiares-->
+
+                    <!--Diagnostico-->
+                    <div class="row justify-content-center mt-4">
+                        <div class="col-md-12 col-lg-12">
+                            <div class="card text-start">
+                                <div class="card-body">
+                                    <h5 class="card-title fw-bolder">Diagnóstico</h5>
+                                    <hr>
+                                    <div class="row">
+                                        <div class="col-lg-6 col-md-6">
+                                            <div class="form-floating mb-3">
+                                                <input type="text" class="form-control" name="diagnostico"
+                                                    id="diganostico" aria-describedby="helpId"
+                                                    value="{{ $diagnostico?->diagnostico }}"
+                                                    placeholder="Escriba el diagnóstico" autofocus>
+                                                <label for="diganostico" class="fw-bold">Diagnóstico</label>
+                                            </div>
+                                        </div>
+
+                                        <div class="col-lg-6 col-md-6">
+                                            <div class="form-floating mb-3">
+                                                <input type="text" class="form-control" name="enfermedad_actual"
+                                                    id="enfermedad_actual" aria-describedby="helpId"
+                                                    value="{{ $diagnostico?->enfermedad_actual }}"
+                                                    placeholder="Escriba la enfermedad actual">
+                                                <label for="enfermedad_actual" class="fw-bold">Enfermedad Actual</label>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <!--Fin Diagnostico-->
+
+                    <!--Boton Guardar-->
+                    <div class="text-end">
+                        <button type="submit" class="btn btn-primary mt-3"><i class="fa-solid fa-check"></i>
+                            Actualizar Historia Clínica</button>
+                    </div>
+                    <!--Fin Boton Guardar-->
+
                 </div>
 
     </form>

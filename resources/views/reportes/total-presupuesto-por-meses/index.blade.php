@@ -6,8 +6,8 @@
     <div class="row">
         <div class="col-md-4">
 
-            <label for="year" class="fw-bold">Año</label>
-            <select class="form-control" id="year" name="year">
+            <label for="year" class="form-label fw-bold">Año</label>
+            <select class="form-select form-select-md" id="year" name="year" autofocus>
                 <option value="">Seleccione un año</option>
                 @foreach ($years as $year)
                     <option value="{{ $year->year }}">{{ $year->year }}</option>

@@ -19,10 +19,10 @@
                                     <div class="row">
                                         <div class="col-md-6">
                                             <div class="mb-3">
-                                                <label for="" class="form-label fw-bold">Nombres</label>
+                                                <label for="nombres" class="form-label fw-bold">Nombres</label>
                                                 <input type="text" value="{{ old('nombres') }}" class="form-control"
                                                     name="nombres" id="" aria-describedby="helpId"
-                                                    placeholder="Escriba los nombres del paciente" required>
+                                                    placeholder="Escriba los nombres del paciente" required autofocus>
 
                                                 @error('nombres')
                                                     <small class="text-danger"> {{ $message }}</small>
@@ -35,12 +35,10 @@
                                                 <label for="" class="form-label fw-bold">Apellidos</label>
                                                 <input type="text" value="{{ old('apellidos') }}" class="form-control"
                                                     name="apellidos" id="" aria-describedby="helpId"
-                                                    placeholder="Escriba los apellidos del paciente">
-
+                                                    placeholder="Escriba los apellidos del paciente" required>
                                                 @error('apellidos')
                                                     <small class="text-danger"> {{ $message }}</small>
                                                 @enderror
-
                                             </div>
                                         </div>
                                     </div>
@@ -53,11 +51,9 @@
                                                     value="{{ old('cedula') }}" minlength="10" maxlength="10" id="cedula"
                                                     aria-describedby="helpId" placeholder="Escriba la cédula del paciente"
                                                     pattern="^[0-9]+$">
-
                                                 @error('cedula')
                                                     <small class="text-danger"> {{ $message }}</small>
                                                 @enderror
-
                                             </div>
                                         </div>
                                         <div class="col-md-5">
@@ -132,15 +128,15 @@
                                                 required>
                                                 <option selected value="">Seleccione el estado civil del paciente
                                                 </option>
-                                                <option value="soltero" {{ old('etado_civil') ? 'checked' : '' }}>
+                                                <option value="soltero" {{ old('estado_civil') == 'soltero' ? 'selected' : '' }}>
                                                     Soltero/a</option>
-                                                <option value="casado" {{ old('etado_civil') ? 'checked' : '' }}>Casado/a
+                                                <option value="casado" {{ old('estado_civil') == 'casado' ? 'selected' : '' }}>Casado/a
                                                 </option>
-                                                <option value="unionlibre" {{ old('etado_civil') ? 'checked' : '' }}>Unión
+                                                <option value="unionlibre" {{ old('estado_civil') == 'unionlibre' ? 'selected' : '' }}>Unión
                                                     Libre</option>
-                                                <option value="divorciado" {{ old('etado_civil') ? 'checked' : '' }}>
+                                                <option value="divorciado" {{ old('estado_civil') == 'divorciado' ? 'selected' : '' }}>
                                                     Divorciado/a</option>
-                                                <option value="viudo" {{ old('etado_civil') ? 'checked' : '' }}>Viudo/a
+                                                <option value="viudo" {{ old('estado_civil') == 'viudo' ? 'selected' : '' }}>Viudo/a
                                                 </option>
                                             </select>
 
@@ -156,11 +152,11 @@
                                                     aria-label=".form-select-sm example">
                                                     <option selected value="">Seleccione el género del paciente
                                                     </option>
-                                                    <option value="masculino" {{ old('sexo') ? 'checked' : '' }}>
+                                                    <option value="masculino" {{ old('sexo') == 'masculino' ? 'selected' : '' }}>
                                                         Masculino</option>
-                                                    <option value="femenino" {{ old('sexo') ? 'checked' : '' }}>Femenino
+                                                    <option value="femenino" {{ old('sexo') == 'femenino' ? 'selected' : '' }}>Femenino
                                                     </option>
-                                                    <option value="otro" {{ old('sexo') ? 'checked' : '' }}>Otro
+                                                    <option value="otro" {{ old('sexo') == 'otro' ? 'selected' : '' }}>Otro
                                                     </option>
                                                 </select>
 
@@ -169,10 +165,6 @@
                                                 @enderror
                                             </div>
                                         </div>
-
-
-
-
                                     </div>
 
                                     <div class="row">
@@ -180,7 +172,7 @@
                                             <div class="mb-3">
                                                 <label for="" class="form-label fw-bold">Celular</label>
                                                 <input type="text" value="{{ old('celular') }}" class="form-control"
-                                                    required name="celular" minlength="10" maxlength="10" id="celular"
+                                                    name="celular" minlength="10" maxlength="10" id="celular"
                                                     aria-describedby="helpId"
                                                     placeholder="Escirba el celular del paciente" pattern="^[0-9]+$">
 
@@ -403,6 +395,7 @@
 
                   </div> --}}
                     </div>
+                    <!--Fin Datos Generales-->
 
                     <!--Antecedentes Personales y Familiares-->
                     <div class="row mt-4">
@@ -551,9 +544,10 @@
 
                                             <div class="col-md-6 col-lg-4" id="embarazada">
                                                 <div class="input-group mb-3">
-                                                    <span class="input-group-text fw-bold" id="basic-addon1">Semanas de embarazo</span>
-                                                    <input type="number" class="form-control" name="semanas_embarazo" style="display: none;"
-                                                     aria-describedby="helpId"
+                                                    <span class="input-group-text fw-bold" id="basic-addon1">Semanas de
+                                                        embarazo</span>
+                                                    <input type="number" class="form-control" name="semanas_embarazo"
+                                                        style="display: none;" aria-describedby="helpId"
                                                         placeholder="Ejemplo: 16">
                                                 </div>
                                             </div>
@@ -646,30 +640,46 @@
                                     </div>
                                 </div>
                             </div>
+                        </div>
+                    </div>
+                    <!--Fin Antecedentes Personales y Familiares-->
 
-                            <div class="row justify-content-center mt-4">
-                                <div class="col-md-12 col-lg-12">
-                                    <div class="card text-start">
-                                        <div class="card-body">
-                                            <h5 class="card-title fw-bolder">Diagnóstico</h5>
-                                            <hr>
-                                            <div class="row">
-                                                
+                    <!--Diagnostico-->
+                    <div class="row justify-content-center mt-4">
+                        <div class="col-md-12 col-lg-12">
+                            <div class="card text-start">
+                                <div class="card-body">
+                                    <h5 class="card-title fw-bolder">Diagnóstico</h5>
+                                    <hr>
+                                    <div class="row">
+                                        <div class="col-lg-6 col-md-6">
+                                            <div class="form-floating mb-3">
+                                                <input type="text" class="form-control" name="diagnostico"
+                                                    id="diganostico" aria-describedby="helpId"
+                                                    placeholder="Escriba el diagnóstico">
+                                                <label for="diganostico" class="fw-bold">Diagnóstico</label>
+                                            </div>
+                                        </div>
+
+                                        <div class="col-lg-6 col-md-6">
+                                            <div class="form-floating mb-3">
+                                                <input type="text" class="form-control" name="enfermedad_actual"
+                                                    id="enfermedad_actual" aria-describedby="helpId"
+                                                    placeholder="Escriba la enfermedad actual">
+                                                <label for="enfermedad_actual" class="fw-bold">Enfermedad Actual</label>
                                             </div>
                                         </div>
                                     </div>
                                 </div>
                             </div>
-
-                            <div class="text-end">
-                                <button type="submit" class="btn btn-primary mt-3"><i class="fa-solid fa-check"></i>
-                                    Guardar Historia Clínica</button>
-                            </div>
                         </div>
                     </div>
+                    <!--Fin Diagnostico-->
 
-                    
-                                        
+                    <div class="text-end">
+                        <button type="submit" class="btn btn-primary mt-3"><i class="fa-solid fa-check"></i>
+                            Guardar Historia Clínica</button>
+                    </div>
                 </div>
 
 
@@ -729,7 +739,7 @@
                     $('#embarazada input').hide();
                 }
             });
-            
+
         });
     </script>
 

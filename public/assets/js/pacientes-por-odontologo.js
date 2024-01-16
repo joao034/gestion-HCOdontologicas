@@ -46,7 +46,7 @@ function actualizarTabla(pacientes) {
     } else {
         $.each(pacientes, function (index, paciente) {
             tabla += "<tr>";
-            tabla += '<td scope="row">' + paciente.cedula + "</td>";
+            tabla += '<td scope="row">' + (paciente.cedula === null ? '-' : paciente.cedula) + "</td>";
             tabla +=
                 "<td>" + paciente.nombres + " " + paciente.apellidos + "</td>";
             //calcula la edad con la fecha de nacimiento
@@ -55,7 +55,7 @@ function actualizarTabla(pacientes) {
             var edad =
                 fechaActual.getFullYear() - fechaNacimiento.getFullYear();
             tabla += "<td>" + edad + "</td>";
-            tabla += "<td>" + paciente.celular + "</td>";
+            tabla += "<td>" + (paciente.celular === null ? '-' : paciente.celular) + "</td>";
             //if (paciente.representante == null) paciente.representante = "-";
             tabla += "<td>" + paciente.direccion + "</td>";
             tabla += "<td></td>";

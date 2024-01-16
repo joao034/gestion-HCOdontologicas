@@ -20,7 +20,7 @@
                     <div class="row">
                         <label for="" class="form-label fw-bold">Tratamiento</label>
                         <div class="mb-3">
-                            <select class="form-select form-select-md" name="tratamiento_id" id="tratamientos" required>
+                            <select class="form-select form-select-md" autofocus name="tratamiento_id" id="tratamientos" required>
                                 <option selected>Seleccione un tratamiento</option>
                                 @foreach ($tratamientos as $tratamiento)
                                     <option value="{{ $tratamiento->id }}">

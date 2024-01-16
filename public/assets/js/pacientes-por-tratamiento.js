@@ -46,7 +46,7 @@ function actualizarTabla(pacientes) {
     } else {
         $.each(pacientes, function (index, paciente) {
             tabla += "<tr>";
-            tabla += '<td scope="row">' + paciente.cedula + "</td>";
+            tabla += '<td scope="row">' + (paciente.cedula === null ? '-' : paciente.cedula) + "</td>";
             tabla +=
                 "<td>" + paciente.nombres + " " + paciente.apellidos + "</td>";
             //calcula la edad con la fecha de nacimiento

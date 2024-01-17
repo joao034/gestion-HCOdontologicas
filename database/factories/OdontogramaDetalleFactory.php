@@ -41,7 +41,6 @@ class OdontogramaDetalleFactory extends Factory
             },
 
             // Otros campos del odontograma
-            'fecha' => now()->format('Y-m-d'),
             'num_pieza_dental' => 18,
             'precio' => 20,
             'cara_dental' => 'Vestibular',

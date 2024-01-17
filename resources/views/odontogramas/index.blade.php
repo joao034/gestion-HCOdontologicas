@@ -1,3 +1,4 @@
+<!-- No se usa -->
 @extends('layouts.app')
 @section('content')
     <h1 class="text-center"><img src="assets/icons/diente.png"> Lista de odontogramas</h1>

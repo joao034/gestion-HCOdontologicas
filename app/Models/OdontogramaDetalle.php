@@ -47,7 +47,7 @@ class OdontogramaDetalle extends Model
 	];
 
 	protected $fillable = [
-		'fecha',
+		'fecha_realizado',
 		'num_pieza_dental',
 		'cara_dental',
 		'simbolo_id',

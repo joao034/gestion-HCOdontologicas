@@ -14,7 +14,7 @@ return new class extends Migration
         Schema::create('odontograma_detalle', function (Blueprint $table) {
             $table->id();
             $table->timestamps();
-            $table->date('fecha');
+            $table->date('fecha_realizado');
             $table->string('num_pieza_dental', 100)->nullable();
             $table->string('cara_dental', 100)->nullable();
             $table->string('observacion', 255)->nullable();

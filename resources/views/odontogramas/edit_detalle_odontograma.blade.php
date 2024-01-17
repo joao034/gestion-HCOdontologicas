@@ -1,4 +1,4 @@
-<div class="modal fade" tabindex="-1" id="detalle_odontograma">
+<div class="modal fade" tabindex="-1" id="editar{{ $detalle->id }}">
     <div class="modal-dialog">
         <div class="modal-content">
             <div class="modal-header">
@@ -7,9 +7,9 @@
             </div>
             <div class="modal-body">
 
-                <form action=" {{ route('detalleOdontogramas.store') }}" method="POST">
+                <form action=" {{ route('detalleOdontogramas.update', $detalle->id) }}">
                     @csrf
-                    @method('POST')
+                    @method('PUT')
 
                     <input type="hidden" name="odontograma_cabecera_id" id="odontograma_cabecera_id">
                     <input type="hidden" name="cara_dental[]" id="cara_dental">
@@ -20,12 +20,11 @@
                     <div class="row">
                         <label for="" class="form-label fw-bold">Tratamiento</label>
                         <div class="mb-3">
-                            <select class="form-select form-select-md" name="tratamiento_id" id="tratamientos" required>
-                                <option selected>Seleccione un tratamiento</option>
-                                @foreach ($tratamientos as $tratamiento)
-                                    <option value="{{ $tratamiento->id }}">
-                                        {{ $tratamiento->nombre . ' - $' . $tratamiento->precio }}</option>
-                                @endforeach
+                            <select class="form-select form-select-md" autofocus name="tratamiento_id" id=""
+                                required disabled>
+                                <option value="{{ $detalle->tratamiento_id }}">
+                                    {{ $detalle->tratamiento->nombre }}
+                                </option>
                             </select>
                         </div>
                     </div>
@@ -72,10 +71,9 @@
                             </label>
                         </div>
                     </div>
-                    <!-- Fin Caras dentale -->
 
                     <!--Simbolos-->
-                    <div class="row" style="margin-top: 5px;border-top:">
+                    {{-- <div class="row" style="margin-top: 5px;border-top:">
                         <div class="card">
                             <div class="card-body">
                                 <h6 class="card-title fw-bold">Símbolos</h6>
@@ -85,13 +83,12 @@
                                             for="">Necesarios</label>
                                         <br>
                                         <div class="contenedor-botones">
-                                            <!--Se activa cuando selecciona una cara != oclusal-->
-                                            <div class="row" id="div_simbolo_rojo">
+                                            <div class="row" id="div_simbolo_rojo" style="display: none;">
                                                 <button type="button" class="btn_simbolo_necesario" id="btn_simbolo"
                                                     data-bs-placement="bottom"
                                                     onclick="agregar_simbolo( event, {{ $simboloRojo->id }})">
                                             </div>
-                                            <div class="row" id="div_simbolos">
+                                            <div class="row" style="display: none;" id="div_simbolos">
                                                 @foreach ($simbolosRojos as $simboloRojo)
                                                     <div class="col-5 col-sm-4 col-md-3 col-lg-2">
                                                         <button type="button" class="btn_simbolo_necesario"
@@ -113,13 +110,12 @@
                                             for="">Realizados</label>
                                         <br>
                                         <div class="contenedor-botones">
-                                            <!--Se activa cuando selecciona una cara != oclusal-->
-                                            <div class="row" id="div_simbolo_azul">
+                                            <div class="row" id="div_simbolo_azul" style="display: none;">
                                                 <button type="button" class="btn_simbolo_realizado" id="btn_simbolo"
                                                     data-bs-placement="bottom"
                                                     onclick="agregar_simbolo( event, {{ $simboloAzul->id }})">
                                             </div>
-                                            <div class="row" id="div_simboloss">
+                                            <div class="row" style="display: none;" id="div_simboloss">
                                                 @foreach ($simbolosAzules as $simboloAzul)
                                                     <div class="col-5 col-sm-4 col-md-3 col-lg-2">
                                                         <button type="button" class="btn_simbolo_realizado"
@@ -137,8 +133,21 @@
                                 </div>
                             </div>
                         </div>
-                    </div>
-                    <!--Fin Simbolos-->
+                    </div> --}}
+
+{{--                     <div class="row mt-2">
+                        <div class="mb-3">
+                            <label for="" class="form-label fw-bold">Simbolo</label>
+                            <select required class="form-select form-select-md" name="simbolo_id" id="">
+                                <option value="">Seleccione un simbolo</option>
+                                @foreach ($simbolosRojos as $simbolo)
+                                    <option value="{{ $simbolo->id }}" {{ $simbolo->id === $detalle->simbolo_id ? 'selected' : ''}}>
+                                        {{ $simbolo->nombre }}
+                                    </option>
+                                @endforeach
+                            </select>
+                        </div>
+                    </div> --}}
 
                     <!--Odontologo-->
                     <div class="row mt-2">
@@ -149,7 +158,7 @@
 
                                     <option selected>Seleccione un odontólogo</option>
                                     @foreach ($odontologos as $odontologo)
-                                        <option value="{{ $odontologo->id }}">
+                                        <option value="{{ $odontologo->id }}" {{ $odontologo->id === $detalle->odontologo_id ? 'selected' : ''}}>
                                             {{ $odontologo->nombres . ' ' . $odontologo->apellidos . ' - ' . $odontologo->especialidad->nombre }}
                                         </option>
                                     @endforeach
@@ -157,8 +166,11 @@
                                     <option value="{{ Auth::user()->odontologo->id }}" selected>
                                         {{ Auth::user()->odontologo->nombres . ' ' . Auth::user()->odontologo->apellidos . ' - ' . Auth::user()->odontologo->especialidad->nombre }}
                                     </option>
+
                                 @endif
+
                             </select>
+
                         </div>
                     </div>
 
@@ -167,7 +179,8 @@
                         <div class="mb-3">
                             <label for="" class="form-label fw-bold">Observación</label>
                             <input type="text" class="form-control" name="observacion" id=""
-                                aria-describedby="helpId" placeholder="Escriba alguna observacion">
+                                aria-describedby="helpId" placeholder="Escriba alguna observacion"
+                                value="{{$detalle->observacion}}">
                         </div>
                     </div>
 

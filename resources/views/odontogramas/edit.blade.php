@@ -1,7 +1,6 @@
 @extends('layouts.app')
 @section('content')
-    {{-- 
-<x-container-info-pacientes-navegacion :paciente="$paciente" :antecedentes="$antPersonales"></x-container-info-pacientes-navegacion> --}}
+
     <x-navegacion-paciente :paciente="$odontograma->paciente" />
 
     <h3 class="text-center mt-4 mb-3 fw-bold">Odontograma de
@@ -289,23 +288,6 @@
         </div>
     </div>
     <!-- Fin Cuadrante Inferior dentadura adulta -->
-
-    <!-- Diagnostico y Enfermedad Actual -->
-    {{-- <div class="row">
-    <div class="col-md-6">
-        <div class="form-floating mt-3">
-            <input type="text" class="form-control" id="floatingDiagnostico" placeholder="Diagnóstico" value="{{ $odontograma->diagnostico }}">
-            <label for="floatingDiagnostico">Diagnóstico</label>
-          </div>
-    </div>
-
-    <div class="col-md-6">
-        <div class="form-floating mt-3">
-            <input type="text" class="form-control" value="{{ $odontograma->enfermedad_actual }}" id="floatingEnfermedadActual" placeholder="Enfermedad Actual">
-            <label for="floatingEnfermedadActual">Enfermedad Actual</label>
-          </div>
-    </div>
-</div> --}}
 
     <!-- Botones -->
     <div class="d-flex justify-content-between mt-2">

@@ -358,7 +358,7 @@ class HClinicaController extends Controller
     {
         //buscar antecedentes personales y familiares
         $antPersonales = AntecedentesPersonalesFamiliare::where('paciente_id', $id)->first();
-        $antPersonales->delete();
+        $antPersonales != null ? $antPersonales->delete() : null;
     }
 
     private function eliminarOdontogramas($id)

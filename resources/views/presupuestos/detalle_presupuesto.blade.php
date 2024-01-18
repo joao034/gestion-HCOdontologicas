@@ -1,8 +1,10 @@
 @extends('layouts.app')
 @section('content')
     <x-navegacion-paciente :paciente="$presupuesto->paciente" />
-    <h3 class="text-center mt-4 mb-3 fw-bold">Presupuesto de {{ $presupuesto->paciente->nombres . ' ' . $presupuesto->paciente->apellidos}}</h3>
-    <h5 class="text-center mt-2 mb-4">Fecha de creación: {{ \Carbon\Carbon::parse($presupuesto->created_at)->format('d/m/Y') }}</h5>
+    <h3 class="text-center mt-4 mb-3 fw-bold">Presupuesto de
+        {{ $presupuesto->paciente->nombres . ' ' . $presupuesto->paciente->apellidos }}</h3>
+    <h5 class="text-center mt-2 mb-4">Fecha de creación:
+        {{ \Carbon\Carbon::parse($presupuesto->created_at)->format('d/m/Y') }}</h5>
 
     <div class="d-flex justify-content-between">
         <a href="{{ route('presupuestos.pdf', $presupuesto->id) }}" class="btn btn-info text-white" target="_blank">
@@ -22,7 +24,8 @@
                     <select class="form-select form-select-md" name="tratamiento_id" required>
                         <option selected> ¿Desea agregar otro tratamiento?</option>
                         @foreach ($tratamientos as $tratamiento)
-                            <option value="{{ $tratamiento->id }}">{{ $tratamiento->nombre . ' - $ ' . $tratamiento->precio }}
+                            <option value="{{ $tratamiento->id }}">
+                                {{ $tratamiento->nombre . ' - $ ' . $tratamiento->precio }}
                             </option>
                         @endforeach
                     </select>
@@ -76,7 +79,7 @@
                                 <!--eliminar -->
                                 <button type="button" class="btn btn-danger" data-bs-toggle="modal"
                                     data-bs-target="#borrar{{ $detalle->id }}">
-                                    <i class="fa-regular fa-trash-can"></i> Eliminar
+                                    <i class="fa-regular fa-trash-can"></i> Quitar
                                 </button>
 
                             </td>
@@ -95,20 +98,20 @@
 
     <script>
         /* document.addEventListener('DOMContentLoaded', function() {
-            let precioInput = document.getElementById('precio');
-            let form = document.getElementById('form');
-            
-            valorInput.addEventListener('keydown', function(event) {
-                if (event.key === 'Enter') {
-                    event.preventDefault(); // Prevenir el comportamiento predeterminado de Enter
-                    form.submit();
-                }
-            });
+                let precioInput = document.getElementById('precio');
+                let form = document.getElementById('form');
+                
+                valorInput.addEventListener('keydown', function(event) {
+                    if (event.key === 'Enter') {
+                        event.preventDefault(); // Prevenir el comportamiento predeterminado de Enter
+                        form.submit();
+                    }
+                });
 
-            precioInput.addEventListener('blur', function() {
-                form.submit();
-            });
-        }); */
+                precioInput.addEventListener('blur', function() {
+                    form.submit();
+                });
+            }); */
     </script>
 
 @endsection

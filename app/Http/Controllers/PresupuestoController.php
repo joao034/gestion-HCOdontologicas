@@ -11,9 +11,9 @@ use App\Models\Odontologo;
 use App\Models\Simbolo;
 use App\Models\Tratamiento;
 use App\Models\Paciente;
-use Carbon\Carbon;
 use Exception;
 use Barryvdh\DomPDF\Facade\Pdf;
+use Illuminate\Support\Facades\Auth;
 
 class PresupuestoController extends Controller
 {
@@ -23,13 +23,13 @@ class PresupuestoController extends Controller
     }
 
     //deprecated
-    public function index( Request $request )
+   /*  public function index( Request $request )
     {
         $search = trim( $request->get('search') );
         //devulve el paciente con sus presupuestos
         $pacientes = Paciente::getAllPacientesWithPagination( $search, 'updated_at', 'desc' );
         return view('presupuestos.index', compact(['search', 'pacientes']));
-    }
+    } */
 
     public function pdf( $id ){
         $presupuesto = Odontograma::find( $id );
@@ -54,26 +54,36 @@ class PresupuestoController extends Controller
         return to_route('presupuestos.edit', $presupuestos->first()->id);    
     }
 
+    private function obtenerIdDelOdontologoEnSesion(){
+        $odontologo = Odontologo::where('user_id', '=', auth()->user()->id)->first();
+        return $odontologo->id;
+    }
+
+    private function esOdontologoElUsuarioEnSesion(){
+        return Auth::user()->role == 'odontologo';
+    }
+
+    private function guardarOdontologId(){
+        return $this->esOdontologoElUsuarioEnSesion() ? $this->obtenerIdDelOdontologoEnSesion() : Odontologo::first()->id;
+    }
+
     //almacena los detalles del presupuesto
     public function store( Request $request ){
-
         try{
             $detalle_presupuesto = new OdontogramaDetalle();
             $detalle_presupuesto->odontograma_cabecera_id = $request->presupuesto_id;
             $detalle_presupuesto->tratamiento_id = $request->tratamiento_id;
-            $detalle_presupuesto->fecha = Carbon::now();
             $detalle_presupuesto->num_pieza_dental = "-";
             $detalle_presupuesto->cara_dental = "-";
             $detalle_presupuesto->precio = Tratamiento::find( $request->tratamiento_id )->precio;
             $detalle_presupuesto->simbolo_id = Simbolo::first()->id;
-            $detalle_presupuesto->odontologo_id = Odontologo::first()->id;
-            $detalle_presupuesto->estado = 'presupuesto';
+            $detalle_presupuesto->odontologo_id = $this->guardarOdontologId();
+            $detalle_presupuesto->estado = 'necesario';
             $detalle_presupuesto->save();
             return back()->with('message', 'Tratamiento agregado al presupuesto.');
         }catch( Exception $e ){
-            return back()->with('danger', 'No se agregó el tratamiento al presupuesto.');
+            return back()->with('danger', 'No se agregó el tratamiento al presupuesto.' . $e->getMessage());
         }
-
     }
 
     public function edit( int $id ){
@@ -81,7 +91,6 @@ class PresupuestoController extends Controller
         $presupuesto = Odontograma::find( $id );
         $detalles_presupuesto = $this->getDetallesPresupuesto( $id );
         $tratamientos = Tratamiento::orderBy('nombre', 'asc')->get();
-
         return view('presupuestos.detalle_presupuesto', compact('detalles_presupuesto', 'presupuesto', 'tratamientos'));
     }
 
@@ -111,7 +120,8 @@ class PresupuestoController extends Controller
                                                 ->where('odontograma_cabecera_id', '=', "$id")
                                                 ->where( function( $query ) {
                                                     $query->where('estado', '=', 'necesario')
-                                                    ->orWhere('estado', '=', 'presupuesto');
+                                                    ->orWhere('estado', '=', 'presupuesto')
+                                                    ->orWhere('estado', '=', 'realizado');
                                                 })->get(); 
         return $detalles_presupuesto;
     }

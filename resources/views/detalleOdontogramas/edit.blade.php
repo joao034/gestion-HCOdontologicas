@@ -9,11 +9,7 @@
                 <form action="{{ route('detalleOdontogramas.update', $detalle->id) }}" method="post">
                     @csrf
                     @method('PATCH')
-                    {{-- <input type="hidden" name="odontograma_cabecera_id" id="odontograma_cabecera_id">
-                    <input type="hidden" name="cara_dental[]" id="cara_dental">
-                    <input type="hidden" name="num_pieza_dental" id="num_pieza_dental">
-                    <input type="hidden" name="simbolo_id" id="simbolo_id"> --}}
-
+                
                     <!--Estado-->
                     <div class="row">
                         <label for="" class="form-label fw-bold">Estado</label>
@@ -21,7 +17,7 @@
                             <select class="form-select form-select-md" autofocus name="estado" id="" required
                                 autofocus>
                                 <option value="necesario" {{ $detalle->estado === 'necesario' ? 'selected' : '' }}>
-                                    Necesario</option>
+                                    Pendiente</option>
                                 <option value="realizado" {{ $detalle->estado === 'realizado' ? 'selected' : '' }}>
                                     Realizado</option>
                             </select>
@@ -110,7 +106,6 @@
                             <label for="" class="form-label fw-bold">Odontólogo</label>
                             <select required class="form-select form-select-md" name="odontologo_id" id="">
                                 @if (Auth::user()->role === 'admin')
-
                                     <option selected>Seleccione un odontólogo</option>
                                     @foreach ($odontologos as $odontologo)
                                         <option value="{{ $odontologo->id }}"

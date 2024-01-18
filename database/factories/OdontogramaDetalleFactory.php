@@ -7,6 +7,7 @@ use Illuminate\Database\Eloquent\Factories\Factory;
 use App\Models\Simbolo;
 use App\Models\Tratamiento;
 use App\Models\Odontologo;
+use Carbon\Carbon;
 
 /**
  * @extends \Illuminate\Database\Eloquent\Factories\Factory<\App\Models\OdontogramaDetalle>
@@ -42,6 +43,7 @@ class OdontogramaDetalleFactory extends Factory
 
             // Otros campos del odontograma
             'num_pieza_dental' => 18,
+            'fecha_realizado' => Carbon::now(),
             'precio' => 20,
             'cara_dental' => 'Vestibular',
             'observacion' => '',

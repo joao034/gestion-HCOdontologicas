@@ -27,43 +27,50 @@
                     <tr class="">
                         <td scope="row">{{ $detalle->id }}</td>
                         <td>{{ $detalle->created_at->format('d-m-Y') }}</td>
-                        <td>{{ $detalle->fecha_realizado == null ? ' - ' : \Carbon\Carbon::parse($detalle->fecha_realizado)->format('d-m-Y') }}</td>
+                        <td>{{ $detalle->fecha_realizado == null ? ' - ' : \Carbon\Carbon::parse($detalle->fecha_realizado)->format('d-m-Y') }}
+                        </td>
                         <td>{{ $detalle->tratamiento->nombre }}</td>
                         <td>{{ $detalle->num_pieza_dental }}</td>
                         <td>{{ $detalle->cara_dental }}</td>
                         <td>{{ $detalle->odontologo->nombres . ' ' . $detalle->odontologo->apellidos }}</td>
-                        <td>{{ strtoupper($detalle->estado) }}</td>
+                        <td class="{{ $detalle->estado == 'necesario' ? 'text-danger' : 'text-primary' }}">
+                            {{ strtoupper($detalle->estado == 'necesario' ? ($detalle->estado = 'pendiente') : $detalle->estado) }}
+                        </td>
                         <td>{{ $detalle->observacion }}</td>
-                            <!--desactivar los botones de los detalles que no pertecen al usuario logueado-->
-                            @if (Auth::user()->role === 'odontologo' && Auth::user()->odontologo->id === $detalle->odontologo->id)
+                        <!--desactivar los botones de los detalles que no pertecen al usuario logueado-->
+                        @if (Auth::user()->role === 'odontologo' && Auth::user()->odontologo->id === $detalle->odontologo->id)
                             <td>
-                                <button type="button" class="btn btn-info" data-bs-toggle="modal"
+                                <button type="button" class="btn btn-info text-white" data-bs-toggle="modal"
                                     data-bs-target="#editarDetalle{{ $detalle->id }}">
                                     <i class="fa-regular fa-pen-to-square"></i>
                                 </button>
                             </td>
                             <td>
                                 <button type="button" class="btn btn-danger" data-bs-toggle="modal"
-                                    data-bs-target="#borrar{{ $detalle->id }}">
+                                    data-bs-target="#borrar{{ $detalle->id }}"
+                                    {{ $detalle->estado == 'realizado' ? 'disabled' : '' }}>
                                     <i class="fa-regular fa-trash-can"></i>
                                 </button>
                             </td>
-                            @endif
+                        @endif
 
-                            @if (Auth::user()->role === 'admin')
+                        @if (Auth::user()->role === 'admin')
                             <td>
                                 <button type="button" class="btn btn-info text-white mb-1" data-bs-toggle="modal"
+                                    {{ $detalle->estado == 'hallazgo' ? 'disabled' : '' }}
                                     data-bs-target="#editarDetalle{{ $detalle->id }}">
                                     <i class="fa-regular fa-pen-to-square"></i>
                                 </button>
+
                             </td>
                             <td>
                                 <button type="button" class="btn btn-danger" data-bs-toggle="modal"
-                                    data-bs-target="#borrar{{ $detalle->id }}">
-                                    <i class="fa-regular fa-trash-can"></i> 
+                                    data-bs-target="#borrar{{ $detalle->id }}"
+                                    {{-- {{ $detalle->estado == 'realizado' ? 'disabled' : '' }} --}}>
+                                    <i class="fa-regular fa-trash-can"></i>
                                 </button>
-                            @endif
-                            </td>
+                        @endif
+                        </td>
                     </tr>
                     @include('odontogramas.destroy_detalle')
                     @include('detalleOdontogramas.edit')

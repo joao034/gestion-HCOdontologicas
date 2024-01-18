@@ -94,9 +94,18 @@ class PresupuestoController extends Controller
         return view('presupuestos.detalle_presupuesto', compact('detalles_presupuesto', 'presupuesto', 'tratamientos'));
     }
 
-    public function update( Request $request, int $id ){}
+    public function update( int $id, Request $request ){
+        try{
+            $detalle_presupuesto = OdontogramaDetalle::find( $id );
+            
+            
+            return back()->with('message', 'Presupuesto actualizado correctamente.');
+        }catch( Exception $e ){
+            return back()->with('danger', 'No se pudo actualizar el presupuesto.');
+        }
+    }
 
-
+    //no se ocupa
     //actualiza el estado del detalle del presupuesto a fuera de presupuesto al momento de eliminarlo un detalle del presupuesto
     public function updateEstado ( int $id ){
         try{

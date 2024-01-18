@@ -90,6 +90,13 @@ class OdontogramaDetalleController extends Controller
     public function update(int $id, Request $request)
     {
         try {
+            $request->validate([
+                'estado' => 'required',
+                'odontologo_id' => 'required',
+                'tratamiento_id' => 'required',
+                'observacion' => 'nullable|string|max:255',
+            ]);
+
             $detalle_odontograma = OdontogramaDetalle::find($id);
 
             if ($request->estado === 'realizado') {
@@ -101,10 +108,9 @@ class OdontogramaDetalleController extends Controller
                 $detalle_odontograma->fecha_realizado = null;
                 $this->actualizarDetalle($detalle_odontograma, $request);
             }
-
             return back()->with('message', 'Detalle del odontograma actualizado correctamente.');
         } catch (\Exception $e) {
-            return back()->with('danger', 'No se pudo actualizar el detalle del odontograma.' . $e->getMessage());
+            return back()->with('danger', 'No se pudo actualizar el detalle del odontograma. Revise que el odontólogo esté activo.');
         }
     }
 

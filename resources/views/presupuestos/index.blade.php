@@ -1,3 +1,4 @@
+<!--Deprecated-->
 @extends('layouts.app')
 @section('content')
     <h1 class="text-center"> <img class="svg-icon-index" src="assets/icons/presupuesto.svg" alt=""> Presupuestos</h1>

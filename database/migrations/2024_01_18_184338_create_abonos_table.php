@@ -17,8 +17,8 @@ return new class extends Migration
             $table->decimal('monto', 8, 2);
             
             // Foreign key
-            $table->unsignedBigInteger('odontograma_id');
-            $table->foreign('odontograma_id')->references('id')->on('odontograma_cabecera')->onDelete('cascade');
+            $table->unsignedBigInteger('odontograma_detalle_id');
+            $table->foreign('odontograma_detalle_id')->references('id')->on('odontograma_detalle');
         });
     }
 

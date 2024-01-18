@@ -37,69 +37,6 @@
                         </div>
                     </div>
 
-                    <!--Simbolos-->
-                    {{-- <div class="row" style="margin-top: 5px;border-top:">
-                        <div class="card">
-                            <div class="card-body">
-                                <h6 class="card-title fw-bold">Símbolos</h6>
-                                <hr>
-                                <div class="row">
-                                    <div class="col-lg-6 col-md-6 col-sm-6 col-xs-6"><label
-                                            for="">Necesarios</label>
-                                        <br>
-                                        <div class="contenedor-botones">
-                                            <div class="row" id="div_simbolo_rojo" style="display: none;">
-                                                <button type="button" class="btn_simbolo_necesario" id="btn_simbolo"
-                                                    data-bs-placement="bottom"
-                                                    onclick="agregar_simbolo( event, {{ $simboloRojo->id }})">
-                                            </div>
-                                            <div class="row" style="display: none;" id="div_simbolos">
-                                                @foreach ($simbolosRojos as $simboloRojo)
-                                                    <div class="col-5 col-sm-4 col-md-3 col-lg-2">
-                                                        <button type="button" class="btn_simbolo_necesario"
-                                                            id="btn_simbolo" data-bs-placement="bottom"
-                                                            title="{{ $simboloRojo->nombre }}"
-                                                            onclick="agregar_simbolo( event, {{ $simboloRojo->id }})">
-                                                            <!-- Comprueba que solo aparezca con simbolos los botones que tengan uno -->
-                                                            @if ($simboloRojo->simbolo != 'ss')
-                                                                {{ $simboloRojo->simbolo }}
-                                                            @endif
-                                                        </button>
-                                                    </div>
-                                                @endforeach
-                                            </div>
-                                        </div>
-                                    </div>
-
-                                    <div class="col-lg-6 col-md-6 col-sm-6 col-xs-6"><label
-                                            for="">Realizados</label>
-                                        <br>
-                                        <div class="contenedor-botones">
-                                            <div class="row" id="div_simbolo_azul" style="display: none;">
-                                                <button type="button" class="btn_simbolo_realizado" id="btn_simbolo"
-                                                    data-bs-placement="bottom"
-                                                    onclick="agregar_simbolo( event, {{ $simboloAzul->id }})">
-                                            </div>
-                                            <div class="row" style="display: none;" id="div_simboloss">
-                                                @foreach ($simbolosAzules as $simboloAzul)
-                                                    <div class="col-5 col-sm-4 col-md-3 col-lg-2">
-                                                        <button type="button" class="btn_simbolo_realizado"
-                                                            id="btn_simbolo" title=" {{ $simboloAzul->nombre }}"
-                                                            onclick="agregar_simbolo( event, {{ $simboloAzul->id }} )">
-                                                            @if ($simboloAzul->simbolo != 'ss')
-                                                                {{ $simboloAzul->simbolo }}
-                                                            @endif
-                                                        </button>
-                                                    </div>
-                                                @endforeach
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div> --}}
-
                     <!--Odontologos-->
                     <div class="row mt-2">
                         <div class="mb-3">
@@ -107,10 +44,10 @@
                             <select required class="form-select form-select-md" name="odontologo_id" id="">
                                 @if (Auth::user()->role === 'admin')
                                     <option selected>Seleccione un odontólogo</option>
-                                    @foreach ($odontologos as $odontologo)
-                                        <option value="{{ $odontologo->id }}"
-                                            {{ $odontologo->id === $detalle->odontologo_id ? 'selected' : '' }}>
-                                            {{ $odontologo->nombres . ' ' . $odontologo->apellidos . ' - ' . $odontologo->especialidad->nombre }}
+                                    @foreach ($odontologos as $user)
+                                        <option value="{{ $user->odontologo->id }}"
+                                            {{ $user->odontologo->id === $detalle->odontologo_id ? 'selected' : '' }}>
+                                            {{ $user->odontologo->nombres . ' ' . $user->odontologo->apellidos . ' - ' . $user->odontologo->especialidad->nombre }}
                                         </option>
                                     @endforeach
                                 @else
@@ -127,7 +64,7 @@
                         <div class="mb-3">
                             <label for="" class="form-label fw-bold">Observación</label>
                             <input type="text" class="form-control" name="observacion" id=""
-                                aria-describedby="helpId" placeholder="Escriba alguna observacion"
+                                aria-describedby="helpId" placeholder="Escriba alguna observación"
                                 value="{{ $detalle->observacion }}">
                         </div>
                     </div>

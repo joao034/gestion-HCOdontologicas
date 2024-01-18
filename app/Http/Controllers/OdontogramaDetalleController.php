@@ -9,6 +9,7 @@ use Illuminate\Http\Request;
 use App\Models\Tratamiento;
 use App\Models\OdontogramaDetalle;
 use App\Models\Simbolo;
+use App\Models\User;
 use Carbon\Carbon;
 
 use Illuminate\Support\Facades\Validator;
@@ -50,7 +51,6 @@ class OdontogramaDetalleController extends Controller
         }
     }
 
-    //guarda el detalle del odontograma
     public function store(Request $request)
     {
         try {
@@ -67,7 +67,7 @@ class OdontogramaDetalleController extends Controller
     {
         $odontograma = Odontograma::find($id);
         $tratamientos = Tratamiento::orderBy('nombre', 'asc')->get();
-        $odontologos = Odontologo::all();
+        $odontologos = $this->getOdontologosActivos();
         $necesario = 'necesario';
         $realizado = 'realizado';
         $simbolosRojos = Simbolo::getSimbolosPorTipo($necesario);
@@ -108,14 +108,14 @@ class OdontogramaDetalleController extends Controller
         }
     }
 
-    private function actualizarDetalle( $detalle_odontograma, Request $request)
+    private function actualizarDetalle($detalle_odontograma, Request $request)
     {
         $detalle_odontograma->estado = $request->estado;
         $nombreSimbolo = explode(" ", $detalle_odontograma->simbolo->nombre);
         $nombreSimbolo = $nombreSimbolo[0];
 
         $simbolo = $this->buscarSimboloPorTipo($nombreSimbolo, $detalle_odontograma->estado);
-        
+
         //almacena el tipo del simbolo dependiendo si es realizado o necesario
         $detalle_odontograma->simbolo_id = $simbolo->id;
         $detalle_odontograma->odontologo_id = $request->odontologo_id;
@@ -188,10 +188,11 @@ class OdontogramaDetalleController extends Controller
         return array_unique($array);
     }
 
-    //To do
-    private function get_odontologos_activos()
+    //obtener usuarios tipo odontologos que esten activos
+    private function getOdontologosActivos()
     {
-        $odontologos = Odontologo::where('estado', 'activo')->get();
-        return $odontologos;
+        return User::where('role', '=', 'odontologo')
+            ->where('active', '=', 1)
+            ->get();
     }
 }

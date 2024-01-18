@@ -146,11 +146,10 @@
                             <label for="" class="form-label fw-bold">Odontólogo</label>
                             <select required class="form-select form-select-md" name="odontologo_id" id="">
                                 @if (Auth::user()->role === 'admin')
-
                                     <option selected>Seleccione un odontólogo</option>
-                                    @foreach ($odontologos as $odontologo)
-                                        <option value="{{ $odontologo->id }}">
-                                            {{ $odontologo->nombres . ' ' . $odontologo->apellidos . ' - ' . $odontologo->especialidad->nombre }}
+                                    @foreach ($odontologos as $user)
+                                        <option value="{{ $user->odontologo->id }}">
+                                            {{ $user->odontologo->nombres . ' ' . $user->odontologo->apellidos . ' - ' . $user->odontologo->especialidad->nombre }}
                                         </option>
                                     @endforeach
                                 @else
@@ -167,7 +166,7 @@
                         <div class="mb-3">
                             <label for="" class="form-label fw-bold">Observación</label>
                             <input type="text" class="form-control" name="observacion" id=""
-                                aria-describedby="helpId" placeholder="Escriba alguna observacion">
+                                aria-describedby="helpId" placeholder="Escriba alguna observación">
                         </div>
                     </div>
 

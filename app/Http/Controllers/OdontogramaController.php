@@ -31,7 +31,7 @@ class OdontogramaController extends Controller
             $odontograma->paciente_id = $paciente_id;
             $odontograma->total = 0;
             $odontograma->save();
-            return to_route('detalleOdontogramas.edit', $odontograma->id)->with('message', 'Odontograma creado correctamente');
+            return to_route('detalleOdontogramas.show', $odontograma->id)->with('message', 'Odontograma creado correctamente');
         } catch (\Exception $e) {
             return back()->with('danger', 'No se pudo crear el nuevo odontograma. ');
         }

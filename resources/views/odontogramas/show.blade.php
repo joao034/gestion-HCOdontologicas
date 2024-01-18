@@ -10,7 +10,7 @@
     @else
         @foreach ($odontogramas as $odontograma)
             <div class="d-flex justify-content-center mt-3">
-                <a href="{{ route('detalleOdontogramas.edit', $odontograma->id) }}">
+                <a href="{{ route('detalleOdontogramas.show', $odontograma->id) }}">
                     <x-card :title="'ODONTOGRAMA Nº ' . $odontograma->id" :content="'<p><strong>Última actualización: </strong>' .
                         $odontograma->updated_at->format('d-m-Y') .
                         '</p>'" width="25rem" />

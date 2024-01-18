@@ -3,7 +3,6 @@
     <table class="table">
         <thead class="bg-dark text-white">
             <tr>
-                <th scope="col">Nº</th>
                 <th scope="col">Fecha Hallazgo</th>
                 <th scope="col">Fecha Realizado</th>
                 <th scope="col">Tratamiento</th>
@@ -25,7 +24,6 @@
                 <!--Si hay resultados-->
                 @foreach ($detalles_odontograma as $detalle)
                     <tr class="">
-                        <td scope="row">{{ $detalle->id }}</td>
                         <td>{{ $detalle->created_at->format('d-m-Y') }}</td>
                         <td>{{ $detalle->fecha_realizado == null ? ' - ' : \Carbon\Carbon::parse($detalle->fecha_realizado)->format('d-m-Y') }}
                         </td>

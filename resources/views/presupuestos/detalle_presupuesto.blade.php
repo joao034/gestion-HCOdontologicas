@@ -1,10 +1,6 @@
 @extends('layouts.app')
 @section('content')
     <x-navegacion-paciente :paciente="$presupuesto->paciente" />
-    {{-- <h3 class="text-center mt-4 mb-3 fw-bold">Presupuesto de
-        {{ $presupuesto->paciente->nombres . ' ' . $presupuesto->paciente->apellidos }}</h3>
-    <h5 class="text-center mt-2 mb-4">Fecha de creación:
-        {{ \Carbon\Carbon::parse($presupuesto->created_at)->format('d/m/Y') }}</h5> --}}
 
     @include('presupuestos.components.presupueto-info')
 
@@ -17,27 +13,7 @@
         </a>
     </div>
 
-    <form action="{{ route('presupuestos.store') }}" method="POST">
-        @csrf
-        <input type="hidden" name="presupuesto_id" value="{{ $presupuesto->id }}">
-        <div class="row mt-3">
-            <div class="input-group mb-3">
-                <div class="col-sm-8 col-md-7 col-lg-5 col-8">
-                    <select class="form-select form-select-md" name="tratamiento_id" required>
-                        <option selected> ¿Desea agregar otro tratamiento?</option>
-                        @foreach ($tratamientos as $tratamiento)
-                            <option value="{{ $tratamiento->id }}">
-                                {{ $tratamiento->nombre . ' - $ ' . $tratamiento->precio }}
-                            </option>
-                        @endforeach
-                    </select>
-                </div>
-                <div class="col-sm-4 col-md-4 col-lg-4 col-4">
-                    <button class="btn btn-primary" type="submit"><i class="fa-regular fa-plus"></i> Agregar</button>
-                </div>
-            </div>
-        </div>
-    </form>
+    @include('presupuestos.components.add-detalle')
 
     <div class="table-responsive">
         <br>
@@ -52,7 +28,9 @@
                     <th scope="col" class="col">Subtotal</th>
                     <th scope="col" class="col">Abonado</th>
                     <th scope="col" class="col">Saldo</th>
-                    <th scope="col" class="col">Acciones</th>
+                    @if (Auth::user()->role == 'admin')
+                        <th scope="col" class="col">Acciones</th>
+                    @endif
                 </tr>
             </thead>
             <tbody>
@@ -81,20 +59,19 @@
                                 {{ strtoupper($detalle->estado == 'necesario' ? ($detalle->estado = 'pendiente') : $detalle->estado) }}
                             </td>
                             <td>${{ $detalle->precio }}</td>
-                            
-                                <td>$ {{ $detalle->abonos }}</td>
-                                <td>$ {{ $detalle->precio - $detalle->abonos }}</td>
-                            
+
+                            <td>$ {{ $detalle->abonos }}</td>
+                            <td>$ {{ $detalle->precio - $detalle->abonos }}</td>
 
                             <td>
                                 <!--Acciones -->
-
-                                <button type="button" class="btn btn-info text-white" data-bs-toggle="modal"
-                                    data-bs-target="#abonar{{ $detalle->id }}"
-                                    {{ $detalle->precio - $detalle->abonos == 0 ? 'disabled' : '' }}>
-                                    <i class="fa-solid fa-money-bill"></i> Abonar
-                                </button>
-
+                                @if (Auth::user()->role == 'admin')
+                                    <button type="button" class="btn btn-primary text-white" data-bs-toggle="modal"
+                                        data-bs-target="#abonar{{ $detalle->id }}"
+                                        {{ $detalle->precio - $detalle->abonos == 0 ? 'disabled' : '' }}>
+                                        <i class="fa-solid fa-money-bill"></i> Abonar
+                                    </button>
+                                @endif
 
                                 {{-- <button type="button" class="btn btn-danger" data-bs-toggle="modal"
                                     data-bs-target="#borrar{{ $detalle->id }}">

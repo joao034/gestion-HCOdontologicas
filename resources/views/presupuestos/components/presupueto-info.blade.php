@@ -1,18 +1,24 @@
 <div class="card">
     <div class="card-body">
-        <h4 class="card-title fw-bold text-center mb-4">Información del Presupuesto Nº {{ $presupuesto->id }}</h4>
+        <h4 class="card-title fw-bold text-center mb-4">Presupuesto Nº {{ $presupuesto->id }}</h4>
+        
+            <a class="btn btn-info float-end text-white" href="{{ route('detalleOdontogramas.show', $presupuesto->id) }}"><i class="fa-solid fa-tooth"></i> Ir al
+                odontograma</a>
+      
+
+
         <h6 class="fs-5"><strong>Paciente:</strong>
             {{ $presupuesto->paciente->nombres . ' ' . $presupuesto->paciente->apellidos }}</h6>
         <h6 class="fs-5"><strong>Fecha de Creación:</strong>
             {{ \Carbon\Carbon::parse($presupuesto->created_at)->format('d/m/Y') }}</h6>
         <hr>
 
-        <div class="table-responsive mx-4" >
-            <table class="table table-striped table-bordered table-hover table-md">
+        <div class="table-responsive mx-4">
+            <table class="table  table-bordered table-hover table-md">
                 <tbody>
                     <tr class="">
-                        <td scope="col" class="fs-5" ><strong>Presupuesto Total:</strong></td>
-                        <td class="text-primary fs-5"> ${{ $presupuesto->total }}</td>
+                        <td scope="col" class="text-primary fs-5"><strong>Presupuesto Total:</strong></td>
+                        <td class="text-primary fs-5"> <strong>${{ $presupuesto->total }}</strong></td>
                     </tr>
                     <tr class="">
                         <td scope="col"><strong>Realizado:</strong></td>
@@ -31,59 +37,13 @@
         </div>
         <div class="row text-center mt-1">
             @if ($total_realizado > $total_abonado)
-                <h6 class="fs-5 text-danger"><strong>Deuda:</strong> ${{ $total_realizado - $total_abonado }}</h6>
+                <h6 class="fs-5 text-danger"><strong>Deuda: ${{ $total_realizado - $total_abonado }}</strong></h6>
             @endif
 
             @if ($total_abonado > $total_realizado)
-                <h6 class="fs-5 text-success"><strong>Saldo a Favor:</strong>
-                    ${{ $total_abonado - $total_realizado }}</h6>
+                <h6 class="fs-5 text-success"><strong>Saldo a Favor:
+                        ${{ $total_abonado - $total_realizado }}</strong></h6>
             @endif
         </div>
-
-        {{-- <div class="container text-center">
-            <div class="d-flex justify-content-between">
-                <div class="col-md-5">
-                    <h6 class="fs-5"><strong>Presupuesto Total:</strong></h6>
-                    <h6 class="fs-5"><strong>Realizado:</strong></h6>
-                    <h6 class="fs-5"><strong>Abonado:</strong> </h6>
-                    <h6 class="fs-5"><strong>Saldo por Abonar:</strong> </h6>
-                </div>
-                <div class="col-md-5">
-                    <h6 class="fs-5"> ${{ $presupuesto->total }}</h6>
-                    <h6 class="fs-5">${{ $total_realizado }}</h6>
-                    <h6 class="fs-5"> ${{ $total_abonado }}</h6>
-                    <h6 class="fs-5"> ${{ $presupuesto->total - $total_abonado }}</h6>
-                </div>
-            </div>
-            
-        </div> --}}
-
-
-        {{--  <div class="container text-center">
-            <div class="row justify-content-between">
-                <div class="col-md-5">
-                    <h6 class="fs-5"><strong>Presupuesto Total:</strong></h6>
-                    <h6 class="fs-5"><strong>Realizado:</strong></h6>
-                    <h6 class="fs-5"><strong>Abonado:</strong> </h6>
-                    <h6 class="fs-5"><strong>Saldo por Abonar:</strong> </h6>
-                </div>
-                <div class="col-md-5">
-                    <h6 class="fs-5"> ${{ $presupuesto->total }}</h6>
-                    <h6 class="fs-5">${{ $total_realizado }}</h6>
-                    <h6 class="fs-5"> ${{ $total_abonado }}</h6>
-                    <h6 class="fs-5"> ${{ $presupuesto->total - $total_abonado }}</h6>
-                </div>
-            </div>
-            <div class="row justify-content-center mt-2">
-                @if ($total_realizado > $total_abonado)
-                    <h6 class="fs-5 text-danger"><strong>Deuda:</strong> ${{ $total_realizado - $total_abonado }}</h6>
-                @endif
-
-                @if ($total_abonado > $total_realizado)
-                    <h6 class="fs-5 text-success"><strong>Saldo a Favor:</strong>
-                        ${{ $total_abonado - $total_realizado }}</h6>
-                @endif
-            </div>
-        </div> --}}
     </div>
 </div>

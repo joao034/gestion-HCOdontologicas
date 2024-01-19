@@ -21,7 +21,7 @@
                         <label for="" class="form-label fw-bold">Tratamiento</label>
                         <div class="mb-3">
                             <select class="form-select form-select-md" name="tratamiento_id" id="tratamientos" required>
-                                <option selected>Seleccione un tratamiento</option>
+                                <option selected value="">Seleccione un tratamiento</option>
                                 @foreach ($tratamientos as $tratamiento)
                                     <option value="{{ $tratamiento->id }}">
                                         {{ $tratamiento->nombre . ' - $' . $tratamiento->precio }}</option>
@@ -140,13 +140,13 @@
                     </div>
                     <!--Fin Simbolos-->
 
-                    <!--Odontologo-->
+                    <!--Odontologos-->
                     <div class="row mt-2">
                         <div class="mb-3">
                             <label for="" class="form-label fw-bold">Odontólogo</label>
                             <select required class="form-select form-select-md" name="odontologo_id" id="">
                                 @if (Auth::user()->role === 'admin')
-                                    <option selected>Seleccione un odontólogo</option>
+                                    <option value="" selected>Seleccione un odontólogo</option>
                                     @foreach ($odontologos as $user)
                                         <option value="{{ $user->odontologo->id }}">
                                             {{ $user->odontologo->nombres . ' ' . $user->odontologo->apellidos . ' - ' . $user->odontologo->especialidad->nombre }}

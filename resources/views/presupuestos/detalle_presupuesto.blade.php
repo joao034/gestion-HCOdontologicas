@@ -13,7 +13,7 @@
         </a>
     </div>
 
-    @include('presupuestos.components.add-detalle')
+    {{-- @include('presupuestos.components.add-detalle') --}}
 
     <div class="table-responsive">
         <br>
@@ -82,11 +82,6 @@
                         @include('presupuestos.abonar')
                         @include('presupuestos.destroy')
                     @endforeach
-                    {{-- <td></td>
-                    <td></td>
-                    <td></td>
-                    <td><b>Total</b></td>
-                    <td><b>${{ $presupuesto->total }}</b></td> --}}
                 @endif
             </tbody>
         </table>

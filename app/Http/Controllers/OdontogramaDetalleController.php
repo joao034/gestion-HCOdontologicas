@@ -114,6 +114,33 @@ class OdontogramaDetalleController extends Controller
         }
     }
 
+    private function guardarDetalle($request)
+    {
+        $detalle_odontograma = new OdontogramaDetalle();
+        $this->asignarVariables($detalle_odontograma, $request);
+        $detalle_odontograma->save();
+    }
+
+    private function asignarVariables(OdontogramaDetalle $detalle_odontograma, Request $request)
+    {
+        $detalle_odontograma->num_pieza_dental = $request->num_pieza_dental;
+        $detalle_odontograma->cara_dental = $this->eliminarElementosRepetidos($request->cara_dental);
+        if (isset($detalle_odontograma->cara_dental)) {
+            $detalle_odontograma->cara_dental = is_array($detalle_odontograma->cara_dental) ? implode(",", $detalle_odontograma->cara_dental) : [];
+        }
+        $detalle_odontograma->simbolo_id = $request->simbolo_id;
+        $detalle_odontograma->odontograma_cabecera_id = $request->odontograma_cabecera_id;
+        $detalle_odontograma->tratamiento_id = $request->tratamiento_id;
+        $detalle_odontograma->precio = Tratamiento::find($request->tratamiento_id)->precio;
+        $detalle_odontograma->odontologo_id = $request->odontologo_id;
+        $detalle_odontograma->observacion = $request->observacion;
+
+        //consultar el tipo del simbolo
+        $simbolo = Simbolo::find($request->simbolo_id);
+        //almacena el tipo del simbolo dependiendo si es realizado o necesario
+        $detalle_odontograma->estado = $simbolo->tipo === 'realizado' ? 'hallazgo' : 'necesario';
+    }
+
     private function actualizarDetalle($detalle_odontograma, Request $request)
     {
         $detalle_odontograma->estado = $request->estado;
@@ -145,33 +172,6 @@ class OdontogramaDetalleController extends Controller
         } catch (\Exception $e) {
             return back()->with('danger', 'No se pudo eliminar el detalle del odontograma.');
         }
-    }
-
-    private function guardarDetalle($request)
-    {
-        $detalle_odontograma = new OdontogramaDetalle();
-        $this->asignarVariables($detalle_odontograma, $request);
-        $detalle_odontograma->save();
-    }
-
-    private function asignarVariables(OdontogramaDetalle $detalle_odontograma, Request $request)
-    {
-        $detalle_odontograma->num_pieza_dental = $request->num_pieza_dental;
-        $detalle_odontograma->cara_dental = $this->eliminarElementosRepetidos($request->cara_dental);
-        if (isset($detalle_odontograma->cara_dental)) {
-            $detalle_odontograma->cara_dental = is_array($detalle_odontograma->cara_dental) ? implode(",", $detalle_odontograma->cara_dental) : [];
-        }
-        $detalle_odontograma->simbolo_id = $request->simbolo_id;
-        $detalle_odontograma->odontograma_cabecera_id = $request->odontograma_cabecera_id;
-        $detalle_odontograma->tratamiento_id = $request->tratamiento_id;
-        $detalle_odontograma->precio = Tratamiento::find($request->tratamiento_id)->precio;
-        $detalle_odontograma->odontologo_id = $request->odontologo_id;
-        $detalle_odontograma->observacion = $request->observacion;
-
-        //consultar el tipo del simbolo
-        $simbolo = Simbolo::find($request->simbolo_id);
-        //almacena el tipo del simbolo dependiendo si es realizado o necesario
-        $detalle_odontograma->estado = $simbolo->tipo === 'realizado' ? 'hallazgo' : 'necesario';
     }
 
     private function getDetallesOdontograma(int $odontograma_cabecera_id)

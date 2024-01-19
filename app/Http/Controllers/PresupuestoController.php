@@ -68,9 +68,9 @@ class PresupuestoController extends Controller
         return Auth::user()->role == 'odontologo';
     }
 
-    private function guardarOdontologId()
+    private function guardarOdontologId(Request $request)
     {
-        return $this->esOdontologoElUsuarioEnSesion() ? $this->obtenerIdDelOdontologoEnSesion() : Odontologo::first()->id;
+        return $this->esOdontologoElUsuarioEnSesion() ? $this->obtenerIdDelOdontologoEnSesion() : $request->odontologo_id;
     }
 
     //almacena los detalles del presupuesto
@@ -84,7 +84,7 @@ class PresupuestoController extends Controller
             $detalle_presupuesto->cara_dental = "-";
             $detalle_presupuesto->precio = Tratamiento::find($request->tratamiento_id)->precio;
             $detalle_presupuesto->simbolo_id = Simbolo::first()->id;
-            $detalle_presupuesto->odontologo_id = $this->guardarOdontologId();
+            $detalle_presupuesto->odontologo_id = $this->guardarOdontologId($request);
             $detalle_presupuesto->estado = 'necesario';
             $detalle_presupuesto->save();
             return back()->with('message', 'Tratamiento agregado al presupuesto.');

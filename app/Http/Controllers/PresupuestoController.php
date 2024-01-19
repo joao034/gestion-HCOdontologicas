@@ -99,7 +99,9 @@ class PresupuestoController extends Controller
         $presupuesto = Odontograma::find($id);
         $detalles_presupuesto = $this->getDetallesPresupuesto($id);
         $tratamientos = Tratamiento::orderBy('nombre', 'asc')->get();
-        return view('presupuestos.detalle_presupuesto', compact('detalles_presupuesto', 'presupuesto', 'tratamientos'));
+        $total_abonado = $this->getTotalAbonado($id);
+        $total_realizado = $this->getTotalRealizado($id);
+        return view('presupuestos.detalle_presupuesto', compact('detalles_presupuesto', 'presupuesto', 'tratamientos', 'total_abonado', 'total_realizado'));
     }
 
     //no se ocupa
@@ -148,10 +150,33 @@ class PresupuestoController extends Controller
         }
     }
 
+    private function getTotalRealizado(int $presupuesto_id)
+    {
+        $detalles_presupuesto = $detalles_presupuesto = OdontogramaDetalle::query()
+        ->where('odontograma_cabecera_id', '=', "$presupuesto_id")
+        ->where('estado', '=', 'realizado')->get();
+        $sumatorio = 0;
+        foreach ($detalles_presupuesto as $detalle_presupuesto) {
+            $sumatorio += $detalle_presupuesto->precio;
+        }
+        return $sumatorio;
+    }
+
+
+    private function getTotalAbonado(int $presupuesto_id)
+    {
+        $detalles_presupuesto = $this->getDetallesPresupuesto($presupuesto_id);
+        $sumatorio = 0;
+        foreach ($detalles_presupuesto as $detalle_presupuesto) {
+            $sumatorio += $this->getTotalDeAbonosDeDetalle($detalle_presupuesto->id);
+        }
+        return $sumatorio;
+    }
+
     //validar que el monto ingresado sea menor o igual al saldo
     private function esValidoElMonto(float $monto, OdontogramaDetalle $detalle_presupuesto)
     {
-        $sumatoriaAbonos = $this->getSumatorioDeAbonosDeDetalle($detalle_presupuesto->id);
+        $sumatoriaAbonos = $this->getTotalDeAbonosDeDetalle($detalle_presupuesto->id);
         $saldo = $detalle_presupuesto->precio - $sumatoriaAbonos;
         if ($monto > $saldo) {
             return false;
@@ -173,14 +198,14 @@ class PresupuestoController extends Controller
             ->where('estado', '!=', 'hallazgo')->get();
 
         $detalles_presupuesto->map(function ($detalle_presupuesto) {
-            $detalle_presupuesto->abonos = $this->getSumatorioDeAbonosDeDetalle($detalle_presupuesto->id);
+            $detalle_presupuesto->abonos = $this->getTotalDeAbonosDeDetalle($detalle_presupuesto->id);
             return $detalle_presupuesto;
         });
 
         return $detalles_presupuesto;
     }
 
-    private function getSumatorioDeAbonosDeDetalle(int $id_detalle)
+    private function getTotalDeAbonosDeDetalle(int $id_detalle)
     {
         $abonos = Abono::where('odontograma_detalle_id', '=', "$id_detalle")->get();
         $sumatorio = 0;

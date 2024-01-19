@@ -2,7 +2,7 @@
     <div class="modal-dialog">
         <div class="modal-content">
             <div class="modal-header">
-                <h5 class="modal-title fw-bold">Detalle Odontograma</h5>
+                <h5 class="modal-title fw-bold">Editar detalle del odontograma</h5>
                 <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
             </div>
             <div class="modal-body">
@@ -38,7 +38,7 @@
                     </div>
 
                     <!--Odontologos-->
-                    <div class="row mt-2">
+                    <div class="row">
                         <div class="mb-3">
                             <label for="" class="form-label fw-bold">Odontólogo</label>
                             <select required class="form-select form-select-md" name="odontologo_id" id="">

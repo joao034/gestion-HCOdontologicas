@@ -6,32 +6,22 @@
                 <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
             </div>
             <!--Formulario-->
-            <form action="{{ route('presupuestos.update', $detalle->id) }}" method="POST">
-                @csrf
+            <form action="{{ route('store.abono', $detalle->id) }}" method="POST">
                 @method('POST')
+                @csrf
                 <div class="modal-body">
-                    <div class="form-floating mb-3">
-                        <input type="number" class="form-control" name="precio" aria-describedby="helpId"
-                            id="precio" placeholder="Escriba el diagnóstico" value="{{ $detalle->precio }}" readonly>
-                        <label for="precio" class="fw-bold">Precio</label>
-                    </div>
 
+                    <h6 class="text-danger fw-bold">Saldo restante: $ {{ $detalle->precio - $detalle->abonos }}</h6>
                     <div class="form-floating mb-3">
-                        <input type="number" class="form-control" name="abono" aria-describedby="helpId"
-                            id="abono" placeholder="Escriba el diagnóstico" autofocus>
-                        <label for="abono" class="fw-bold">Abono</label>
-                    </div>
-
-                    <div class="form-floating mb-3">
-                        <input type="number" class="form-control" name="saldo" aria-describedby="helpId"
-                            id="saldo" placeholder="Escriba el diagnóstico" readonly>
-                        <label for="saldo" class="fw-bold">Saldo</label>
+                        <input type="number" class="form-control" name="monto" aria-describedby="helpId"
+                            id="monto" placeholder="Escriba el diagnóstico" autofocus>
+                        <label for="monto" class="fw-bold">Abono ($) </label>
                     </div>
                 </div>
 
                 <div class="modal-footer">
                     <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancelar</button>
-                    <button type="submit" class="btn btn-primary">Abonar</button>
+                    <button type="submit" id="btn_abonar" class="btn btn-primary">Abonar</button>
                 </div>
             </form>
         </div>

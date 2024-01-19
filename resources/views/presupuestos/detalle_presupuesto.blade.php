@@ -42,13 +42,15 @@
         <table class="table">
             <thead class="bg-dark text-white">
                 <tr>
-                    <th scope="col" class="col-1">Nº</th>
-                    <th scope="col" class="col-3">Tratamiento</th>
-                    <th scope="col" class="col-1">Nº Diente</th>
-                    <th scope="col" class="col-2">Valor Unitario ($)</th>
-                    <th scope="col" class="col-1">Subtotal</th>
-                    <th scope="col" class="col-1">Estado</th>
-                    <th scope="col" class="col-4">Acción</th>
+                    <th scope="col" class="col">Nº</th>
+                    <th scope="col" class="col-2">Tratamiento</th>
+                    <th scope="col" class="col">Nº Diente</th>
+                    <th scope="col" class="col-1">Valor Unitario ($)</th>
+                    <th scope="col" class="col">Subtotal</th>
+                    <th scope="col" class="col">Estado</th>
+                    <th scope="col" class="col">Abonado</th>
+                    <th scope="col" class="col">Saldo</th>
+                    <th scope="col" class="col-3">Acciones</th>
                 </tr>
             </thead>
             <tbody>
@@ -68,7 +70,7 @@
                                 <form action="{{ route('update.precio', $detalle->id) }}" id="form" method="POST">
                                     @method('PUT')
                                     @csrf
-                                    <input class="form-control form-control-md" type="number" id="precio" name="precio"
+                                    <input class="form-control form-control-md" type="number" id="precio" name="precio" {{ $detalle->estado == 'realizado' ? 'readonly' : ''}}
                                         step="any" value="{{ $detalle->precio }}">
                                 </form>
                             </td>
@@ -76,19 +78,27 @@
                             <td class="{{ $detalle->estado == 'necesario' ? 'text-danger' : 'text-primary' }}">
                                 {{ strtoupper($detalle->estado == 'necesario' ? ($detalle->estado = 'pendiente') : $detalle->estado) }}
                             </td>
+                            @if ( $detalle->estado == 'realizado' )
+                                <td>$ {{ $detalle->abonos }}</td>
+                                <td>$ {{ $detalle->precio - $detalle->abonos}}</td>
+                            @else
+                                <td>-</td>
+                                <td>-</td>
+                            @endif
+                            
                             <td>
                                 <!--Acciones -->
-                                @if ( $detalle->estado == 'realizado' )
+                                @if ($detalle->estado == 'realizado')
                                     <button type="button" class="btn btn-info text-white" data-bs-toggle="modal"
-                                    data-bs-target="#abonar{{ $detalle->id }}">
-                                    <i class="fa-solid fa-money-bill"></i> Abonar
+                                        data-bs-target="#abonar{{ $detalle->id }}" {{ $detalle->precio - $detalle->abonos == 0 ? 'disabled' : ''}}>
+                                        <i class="fa-solid fa-money-bill"></i> Abonar
                                     </button>
                                 @endif
-                                
-                                <button type="button" class="btn btn-danger" data-bs-toggle="modal"
+                        
+                                {{-- <button type="button" class="btn btn-danger" data-bs-toggle="modal"
                                     data-bs-target="#borrar{{ $detalle->id }}">
                                     <i class="fa-regular fa-trash-can"></i> Eliminar
-                                </button>
+                                </button> --}}
                             </td>
                         </tr>
                         @include('presupuestos.abonar')
@@ -103,23 +113,4 @@
             </tbody>
         </table>
     </div>
-
-    <script>
-        /* document.addEventListener('DOMContentLoaded', function() {
-                    let precioInput = document.getElementById('precio');
-                    let form = document.getElementById('form');
-                    
-                    valorInput.addEventListener('keydown', function(event) {
-                        if (event.key === 'Enter') {
-                            event.preventDefault(); // Prevenir el comportamiento predeterminado de Enter
-                            form.submit();
-                        }
-                    });
-
-                    precioInput.addEventListener('blur', function() {
-                        form.submit();
-                    });
-                }); */
-    </script>
-
 @endsection

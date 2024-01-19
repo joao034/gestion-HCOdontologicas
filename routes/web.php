@@ -5,13 +5,11 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\HClinicaController;
 use App\Http\Controllers\OdontogramaController;
 use App\Http\Controllers\OdontogramaDetalleController;
-use App\Http\Controllers\OdontologoController;
 use App\Http\Controllers\PresupuestoController;
 use App\Http\Controllers\PacientesPorOdontologoController;
 use App\Http\Controllers\PacientesPorTratamientoController;
 use App\Http\Controllers\TratamientoController;
 use App\Http\Controllers\UserController;
-use App\Http\Controllers\WhatsappController;
 use Illuminate\Support\Facades\Auth;
 use App\Http\Controllers\PresupuestoPorTiempoController;
 use App\Http\Controllers\SMSController;
@@ -50,7 +48,7 @@ Route::middleware('auth')->group(function () {
 
     Route::put('presupuestos/update-precio/{id_detalle_presupuesto}', [PresupuestoController::class, 'updatePrecio'])->name('update.precio');
 
-    Route::put('presupuestos/update-estado/{id_detalle_presupuesto}', [PresupuestoController::class, 'updateEstado'])->name('update.estado');
+    Route::post('presupuestos/store-abono/{id_detalle_presupuesto}', [PresupuestoController::class, 'storeAbono'])->name('store.abono');
 
     Route::get('reportes/pacientes-por-odontologo', [PacientesPorOdontologoController::class, 'get_pacientes_por_odontologo'])->name('reportes.get_pacientes_por_odontologo');
 
@@ -63,8 +61,6 @@ Route::middleware('auth')->group(function () {
     Route::get('reportes/total-presupuesto-por-meses', [PresupuestoPorTiempoController::class, 'get_total_por_meses'])->name('reportes.total-presupuesto-por-meses');
 
     Route::get('reportes/top-pacientes-por-presupuesto', [TopPacientesPorPresupuesto::class, 'get_top_3_pacientes_por_total_presupuesto'])->name('reportes.top_pacientes_por_presupuesto');
- 
-    /* Route::get('enviar-mensaje/{presupusto_id}', [WhatsappController::class, 'sendMessage'])->name('presupuestos.enviar-mensaje'); */
     
     Route::get('enviar-mensaje/{presupusto_id}', [SMSController::class, 'send_sms'])->name('presupuestos.enviar-mensaje');
 });

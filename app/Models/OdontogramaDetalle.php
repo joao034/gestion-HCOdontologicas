@@ -79,6 +79,11 @@ class OdontogramaDetalle extends Model
 		return $this->belongsTo(Simbolo::class);
 	}
 
+	public function abonos()
+	{
+		return $this->hasMany(Abono::class);
+	}
+
 	public function retornar_caras_dentales($cara_dental_buscar) {
 		
 		$caras_dentales_array = explode(',', $this->cara_dental);

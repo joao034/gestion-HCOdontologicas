@@ -13,11 +13,12 @@ class Abono extends Model
 
     protected $fillable = [
         'monto',
-        'odontograma_id',
+        'odontograma_detalle_id',
     ];
 
-    public function odontograma()
+    public function odontogramaDetalle()
     {
-        return $this->belongsTo(Odontograma::class, 'odontograma_id');
+        return $this->belongsTo(OdontogramaDetalle::class, 'odontograma_detalle_id');
     }
+
 }

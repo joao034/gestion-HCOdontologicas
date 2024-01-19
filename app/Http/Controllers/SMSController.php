@@ -14,11 +14,7 @@ class SMSController extends Controller
         try {
             $account_sid = env('TWILIO_SID');
             $auth_token = env('TWILIO_AUTH_TOKEN');
-            // In production, these should be environment variables. E.g.:
-            // $auth_token = $_ENV["TWILIO_AUTH_TOKEN"]
 
-            // A Twilio number you own with SMS capabilities
-            //$twilio_number = "+15017122661";
             $twilio_number = env('TWILIO_PHONE_NUMBER');
 
             $urlPresupuesto = env('APP_URL') . "/presupuestos/pdf/$id_presupuesto";

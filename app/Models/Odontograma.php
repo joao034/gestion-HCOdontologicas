@@ -54,11 +54,6 @@ class Odontograma extends Model
 		return $this->hasMany(OdontogramaDetalle::class);
 	}
 
-	public function abonos()
-	{
-		return $this->hasMany(Abono::class);
-	}
-
 	//devuelve el color pintado en la cara dental
     public function getColorCaraDentalAPintar( $cara_dental, $num_diente, $id_odontograma ){
 		try{

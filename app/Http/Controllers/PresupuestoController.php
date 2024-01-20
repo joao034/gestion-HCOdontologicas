@@ -38,7 +38,7 @@ class PresupuestoController extends Controller
         $paciente = Paciente::find($presupuesto->paciente_id);
         $detalles_presupuesto = $this->getDetallesPresupuesto($id);
         $pdf = Pdf::loadView('presupuestos.pdf', compact('paciente', 'presupuesto', 'detalles_presupuesto'));
-        return $pdf->stream();
+        return $pdf->stream('presupuesto_' . $paciente->nombres . ' ' . $paciente->apellidos . '.pdf');
     }
 
     public function show(int $paciente_id)

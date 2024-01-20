@@ -8,9 +8,15 @@
         <a href="{{ route('presupuestos.pdf', $presupuesto->id) }}" class="btn btn-info text-white" target="_blank">
             <i class="fa-solid fa-file-pdf"></i> Descargar PDF
         </a>
-        <a href="{{ route('presupuestos.enviar-mensaje', $presupuesto->id) }}" class="btn btn-info text-white">
+
+        <button type="button" class="btn btn-info text-white" data-bs-toggle="modal"
+            data-bs-target="#enviar{{ $presupuesto->id }}">
             <i class="fa-solid fa-comment-sms"></i> Enviar el presupuesto
-        </a>
+        </button>
+
+        {{-- <a href="{{ route('presupuestos.enviar-mensaje', $presupuesto->id) }}" class="btn btn-info text-white">
+            <i class="fa-solid fa-comment-sms"></i> Enviar el presupuesto
+        </a> --}}
     </div>
 
     {{-- @include('presupuestos.components.add-detalle') --}}
@@ -81,6 +87,7 @@
                         </tr>
                         @include('presupuestos.abonar')
                         @include('presupuestos.destroy')
+                        @include('presupuestos.components.enviar_presupuesto')
                     @endforeach
                 @endif
             </tbody>

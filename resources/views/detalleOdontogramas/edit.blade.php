@@ -14,7 +14,7 @@
                     <div class="row">
                         <label for="" class="form-label fw-bold">Estado</label>
                         <div class="mb-3">
-                            <select class="form-select form-select-md" autofocus name="estado" id="" required
+                            <select class="form-select form-select-md" autofocus name="estado" id="estado" required
                                 autofocus>
                                 <option value="necesario" {{ $detalle->estado === 'necesario' ? 'selected' : '' }}>
                                     Pendiente</option>
@@ -78,3 +78,12 @@
         </div>
     </div>
 </div>
+
+
+<script>
+    $(document).ready(function () {
+        $('#editarDetalle').on('shown.bs.modal', function () {
+            $('#estado').focus();
+        });
+    });
+</script>

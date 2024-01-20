@@ -1,11 +1,10 @@
 <div class="card">
     <div class="card-body">
         <h4 class="card-title fw-bold text-center mb-4">Presupuesto Nº {{ $presupuesto->id }}</h4>
-        
-            <a class="btn btn-info float-end text-white" href="{{ route('detalleOdontogramas.show', $presupuesto->id) }}"><i class="fa-solid fa-tooth"></i> Ir al
-                odontograma</a>
-      
 
+        <a class="btn btn-info float-end text-white" href="{{ route('detalleOdontogramas.show', $presupuesto->id) }}"><i
+                class="fa-solid fa-tooth"></i> Ir al
+            odontograma</a>
 
         <h6 class="fs-5"><strong>Paciente:</strong>
             {{ $presupuesto->paciente->nombres . ' ' . $presupuesto->paciente->apellidos }}</h6>

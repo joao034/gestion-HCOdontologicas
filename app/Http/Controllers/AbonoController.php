@@ -24,7 +24,7 @@ class AbonoController extends Controller
             }
             return back()->with('message', 'Abonos guardados correctamente');
         } catch (\Exception $e) {
-            return back()->with('danger', 'Error al registrar el abono' . $e->getMessage());
+            return back()->with('danger', 'Error al registrar el abono. Seleccione al menos un detalle');
         }
     }
 }

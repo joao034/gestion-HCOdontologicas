@@ -19,7 +19,7 @@
                                     <div class="row">
                                         <div class="col-md-6">
                                             <div class="mb-3">
-                                                <label for="nombres" class="form-label fw-bold">Nombres</label>
+                                                <label for="nombres" class="form-label fw-bold">Nombres <span class="text-danger">*</span></label>
                                                 <input type="text" value="{{ old('nombres') }}" class="form-control"
                                                     name="nombres" id="" aria-describedby="helpId"
                                                     placeholder="Escriba los nombres del paciente" required autofocus>
@@ -32,7 +32,7 @@
                                         </div>
                                         <div class="col-md-6">
                                             <div class="mb-3">
-                                                <label for="" class="form-label fw-bold">Apellidos</label>
+                                                <label for="" class="form-label fw-bold">Apellidos <span class="text-danger">*</span></label>
                                                 <input type="text" value="{{ old('apellidos') }}" class="form-control"
                                                     name="apellidos" id="" aria-describedby="helpId"
                                                     placeholder="Escriba los apellidos del paciente" required>
@@ -58,7 +58,7 @@
                                         </div>
                                         <div class="col-md-5">
                                             <div class="mb-3">
-                                                <label for="" class="form-label fw-bold">Fecha de Nacimiento</label>
+                                                <label for="" class="form-label fw-bold">Fecha de Nacimiento <span class="text-danger">*</span></label>
                                                 <input type="date" value="{{ old('fecha_nacimiento') }}"
                                                     class="form-control" name="fecha_nacimiento" id="fecha_nacimiento"
                                                     max="<?php echo date('Y-m-d'); ?>" id="fechaNacimiento" placeholder="dd/mm/aaaa"
@@ -123,7 +123,7 @@
                                     <div class="row">
 
                                         <div class="col-md-6">
-                                            <label for="" class="form-label fw-bold">Estado civil</label>
+                                            <label for="" class="form-label fw-bold">Estado civil <span class="text-danger">*</span></label>
                                             <select name="estado_civil" id="" class="form-select form-select-md"
                                                 required>
                                                 <option selected value="">Seleccione el estado civil del paciente
@@ -147,7 +147,7 @@
 
                                         <div class="col-md-6">
                                             <div class="mb-3">
-                                                <label for="" class="form-label fw-bold">Género</label>
+                                                <label for="" class="form-label fw-bold">Género <span class="text-danger">*</span></label>
                                                 <select class="form-select form-select-md" name="sexo" required
                                                     aria-label=".form-select-sm example">
                                                     <option selected value="">Seleccione el género del paciente
@@ -202,7 +202,7 @@
                                         <div class="col-md-6">
                                             <div class="mb-3">
                                                 <label for="" class="form-label fw-bold">Direción
-                                                    (Ciudad/Barrio)</label>
+                                                    (Ciudad/Barrio) <span class="text-danger">*</span></label>
                                                 <input type="text" class="form-control" name="direccion"
                                                     id="" aria-describedby="helpId"
                                                     placeholder="Escriba dónde reside el paciente"
@@ -215,7 +215,7 @@
                                         <div class="col-md-6">
                                             <div class="mb-3">
                                                 <label for="" class="form-label fw-bold">Profesión u
-                                                    Ocupación</label>
+                                                    Ocupación <span class="text-danger">*</span></label>
                                                 <input type="text" class="form-control" name="ocupacion"
                                                     id="" aria-describedby="helpId"
                                                     placeholder="Escriba la ocupación del paciente"
@@ -411,21 +411,21 @@
                                     <div class="row">
 
                                         <div class="col-lg-3 col-md-6">
-                                            <input class="form-check-input" type="checkbox" id="checkHipertension"
+                                            <input class="form-check-input border-primary" type="checkbox" id="checkHipertension"
                                                 name="enfermedades[]" value="hipertension">
                                             <label class="form-check-label" for="checkHipertension">
                                                 Hipertensión
                                             </label>
                                         </div>
                                         <div class="col-lg-3 col-md-6">
-                                            <input class="form-check-input" type="checkbox" id="checkEcardiacas"
+                                            <input class="form-check-input border-primary" type="checkbox" id="checkEcardiacas"
                                                 name="enfermedades[]" value="enfermedades cardiacas">
                                             <label class="form-check-label" for="checkEcardiacas">
                                                 Enfermedades Cardiacas
                                             </label>
                                         </div>
                                         <div class="col-lg-3 col-md-6">
-                                            <input class="form-check-input" type="checkbox" id="checkDiabetes"
+                                            <input class="form-check-input border-primary" type="checkbox" id="checkDiabetes"
                                                 name="enfermedades[]" value="diabetes mellitus">
                                             <label class="form-check-label" for="checkDiabetes">
                                                 Diabetes Mellitus
@@ -433,7 +433,7 @@
                                         </div>
 
                                         <div class="col-lg-3 col-md-6">
-                                            <input class="form-check-input" type="checkbox" id="checkHepatitis"
+                                            <input class="form-check-input border-primary" type="checkbox" id="checkHepatitis"
                                                 name="enfermedades[]" value="hepatitis">
                                             <label class="form-check-label" for="checkHepatitis">
                                                 Hepatitis
@@ -444,7 +444,7 @@
                                         <div class="row">
                                             <div class="col-lg-3 col-md-6">
                                                 <div class="form-check">
-                                                    <input class="form-check-input" type="checkbox"
+                                                    <input class="form-check-input border-primary" type="checkbox"
                                                         id="checkFiebreReumatica" name="enfermedades[]"
                                                         value="fiebre reumatica">
                                                     <label class="form-check-label" for="checkFiebreReumatica">
@@ -453,14 +453,14 @@
                                                 </div>
                                             </div>
                                             <div class="col-lg-3 col-md-6">
-                                                <input class="form-check-input" type="checkbox" id="checkTuberculosis"
+                                                <input class="form-check-input border-primary" type="checkbox" id="checkTuberculosis"
                                                     name="enfermedades[]" value="tuberculosis">
                                                 <label class="form-check-label" for="checkTuberculosis">
                                                     Tuberculosis
                                                 </label>
                                             </div>
                                             <div class="col-lg-3 col-md-6">
-                                                <input class="form-check-input" type="checkbox" id="checkAsma"
+                                                <input class="form-check-input border-primary" type="checkbox" id="checkAsma"
                                                     name="enfermedades[]" value="asma">
                                                 <label class="form-check-label" for="checkAsma">
                                                     Asma
@@ -468,7 +468,7 @@
                                             </div>
 
                                             <div class="col-lg-3 col-md-6">
-                                                <input class="form-check-input" type="checkbox" id="checkHemorragias"
+                                                <input class="form-check-input border-primary" type="checkbox" id="checkHemorragias"
                                                     name="enfermedades[]" value="hemorragias">
                                                 <label class="form-check-label" for="checkHemorragias">
                                                     Hemorragias
@@ -479,7 +479,7 @@
                                         <div class="row">
                                             <div class="col-lg-3 col-md-6">
                                                 <div class="form-check">
-                                                    <input class="form-check-input" type="checkbox" id="checkEpilepsias"
+                                                    <input class="form-check-input border-primary" type="checkbox" id="checkEpilepsias"
                                                         name="enfermedades[]" value="epilepsias">
                                                     <label class="form-check-label" for="checkEpilepsias">
                                                         Epilepsias
@@ -487,7 +487,7 @@
                                                 </div>
                                             </div>
                                             <div class="col-lg-3 col-md-6 mb-2">
-                                                <input class="form-check-input" type="checkbox" id="checkAlergias"
+                                                <input class="form-check-input border-primary" type="checkbox" id="checkAlergias"
                                                     name="enfermedades[]" value="alergias">
                                                 <label class="form-check-label" for="checkAlergias">
                                                     Alergias
@@ -581,7 +581,7 @@
                                         <div class="row">
                                             <div class="col-lg-3 col-md-6">
                                                 <div class="form-check">
-                                                    <input class="form-check-input" type="checkbox" id="checkTabaquismo"
+                                                    <input class="form-check-input border-primary" type="checkbox" id="checkTabaquismo"
                                                         name="habitos[]" value="tabaquismo">
                                                     <label class="form-check-label" for="checkTabaquismo">
                                                         Tabaquismo
@@ -589,14 +589,14 @@
                                                 </div>
                                             </div>
                                             <div class="col-lg-3 col-md-6">
-                                                <input class="form-check-input" type="checkbox" id="checkAlcohol"
+                                                <input class="form-check-input border-primary" type="checkbox" id="checkAlcohol"
                                                     name="habitos[]" value="alcohol">
                                                 <label class="form-check-label" for="checkAlcohol">
                                                     Alcohol
                                                 </label>
                                             </div>
                                             <div class="col-lg-3 col-md-6">
-                                                <input class="form-check-input" type="checkbox" id="checkDuglucion"
+                                                <input class="form-check-input border-primary" type="checkbox" id="checkDuglucion"
                                                     name="habitos[]" value="duglucion atipica">
                                                 <label class="form-check-label" for="checkDuglucion">
                                                     Duglución atípica
@@ -604,7 +604,7 @@
                                             </div>
 
                                             <div class="col-lg-3 col-md-6">
-                                                <input class="form-check-input" type="checkbox" id="checkRespiracion"
+                                                <input class="form-check-input border-primary" type="checkbox" id="checkRespiracion"
                                                     name="habitos[]" value="respiracion bucal">
                                                 <label class="form-check-label" for="checkRespiracion">
                                                     Respiración bucal
@@ -615,7 +615,7 @@
                                         <div class="row">
                                             <div class="col-lg-3 col-md-6">
                                                 <div class="form-check">
-                                                    <input class="form-check-input" type="checkbox" id="checkBruxismo"
+                                                    <input class="form-check-input border-primary" type="checkbox" id="checkBruxismo"
                                                         name="habitos[]" value="bruxismo">
                                                     <label class="form-check-label" for="checkBruxismo">
                                                         Bruxismo
@@ -623,7 +623,7 @@
                                                 </div>
                                             </div>
                                             <div class="col-lg-3 col-md-6">
-                                                <input class="form-check-input" type="checkbox" id="checkSuccionDigital"
+                                                <input class="form-check-input border-primary" type="checkbox" id="checkSuccionDigital"
                                                     name="habitos[]" value="succion digital">
                                                 <label class="form-check-label" for="checkSuccionDigital">
                                                     Succión Digital

@@ -24,7 +24,7 @@ class PacienteFactory extends Factory
             'telef_convencional' => '2432424',
             'celular' => '0992580757',
             'direccion' => $this->faker->address(),
-            'cedula' => $this->faker->unique()->randomLetter(10),
+            'cedula' => $this->faker->unique()->randomNumber(9),
             'estado_civil' => $this->faker->randomElement(['Soltero', 'Casado', 'Divorciado', 'Viudo']),
             'ocupacion' => $this->faker->jobTitle(50),
         ];

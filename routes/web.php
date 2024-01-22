@@ -14,6 +14,7 @@ use Illuminate\Support\Facades\Auth;
 use App\Http\Controllers\PresupuestoPorTiempoController;
 use App\Http\Controllers\SMSController;
 use App\Http\Controllers\TopPacientesPorPresupuesto;
+use App\Http\Controllers\AbonoController;
 
 //use Illuminate\Support\Facades\App;
 
@@ -44,6 +45,7 @@ Route::middleware('auth')->group(function () {
     Route::resource("detalleOdontogramas", OdontogramaDetalleController::class);
     Route::resource("presupuestos", PresupuestoController::class);
     Route::resource("users", UserController::class);
+    Route::resource("abonos", AbonoController::class);
     Route::post('odontogramas/nuevo/{paciente_id}', 'App\Http\Controllers\OdontogramaController@nuevo')->name('odontogramas.nuevo');
 
     Route::put('presupuestos/update-precio/{id_detalle_presupuesto}', [PresupuestoController::class, 'updatePrecio'])->name('update.precio');

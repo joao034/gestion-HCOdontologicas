@@ -13,23 +13,17 @@
             data-bs-target="#enviar{{ $presupuesto->id }}">
             <i class="fa-solid fa-comment-sms"></i> Enviar el presupuesto
         </button>
-
-        {{-- <a href="{{ route('presupuestos.enviar-mensaje', $presupuesto->id) }}" class="btn btn-info text-white">
-            <i class="fa-solid fa-comment-sms"></i> Enviar el presupuesto
-        </a> --}}
     </div>
-
-    {{-- @include('presupuestos.components.add-detalle') --}}
 
     <div class="table-responsive">
         <br>
         <table class="table">
             <thead class="bg-dark text-white">
                 <tr>
-                    <th scope="col" class="col">Nº</th>
+                    <th scope="col" class="col"> </th>
                     <th scope="col" class="col">Tratamiento</th>
                     <th scope="col" class="col">Nº Diente</th>
-                    <th scope="col" class="col">Valor Unitario ($)</th>
+                    <th scope="col" class="col-2">Valor Unitario ($)</th>
                     <th scope="col" class="col">Estado</th>
                     <th scope="col" class="col">Subtotal</th>
                     <th scope="col" class="col">Abonado</th>
@@ -49,7 +43,17 @@
                     <!--Si hay resultados-->
                     @foreach ($detalles_presupuesto as $detalle)
                         <tr class="">
-                            <td scope="row">{{ $detalle->id }}</td>
+                            {{-- <td scope="row">{{ $detalle->id }}</td> --}}
+                            @if ($detalle->precio - $detalle->abonos > 0)
+                                <td>
+                                    <input class="form-check-input border-primary" type="checkbox"
+                                        id="detalle_{{ $detalle->id }}" name="detalles_check[]" autofocus
+                                        value="{{ $detalle->id }}" data-precio={{ $detalle->precio - $detalle->abonos }}>
+                                </td>
+                            @else
+                                <td></td>
+                            @endif
+
                             <td>{{ $detalle->tratamiento->nombre }}</td>
                             <td>{{ $detalle->num_pieza_dental }}</td>
                             <td>
@@ -65,7 +69,6 @@
                                 {{ strtoupper($detalle->estado == 'necesario' ? ($detalle->estado = 'pendiente') : $detalle->estado) }}
                             </td>
                             <td>${{ $detalle->precio }}</td>
-
                             <td>$ {{ $detalle->abonos }}</td>
                             <td>$ {{ $detalle->precio - $detalle->abonos }}</td>
 
@@ -93,4 +96,10 @@
             </tbody>
         </table>
     </div>
+
+    @if (Auth::user()->role == 'admin')
+        @include('presupuestos.components.abonar_multiple')
+    @endif
 @endsection
+
+

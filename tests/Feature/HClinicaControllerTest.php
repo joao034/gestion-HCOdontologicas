@@ -9,7 +9,6 @@ use Tests\TestCase;
 
 class HClinicaControllerTest extends TestCase
 {
-
     use RefreshDatabase;
 
     public function test_get_hclinicas()
@@ -20,6 +19,7 @@ class HClinicaControllerTest extends TestCase
 
     public function test_store_hclinica()
     {
+        //$this->withoutExceptionHandling();
         $paciente = Paciente::factory()->create()->toArray();
 
         $response = $this->post('hclinicas', $paciente);
@@ -29,6 +29,7 @@ class HClinicaControllerTest extends TestCase
     }
 
     public function test_update_hclinica(){
+        $this->withoutExceptionHandling();
 
         $paciente = Paciente::factory()->create();
 

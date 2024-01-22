@@ -78,12 +78,3 @@
         </div>
     </div>
 </div>
-
-
-<script>
-    $(document).ready(function () {
-        $('#editarDetalle').on('shown.bs.modal', function () {
-            $('#estado').focus();
-        });
-    });
-</script>

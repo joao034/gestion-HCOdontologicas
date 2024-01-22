@@ -94,7 +94,15 @@ class OdontogramaDetalle extends Model
 			}
 		}
 		return false;
-		
+	}
+
+	public function get_total_abonos() {
+		$abonos = Abono::where('odontograma_detalle_id', '=', "$this->id")->get();
+		$sumatorio = 0;
+		foreach ($abonos as $abono) {
+			$sumatorio += $abono->monto;
+		}
+		return $sumatorio;
 	}
 
 }

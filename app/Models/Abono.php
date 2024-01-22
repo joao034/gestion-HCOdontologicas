@@ -21,4 +21,14 @@ class Abono extends Model
         return $this->belongsTo(OdontogramaDetalle::class, 'odontograma_detalle_id');
     }
 
+    private function getTotalDeAbonosDeDetalle(int $id_detalle)
+    {
+        $abonos = Abono::where('odontograma_detalle_id', '=', "$id_detalle")->get();
+        $sumatorio = 0;
+        foreach ($abonos as $abono) {
+            $sumatorio += $abono->monto;
+        }
+        return $sumatorio;
+    }
+
 }

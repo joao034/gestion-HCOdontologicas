@@ -8,7 +8,7 @@
 
         <h6 class="fs-5"><strong>Paciente:</strong>
             {{ $presupuesto->paciente->nombres . ' ' . $presupuesto->paciente->apellidos }}</h6>
-        <h6 class="fs-5"><strong>Fecha de Creación:</strong>
+        <h6 class="fs-5"><strong>Fecha:</strong>
             {{ \Carbon\Carbon::parse($presupuesto->created_at)->format('d/m/Y') }}</h6>
         <hr>
 
@@ -34,6 +34,7 @@
                 </tbody>
             </table>
         </div>
+        
         <div class="row text-center mt-1">
             @if ($total_realizado > $total_abonado)
                 <h6 class="fs-5 text-danger"><strong>Deuda: ${{ $total_realizado - $total_abonado }}</strong></h6>

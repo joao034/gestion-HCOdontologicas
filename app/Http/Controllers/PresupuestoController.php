@@ -93,15 +93,17 @@ class PresupuestoController extends Controller
         }
     }
 
-    public function edit(int $id)
+    public function edit(int $presupuesto_id)
     {
         //Buscar el odontograma del paciente
-        $presupuesto = Odontograma::find($id);
-        $detalles_presupuesto = $this->getDetallesPresupuesto($id);
+        $presupuesto = Odontograma::find($presupuesto_id);
+        $detalles_presupuesto = $this->getDetallesPresupuesto($presupuesto_id);
         $tratamientos = Tratamiento::orderBy('nombre', 'asc')->get();
-        $total_abonado = $this->getTotalAbonado($id);
-        $total_realizado = $this->getTotalRealizado($id);
-        return view('presupuestos.detalle_presupuesto', compact('detalles_presupuesto', 'presupuesto', 'tratamientos', 'total_abonado', 'total_realizado'));
+        $total_abonado = $this->getTotalAbonado($presupuesto_id);
+        $total_realizado = $this->getTotalRealizado($presupuesto_id);
+        $detalles = OdontogramaDetalle::where('odontograma_cabecera_id', $presupuesto_id)->get();
+        $abonos = Abono::whereIn('odontograma_detalle_id', $detalles->pluck('id'))->get();
+        return view('presupuestos.detalle_presupuesto', compact('detalles_presupuesto', 'presupuesto', 'tratamientos', 'total_abonado', 'total_realizado', 'abonos'));
     }
 
     //no se ocupa

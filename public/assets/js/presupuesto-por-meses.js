@@ -17,11 +17,6 @@ $(document).ready(function () {
             },
         });
     });
-
-    /* $("#generatePdfBtn").click(function () {
-        var odontologoId = $("#odontologo_id").val();
-        window.location.href = "/reportes/pdf/pacientes-por-odontologo?odontologo_id=" + odontologoId;
-    }); */
 });
 
 //construye y actualiza la tabla

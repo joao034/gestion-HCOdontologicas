@@ -20,11 +20,10 @@ class AbonoController extends Controller
     {
         try {
             $selectedIds = explode(',', $request->input('detalles_check_values'));
-            //dd($selectedIds);
+
             foreach ($selectedIds as $detalle_id) {
                 $abono = new Abono();
                 $abono->odontograma_detalle_id = $detalle_id;
-                //buscar el detalle
                 $detalle_presupuesto = OdontogramaDetalle::find($detalle_id);
                 $abono->monto = $detalle_presupuesto->precio - $detalle_presupuesto->get_total_abonos();
                 $abono->save();

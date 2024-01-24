@@ -6,7 +6,6 @@ use App\Http\Controllers\Controller;
 use App\Models\Odontograma;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
-use App\Models\Abono;
 
 class PresupuestoPorTiempoController extends Controller
 {

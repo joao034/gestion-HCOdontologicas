@@ -21,7 +21,8 @@
             <tr>
                 <th scope="col">Año</th>
                 <th scope="col">Mes</th>
-                <th scope="col">Monto Total</th>
+                <th scope="col">Total Presupuestos</th>
+                <th scope="col">Total Abonos</th>
             </tr>
         </thead>
         <tbody>
@@ -37,6 +38,7 @@
                     <td scope="row">{{ $resultado->year }}</td>
                     <td>{{ $resultado->month }}</td>
                     <td>${{ $resultado->total_por_mes }}</td>
+                    <td>${{ $resultado->total_abonos_por_mes }}</td>
                     <td>
                     </td>
                 </tr>

@@ -145,7 +145,6 @@
                                     </div>
                             </div>
                         
-                       
                             <!--Registrar Button -->
 
                             <div class="row mb-0 text-end">

@@ -98,8 +98,12 @@
     </div>
 
     @if (Auth::user()->role == 'admin')
+        {{-- <button type="button" class="btn btn-primary text-white" data-bs-toggle="modal"
+            data-bs-target="#lista_abonos{{ $presupuesto->id }}">
+            <i class="fa-solid fa-money-bill"></i> Ver Abonos
+        </button>
+        @include('abonos.show', ['abonos' => $presupuesto->abonos]) --}}
+        <a href="{{ route('abonos.show', $presupuesto->id) }}">Ver Abonos</a>
         @include('presupuestos.components.abonar_multiple')
     @endif
 @endsection
-
-

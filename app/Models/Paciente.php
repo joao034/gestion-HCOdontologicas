@@ -43,10 +43,6 @@ class Paciente extends Model
 
 	protected $table = 'pacientes';
 
-	protected $casts = [
-		'edad' => 'int'
-	];
-
 	protected $fillable = [
 		'nombres',
 		'apellidos',
@@ -83,6 +79,10 @@ class Paciente extends Model
 	public function representante()
 	{
 		return $this->hasOne(Representante::class);
+	}
+
+	public function edad(){
+		return Carbon::parse($this->fecha_nacimiento)->age;
 	}
 
 	//Devuelve la lista de pacientes con paginacion mediante eloquent

@@ -24,6 +24,7 @@ class PacientesPorTratamientoController extends Controller
             ->pluck('paciente_id');
 
         $pacientes = Paciente::whereIn('id', $odontogramaCabeceraPacienteIds)
+            ->orderBy('apellidos', 'asc')
             ->get();
 
         if ($request->ajax()) {
@@ -48,6 +49,7 @@ class PacientesPorTratamientoController extends Controller
             ->pluck('paciente_id');
 
         $pacientes = Paciente::whereIn('id', $odontogramaCabeceraPacienteIds)
+            ->orderBy('apellidos', 'asc')
             ->get();
             
         $pdf = Pdf::loadView('reportes.pacientes-por-tratamiento.pdf', compact(['pacientes', 'tratamiento']));

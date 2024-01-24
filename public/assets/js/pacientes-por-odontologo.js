@@ -1,6 +1,6 @@
 $(document).ready(function () {
     $("#odontologo_id").change(function () {
-        var odontologoId = $(this).val();
+        let odontologoId = $(this).val();
         $.ajax({
             type: "GET",
             url: "/reportes/pacientes-por-odontologo",
@@ -19,8 +19,8 @@ $(document).ready(function () {
     });
 
     $("#generatePdfBtn").click(function () {
-        var odontologoId = $("#odontologo_id").val();
-        window.location.href = "/reportes/pdf/pacientes-por-odontologo?odontologo_id=" + odontologoId;
+        let odontologoId = $("#odontologo_id").val();
+        window.open("/reportes/pdf/pacientes-por-odontologo?odontologo_id=" + odontologoId, '_blank');
     });
 
 });
@@ -48,13 +48,13 @@ function actualizarTabla(pacientes) {
             tabla += "<tr>";
             tabla += '<td scope="row">' + (paciente.cedula === null ? '-' : paciente.cedula) + "</td>";
             tabla +=
-                "<td>" + paciente.nombres + " " + paciente.apellidos + "</td>";
+                "<td>" + paciente.apellidos + " " + paciente.nombres + "</td>";
             //calcula la edad con la fecha de nacimiento
-            var fechaNacimiento = new Date(paciente.fecha_nacimiento);
-            var fechaActual = new Date();
-            var edad =
+            let fechaNacimiento = new Date(paciente.fecha_nacimiento);
+            let fechaActual = new Date();
+            let edad =
                 fechaActual.getFullYear() - fechaNacimiento.getFullYear();
-            tabla += "<td>" + edad + "</td>";
+            tabla += "<td>" + edad + ' años' + "</td>";
             tabla += "<td>" + (paciente.celular === null ? '-' : paciente.celular) + "</td>";
             //if (paciente.representante == null) paciente.representante = "-";
             tabla += "<td>" + paciente.direccion + "</td>";

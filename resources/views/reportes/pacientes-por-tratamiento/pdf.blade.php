@@ -70,7 +70,7 @@
             <tr>
                 <th scope="col">Cédula</th>
                 <th scope="col">Paciente</th>
-                <th scope="col">Fecha de nacimiento</th>
+                <th scope="col">Edad</th>
                 <th scope="col">Celular</th>
                 <th scope="col">Dirección</th>
             </tr>
@@ -86,8 +86,8 @@
                 @foreach ($pacientes as $paciente)
                     <tr>
                         <td scope="row">{{$paciente->cedula}}</td>
-                        <td>{{$paciente->nombres . ' ' . $paciente->apellidos}}</td>
-                        <td>{{$paciente->fecha_nacimiento}}</td>
+                        <td>{{$paciente->apellidos . ' ' . $paciente->nombres}}</td>
+                        <td>{{$paciente->edad()}}</td>
                         <td>{{$paciente->celular}}</td>
                         <td>{{$paciente->direccion}}</td>
                     </tr>

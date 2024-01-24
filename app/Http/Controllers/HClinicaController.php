@@ -90,6 +90,7 @@ class HClinicaController extends Controller
             //verificar que la cedula del representante no sea la misma que la del paciente
             $this->guardarOActualizarPaciente($paciente, $request);
             //insertar datos otras tablas
+
             $this->almacenarRepresentante($request, $paciente->id);
             $this->almacenarAntecedentePersonales($request, $paciente->id);
             $this->almacenarDiagnostico($request, $paciente->id);
@@ -214,6 +215,11 @@ class HClinicaController extends Controller
     {
         try {
             if ($this->verificarCedulaDistinta($request)) {
+                /* $request->validate([
+                    'representante' => ['required', 'string', 'max:100'],
+                    'cedula_representante' => ['nullable', 'string', 'min:10', 'max:10', 'validar_cedula'],
+                ]); */
+
                 if (null != $request->input('representante') || null != $request->input('cedula_representante')) {
                     $representante = new Representante();
                     $representante->paciente_id = $paciente_id;

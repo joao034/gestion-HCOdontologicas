@@ -9,6 +9,13 @@ use App\Models\OdontogramaDetalle;
 
 class AbonoController extends Controller
 {
+
+    public function show(int $presupuesto_id){
+        $detalles = OdontogramaDetalle::where('odontograma_cabecera_id', $presupuesto_id)->get();
+        $abonos = Abono::whereIn('odontograma_detalle_id', $detalles->pluck('id'))->get();
+        return view ('abonos.show', compact('abonos'));
+    }
+
     public function store(Request $request)
     {
         try {

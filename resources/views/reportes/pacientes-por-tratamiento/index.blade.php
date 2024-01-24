@@ -36,7 +36,7 @@
                 </div> --}}
 
             </div>
-            <a type="button" class="mt-3 btn btn-danger" target="_blank" id="generatePdfBtn">
+            <a type="button" class="my-3 btn btn-danger" id="generatePdfBtn">
                 <i class="fa-solid fa-file-pdf"></i> Descargar PDF
             </a>
         </form>

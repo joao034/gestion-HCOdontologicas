@@ -31,7 +31,8 @@ function actualizarTabla(resultados) {
     tabla += "<tr>";
     tabla += '<th scope="col">Año</th>';
     tabla += '<th scope="col">Mes</th>';
-    tabla += '<th scope="col">Monto Total</th>';
+    tabla += '<th scope="col">Total Presupuestos</th>';
+    tabla += '<th scope="col">Total Abonos</th>';
     tabla += "</tr>";
     tabla += "</thead>";
     tabla += "<tbody>";
@@ -43,48 +44,49 @@ function actualizarTabla(resultados) {
     } else {
         $.each(resultados, function (index, resultado) {
             tabla += "<tr>";
-            tabla += '<td scope="row">' + resultado.year + "</td>";
+            tabla += '<td scope="row">' + resultado.anio + "</td>";
             //presentar el mes en español
-            switch (resultado.month) {
+            switch (resultado.mes) {
                 case "January":
-                    resultado.month = "Enero";
+                    resultado.mes = "Enero";
                     break;
                 case "February ":
-                    resultado.month = "Febrero";
+                    resultado.mes = "Febrero";
                     break;
                 case "March":
-                    resultado.month = "Marzo";
+                    resultado.mes = "Marzo";
                     break;
                 case "April":
-                    resultado.month = "Abril";
+                    resultado.mes = "Abril";
                     break;
                 case "May":
-                    resultado.month = "Mayo";
+                    resultado.mes = "Mayo";
                     break;
                 case "June":
-                    resultado.month = "Junio";
+                    resultado.mes = "Junio";
                     break;
                 case "July":
-                    resultado.month = "Julio";
+                    resultado.mes = "Julio";
                     break;
                 case "August":
-                    resultado.month = "Agosto";
+                    resultado.mes = "Agosto";
                     break;
                 case "September":
-                    resultado.month = "Septiembre";
+                    resultado.mes = "Septiembre";
                     break;
                 case "October":
-                    resultado.month = "Octubre";
+                    resultado.mes = "Octubre";
                     break;
                 case "November":
-                    resultado.month = "Noviembre";
+                    resultado.mes = "Noviembre";
                     break;
                 case "December":
-                    resultado.month = "Diciembre";
+                    resultado.mes = "Diciembre";
                     break;
             }
-            tabla += "<td>" + resultado.month + "</td>";
-            tabla += "<td>" + "$" + resultado.total_por_mes + "</td>";
+            tabla += "<td>" + resultado.mes + "</td>";
+            tabla += "<td>" + "$" + resultado.total_presupuestos + "</td>";
+            tabla += "<td>" + "$" + resultado.total_abonos + "</td>";
             tabla += "</tr>";
         });
     }

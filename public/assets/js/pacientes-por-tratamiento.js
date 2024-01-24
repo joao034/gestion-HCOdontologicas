@@ -1,6 +1,6 @@
 $(document).ready(function () {
     $("#tratamiento_id").change(function () {
-        var tratamientoId = $(this).val();
+        let tratamientoId = $(this).val();
         $.ajax({
             type: "GET",
             url: "/reportes/pacientes-por-tratamiento",
@@ -19,15 +19,15 @@ $(document).ready(function () {
     });
 
     $("#generatePdfBtn").click(function () {
-        var tratamientoId = $("#tratamiento_id").val();
-        window.location.href = "/reportes/pdf/pacientes-por-tratamiento?tratamiento_id=" + tratamientoId;
+        let tratamientoId = $("#tratamiento_id").val();
+        window.open("/reportes/pdf/pacientes-por-tratamiento?tratamiento_id=" + tratamientoId, '_blank');
     });
 
 });
 
 //construye y actualiza la tabla
 function actualizarTabla(pacientes) {
-    var tabla = '<table class="table">';
+    let tabla = '<table class="table">';
     tabla += '<thead class="bg-dark text-white">';
     tabla += "<tr>";
     tabla += '<th scope="col">Cédula</th>';
@@ -48,13 +48,13 @@ function actualizarTabla(pacientes) {
             tabla += "<tr>";
             tabla += '<td scope="row">' + (paciente.cedula === null ? '-' : paciente.cedula) + "</td>";
             tabla +=
-                "<td>" + paciente.nombres + " " + paciente.apellidos + "</td>";
+                "<td>" + paciente.apellidos + " " + paciente.nombres + "</td>";
             //calcula la edad con la fecha de nacimiento
-            var fechaNacimiento = new Date(paciente.fecha_nacimiento);
-            var fechaActual = new Date();
-            var edad =
+            let fechaNacimiento = new Date(paciente.fecha_nacimiento);
+            let fechaActual = new Date();
+            let edad =
                 fechaActual.getFullYear() - fechaNacimiento.getFullYear();
-            tabla += "<td>" + edad + "</td>";
+            tabla += "<td>" + edad + " años" + "</td>";
             tabla += "<td>" + (paciente.celular === null ? '-' : paciente.celular) + "</td>";
             //if (paciente.representante == null) paciente.representante = "-";
             tabla += "<td>" + paciente.direccion + "</td>";

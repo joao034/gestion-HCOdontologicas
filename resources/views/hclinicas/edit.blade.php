@@ -70,7 +70,7 @@
                                             <div class="col-md-6">
                                                 <div class="mb-3">
                                                     <label for="" class="form-label fw-bold">Cédula del
-                                                        Representante</label>
+                                                        Representante <span class="text-danger">*</span></label>
                                                     <input type="text" class="form-control" name="cedula_representante"
                                                         minlength="10" maxlength="10" id=""
                                                         aria-describedby="helpId" placeholder="" pattern="^[0-9]+$"

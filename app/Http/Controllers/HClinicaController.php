@@ -13,7 +13,7 @@ use App\Models\Diagnostico;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Validator;
-use Illuminate\Validation\Rule;
+use Illuminate\Support\Facades\Session;
 
 class HClinicaController extends Controller
 {
@@ -25,20 +25,40 @@ class HClinicaController extends Controller
      */
     protected function validator(array $data)
     {
-        return Validator::make($data, [
+        $rules = [
             'nombres' => ['required', 'string', 'max:255'],
             'apellidos' => ['required', 'string', 'max:255'],
-            'cedula' => ['nullable', 'string', 'min:10', 'max:10', 'validar_cedula', ],
-            'cedula_representante' => ['nullable', 'string', 'min:10', 'max:10', 'validar_cedula'],
-            'representante' => ['nullable', 'string', 'max:100'],
+            'cedula' => ['nullable', 'string', 'min:10', 'max:10', 'validar_cedula'],
             'estado_civil' => ['required', 'string', 'max:255'],
             'direccion' => ['required', 'string', 'max:255'],
             'ocupacion' => ['required', 'string', 'max:255'],
             'sexo' => ['required', 'string', 'max:255'],
             'celular' => ['nullable', 'min:10', 'max:10'],
             'telef_convencional' => ['nullable', 'min:6', 'max:9'],
-            'fecha_nacimiento' => ['required', 'date', 'before:today', 'after:1900-01-01']
-        ]);
+            'fecha_nacimiento' => ['required', 'date', 'before:today', 'after:1900-01-01'],
+        ];
+
+        //si es mayor o igual a 18 el campo cedula es obligatorio
+        if (isset($data['fecha_nacimiento']) && !empty($data['fecha_nacimiento'])) {
+            $fecha_nacimiento = date_create($data['fecha_nacimiento']);
+            $hoy = date_create(date('Y-m-d'));
+            $edad = date_diff($fecha_nacimiento, $hoy);
+            if ($edad->y >= 18) {
+                $rules['cedula'] = ['required', 'string', 'min:10', 'max:10', 'validar_cedula'];
+            }
+        }
+
+        //si el paciente es menor o igual a 12 años el campo representante y cedula_representante son obligatorios
+        if (isset($data['fecha_nacimiento']) && !empty($data['fecha_nacimiento'])) {
+            $fecha_nacimiento = date_create($data['fecha_nacimiento']);
+            $hoy = date_create(date('Y-m-d'));
+            $edad = date_diff($fecha_nacimiento, $hoy);
+            if ($edad->y < 12) {
+                $rules['representante'] = ['required', 'string', 'max:100'];
+                $rules['cedula_representante'] = ['required', 'string', 'min:10', 'max:10', 'validar_cedula'];
+            }
+        }
+        return Validator::make($data, $rules);
     }
 
     private function mostrarErroresDeValidacion($request)
@@ -84,21 +104,24 @@ class HClinicaController extends Controller
             //validar los datos
             $this->mostrarErroresDeValidacion($request);
             $this->validator($request->all())->validate();
-            if(!$this->verificarCedulaDistinta($request)){
+            if (!$this->verificarCedulaDistinta($request)) {
                 return to_route('hclinicas.create')->with('danger', 'La cédula del representante no puede ser igual a la del paciente.');
             }
-            //verificar que la cedula del representante no sea la misma que la del paciente
+
             $this->guardarOActualizarPaciente($paciente, $request);
             //insertar datos otras tablas
-
             $this->almacenarRepresentante($request, $paciente->id);
             $this->almacenarAntecedentePersonales($request, $paciente->id);
             $this->almacenarDiagnostico($request, $paciente->id);
             DB::commit();
+
+            /* // Establecer la variable de sesión 'pacienteCreado'
+            Session::flash('pacienteCreado', true); */
+
             return to_route('hclinicas.index')->with('message', 'Historia Clinica creado exitosamente.');
         } catch (\Exception $e) {
             DB::rollback();
-            return to_route('hclinicas.create')->with('danger', 'No se pudo crear la Historia Clinica.' . $e->getMessage());
+            return to_route('hclinicas.create')->with('danger', 'No se pudo crear la Historia Clinica.');
             throw $e;
         }
     }
@@ -124,7 +147,7 @@ class HClinicaController extends Controller
     }
 
     /**
-     * Muesta la vista info
+     * Muesta la vista edit
      *
      * @param  \App\Models\  $id_paciente
      * @return \Illuminate\Http\
@@ -153,7 +176,7 @@ class HClinicaController extends Controller
             //validar el ingreso de los datos
             $this->mostrarErroresDeValidacion($request);
             $this->validator($request->all())->validate();
-            if(!$this->verificarCedulaDistinta($request)){
+            if (!$this->verificarCedulaDistinta($request)) {
                 return to_route('hclinicas.create')->with('danger', 'La cédula del representante no puede ser igual a la del paciente.');
             }
             $this->guardarOActualizarPaciente($paciente, $request);
@@ -215,19 +238,12 @@ class HClinicaController extends Controller
     {
         try {
             if ($this->verificarCedulaDistinta($request)) {
-                /* $request->validate([
-                    'representante' => ['required', 'string', 'max:100'],
-                    'cedula_representante' => ['nullable', 'string', 'min:10', 'max:10', 'validar_cedula'],
-                ]); */
-
-                if (null != $request->input('representante') || null != $request->input('cedula_representante')) {
-                    $representante = new Representante();
-                    $representante->paciente_id = $paciente_id;
-                    $representante->representante = $request->input('representante');
-                    $representante->cedula_representante = $request->input('cedula_representante');
-                    $representante->save();
-                }
-            }else{
+                $representante = new Representante();
+                $representante->paciente_id = $paciente_id;
+                $representante->representante = $request->input('representante');
+                $representante->cedula_representante = $request->input('cedula_representante');
+                $representante->save();
+            } else {
                 return back()->with('danger', 'La cédula del representante no puede ser igual a la del paciente.');
             }
         } catch (\Exception $e) {
@@ -306,7 +322,7 @@ class HClinicaController extends Controller
             //si el paciente no tiene representante y se ingreso uno nuevo, lo crea
             else
                 $this->almacenarRepresentante($request, $paciente->id);
-        }else{
+        } else {
             return back()->with('danger', 'La cédula del representante no puede ser igual a la del paciente.');
         }
     }

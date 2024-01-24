@@ -33,4 +33,15 @@ class AbonoController extends Controller
             return back()->with('danger', 'Error al registrar el abono. Seleccione al menos un detalle');
         }
     }
+
+    public function delete(int $id)
+    {
+        try {
+            $abono = Abono::find($id);
+            $abono->delete();
+            return back()->with('message', 'Abono eliminado correctamente');
+        } catch (\Exception $e) {
+            return back()->with('danger', 'Error al eliminar el abono');
+        }
+    }
 }

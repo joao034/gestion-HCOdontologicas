@@ -167,6 +167,7 @@
                                             <select class="form-select form-select" name="sexo" required aria-label=".form-select-sm example">
                                                 <option value="masculino" {{ $user->odontologo['sexo'] == 'masculino' ? 'selected' : '' }}>Masculino</option>
                                                 <option value="femenino" {{ $user->odontologo['sexo'] == 'femenino' ? 'selected' : '' }}>Femenino</option>
+                                                <option value="otro" {{ $user->odontologo['sexo'] == 'otro' ? 'selected' : '' }}>Otro</option>
                                             </select>
                                         </div>
                                         </div>

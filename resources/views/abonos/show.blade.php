@@ -8,7 +8,7 @@
             </div>
 
             <div class="modal-body">
-                <h3 class="fs-5 fw-bold text-center">Lista de Abonos del Presupuesto Nº {{$presupuesto->id}}</h3>
+                <h3 class="fs-5 fw-bold text-center">Lista de Abonos del Presupuesto Nº {{ $presupuesto->id }}</h3>
 
                 <div class="table-responsive mx-4">
                     <br>
@@ -38,10 +38,11 @@
                     </button> --}}
 
                                         <!--eliminar-->
-                                        {{-- <button type="button" class="btn btn-danger" data-bs-toggle="modal" data-bs-target="#delete{{$tratamiento->id}}">
-                        <i class="fa-regular fa-trash-can"></i> Eliminar
-                    </button> --}}
-
+                                        {{-- <button type="button" class="btn btn-danger" data-bs-toggle="modal"
+                                            data-bs-target="#delete{{ $abono->id }}">
+                                            <i class="fa-regular fa-trash-can"></i>
+                                        </button>
+                                        @include('abonos.delete') --}}
                                     </td>
                                 </tr>
                             @endforeach

@@ -14,7 +14,7 @@
                         <option value="0">Seleccione un odontólogo</option>
                         @foreach ($odontologos as $odontologo)
                             <option value="{{ $odontologo->id }}">
-                                {{ $odontologo->nombres . ' ' . $odontologo->apellidos . '  - ' . $odontologo->especialidad->nombre }}
+                                {{ $odontologo->nombres . ' ' . $odontologo->apellidos . '  - ' . $odontologo->get_nombres_especialidades() }}
                             </option>
                         @endforeach
                     </select>

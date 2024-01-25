@@ -25,7 +25,7 @@
             <tr class="">
                 <td scope="row">{{$odontologo->cedula}}</td>
                 <td>{{$odontologo->nombres . ' ' . $odontologo->apellidos}}</td>
-                <td>{{$odontologo->especialidad->nombre}}</td>
+                <td>{{$odontologo->get_nombres_especialidades()}}</td>
                 <td>{{$odontologo->celular}}</td>
                 <td>
                     <!--editar-->

@@ -23,12 +23,12 @@
                             <option value="" selected>Seleccione un odontólogo</option>
                             @foreach ($odontologos as $user)
                                 <option value="{{ $user->odontologo->id }}">
-                                    {{ $user->odontologo->nombres . ' ' . $user->odontologo->apellidos . ' - ' . $user->odontologo->especialidad->nombre }}
+                                    {{ $user->odontologo->nombres . ' ' . $user->odontologo->apellidos . ' - ' . $user->odontologo->get_nombres_especialidades()}}
                                 </option>
                             @endforeach
                         @else
                             <option value="{{ Auth::user()->odontologo->id }}" selected>
-                                {{ Auth::user()->odontologo->nombres . ' ' . Auth::user()->odontologo->apellidos . ' - ' . Auth::user()->odontologo->especialidad->nombre }}
+                                {{ Auth::user()->odontologo->nombres . ' ' . Auth::user()->odontologo->apellidos . ' - ' . Auth::user()->odontologo->get_nombres_especialidades() }}
                             </option>
                         @endif
                     </select>

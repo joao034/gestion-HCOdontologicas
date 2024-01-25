@@ -14,7 +14,6 @@
         <thead class="bg-dark text-white">
             <tr>
                 <th scope="col" class="col">Nombre de Usuario</th>
-                <th scope="col" class="col">Odontólogo</th>
                 <th scope="col" class="col">Email</th>
                 <th scope="col" class="col">Rol</th>
                 <th scope="col" class="col">Estado</th>

@@ -339,7 +339,6 @@
                                     </div>
 
                                     <div class="row">
-
                                         <div class="col-lg-3 col-md-4">
                                             <p class="fw-bold">¿Está Ud embarazada?</p>
                                         </div>
@@ -500,7 +499,8 @@
                                         <div class="col-lg-6 col-md-6">
                                             <div class="form-floating mb-3">
                                                 <input type="text" class="form-control" name="diagnostico"
-                                                    id="diganostico" aria-describedby="helpId" value="{{$diagnostico?->diagnostico}}"
+                                                    id="diganostico" aria-describedby="helpId"
+                                                    value="{{ $diagnostico?->diagnostico }}"
                                                     placeholder="Escriba el diagnóstico" readonly>
                                                 <label for="diganostico" class="fw-bold">Diagnóstico</label>
                                             </div>
@@ -511,7 +511,7 @@
                                                 <input type="text" class="form-control" name="enfermedad_actual"
                                                     id="enfermedad_actual" aria-describedby="helpId"
                                                     placeholder="Escriba la enfermedad actual" readonly
-                                                    value="{{$diagnostico?->enfermedad_actual}}">
+                                                    value="{{ $diagnostico?->enfermedad_actual }}">
                                                 <label for="enfermedad_actual" class="fw-bold">Enfermedad Actual</label>
                                             </div>
                                         </div>

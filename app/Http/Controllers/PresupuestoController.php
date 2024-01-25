@@ -32,12 +32,14 @@ class PresupuestoController extends Controller
         return view('presupuestos.index', compact(['search', 'pacientes']));
     } */
 
-    public function pdf($id)
+    public function pdf($presupuesto_id)
     {
-        $presupuesto = Odontograma::find($id);
+        $presupuesto = Odontograma::find($presupuesto_id);
         $paciente = Paciente::find($presupuesto->paciente_id);
-        $detalles_presupuesto = $this->getDetallesPresupuesto($id);
-        $pdf = Pdf::loadView('presupuestos.pdf', compact('paciente', 'presupuesto', 'detalles_presupuesto'));
+        $detalles_presupuesto = $this->getDetallesPresupuesto($presupuesto_id);
+        $total_abonado = $this->getTotalAbonado($presupuesto_id);
+        $total_realizado = $this->getTotalRealizado($presupuesto_id);
+        $pdf = Pdf::loadView('presupuestos.pdf', compact('paciente', 'presupuesto', 'detalles_presupuesto', 'total_abonado', 'total_realizado'));
         return $pdf->stream('presupuesto_' . $paciente->nombres . ' ' . $paciente->apellidos . '.pdf');
     }
 
@@ -95,7 +97,6 @@ class PresupuestoController extends Controller
 
     public function edit(int $presupuesto_id)
     {
-        //Buscar el odontograma del paciente
         $presupuesto = Odontograma::find($presupuesto_id);
         $detalles_presupuesto = $this->getDetallesPresupuesto($presupuesto_id);
         $tratamientos = Tratamiento::orderBy('nombre', 'asc')->get();
@@ -197,7 +198,9 @@ class PresupuestoController extends Controller
                                                 })->get();  */
         $detalles_presupuesto = OdontogramaDetalle::query()
             ->where('odontograma_cabecera_id', '=', "$id")
-            ->where('estado', '!=', 'hallazgo')->get();
+            ->where('estado', '!=', 'hallazgo')
+            ->orderByRaw("FIELD(estado , 'realizado', 'necesario')")
+            ->get();
 
         $detalles_presupuesto->map(function ($detalle_presupuesto) {
             $detalle_presupuesto->abonos = $this->getTotalDeAbonosDeDetalle($detalle_presupuesto->id);

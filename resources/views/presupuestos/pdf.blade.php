@@ -47,7 +47,7 @@
         margin: 5px 0;
     }
 
-    .center{
+    .center {
         text-align: center;
     }
 </style>
@@ -64,7 +64,7 @@
         </div>
     </div>
 
-    <!-- Datos del paciente --> 
+    <!-- Datos del paciente -->
     <div class="client-info">
         <h3>Información del Paciente</h3>
         <p><b>Paciente:</b> {{ $paciente->nombres }} {{ $paciente->apellidos }}</p>
@@ -72,8 +72,67 @@
         <p><b>Dirección:</b> {{ $paciente->direccion }}</p>
     </div>
 
-    <!-- Tabla de detalles del presupuesto -->
+        <table class="invoice-table">
+            <tbody >
+                <tr class="">
+                    <td scope="col"><strong>Presupuesto Total:</strong></td>
+                    <td class=""> <strong>${{ $presupuesto->total }}</strong></td>
+                </tr>
+                <tr class="">
+                    <td scope="col"><strong>Realizado:</strong></td>
+                    <td>${{ $total_realizado }}</td>
+                </tr>
+                <tr class="">
+                    <td scope="col"><strong>Abonado:</strong></td>
+                    <td>${{ $total_abonado }}</td>
+                </tr>
+                <tr class="">
+                    <td scope="col"><strong>Saldo por Abonar:</strong></td>
+                    <td>${{ $presupuesto->total - $total_abonado }}</td>
+                </tr>
+            </tbody>
+        </table>
+ 
+
+
     <table class="invoice-table">
+        <thead class="bg-dark text-white">
+            <tr>
+                <th scope="col" class="col">Tratamiento</th>
+                <th scope="col" class="col">Nº Diente</th>
+                <th scope="col" class="col">Subtotal</th>
+                <th scope="col" class="col">Abonado</th>
+                <th scope="col" class="col">Saldo</th>
+            </tr>
+        </thead>
+        <tbody>
+            <!--Si no hay resultados-->
+            @if ($detalles_presupuesto->count() < 1)
+                <tr>
+                    <td colspan="6">No hay detalles del presupuesto.</td>
+                </tr>
+            @else
+                <!--Si hay resultados-->
+                @foreach ($detalles_presupuesto as $detalle)
+                    <tr class="">
+                        <td>{{ $detalle->tratamiento->nombre }}</td>
+                        <td>{{ $detalle->num_pieza_dental }}</td>
+                        
+                        {{-- <td class="{{ $detalle->estado == 'necesario' ? 'text-danger' : 'text-primary' }}">
+                            {{ strtoupper($detalle->estado == 'necesario' ? ($detalle->estado = 'pendiente') : $detalle->estado) }}
+                        </td> --}}
+                        <td>${{ $detalle->precio }}</td>
+                        <td>$ {{ $detalle->abonos }}</td>
+                        <td>$ {{ $detalle->precio - $detalle->abonos }}</td>
+                    </tr>
+                @endforeach
+            @endif
+        </tbody>
+    </table>
+
+
+    <!-- Tabla de detalles del presupuesto -->
+    {{-- <table class="invoice-table">
         <thead class="bg-dark text-white">
             <tr>
                 <th scope="col">Nº</th>
@@ -84,7 +143,7 @@
         </thead>
         <tbody>
             <!-- Si no hay resultados -->
-            @if($detalles_presupuesto->count() < 1 )
+            @if ($detalles_presupuesto->count() < 1)
                 <tr>
                     <td colspan="4">No hay detalles del presupuesto.</td>
                 </tr>
@@ -92,17 +151,17 @@
                 <!-- Si hay resultados -->
                 @foreach ($detalles_presupuesto as $detalle)
                     <tr>
-                        <td scope="row">{{$detalle->id}}</td>
-                        <td>{{$detalle->tratamiento->nombre}}</td>
-                        <td>{{$detalle->num_pieza_dental}}</td>
-                        <td>${{$detalle->precio}}</td>
+                        <td scope="row">{{ $detalle->id }}</td>
+                        <td>{{ $detalle->tratamiento->nombre }}</td>
+                        <td>{{ $detalle->num_pieza_dental }}</td>
+                        <td>${{ $detalle->precio }}</td>
                     </tr>
                 @endforeach
                 <tr>
                     <td colspan="3" class="center"><b>Total</b></td>
-                    <td><b>${{$presupuesto->total}}</b></td>
+                    <td><b>${{ $presupuesto->total }}</b></td>
                 </tr>
             @endif
         </tbody>
-    </table>
+    </table> --}}
 </div>

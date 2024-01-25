@@ -183,7 +183,8 @@ class OdontogramaDetalleController extends Controller
                     ->orWhere('estado', '=', 'realizado')
                     ->orWhere('estado', '=', 'fuera_presupuesto');
             }) */
-            ->orderBy('created_at', 'desc')
+            //ordenar primero los necesarios
+            ->orderByRaw("FIELD(estado , 'necesario', 'realizado', 'hallazgo')")
             ->paginate(10);
 
         return $detalles_odontograma;

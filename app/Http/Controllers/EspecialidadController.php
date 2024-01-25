@@ -34,6 +34,7 @@ class EspecialidadController extends Controller
     public function index()
     {
         $especialidades = Especialidad::all();
+        $especialidades = $especialidades->sortBy('nombre');
         return view('especialidades.index', compact('especialidades'));
     }
 

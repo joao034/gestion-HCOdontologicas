@@ -32,11 +32,10 @@ class SMSController extends Controller
                 $numero,
                 array(
                     'from' => $twilio_number,
-                    'body' => 'Revise su presupuesto en el siguiente enlace: ' . $urlPresupuesto
+                    'body' => 'De parte de Saúde Medical Group, le informamos que el total de su presupuesto asciende a: $' . $odontograma->total . '. Revíselo a detalle en el siguiente enlace: ' . $urlPresupuesto
                 )
             );
             return back()->with('message', 'Presupuesto enviado al celular del paciente correctamente');
-
         } catch (\Exception $e) {
             return back()->with('danger', 'No se pudo enviar el mensaje ' . $e->getMessage());
         }

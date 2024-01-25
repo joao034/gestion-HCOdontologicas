@@ -36,7 +36,7 @@ class Odontologo extends Model
 	protected $table = 'odontologos';
 
 	protected $casts = [
-		'especialidad_id' => 'int',
+		//'especialidad_id' => 'int',
 		'user_id' => 'int'
 	];
 
@@ -46,14 +46,19 @@ class Odontologo extends Model
 		'cedula',
 		'sexo',
 		'celular',
-		'especialidad_id',
+		//'especialidad_id',
 		'user_id'
 	];
 
-	public function especialidad()
+	/* public function especialidad()
 	{
 		return $this->belongsTo(Especialidad::class, 'especialidad_id');
-	}
+	} */
+
+	public function especialidades()
+    {
+        return $this->belongsToMany(Especialidad::class, 'odontologo_especialidad');
+    }
 
 	public function usuario(){
 		return $this->belongsTo(User::class, 'user_id');

@@ -32,8 +32,13 @@ class Especialidad extends Model
 		'descripcion'
 	];
 
-	public function odontologos()
+	/* public function odontologos()
 	{
 		return $this->hasMany(Odontologo::class, 'especialidad_id');
-	}
+	} */
+
+	public function odontologos()
+    {
+        return $this->belongsToMany(Odontologo::class, 'odontologo_especialidad');
+    }
 }

@@ -23,7 +23,7 @@
                     <th scope="col" class="col"> </th>
                     <th scope="col" class="col">Tratamiento</th>
                     <th scope="col" class="col">Nº Diente</th>
-                    <th scope="col" class="col-2">Valor Unitario ($)</th>
+                    {{-- <th scope="col" class="col-2">Valor Unitario ($)</th> --}}
                     <th scope="col" class="col">Estado</th>
                     <th scope="col" class="col">Subtotal</th>
                     <th scope="col" class="col">Abonado</th>
@@ -44,7 +44,7 @@
                     @foreach ($detalles_presupuesto as $detalle)
                         <tr class="">
                             {{-- <td scope="row">{{ $detalle->id }}</td> --}}
-                            @if ($detalle->precio - $detalle->abonos > 0)
+                            @if (Auth::user()->role == 'admin' && $detalle->precio - $detalle->abonos > 0)
                                 <td>
                                     <input class="form-check-input border-primary" type="checkbox"
                                         id="detalle_{{ $detalle->id }}" name="detalles_check[]" autofocus
@@ -56,7 +56,7 @@
 
                             <td>{{ $detalle->tratamiento->nombre }}</td>
                             <td>{{ $detalle->num_pieza_dental }}</td>
-                            <td>
+                            {{-- <td>
                                 <form action="{{ route('update.precio', $detalle->id) }}" id="form" method="POST">
                                     @method('PUT')
                                     @csrf
@@ -64,7 +64,7 @@
                                         {{ $detalle->estado == 'realizado' ? 'readonly' : '' }} step="any"
                                         value="{{ $detalle->precio }}">
                                 </form>
-                            </td>
+                            </td> --}}
                             <td class="{{ $detalle->estado == 'necesario' ? 'text-danger' : 'text-primary' }}">
                                 {{ strtoupper($detalle->estado == 'necesario' ? ($detalle->estado = 'pendiente') : $detalle->estado) }}
                             </td>

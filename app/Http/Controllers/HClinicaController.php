@@ -115,9 +115,6 @@ class HClinicaController extends Controller
             $this->almacenarDiagnostico($request, $paciente->id);
             DB::commit();
 
-            /* // Establecer la variable de sesión 'pacienteCreado'
-            Session::flash('pacienteCreado', true); */
-
             return to_route('hclinicas.index')->with('message', 'Historia Clinica creado exitosamente.');
         } catch (\Exception $e) {
             DB::rollback();

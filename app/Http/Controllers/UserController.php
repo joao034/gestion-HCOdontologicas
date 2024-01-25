@@ -21,6 +21,7 @@ class UserController extends Controller
     public function index()
     {
         $users = User::all();
+        $users = $users->sortBy('name');
         return view('users.index', compact('users'));
     }
 

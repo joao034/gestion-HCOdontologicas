@@ -39,7 +39,7 @@
                     </button> --}}
                 </td>
             </tr>
-            @include('users.delete')
+            {{-- @include('users.delete') --}}
             @endforeach
         </tbody>
     </table>

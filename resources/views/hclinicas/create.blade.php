@@ -423,7 +423,6 @@
                                         ENFERMEDADES?</p>
 
                                     <div class="row">
-
                                         <div class="col-lg-3 col-md-6">
                                             <input class="form-check-input border-primary" type="checkbox"
                                                 id="checkHipertension" name="enfermedades[]" value="hipertension">

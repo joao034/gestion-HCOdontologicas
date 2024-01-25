@@ -671,7 +671,7 @@
                                             <div class="form-floating mb-3">
                                                 <input type="text" class="form-control" name="diagnostico"
                                                     id="diganostico" aria-describedby="helpId"
-                                                    placeholder="Escriba el diagnóstico">
+                                                    placeholder="Escriba el diagnóstico" value="{{ old('diagnostico') }}">
                                                 <label for="diganostico" class="fw-bold">Diagnóstico</label>
                                             </div>
                                         </div>
@@ -680,7 +680,7 @@
                                             <div class="form-floating mb-3">
                                                 <input type="text" class="form-control" name="enfermedad_actual"
                                                     id="enfermedad_actual" aria-describedby="helpId"
-                                                    placeholder="Escriba la enfermedad actual">
+                                                    placeholder="Escriba la enfermedad actual" value="{{ old('enfermedad_actual') }}">
                                                 <label for="enfermedad_actual" class="fw-bold">Enfermedad Actual</label>
                                             </div>
                                         </div>

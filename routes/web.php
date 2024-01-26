@@ -46,8 +46,6 @@ Route::middleware('auth')->group(function () {
     Route::resource("presupuestos", PresupuestoController::class);
     Route::resource("users", UserController::class);
     Route::resource("abonos", AbonoController::class);
-    
-    Route::get('odontogramas/pdf/{odontograma_cabecera_id}', [OdontogramaController::class, 'pdf'])->name('odontogramas.pdf');
 
     Route::post('odontogramas/nuevo/{paciente_id}', 'App\Http\Controllers\OdontogramaController@nuevo')->name('odontogramas.nuevo');
 
@@ -70,9 +68,12 @@ Route::middleware('auth')->group(function () {
     Route::get('reportes/top-pacientes-por-presupuesto', [TopPacientesPorPresupuesto::class, 'get_top_3_pacientes_por_total_presupuesto'])->name('reportes.top_pacientes_por_presupuesto');
     
     Route::get('enviar-mensaje/{presupusto_id}', [SMSController::class, 'send_sms'])->name('presupuestos.enviar-mensaje');
+
     Route::get('enviar-hclinica/{odontograma_id}', [SMSController::class, 'send_hclinica_sms'])->name('odontogramas.enviar-mensaje');
 });
 
 //Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
 
 Route::get('presupuestos/pdf/{odontograma_cabecera_id}', [PresupuestoController::class, 'pdf'])->name('presupuestos.pdf');
+
+Route::get('odontogramas/pdf/{odontograma_cabecera_id}', [OdontogramaController::class, 'pdf'])->name('odontogramas.pdf');

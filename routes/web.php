@@ -46,6 +46,9 @@ Route::middleware('auth')->group(function () {
     Route::resource("presupuestos", PresupuestoController::class);
     Route::resource("users", UserController::class);
     Route::resource("abonos", AbonoController::class);
+    
+    Route::get('odontogramas/pdf/{odontograma_cabecera_id}', [OdontogramaController::class, 'pdf'])->name('odontogramas.pdf');
+
     Route::post('odontogramas/nuevo/{paciente_id}', 'App\Http\Controllers\OdontogramaController@nuevo')->name('odontogramas.nuevo');
 
     Route::put('presupuestos/update-precio/{id_detalle_presupuesto}', [PresupuestoController::class, 'updatePrecio'])->name('update.precio');

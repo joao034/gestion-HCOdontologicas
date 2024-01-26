@@ -8,6 +8,9 @@ use App\Models\Paciente;
 use Illuminate\Http\Request;
 use App\Models\OdontogramaDetalle;
 use Carbon\Carbon;
+use Barryvdh\DomPDF\Facade\Pdf;
+use Dompdf\Dompdf;
+use Dompdf\Options;
 
 class OdontogramaController extends Controller
 {
@@ -21,6 +24,15 @@ class OdontogramaController extends Controller
         /* $search = trim( $request->get('search') );
         $pacientes = Paciente::getAllPacientesWithPagination( $search, 'updated_at', 'desc' );
         return view('odontogramas.index', compact(['search', 'pacientes'])); */
+    }
+
+    public function pdf(int $odontograma_cabecera_id)
+    {
+        $odontograma = Odontograma::find($odontograma_cabecera_id);
+        $paciente = $odontograma->paciente;
+        $odontograma_detalles = $this->getDetallesOdontograma($odontograma_cabecera_id);
+        $pdf = PDF::loadView('odontogramas.pdf', compact(['odontograma', 'paciente', 'odontograma_detalles']));
+        return $pdf->stream('odontograma_' . $paciente->nombres . ' ' . $paciente->apellidos . '.pdf');
     }
 
     public function nuevo(int $paciente_id)
@@ -69,5 +81,12 @@ class OdontogramaController extends Controller
         } catch (\Exception $e) {
             return to_route('odontogramas.index')->with('danger', 'Error al eliminar el odontograma');
         }
+    }
+
+    private function getDetallesOdontograma(int $odontograma_cabecera_id)
+    {
+        return OdontogramaDetalle::query()
+            ->where('odontograma_cabecera_id', '=', "$odontograma_cabecera_id")
+            ->get();
     }
 }

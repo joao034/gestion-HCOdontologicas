@@ -1,7 +1,5 @@
 @extends('layouts.app')
 @section('content')
-    {{-- <x-container-info-pacientes-navegacion :paciente="$paciente" :antecedentes="$antPersonales?"></x-container-info-pacientes-navegacion> --}}
-
     <x-navegacion-paciente :paciente="$paciente" />
     <form>
         <div class="card">

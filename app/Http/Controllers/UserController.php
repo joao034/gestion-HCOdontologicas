@@ -107,6 +107,7 @@ class UserController extends Controller
         $user->odontologo->nombres = $request->nombres;
         $user->odontologo->apellidos = $request->apellidos;
         $user->odontologo->cedula = $request->cedula;
+        $user->odontologo->tipo_identificacion = $request->tipo_identificacion;
         $user->odontologo->sexo = $request->sexo;
         $user->odontologo->celular = $request->celular;
         $this->almacenarEspecialidadesSeleccionadas($user->odontologo, $request);
@@ -119,7 +120,8 @@ class UserController extends Controller
         return [
             'nombres' => 'required|string|max:255',
             'apellidos' => 'required|string|max:255',
-            'cedula' => 'required|string|min:10|max:10|validar_cedula',
+            'cedula' => 'required|string',
+            'tipo_identificacion' => 'required|string|max:255',
             'sexo' => 'required|string|max:255',
             'celular' => 'required|string|min:10|max:10',
             'especialidades' => 'required|array|min:1',
@@ -133,6 +135,7 @@ class UserController extends Controller
             'nombres' => $request->nombres,
             'apellidos' => $request->apellidos,
             'cedula' => $request->cedula,
+            'tipo_identificacion' => $request->tipo_identificacion,
             'sexo' => $request->sexo,
             'celular' => $request->celular,
             'user_id' => $user->id,

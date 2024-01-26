@@ -136,17 +136,44 @@
                                         <div class="col-md-6">
                                             <div class="mb-3">
                                                 <label for=""
+                                                    class="form-label fw-bold">{{ __('Tipo de identificación') }}</label>
+                                                <select class="form-select form-select" name="tipo_identificacion" required
+                                                    aria-label=".form-select-sm example">
+                                                    <option value="masculino"
+                                                        {{ $user->odontologo['tipo_identificacion'] == 'cedula' ? 'selected' : '' }}>
+                                                        Cédula</option>
+                                                    <option value="pasaporte"
+                                                        {{ $user->odontologo['tipo_identificacion'] == 'pasaporte' ? 'selected' : '' }}>
+                                                        Pasaporte</option>
+                                                    <option value="visa"
+                                                        {{ $user->odontologo['tipo_identificacion'] == 'visa' ? 'selected' : '' }}>
+                                                        Visa
+                                                    </option>
+                                                    <option value="documento_identidad"
+                                                        {{ $user->odontologo['tipo_identificacion'] == 'documento_identidad' ? 'selected' : '' }}>
+                                                        Documento de identidad
+                                                    </option>
+                                                </select>
+                                            </div>
+                                        </div>
+
+                                        <div class="col-md-6">
+                                            <div class="mb-3">
+                                                <label for=""
                                                     class="form-label fw-bold">{{ __('Número de registro') }}</label>
                                                 <input
                                                     type="text"class="form-control form-control @error('cedula') is-invalid @enderror"
-                                                    name="cedula" id="cedula_odo"minlength="10" maxlength="10"
-                                                    pattern="^[0-9]+$" aria-describedby="helpId"
+                                                    name="cedula" id="cedula_odo" aria-describedby="helpId"
                                                     value="{{ $user->odontologo->cedula }}">
                                                 @error('cedula')
                                                     <small class="text-danger"> {{ $message }}</small>
                                                 @enderror
                                             </div>
                                         </div>
+
+                                    </div>
+
+                                    <div class="row">
                                         <div class="col-md-6">
                                             <div class="mb-3">
                                                 <label for=""
@@ -161,23 +188,23 @@
                                                 @enderror
                                             </div>
                                         </div>
-                                    </div>
-
-                                    <div class="col-md-6">
-                                        <div class="mb-3">
-                                            <label for="" class="form-label fw-bold">{{ __('Género') }}</label>
-                                            <select class="form-select form-select" name="sexo" required
-                                                aria-label=".form-select-sm example">
-                                                <option value="masculino"
-                                                    {{ $user->odontologo['sexo'] == 'masculino' ? 'selected' : '' }}>
-                                                    Masculino</option>
-                                                <option value="femenino"
-                                                    {{ $user->odontologo['sexo'] == 'femenino' ? 'selected' : '' }}>
-                                                    Femenino</option>
-                                                <option value="otro"
-                                                    {{ $user->odontologo['sexo'] == 'otro' ? 'selected' : '' }}>Otro
-                                                </option>
-                                            </select>
+                                        <div class="col-md-6">
+                                            <div class="mb-3">
+                                                <label for=""
+                                                    class="form-label fw-bold">{{ __('Género') }}</label>
+                                                <select class="form-select form-select" name="sexo" required
+                                                    aria-label=".form-select-sm example">
+                                                    <option value="masculino"
+                                                        {{ $user->odontologo['sexo'] == 'masculino' ? 'selected' : '' }}>
+                                                        Masculino</option>
+                                                    <option value="femenino"
+                                                        {{ $user->odontologo['sexo'] == 'femenino' ? 'selected' : '' }}>
+                                                        Femenino</option>
+                                                    <option value="otro"
+                                                        {{ $user->odontologo['sexo'] == 'otro' ? 'selected' : '' }}>Otro
+                                                    </option>
+                                                </select>
+                                            </div>
                                         </div>
                                     </div>
 

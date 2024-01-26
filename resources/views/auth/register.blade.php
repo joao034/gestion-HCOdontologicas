@@ -114,10 +114,28 @@
                                 <div class="row">
                                     <div class="col-md-6">
                                         <div class="mb-3">
-                                            <label for="" class="form-label fw-bold">{{ __('Número de Registro') }}</label>
+                                            <label for=""
+                                                class="form-label fw-bold">{{ __('Tipo de identificación') }}</label>
+                                            <select class="form-select form-select-md" name="tipo_identificacion"
+                                                aria-label=".form-select-sm example" required>
+                                                <option value="0">Seleccione el tipo de identificación</option>
+                                                <option value="cedula">Cédula</option>
+                                                <option value="pasaporte">Pasaporte</option>
+                                                <option value="visa">Visa</option>
+                                                <option value="documento_identidad">Documento de identidad</option>
+                                            </select>
+                                        </div>
+                                    </div>
+
+
+                                    <div class="col-md-6">
+                                        <div class="mb-3">
+                                            <label for=""
+                                                class="form-label fw-bold">{{ __('Número de Registro') }}</label>
                                             <input type="text"class="form-control form-control-md" name="cedula"
-                                                id="cedula_odo" minlength="10" maxlength="10" aria-describedby="helpId"
-                                                placeholder="Escriba su número de registro del ACESS" value="{{ old('cedula') }}">
+                                                id="cedula_odo" aria-describedby="helpId"
+                                                placeholder="Escriba su número de registro del ACESS"
+                                                value="{{ old('cedula') }}">
                                             @error('cedula')
                                                 <span class="invalid-feedback" role="alert">
                                                     <strong>{{ $message }}</strong>
@@ -125,6 +143,10 @@
                                             @enderror
                                         </div>
                                     </div>
+
+                                </div>
+
+                                <div class="row">
                                     <div class="col-md-6">
                                         <div class="mb-3">
                                             <label for="" class="form-label fw-bold">{{ __('Celular') }}</label>
@@ -134,20 +156,20 @@
                                                 placeholder="Escriba su celular">
                                         </div>
                                     </div>
-                                </div>
-
-                                <div class="col-md-6">
-                                    <div class="mb-3">
-                                        <label for="" class="form-label fw-bold">{{ __('Género') }}</label>
-                                        <select class="form-select form-select-md" name="sexo"
-                                            aria-label=".form-select-sm example">
-                                            <option>Seleccione el género</option>
-                                            <option value="masculino">Masculino</option>
-                                            <option value="femenino">Femenino</option>
-                                            <option value="otro">Otro</option>
-                                        </select>
+                                    <div class="col-md-6">
+                                        <div class="mb-3">
+                                            <label for="" class="form-label fw-bold">{{ __('Género') }}</label>
+                                            <select class="form-select form-select-md" name="sexo"
+                                                aria-label=".form-select-sm example">
+                                                <option>Seleccione el género</option>
+                                                <option value="masculino">Masculino</option>
+                                                <option value="femenino">Femenino</option>
+                                                <option value="otro">Otro</option>
+                                            </select>
+                                        </div>
                                     </div>
                                 </div>
+
                                 {{-- <select class="form-select form-select-md" name="especialidad_id" aria-label=".form-select-sm example">
                                             <option>Seleccione una especialidad</option>
                                             @foreach ($especialidades as $especialidad)

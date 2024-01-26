@@ -4,13 +4,14 @@
     @if (!request()->ajax())
         <h3 class="text-center fw-bold">Pacientes por odontólogo</h3>
         <hr>
-        <form action="" id="odontologoForm" method="GET">
+        <form action="{{route('asignar.odontologo')}}" id="odontologoForm" method="POST">
             @csrf
+            @method('PUT')
             <div class="row">
-                <div class="col-md-6">
-                    <label for="odontologo_id" class="form-label fw-bold">{{ __('Odontólogo') }}</label>
-                    <select class="form-select form-select-md" name="odontologo_id" required
-                        aria-label=".form-select-md example" id="odontologo_id" autofocus>
+                <div class="col-md-5">
+                    <label for="odontologo_id_origen" class="form-label fw-bold">{{ __('Odontólogo') }}</label>
+                    <select class="form-select form-select-md" name="odontologo_id_origen" required
+                        aria-label=".form-select-md example" id="odontologo_id_origen" autofocus>
                         <option value="0">Seleccione un odontólogo</option>
                         @foreach ($odontologos as $odontologo)
                             <option value="{{ $odontologo->id }}">
@@ -18,6 +19,23 @@
                             </option>
                         @endforeach
                     </select>
+                </div>
+                <!--Odontologo a asignar-->
+                <div class="col-md-5">
+                    <label for="odontologo_id_destino" class="form-label fw-bold">{{ __('Odontólogo a asignar pacientes') }}</label>
+                    <select class="form-select form-select-md" name="odontologo_id_destino" required
+                        aria-label=".form-select-md example" id="odontologo_id_destino" autofocus>
+                        <option value="0">Seleccione un odontólogo</option>
+                        @foreach ($odontologos as $odontologo)
+                            <option value="{{ $odontologo->id }}">
+                                {{ $odontologo->nombres . ' ' . $odontologo->apellidos . '  - ' . $odontologo->get_nombres_especialidades() }}
+                            </option>
+                        @endforeach
+                    </select>
+                </div>
+
+                <div class="col-md-2 mt-4">
+                    <button type="submit" class="btn btn-secondary"><i class="fa-regular fa-pen-to-square"></i> Asignar</button>
                 </div>
 
                 {{-- <p class="fw-bold">Seleccione un rango de fechas:</p>

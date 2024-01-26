@@ -1,5 +1,5 @@
 $(document).ready(function () {
-    $("#odontologo_id").change(function () {
+    $("#odontologo_id_origen").change(function () {
         let odontologoId = $(this).val();
         $.ajax({
             type: "GET",
@@ -19,10 +19,13 @@ $(document).ready(function () {
     });
 
     $("#generatePdfBtn").click(function () {
-        let odontologoId = $("#odontologo_id").val();
-        window.open("/reportes/pdf/pacientes-por-odontologo?odontologo_id=" + odontologoId, '_blank');
+        let odontologoId = $("#odontologo_id_origen").val();
+        window.open(
+            "/reportes/pdf/pacientes-por-odontologo?odontologo_id_origen=" +
+                odontologoId,
+            "_blank"
+        );
     });
-
 });
 
 //construye y actualiza la tabla
@@ -35,6 +38,7 @@ function actualizarTabla(pacientes) {
     tabla += '<th scope="col">Edad</th>';
     tabla += '<th scope="col">Celular</th>';
     tabla += '<th scope="col">Dirección</th>';
+    tabla += '<th scope="col">Historia Clínica</th>';
     tabla += "</tr>";
     tabla += "</thead>";
     tabla += "<tbody>";
@@ -46,7 +50,10 @@ function actualizarTabla(pacientes) {
     } else {
         $.each(pacientes, function (index, paciente) {
             tabla += "<tr>";
-            tabla += '<td scope="row">' + (paciente.cedula === null ? '-' : paciente.cedula) + "</td>";
+            tabla +=
+                '<td scope="row">' +
+                (paciente.cedula === null ? "-" : paciente.cedula) +
+                "</td>";
             tabla +=
                 "<td>" + paciente.apellidos + " " + paciente.nombres + "</td>";
             //calcula la edad con la fecha de nacimiento
@@ -54,10 +61,18 @@ function actualizarTabla(pacientes) {
             let fechaActual = new Date();
             let edad =
                 fechaActual.getFullYear() - fechaNacimiento.getFullYear();
-            tabla += "<td>" + edad + ' años' + "</td>";
-            tabla += "<td>" + (paciente.celular === null ? '-' : paciente.celular) + "</td>";
+            tabla += "<td>" + edad + " años" + "</td>";
+            tabla +=
+                "<td>" +
+                (paciente.celular === null ? "-" : paciente.celular) +
+                "</td>";
             //if (paciente.representante == null) paciente.representante = "-";
             tabla += "<td>" + paciente.direccion + "</td>";
+            tabla +=
+                '<td><button onclick="redirigirAHclinicas(' +
+                paciente.id +
+                ')" class="btn btn-secondary"><i class="fa-regular fa-pen-to-square"></i> Ver</button></td>';
+
             tabla += "<td></td>";
             tabla += "</tr>";
         });
@@ -68,4 +83,8 @@ function actualizarTabla(pacientes) {
 
     // Actualiza el contenido de #pacientesContainer con la nueva tabla
     $("#pacientesContainer").html(tabla);
+}
+
+function redirigirAHclinicas(pacienteId) {
+    window.open("/hclinicas/" + pacienteId, "_blank");
 }

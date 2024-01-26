@@ -53,6 +53,8 @@ Route::middleware('auth')->group(function () {
 
     Route::put('presupuestos/update-precio/{id_detalle_presupuesto}', [PresupuestoController::class, 'updatePrecio'])->name('update.precio');
 
+    Route::match(['post', 'put', 'patch'], '/asignar-odontologo/', [OdontogramaDetalleController::class, 'asignar_tratamientos_a_odontologo'])->name('asignar.odontologo');
+
     Route::post('presupuestos/store-abono/{id_detalle_presupuesto}', [PresupuestoController::class, 'storeAbono'])->name('store.abono');
 
     Route::get('reportes/pacientes-por-odontologo', [PacientesPorOdontologoController::class, 'get_pacientes_por_odontologo'])->name('reportes.get_pacientes_por_odontologo');

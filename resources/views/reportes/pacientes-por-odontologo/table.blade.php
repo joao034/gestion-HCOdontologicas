@@ -8,6 +8,7 @@
                 <th scope="col">Edad</th>
                 <th scope="col">Celular</th>
                 <th scope="col">Dirección</th>
+                <th scope="col">Historia Clínica</th>
             </tr>
         </thead>
         <tbody>
@@ -25,6 +26,8 @@
                     <td>{{ $paciente->fecha_nacimiento }}</td>
                     <td>{{ $paciente->celular }}</td>
                     <td>{{ $paciente->direccion }}</td>
+                    <a href="{{ route('hclinicas.show', $paciente->id) }}" class="btn btn-secondary"><i
+                            class="fa-regular fa-pen-to-square"></i> Ver</a>
                     <td>
                     </td>
                 </tr>

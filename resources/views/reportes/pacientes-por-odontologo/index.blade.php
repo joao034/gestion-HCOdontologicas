@@ -80,7 +80,6 @@
         </div>
     </div>
 
-
     @include('reportes.pacientes-por-odontologo.table', ['pacientes' => $pacientes])
 
     @if (!request()->ajax())

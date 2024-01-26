@@ -520,6 +520,15 @@
                     </div>
                     <!--Fin Diagnosticos-->
 
+                    <div class="form-check mt-2">
+                        <input class="form-check-input border-primary" type="checkbox" id="consentimiento" {{$paciente->consentimiento == true ? 'checked' : ''}}
+                            name="consentimiento" required>
+                        <label class="form-check-label" for="consentimiento">
+                            Acepto de manera libre y voluntaria dar mi consentimiento para la recolección, procesamiento y
+                            uso de mis datos personales con fines médicos y en el contexto de la historia clínica
+                            odontológica.
+                        </label>
+                    </div>
                 </div>
 
     </form>

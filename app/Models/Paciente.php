@@ -53,7 +53,8 @@ class Paciente extends Model
 		'ocupacion',
 		'direccion',
 		'celular',
-		'telef_convencional'
+		'telef_convencional',
+		'consentimiento'
 	];
 
 	public function antecedentes_infecciosos()

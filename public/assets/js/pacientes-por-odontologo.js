@@ -77,7 +77,7 @@ function actualizarTabla(pacientes) {
             tabla += "</tr>";
         });
     }
-
+    
     tabla += "</tbody>";
     tabla += "</table>";
 

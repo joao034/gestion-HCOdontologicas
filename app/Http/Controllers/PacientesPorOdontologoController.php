@@ -32,6 +32,26 @@ class PacientesPorOdontologoController extends Controller
         return view('reportes.pacientes-por-odontologo.index', compact(['pacientes', 'odontologos']));
     }
 
+    /* public function get_pacientes_por_odontologo(Request $request)
+    {
+        $odontologos = Odontologo::all();
+
+        $odontogramaDetalleIds = OdontogramaDetalle::where('odontologo_id', $request->odontologo_id)
+            ->pluck('odontograma_cabecera_id');
+
+        $odontogramaCabeceraPacienteIds = Odontograma::whereIn('id', $odontogramaDetalleIds)
+            ->pluck('paciente_id');
+
+        $pacientes = Paciente::whereIn('id', $odontogramaCabeceraPacienteIds)
+            ->orderBy('apellidos', 'asc')
+            ->paginate(10);
+
+        if ($request->ajax()) {
+            return response()->json(view('reportes.pacientes-por-odontologo.table', compact('pacientes'))->render());
+        }
+        return view('reportes.pacientes-por-odontologo.index', compact(['pacientes', 'odontologos']));
+    } */
+
     public function generate_pdf(Request $request)
     {
 

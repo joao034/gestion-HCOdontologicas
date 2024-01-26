@@ -670,7 +670,8 @@
                                             <div class="form-floating mb-3">
                                                 <input type="text" class="form-control" name="diagnostico"
                                                     id="diganostico" aria-describedby="helpId"
-                                                    placeholder="Escriba el diagnóstico" value="{{ old('diagnostico') }}">
+                                                    placeholder="Escriba el diagnóstico"
+                                                    value="{{ old('diagnostico') }}">
                                                 <label for="diganostico" class="fw-bold">Diagnóstico</label>
                                             </div>
                                         </div>
@@ -679,7 +680,8 @@
                                             <div class="form-floating mb-3">
                                                 <input type="text" class="form-control" name="enfermedad_actual"
                                                     id="enfermedad_actual" aria-describedby="helpId"
-                                                    placeholder="Escriba la enfermedad actual" value="{{ old('enfermedad_actual') }}">
+                                                    placeholder="Escriba la enfermedad actual"
+                                                    value="{{ old('enfermedad_actual') }}">
                                                 <label for="enfermedad_actual" class="fw-bold">Enfermedad Actual</label>
                                             </div>
                                         </div>
@@ -689,6 +691,17 @@
                         </div>
                     </div>
                     <!--Fin Diagnostico-->
+                    <!--Consentimiento-->
+                    <div class="form-check mt-2">
+                        <input class="form-check-input border-primary" type="checkbox" id="consentimiento"
+                            name="consentimiento" required value="1" {{ old('consentimiento') ? 'checked' : '' }}>
+
+                        <label class="form-check-label" for="consentimiento">
+                            Acepto de manera libre y voluntaria dar mi consentimiento para la recolección, procesamiento y
+                            uso de mis datos personales con fines médicos y en el contexto de la historia clínica
+                            odontológica.
+                        </label>
+                    </div>
 
                     <div class="text-end">
                         <button type="submit" class="btn btn-primary mt-3"><i class="fa-solid fa-check"></i>

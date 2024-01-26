@@ -118,7 +118,7 @@ class HClinicaController extends Controller
             return to_route('hclinicas.index')->with('message', 'Historia Clinica creado exitosamente.');
         } catch (\Exception $e) {
             DB::rollback();
-            return to_route('hclinicas.create')->with('danger', 'No se pudo crear la Historia Clinica.');
+            return to_route('hclinicas.create')->with('danger', 'No se pudo crear la Historia Clinica.' . $e->getMessage() );
             throw $e;
         }
     }
@@ -228,6 +228,7 @@ class HClinicaController extends Controller
         $paciente->direccion = $request->input('direccion');
         $paciente->celular = $request->input('celular');
         $paciente->telef_convencional = $request->input('telef_convencional');
+        $paciente->consentimiento = $request->input('consentimiento');
         $paciente->save();
     }
 

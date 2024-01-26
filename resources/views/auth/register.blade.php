@@ -117,7 +117,7 @@
                                             <label for="" class="form-label fw-bold">{{ __('Número de Registro') }}</label>
                                             <input type="text"class="form-control form-control-md" name="cedula"
                                                 id="cedula_odo" minlength="10" maxlength="10" aria-describedby="helpId"
-                                                placeholder="Escriba su identificación" value="{{ old('cedula') }}">
+                                                placeholder="Escriba su número de registro del ACESS" value="{{ old('cedula') }}">
                                             @error('cedula')
                                                 <span class="invalid-feedback" role="alert">
                                                     <strong>{{ $message }}</strong>

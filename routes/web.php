@@ -70,6 +70,7 @@ Route::middleware('auth')->group(function () {
     Route::get('reportes/top-pacientes-por-presupuesto', [TopPacientesPorPresupuesto::class, 'get_top_3_pacientes_por_total_presupuesto'])->name('reportes.top_pacientes_por_presupuesto');
     
     Route::get('enviar-mensaje/{presupusto_id}', [SMSController::class, 'send_sms'])->name('presupuestos.enviar-mensaje');
+    Route::get('enviar-hclinica/{odontograma_id}', [SMSController::class, 'send_hclinica_sms'])->name('odontogramas.enviar-mensaje');
 });
 
 //Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');

@@ -117,9 +117,16 @@ class OdontogramaDetalleController extends Controller
     public function asignar_tratamientos_a_odontologo(Request $request)
     {
         try {
-            //dd($request->all());
+            
+            if ($request->odontologo_id_origen == $request->odontologo_id_destino) {
+                return back()->with('danger', 'Seleccione diferentes odontólogos.');
+            }
 
-            //actualizar en la tabla odontograma_detalle el campo odontologo_id cuando en el detalle en el campo odontologo_id = odontologo_id_origen y el estado = necesario el con el odontologo seleccionado con el name odontologo_id_destino
+            //verificar que no sean ceros
+            if ($request->odontologo_id_origen == "0" || $request->odontologo_id_destino == "0") {
+                return back()->with('danger', 'Seleccione un odontólogo.');
+            }
+
             OdontogramaDetalle::where('odontologo_id', '=', $request->odontologo_id_origen)
                 ->where('estado', '=', 'necesario')
                 ->update(['odontologo_id' => $request->odontologo_id_destino]);

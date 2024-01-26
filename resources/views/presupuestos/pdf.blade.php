@@ -65,13 +65,13 @@
     </div>
 
     <!-- Datos del paciente -->
-    <div class="client-info">
+    {{-- <div class="client-info">
         <h3>Información del Paciente</h3>
         <p><b>Paciente:</b> {{ $paciente->nombres }} {{ $paciente->apellidos }}</p>
         <p><b>Celular:</b> {{ $paciente->celular }}</p>
         <p><b>Dirección:</b> {{ $paciente->direccion }}</p>
     </div>
-
+ --}}
         <table class="invoice-table">
             <tbody >
                 <tr class="">

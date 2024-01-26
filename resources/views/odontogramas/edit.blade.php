@@ -15,7 +15,10 @@
                     class="fa-solid fa-plus"></i> Nuevo Odontograma </a>
         </div>
 
-        <a href="{{ route('odontogramas.pdf', $odontograma->id) }}" target="_blank">Exportar Historia Clínica</a>
+        <div class="mb-2 mx-2">
+            <a class="btn btn-info text-white" href="{{ route('odontogramas.pdf', $odontograma->id) }}" target="_blank"><i class="fa-solid fa-notes-medical"></i> Exportar Historia Clínica</a>
+        </div>
+        
 
         <div class="mb-2">
             <a class="btn btn-secondary" href="{{ route('presupuestos.edit', $odontograma->id) }}"><i

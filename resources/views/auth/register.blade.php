@@ -114,10 +114,10 @@
                                 <div class="row">
                                     <div class="col-md-6">
                                         <div class="mb-3">
-                                            <label for="" class="form-label fw-bold">{{ __('Cédula') }}</label>
+                                            <label for="" class="form-label fw-bold">{{ __('Número de Registro') }}</label>
                                             <input type="text"class="form-control form-control-md" name="cedula"
                                                 id="cedula_odo" minlength="10" maxlength="10" aria-describedby="helpId"
-                                                placeholder="Escriba su cédula" value="{{ old('cedula') }}">
+                                                placeholder="Escriba su identificación" value="{{ old('cedula') }}">
                                             @error('cedula')
                                                 <span class="invalid-feedback" role="alert">
                                                     <strong>{{ $message }}</strong>

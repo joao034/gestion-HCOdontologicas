@@ -32,7 +32,7 @@ class OdontogramaController extends Controller
         $paciente = $odontograma->paciente;
         $odontograma_detalles = $this->getDetallesOdontograma($odontograma_cabecera_id);
         $pdf = PDF::loadView('odontogramas.pdf', compact(['odontograma', 'paciente', 'odontograma_detalles']));
-        return $pdf->stream('odontograma_' . $paciente->nombres . ' ' . $paciente->apellidos . '.pdf');
+        return $pdf->stream('hclinica_' . $paciente->nombres . ' ' . $paciente->apellidos . '.pdf');
     }
 
     public function nuevo(int $paciente_id)

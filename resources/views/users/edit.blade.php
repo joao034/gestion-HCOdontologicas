@@ -136,7 +136,7 @@
                                         <div class="col-md-6">
                                             <div class="mb-3">
                                                 <label for=""
-                                                    class="form-label fw-bold">{{ __('Cédula') }}</label>
+                                                    class="form-label fw-bold">{{ __('Número de registro') }}</label>
                                                 <input
                                                     type="text"class="form-control form-control @error('cedula') is-invalid @enderror"
                                                     name="cedula" id="cedula_odo"minlength="10" maxlength="10"

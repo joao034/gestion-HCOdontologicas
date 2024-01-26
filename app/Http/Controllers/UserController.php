@@ -33,7 +33,6 @@ class UserController extends Controller
 
     public function store(Request $request)
     {
-        //dd($request->all());
         $this->validate($request, [
             'name' => 'required|string|max:255',
             'role' => 'required|in:admin,odontologo|string|max:255',
@@ -51,7 +50,6 @@ class UserController extends Controller
 
             if ($request->role === 'odontologo')
                 $this->createOdontologo($user, $request);
-                //$this->store_update_data_odontologo($user, $request);
 
             DB::commit();
             return to_route('users.index')->with('message', 'Exito');
@@ -66,7 +64,7 @@ class UserController extends Controller
             $this->update_user_data($request, $user);
             return to_route('users.index')->with('message', 'Usuario actualizado correctamente');
         } catch (\Exception $e) {
-            return back()->with('danger', 'Error al actualizar usuario' . $e->getMessage());
+            return back()->with('danger', 'Error al actualizar usuario .' . $e->getMessage());
         }
     }
 
@@ -106,15 +104,11 @@ class UserController extends Controller
     {
         $this->validate($request, $this->validate_odontologo_data());
 
-        // Asegúrate de cargar la relación 'odontologo'
-        $user->load('odontologo');
-
         $user->odontologo->nombres = $request->nombres;
         $user->odontologo->apellidos = $request->apellidos;
         $user->odontologo->cedula = $request->cedula;
         $user->odontologo->sexo = $request->sexo;
         $user->odontologo->celular = $request->celular;
-        //$user->odontologo->especialidad_id = $request->especialidad_id;
         $this->almacenarEspecialidadesSeleccionadas($user->odontologo, $request);
         $user->odontologo->user_id = $user->id;
         $user->odontologo->save();
@@ -125,10 +119,10 @@ class UserController extends Controller
         return [
             'nombres' => 'required|string|max:255',
             'apellidos' => 'required|string|max:255',
-            //'cedula' => 'required|string|min:10|max:10|validar_cedula',
+            'cedula' => 'required|string|min:10|max:10|validar_cedula',
             'sexo' => 'required|string|max:255',
             'celular' => 'required|string|min:10|max:10',
-            //'especialidad_id' => 'required|integer',
+            'especialidades' => 'required|array|min:1',
         ];
     }
 

@@ -2,7 +2,7 @@
 @section('content')
 
     @if (!request()->ajax())
-        <h3 class="text-center fw-bold">Pacientes atendidos por odontólogo</h3>
+        <h3 class="text-center fw-bold">Pacientes con tratamientos pendientes por odontólogo</h3>
         <hr>
         <form action="{{ route('asignar.odontologo') }}" id="asignarPacientesForm" method="POST">
             @csrf

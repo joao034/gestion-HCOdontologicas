@@ -1,6 +1,6 @@
 <button type="button" class="btn btn-info text-white" data-bs-toggle="modal"
     data-bs-target="#enviar{{ $odontograma->id }}">
-    <i class="fa-solid fa-comment-sms"></i> Enviar la historia clínica
+    <i class="fa-solid fa-comment-sms"></i> Enviar Historia Clínica
 </button>
 
 

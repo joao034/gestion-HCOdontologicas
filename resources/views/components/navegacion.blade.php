@@ -30,10 +30,18 @@
 
                         <!-- Submenú -->
                         <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
-                            <li><a class="dropdown-item" href="{{route('reportes.get_pacientes_por_odontologo')}}">Pacientes por odontólogo</a></li>
-                            <li><a class="dropdown-item" href="{{route('reportes.get_pacientes_por_tratamiento')}}">Pacientes por tratamiento</a></li>
-                            <li><a class="dropdown-item" href="{{route('reportes.total-presupuesto-por-meses')}}">Total de presupuestos</a></li>
-                            <li><a class="dropdown-item" href="{{route('reportes.top_pacientes_por_presupuesto')}}">Top presupuestos</a></li>
+                            <li><a class="dropdown-item"
+                                    href="{{ route('reportes.get_pacientes_por_odontologo') }}">Pacientes por
+                                    odontólogo</a></li>
+                            <li><a class="dropdown-item"
+                                    href="{{ route('reportes.get_pacientes_por_tratamiento') }}">Pacientes por
+                                    tratamiento</a></li>
+                            <li><a class="dropdown-item"
+                                    href="{{ route('reportes.total-presupuesto-por-meses') }}">Total de presupuestos</a>
+                            </li>
+                            <li><a class="dropdown-item"
+                                    href="{{ route('reportes.top_pacientes_por_presupuesto') }}">Top presupuestos</a>
+                            </li>
                         </ul>
                     </li>
 
@@ -60,10 +68,8 @@
                     <a class="nav-link active text-white" href="{{ route('hclinicas.index') }}" aria-current="page">
                         <img class="svg-icon" src="{{ asset('assets/icons/hclinica.svg') }}" alt=""> Historias
                         Clínicas</a>
-                    {{-- <a class="nav-link active text-white" href="{{ route('odontogramas.index') }}">
-                        <img class="svg-icon" src="{{ asset('assets/icons/diente.png') }}"> Odontogramas</a>
-                    <a class="nav-link active text-white" href="{{ route('presupuestos.index') }}">
-                        <img class="svg-icon" src="{{ asset('assets/icons/presupuesto.svg') }}"> Presupuestos</a> --}}
+                    <a class="nav-link active text-white" href="{{ route('reportes.get_pacientes_por_odontologo') }}">
+                        <img class="svg-icon" src="{{ asset('assets/icons/user.svg') }}"> Mis pacientes</a>
                 @endif
 
             </ul>

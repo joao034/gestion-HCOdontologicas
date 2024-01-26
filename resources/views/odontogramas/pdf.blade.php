@@ -126,6 +126,9 @@
 </style>
 
 <div>
+    <div class="company-logo">
+        <img src="{{public_path('assets/img/logo.png')}}" alt="Logo de la empresa">
+    </div>
     <h2>Historia Clínica Odontológica</h2>
     <h3 class="center">Saúde Medical Group</h3>
 </div>

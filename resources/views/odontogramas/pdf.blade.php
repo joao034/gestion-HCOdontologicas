@@ -226,9 +226,9 @@
     </div>
 
 </div>
-<hr>
+{{-- <hr>
 <h3>Odontograma</h3>
-<hr>
+<hr> --}}
 {{-- 
 <div class="odontograma">
     @for ($i = 1; $i <= 32; $i++)
@@ -312,10 +312,9 @@
     @endfor
 </div> --}}
 
-<div class="contenedor">
+{{-- <div class="contenedor">
     <img src="{{ public_path('assets/img/odontogramaGeometrico.png') }}" alt="" class="imagen">
-</div>
-
+</div> --}}
 
 <hr>
 <h3>Tratamientos</h3>

@@ -14,7 +14,6 @@
                         aria-label=".form-select-md example" id="odontologo_id_origen" autofocus>
                         <option value="0">Seleccione el odontólogo</option>
                         @if (Auth::user()->role === 'admin')
-                            <option value="0">Seleccione un odontólogo</option>
                             @foreach ($odontologos as $odontologo)
                                 <option value="{{ $odontologo->id }}">
                                     {{ $odontologo->nombres . ' ' . $odontologo->apellidos . '  - ' . $odontologo->get_nombres_especialidades() }}

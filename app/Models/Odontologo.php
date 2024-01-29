@@ -40,14 +40,14 @@ class Odontologo extends Model
 	];
 
 	protected $fillable = [
+		'tipo_nacionalidad_id',
+		'tipo_documento_id',
+		'user_id',
 		'nombres',
 		'apellidos',
 		'cedula',
 		'sexo',
-		'celular',
-		//'tipo_identificacion',
-		'tipo_documento_id',
-		'user_id'
+		'celular'
 	];
 
 	public function especialidades()

@@ -23,10 +23,7 @@ return new class extends Migration
             $table->string('direccion', 100);
             $table->string('celular', 10)->nullable();
             $table->string('telef_convencional', 10)->nullable();
-            /* $table->string('representante', 50)->nullable();
-            $table->string('cedula_representante', 10)->nullable();
-            $table->string('diagnostico')->nullable();
-            $table->string('enfermedad_actual')->nullable(); */
+            $table->boolean('consentimiento')->default(true);
             $table->timestamps();
         });
 

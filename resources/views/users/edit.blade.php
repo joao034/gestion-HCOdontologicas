@@ -135,30 +135,46 @@
                                         </div>
                                     </div>
 
-                                    <div class="row">
+                                    <div class="row mb-3">
                                         <div class="col-md-6">
-                                            <div class="mb-3">
-                                                <label for=""
-                                                    class="form-label fw-bold">{{ __('Tipo de identificación') }}</label>
-                                                <select class="form-select form-select" name="tipo_identificacion" required
-                                                    aria-label=".form-select-sm example">
-                                                    <option value="masculino"
-                                                        {{ $user->odontologo['tipo_identificacion'] == 'cedula' ? 'selected' : '' }}>
-                                                        Cédula</option>
-                                                    <option value="pasaporte"
-                                                        {{ $user->odontologo['tipo_identificacion'] == 'pasaporte' ? 'selected' : '' }}>
-                                                        Pasaporte</option>
-                                                    <option value="visa"
-                                                        {{ $user->odontologo['tipo_identificacion'] == 'visa' ? 'selected' : '' }}>
-                                                        Visa
-                                                    </option>
-                                                    <option value="documento_identidad"
-                                                        {{ $user->odontologo['tipo_identificacion'] == 'documento_identidad' ? 'selected' : '' }}>
-                                                        Documento de identidad
-                                                    </option>
-                                                </select>
-                                            </div>
+                                            <label for="" class="form-label fw-bold">Tipo de nacionalidad <span
+                                                    class="text-danger">*</span></label>
+                                            <select class="form-select form-select-md" name="tipo_nacionalidad_id"
+                                                id="">
+                                                <option value="">Seleccione el tipo de nacionalidad</option>
+                                                @foreach ($tipos_nacionalidad as $tipo_nacionalidad)
+                                                    <option value="{{ $tipo_nacionalidad->id }}"
+                                                        {{ $user->odontologo->tipo_nacionalidad_id == $tipo_nacionalidad->id ? 'selected' : '' }}>
+                                                        {{ $tipo_nacionalidad->nombre }}</option>
+                                                @endforeach
+                                            </select>
+
+                                            @error('tipo_nacionalidad_id')
+                                                <small class="text-danger"> {{ $message }}</small>
+                                            @enderror
+
                                         </div>
+                                        <div class="col-md-6">
+                                            <label for="" class="form-label fw-bold">Tipo de documento de
+                                                identificación <span class="text-danger">*</span></label>
+                                            <select class="form-select form-select-md" name="tipo_documento_id"
+                                                id="">
+                                                <option selected value="">Seleccione el tipo de documento de
+                                                    identificación</option>
+                                                @foreach ($tipos_documento as $tipo_documento)
+                                                    <option value="{{ $tipo_documento->id }}"
+                                                        {{ $user->odontologo->tipo_documento_id == $tipo_documento->id ? 'selected' : '' }}>
+                                                        {{ mb_strtoupper($tipo_documento->nombre) }}
+                                                    </option>
+                                                @endforeach
+                                            </select>
+                                        </div>
+                                        @error('tipo_documento_id')
+                                            <small class="text-danger"> {{ $message }}</small>
+                                        @enderror
+                                    </div>
+
+                                    <div class="row">
 
                                         <div class="col-md-6">
                                             <div class="mb-3">

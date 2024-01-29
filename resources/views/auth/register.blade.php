@@ -111,22 +111,44 @@
                                         </div>
                                     </div>
                                 </div>
-                                <div class="row">
-                                    <div class="col-md-6">
-                                        <div class="mb-3">
-                                            <label for=""
-                                                class="form-label fw-bold">{{ __('Tipo de identificación') }}</label>
-                                            <select class="form-select form-select-md" name="tipo_identificacion"
-                                                aria-label=".form-select-sm example" required>
-                                                <option value="0">Seleccione el tipo de identificación</option>
-                                                <option value="cedula">Cédula</option>
-                                                <option value="pasaporte">Pasaporte</option>
-                                                <option value="visa">Visa</option>
-                                                <option value="documento_identidad">Documento de identidad</option>
-                                            </select>
-                                        </div>
-                                    </div>
 
+                                <div class="row mb-3">
+                                    <div class="col-md-6">
+                                        <label for="" class="form-label fw-bold">Tipo de nacionalidad <span
+                                                class="text-danger">*</span></label>
+                                        <select class="form-select form-select-md" name="tipo_nacionalidad_id" id="">
+                                            <option value="">Seleccione el tipo de nacionalidad</option>
+                                            @foreach ($tipos_nacionalidad as $tipo_nacionalidad)
+                                                <option value="{{ $tipo_nacionalidad->id }}"
+                                                    {{ old('tipo_nacionalidad_id') == $tipo_nacionalidad->id ? 'selected' : '' }}>
+                                                    {{ strtoupper($tipo_nacionalidad->nombre) }}</option>
+                                            @endforeach
+                                        </select>
+                
+                                        @error('tipo_nacionalidad_id')
+                                            <small class="text-danger"> {{ $message }}</small>
+                                        @enderror
+                
+                                    </div>
+                                    <div class="col-md-6">
+                                        <label for="" class="form-label fw-bold">Tipo de documento de identificación <span
+                                                class="text-danger">*</span></label>
+                                        <select class="form-select form-select-md" name="tipo_documento_id" id="">
+                                            <option selected value="">Seleccione el tipo de documento de identificación</option>
+                                            @foreach ($tipos_documento as $tipo_documento)
+                                                <option value="{{ $tipo_documento->id }}"
+                                                    {{ old('tipo_documento_id') == $tipo_documento->id ? 'selected' : '' }}>
+                                                    {{ mb_strtoupper($tipo_documento->nombre) }}
+                                                </option>
+                                            @endforeach
+                                        </select>
+                                    </div>
+                                    @error('tipo_documento_id')
+                                        <small class="text-danger"> {{ $message }}</small>
+                                    @enderror
+                                </div>
+
+                                <div class="row">
 
                                     <div class="col-md-6">
                                         <div class="mb-3">
@@ -150,7 +172,7 @@
                                     <div class="col-md-6">
                                         <div class="mb-3">
                                             <label for="" class="form-label fw-bold">{{ __('Celular') }}</label>
-                                            <input type="text" class="form-control form-control-sm" name="celular"
+                                            <input type="text" class="form-control form-control-md" name="celular"
                                                 id="celu" minlength="10" maxlength="10"
                                                 value="{{ old('celular') }}" aria-describedby="helpId"
                                                 placeholder="Escriba su celular">

@@ -12,8 +12,9 @@ return new class extends Migration
     public function up(): void
     {
         Schema::table('odontologos', function (Blueprint $table) {
-            $table->string('tipo_identificacion')->nullable()->after('cedula');
+            $table->dropColumn('tipo_identificacion');
         });
+
     }
 
     /**
@@ -22,7 +23,7 @@ return new class extends Migration
     public function down(): void
     {
         Schema::table('odontologos', function (Blueprint $table) {
-            //
+            $table->string('tipo_identificacion')->nullable();
         });
     }
 };

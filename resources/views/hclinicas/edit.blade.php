@@ -4,6 +4,7 @@
     <form method="post" action="{{ route('hclinicas.update', $paciente->id) }}">
         @csrf
         @method('PUT')
+        <input type="hidden" name="consentimiento" value="{{ $paciente->consentimiento }}">
         <div class="card">
             <div class="card-body">
 
@@ -21,7 +22,8 @@
                                     <div class="row">
                                         <div class="col-md-6">
                                             <div class="mb-3">
-                                                <label for="" class="form-label fw-bold">Nombres <span class="text-danger">*</span></label>
+                                                <label for="" class="form-label fw-bold">Nombres <span
+                                                        class="text-danger">*</span></label>
                                                 <input type="text" class="form-control" name="nombres" id=""
                                                     aria-describedby="helpId" placeholder="" required
                                                     value="{{ $paciente->nombres }}">
@@ -29,7 +31,8 @@
                                         </div>
                                         <div class="col-md-6">
                                             <div class="mb-3">
-                                                <label for="" class="form-label fw-bold">Apellidos <span class="text-danger">*</span></label>
+                                                <label for="" class="form-label fw-bold">Apellidos <span
+                                                        class="text-danger">*</span></label>
                                                 <input type="text" class="form-control" name="apellidos" id=""
                                                     aria-describedby="helpId" placeholder=""
                                                     value="{{ $paciente->apellidos }}">
@@ -37,18 +40,58 @@
                                         </div>
                                     </div>
 
+                                    <div class="row mb-3">
+                                        <div class="col-md-6">
+                                            <label for="" class="form-label fw-bold">Tipo de nacionalidad <span
+                                                    class="text-danger">*</span></label>
+                                            <select class="form-select form-select-md" name="tipo_nacionalidad_id"
+                                                id="">
+                                                <option value="">Seleccione el tipo de nacionalidad</option>
+                                                @foreach ($tipos_nacionalidad as $tipo_nacionalidad)
+                                                    <option value="{{ $tipo_nacionalidad->id }}"
+                                                        {{ $paciente->tipo_nacionalidad_id == $tipo_nacionalidad->id ? 'selected' : '' }}>
+                                                        {{ $tipo_nacionalidad->nombre }}</option>
+                                                @endforeach
+                                            </select>
+
+                                            @error('tipo_nacionalidad_id')
+                                                <small class="text-danger"> {{ $message }}</small>
+                                            @enderror
+
+                                        </div>
+                                        <div class="col-md-6">
+                                            <label for="" class="form-label fw-bold">Tipo de documento de
+                                                identificación <span class="text-danger">*</span></label>
+                                            <select class="form-select form-select-md" name="tipo_documento_id"
+                                                id="">
+                                                <option selected value="">Seleccione el tipo de documento de
+                                                    identificación</option>
+                                                @foreach ($tipos_documento as $tipo_documento)
+                                                    <option value="{{ $tipo_documento->id }}"
+                                                        {{ $paciente->tipo_documento_id == $tipo_documento->id ? 'selected' : '' }}>
+                                                        {{ mb_strtoupper($tipo_documento->nombre) }}
+                                                    </option>
+                                                @endforeach
+                                            </select>
+                                        </div>
+                                        @error('tipo_documento_id')
+                                            <small class="text-danger"> {{ $message }}</small>
+                                        @enderror
+                                    </div>
+
                                     <div class="row">
                                         <div class="col-md-5">
                                             <div class="mb-3">
                                                 <label for="" class="form-label fw-bold">Cédula</label>
                                                 <input type="text" class="form-control" name="cedula" minlength="10"
-                                                    maxlength="10" id="cedula" aria-describedby="helpId" placeholder=""
+                                                    maxlength="16" id="cedula" aria-describedby="helpId" placeholder=""
                                                     value="{{ $paciente->cedula }}">
                                             </div>
                                         </div>
                                         <div class="col-md-5">
                                             <div class="mb-3">
-                                                <label for="" class="form-label fw-bold">Fecha de Nacimiento <span class="text-danger">*</span></label>
+                                                <label for="" class="form-label fw-bold">Fecha de Nacimiento <span
+                                                        class="text-danger">*</span></label>
                                                 <input type="date" id="fecha_nacimiento"
                                                     value="{{ $paciente->fecha_nacimiento }}" class="form-control"
                                                     max="<?php echo date('Y-m-d'); ?>" name="fecha_nacimiento" id="fechaNacimiento"
@@ -71,9 +114,10 @@
                                                 <div class="mb-3">
                                                     <label for="" class="form-label fw-bold">Cédula del
                                                         Representante <span class="text-danger">*</span></label>
-                                                    <input type="text" class="form-control" name="cedula_representante"
-                                                        minlength="10" maxlength="10" id=""
-                                                        aria-describedby="helpId" placeholder="" pattern="^[0-9]+$"
+                                                    <input type="text" class="form-control"
+                                                        name="cedula_representante" minlength="10" maxlength="10"
+                                                        id="" aria-describedby="helpId" placeholder=""
+                                                        pattern="^[0-9]+$"
                                                         value="{{ $representante->cedula_representante }}">
 
                                                     @error('cedula_representante')
@@ -101,7 +145,8 @@
                                     <div class="row">
 
                                         <div class="col-md-6">
-                                            <label for="" class="form-label fw-bold">Estado civil <span class="text-danger">*</span></label>
+                                            <label for="" class="form-label fw-bold">Estado civil <span
+                                                    class="text-danger">*</span></label>
                                             <select name="estado_civil" id="" class="form-select form-select-md"
                                                 required>
 
@@ -132,7 +177,8 @@
 
                                         <div class="col-md-6">
                                             <div class="mb-3">
-                                                <label for="" class="form-label fw-bold">Género <span class="text-danger">*</span></label>
+                                                <label for="" class="form-label fw-bold">Género <span
+                                                        class="text-danger">*</span></label>
                                                 <select class="form-select form-select-md" name="sexo" required
                                                     aria-label=".form-select-md example">
                                                     <option value="masculino"
@@ -178,7 +224,8 @@
                                     <div class="row">
                                         <div class="col-md-6">
                                             <div class="mb-3">
-                                                <label for="" class="form-label fw-bold">Direción <span class="text-danger">*</span></label>
+                                                <label for="" class="form-label fw-bold">Direción <span
+                                                        class="text-danger">*</span></label>
                                                 <input type="text" class="form-control" name="direccion"
                                                     id="" aria-describedby="helpId" placeholder=""
                                                     value="{{ $paciente->direccion }}">
@@ -378,8 +425,8 @@
 
                                     <div class="row">
                                         <div class="col-lg-3 col-md-6">
-                                            <input class="form-check-input border-primary" type="checkbox" id="hipertension"
-                                                name="enfermedades[]" value="hipertension"
+                                            <input class="form-check-input border-primary" type="checkbox"
+                                                id="hipertension" name="enfermedades[]" value="hipertension"
                                                 {{ $antPersonales?->retornar_enfermedades('hipertension') == true ? 'checked' : '' }}>
                                             <label class="form-check-label" for="hipertension">
                                                 Hipertensión
@@ -387,8 +434,9 @@
 
                                         </div>
                                         <div class="col-lg-3 col-md-6">
-                                            <input class="form-check-input border-primary" type="checkbox" id="enfermedades_cardiacas"
-                                                name="enfermedades[]" value="enfermedades cardiacas"
+                                            <input class="form-check-input border-primary" type="checkbox"
+                                                id="enfermedades_cardiacas" name="enfermedades[]"
+                                                value="enfermedades cardiacas"
                                                 {{ $antPersonales?->retornar_enfermedades('enfermedades cardiacas') == true ? 'checked' : '' }}>
                                             <label class="form-check-label" for="enfermedades_cardiacas">
                                                 Enfermedades Cardiacas
@@ -416,8 +464,8 @@
                                     <div class="row">
                                         <div class="col-lg-3 col-md-6">
                                             <div class="form-check">
-                                                <input class="form-check-input border-primary" type="checkbox" id="fiebre_reumatica"
-                                                    name="enfermedades[]" value="fiebre reumatica"
+                                                <input class="form-check-input border-primary" type="checkbox"
+                                                    id="fiebre_reumatica" name="enfermedades[]" value="fiebre reumatica"
                                                     {{ $antPersonales?->retornar_enfermedades('fiebre reumatica') == true ? 'checked' : '' }}>
                                                 <label class="form-check-label" for="fiebre_reumatica">
                                                     Fiebre Reumática
@@ -425,8 +473,8 @@
                                             </div>
                                         </div>
                                         <div class="col-lg-3 col-md-6">
-                                            <input class="form-check-input border-primary" type="checkbox" id="tuberculosis"
-                                                name="enfermedades[]" value="tuberculosis"
+                                            <input class="form-check-input border-primary" type="checkbox"
+                                                id="tuberculosis" name="enfermedades[]" value="tuberculosis"
                                                 {{ $antPersonales?->retornar_enfermedades('tuberculosis') == true ? 'checked' : '' }}>
                                             <label class="form-check-label" for="tuberculosis">
                                                 Tuberculosis
@@ -442,8 +490,8 @@
                                         </div>
 
                                         <div class="col-lg-3 col-md-6">
-                                            <input class="form-check-input border-primary" type="checkbox" id="hemorragias"
-                                                name="enfermedades[]" value="hemorragias"
+                                            <input class="form-check-input border-primary" type="checkbox"
+                                                id="hemorragias" name="enfermedades[]" value="hemorragias"
                                                 {{ $antPersonales?->retornar_enfermedades('hemorragias') == true ? 'checked' : '' }}>
                                             <label class="form-check-label" for="hemorragias">
                                                 Hemorragias
@@ -454,8 +502,8 @@
                                     <div class="row">
                                         <div class="col-lg-3 col-md-6">
                                             <div class="form-check">
-                                                <input class="form-check-input border-primary" type="checkbox" id="epilepsias"
-                                                    name="enfermedades[]" value="epilepsias"
+                                                <input class="form-check-input border-primary" type="checkbox"
+                                                    id="epilepsias" name="enfermedades[]" value="epilepsias"
                                                     {{ $antPersonales?->retornar_enfermedades('epilepsias') == true ? 'checked' : '' }}>
                                                 <label class="form-check-label" for="epilepsias">
                                                     Epilepsias
@@ -568,8 +616,8 @@
                                         <div class="row">
                                             <div class="col-lg-3 col-md-6">
                                                 <div class="form-check">
-                                                    <input class="form-check-input border-primary" type="checkbox" id="tabaquismo"
-                                                        name="habitos[]" value="tabaquismo"
+                                                    <input class="form-check-input border-primary" type="checkbox"
+                                                        id="tabaquismo" name="habitos[]" value="tabaquismo"
                                                         {{ $antPersonales?->retornar_habitos('tabaquismo') == true ? 'checked' : '' }}>
                                                     <label class="form-check-label" for="tabaquismo">
                                                         Tabaquismo
@@ -577,16 +625,16 @@
                                                 </div>
                                             </div>
                                             <div class="col-lg-3 col-md-6">
-                                                <input class="form-check-input border-primary" type="checkbox" id="alcohol"
-                                                    name="habitos[]" value="alcohol"
+                                                <input class="form-check-input border-primary" type="checkbox"
+                                                    id="alcohol" name="habitos[]" value="alcohol"
                                                     {{ $antPersonales?->retornar_habitos('alcohol') == true ? 'checked' : '' }}>
                                                 <label class="form-check-label" for="alcohol">
                                                     Alcohol
                                                 </label>
                                             </div>
                                             <div class="col-lg-3 col-md-6">
-                                                <input class="form-check-input border-primary" type="checkbox" id="duglucion_atipica"
-                                                    name="habitos[]" value="duglucion atipica"
+                                                <input class="form-check-input border-primary" type="checkbox"
+                                                    id="duglucion_atipica" name="habitos[]" value="duglucion atipica"
                                                     {{ $antPersonales?->retornar_habitos('duglucion atipica') == true ? 'checked' : '' }}>
                                                 <label class="form-check-label" for="duglucion_atipica">
                                                     Duglución atípica
@@ -594,8 +642,8 @@
                                             </div>
 
                                             <div class="col-lg-3 col-md-6">
-                                                <input class="form-check-input border-primary" type="checkbox" id="respiracion_bucal"
-                                                    name="habitos[]" value="respiracion bucal"
+                                                <input class="form-check-input border-primary" type="checkbox"
+                                                    id="respiracion_bucal" name="habitos[]" value="respiracion bucal"
                                                     {{ $antPersonales?->retornar_habitos('respiracion bucal') == true ? 'checked' : '' }}>
                                                 <label class="form-check-label" for="respiracion_bucal">
                                                     Respiración bucal
@@ -606,8 +654,8 @@
                                         <div class="row">
                                             <div class="col-lg-3 col-md-6">
                                                 <div class="form-check">
-                                                    <input class="form-check-input border-primary" type="checkbox" id="bruxismo"
-                                                        name="habitos[]" value="bruxismo"
+                                                    <input class="form-check-input border-primary" type="checkbox"
+                                                        id="bruxismo" name="habitos[]" value="bruxismo"
                                                         {{ $antPersonales?->retornar_habitos('bruxismo') == true ? 'checked' : '' }}>
                                                     <label class="form-check-label" for="bruxismo">
                                                         Bruxismo
@@ -615,8 +663,8 @@
                                                 </div>
                                             </div>
                                             <div class="col-lg-3 col-md-6">
-                                                <input class="form-check-input border-primary" type="checkbox" id="succion_digital"
-                                                    name="habitos[]" value="succion digital"
+                                                <input class="form-check-input border-primary" type="checkbox"
+                                                    id="succion_digital" name="habitos[]" value="succion digital"
                                                     {{ $antPersonales?->retornar_habitos('succion digital') == true ? 'checked' : '' }}>
                                                 <label class="form-check-label" for="succion_digital">
                                                     Succión Digital
@@ -682,83 +730,7 @@
                     <!--Fin Boton Guardar-->
 
                 </div>
-
     </form>
 
-    <script>
-        $(document).ready(function() {
-            // Obtener los elementos necesarios
-            const fechaInput = $('#fecha_nacimiento');
-            const edadInput = $('#edad');
-            const representanteDiv = $('#representanteDiv');
-
-
-            function calcularEdad(nacimiento) {
-                const fechaNacimiento = new Date(nacimiento);
-                const fechaActual = new Date();
-                let edad = fechaActual.getFullYear() - fechaNacimiento.getFullYear();
-
-                const mesActual = fechaActual.getMonth() + 1;
-                const mesNacimiento = fechaNacimiento.getMonth() + 1;
-
-                if (mesNacimiento > mesActual || (mesNacimiento === mesActual &&
-                        fechaNacimiento.getDate() > fechaActual.getDate())) {
-                    edad--;
-                }
-                return edad;
-            }
-
-            function controlarVisibilidadRepresentante() {
-                const edad = parseInt(edadInput.val());
-
-                if (edad < 12) {
-                    representanteDiv.show();
-                } else {
-                    representanteDiv.hide();
-                }
-            }
-            // Evento que se dispara al cambiar el valor del input de fecha
-            fechaInput.on('change', function() {
-                // Obtener el valor de la fecha de nacimiento
-                const fechaNacimiento = fechaInput.val();
-
-                // Calcular la edad y actualizar el input correspondiente
-                const edad = calcularEdad(fechaNacimiento);
-                edadInput.val(edad);
-
-                // Controlar la visibilidad del div del representante según la edad calculada
-                controlarVisibilidadRepresentante();
-            });
-
-            // Controlar la visibilidad del input semanas de embarazo según la respuesta de embarazada
-            $('input[name="embarazada"]').on('change', function() {
-                const embarazada = $(this).val();
-                if (embarazada === '0') {
-                    $('#embarazada input').show();
-                } else {
-                    $('#embarazada input').hide();
-                }
-            });
-        });
-    </script>
-
-    <script>
-        let cedulaInput = document.getElementById('cedula');
-        apply_input_filter(cedulaInput);
-
-        let celularInput = document.getElementById('celular');
-        apply_input_filter(celularInput);
-
-        let telefonoInput = document.getElementById('telefono');
-        apply_input_filter(telefonoInput);
-
-
-        function apply_input_filter(input) {
-            input.addEventListener('input', function() {
-                // Filtrar y mantener solo los dígitos
-                const filteredValue = this.value.replace(/\D/g, '');
-                this.value = filteredValue;
-            });
-        }
-    </script>
+    <script src="{{ asset('assets/js/controles_hclinica.js') }}"></script>
 @endsection

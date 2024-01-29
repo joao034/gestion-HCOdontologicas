@@ -35,6 +35,44 @@
                                         </div>
                                     </div>
 
+                                    <div class="row mb-3">
+                                        <div class="col-md-6">
+                                            <label for="" class="form-label fw-bold">Tipo de nacionalidad </label>
+                                            <select class="form-select form-select-md" name="tipo_nacionalidad_id"
+                                                id="" disabled>
+                                                <option value="">Seleccione el tipo de nacionalidad</option>
+                                                @foreach ($tipos_nacionalidad as $tipo_nacionalidad)
+                                                    <option value="{{ $tipo_nacionalidad->id }}"
+                                                        {{ $paciente->tipo_nacionalidad_id == $tipo_nacionalidad->id ? 'selected' : '' }}>
+                                                        {{ $tipo_nacionalidad->nombre }}</option>
+                                                @endforeach
+                                            </select>
+
+                                            @error('tipo_nacionalidad_id')
+                                                <small class="text-danger"> {{ $message }}</small>
+                                            @enderror
+
+                                        </div>
+                                        <div class="col-md-6">
+                                            <label for="" class="form-label fw-bold">Tipo de documento de
+                                                identificación <span class="text-danger">*</span></label>
+                                            <select class="form-select form-select-md" name="tipo_documento_id"
+                                                id="" disabled>
+                                                <option selected value="">Seleccione el tipo de documento de
+                                                    identificación</option>
+                                                @foreach ($tipos_documento as $tipo_documento)
+                                                    <option value="{{ $tipo_documento->id }}"
+                                                        {{ $paciente->tipo_documento_id == $tipo_documento->id ? 'selected' : '' }}>
+                                                        {{ mb_strtoupper($tipo_documento->nombre) }}
+                                                    </option>
+                                                @endforeach
+                                            </select>
+                                        </div>
+                                        @error('tipo_documento_id')
+                                            <small class="text-danger"> {{ $message }}</small>
+                                        @enderror
+                                    </div>
+
                                     <div class="row">
                                         <div class="col-md-5">
                                             <div class="mb-3">
@@ -521,8 +559,8 @@
                     <!--Fin Diagnosticos-->
 
                     <div class="form-check mt-2">
-                        <input class="form-check-input border-primary" type="checkbox" id="consentimiento" {{$paciente->consentimiento == true ? 'checked' : ''}}
-                            name="consentimiento" required>
+                        <input class="form-check-input border-primary" type="checkbox" id="consentimiento"
+                            {{ $paciente->consentimiento == true ? 'checked' : '' }} name="consentimiento" required>
                         <label class="form-check-label" for="consentimiento">
                             Acepto de manera libre y voluntaria dar mi consentimiento para la recolección, procesamiento y
                             uso de mis datos personales con fines médicos y en el contexto de la historia clínica
@@ -530,73 +568,5 @@
                         </label>
                     </div>
                 </div>
-
     </form>
-
-    <script>
-        $(document).ready(function() {
-            // Obtener los elementos necesarios
-            const fechaInput = $('#fecha_nacimiento');
-            const edadInput = $('#edad');
-            const representanteDiv = $('#representanteDiv');
-
-
-            function calcularEdad(nacimiento) {
-                const fechaNacimiento = new Date(nacimiento);
-                const fechaActual = new Date();
-                let edad = fechaActual.getFullYear() - fechaNacimiento.getFullYear();
-
-                const mesActual = fechaActual.getMonth() + 1;
-                const mesNacimiento = fechaNacimiento.getMonth() + 1;
-
-                if (mesNacimiento > mesActual || (mesNacimiento === mesActual &&
-                        fechaNacimiento.getDate() > fechaActual.getDate())) {
-                    edad--;
-                }
-                return edad;
-            }
-
-            function controlarVisibilidadRepresentante() {
-                const edad = parseInt(edadInput.val());
-
-                if (edad < 12) {
-                    representanteDiv.show();
-                } else {
-                    representanteDiv.hide();
-                }
-            }
-            // Evento que se dispara al cambiar el valor del input de fecha
-            fechaInput.on('change', function() {
-                // Obtener el valor de la fecha de nacimiento
-                const fechaNacimiento = fechaInput.val();
-
-                // Calcular la edad y actualizar el input correspondiente
-                const edad = calcularEdad(fechaNacimiento);
-                edadInput.val(edad);
-
-                // Controlar la visibilidad del div del representante según la edad calculada
-                controlarVisibilidadRepresentante();
-            });
-        });
-    </script>
-
-    <script>
-        let cedulaInput = document.getElementById('cedula');
-        apply_input_filter(cedulaInput);
-
-        let celularInput = document.getElementById('celular');
-        apply_input_filter(celularInput);
-
-        let telefonoInput = document.getElementById('telefono');
-        apply_input_filter(telefonoInput);
-
-
-        function apply_input_filter(input) {
-            input.addEventListener('input', function() {
-                // Filtrar y mantener solo los dígitos
-                const filteredValue = this.value.replace(/\D/g, '');
-                this.value = filteredValue;
-            });
-        }
-    </script>
 @endsection

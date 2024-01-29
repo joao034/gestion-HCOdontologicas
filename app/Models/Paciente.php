@@ -44,6 +44,8 @@ class Paciente extends Model
 	protected $table = 'pacientes';
 
 	protected $fillable = [
+		'tipo_documento_id',
+		'tipo_nacionalidad_id',
 		'nombres',
 		'apellidos',
 		'cedula',
@@ -54,7 +56,7 @@ class Paciente extends Model
 		'direccion',
 		'celular',
 		'telef_convencional',
-		'consentimiento'
+		'consentimiento',
 	];
 
 	public function antecedentes_infecciosos()
@@ -82,7 +84,19 @@ class Paciente extends Model
 		return $this->hasOne(Representante::class);
 	}
 
-	public function edad(){
+	public function tipo_documento()
+	{
+		return $this->belongsTo(TipoDocumento::class, 'tipo_documento_id');
+	}
+
+	public function tipo_nacionalidad()
+	{
+		return $this->belongsTo(TipoNacionalidad::class, 'tipo_nacionalidad_id');
+	}
+
+
+	public function edad()
+	{
 		return Carbon::parse($this->fecha_nacimiento)->age;
 	}
 

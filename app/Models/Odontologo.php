@@ -45,7 +45,8 @@ class Odontologo extends Model
 		'cedula',
 		'sexo',
 		'celular',
-		'tipo_identificacion',
+		//'tipo_identificacion',
+		'tipo_documento_id',
 		'user_id'
 	];
 
@@ -53,6 +54,11 @@ class Odontologo extends Model
     {
         return $this->belongsToMany(Especialidad::class, 'odontologo_especialidad');
     }
+
+	public function tipo_documento()
+	{
+		return $this->belongsTo(TipoDocumento::class, 'tipo_documento_id');
+	} 
 
 	public function usuario(){
 		return $this->belongsTo(User::class, 'user_id');

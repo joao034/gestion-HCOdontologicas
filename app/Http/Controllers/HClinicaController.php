@@ -10,6 +10,8 @@ use App\Models\Odontograma;
 use App\Models\OdontogramaDetalle;
 use App\Models\Representante;
 use App\Models\Diagnostico;
+use App\Models\TipoDocumento;
+use App\Models\TipoNacionalidad;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Validator;
@@ -26,9 +28,13 @@ class HClinicaController extends Controller
     protected function validator(array $data)
     {
         $rules = [
+            //foreign keys
+            'tipo_documento_id' => ['required', 'integer'],
+            'tipo_nacionalidad_id' => ['required', 'integer'],
+            //datos del paciente
             'nombres' => ['required', 'string', 'max:255'],
             'apellidos' => ['required', 'string', 'max:255'],
-            'cedula' => ['nullable', 'string', 'min:10', 'max:10', 'validar_cedula'],
+            'cedula' => ['nullable', 'string', 'min:10', 'max:10'],
             'estado_civil' => ['required', 'string', 'max:255'],
             'direccion' => ['required', 'string', 'max:255'],
             'ocupacion' => ['required', 'string', 'max:255'],
@@ -87,7 +93,9 @@ class HClinicaController extends Controller
      */
     public function create()
     {
-        return view("hclinicas.create");
+        $tipos_documento = TipoDocumento::orderBy('nombre', 'asc')->get();
+        $tipos_nacionalidad = TipoNacionalidad::all();
+        return view("hclinicas.create", compact(['tipos_documento', 'tipos_nacionalidad']));
     }
 
     /**
@@ -118,7 +126,7 @@ class HClinicaController extends Controller
             return to_route('hclinicas.index')->with('message', 'Historia Clinica creado exitosamente.');
         } catch (\Exception $e) {
             DB::rollback();
-            return to_route('hclinicas.create')->with('danger', 'No se pudo crear la Historia Clinica.' . $e->getMessage() );
+            return to_route('hclinicas.create')->with('danger', 'No se pudo crear la Historia Clinica.' . $e->getMessage());
             throw $e;
         }
     }
@@ -136,7 +144,9 @@ class HClinicaController extends Controller
             $representante = Representante::where('paciente_id', $paciente->id)->first();
             $antPersonales = AntecedentesPersonalesFamiliare::where('paciente_id', $paciente->id)->first();
             $diagnostico = Diagnostico::where('paciente_id', $paciente->id)->first();
-            return view('hclinicas.show', compact(['paciente', 'antPersonales', 'representante', 'diagnostico']));
+            $tipos_documento = TipoDocumento::orderBy('nombre', 'asc')->get();
+            $tipos_nacionalidad = TipoNacionalidad::all();
+            return view('hclinicas.show', compact(['paciente', 'antPersonales', 'representante', 'diagnostico', 'tipos_documento', 'tipos_nacionalidad']));
         } catch (\Exception $e) {
             return to_route('hclinicas.index')->with('danger', 'No se pudo mostrar la Historia Clinica.' . $e->getMessage());
             throw $e;
@@ -155,7 +165,9 @@ class HClinicaController extends Controller
         $representante = Representante::where('paciente_id', $paciente->id)->first();
         $antPersonales = AntecedentesPersonalesFamiliare::where('paciente_id', $paciente->id)->first();
         $diagnostico = Diagnostico::where('paciente_id', $paciente->id)->first();
-        return view('hclinicas.edit', compact(['paciente', 'representante', 'antPersonales', 'diagnostico']));
+        $tipos_documento = TipoDocumento::orderBy('nombre', 'asc')->get();
+        $tipos_nacionalidad = TipoNacionalidad::all();
+        return view('hclinicas.edit', compact(['paciente', 'representante', 'antPersonales', 'diagnostico', 'tipos_documento', 'tipos_nacionalidad']));
     }
 
     /**
@@ -184,7 +196,7 @@ class HClinicaController extends Controller
             return back()->with('message', 'Historia Clínica actualizada exitosamente');
         } catch (\Exception $e) {
             DB::rollback();
-            return back()->with('danger', 'No se pudo actualizar la Historia Clínica.');
+            return back()->with('danger', 'No se pudo actualizar la Historia Clínica.'. $e->getMessage());
             throw $e;
         }
     }
@@ -218,6 +230,8 @@ class HClinicaController extends Controller
 
     private function guardarOActualizarPaciente(Paciente $paciente, Request $request)
     {
+        $paciente->tipo_nacionalidad_id = $request->input('tipo_nacionalidad_id');
+        $paciente->tipo_documento_id = $request->input('tipo_documento_id');
         $paciente->nombres = $request->input('nombres');
         $paciente->apellidos = $request->input('apellidos');
         $paciente->cedula = $request->input('cedula');

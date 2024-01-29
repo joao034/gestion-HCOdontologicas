@@ -96,7 +96,8 @@
                                 <div class="col-md-6">
                                     <input id="password" type="password"
                                         class="form-control @error('password') is-invalid @enderror" name="password"
-                                        autocomplete="new-password">
+                                        autocomplete="new-password"
+                                        placeholder="Ingrese la nueva contraseña">
 
                                     @error('password')
                                         <span class="invalid-feedback" role="alert">
@@ -105,6 +106,8 @@
                                     @enderror
                                 </div>
                             </div>
+
+                            <hr>
 
                             <!-- Datos odontologo -->
                             @if ($user->role === 'odontologo')
@@ -210,7 +213,7 @@
 
                                     <div class="row">
                                         <label for=""
-                                            class="form-label fw-bold">{{ __('Especialidades (Seleccione las especialidades del odontólogo)') }}</label>
+                                            class="form-label fw-bold">{{ __('Especialidades') }}</label>
                                         @foreach ($especialidades as $especialidad)
                                             <div class="col-lg-5 col-md-5 col-sm-6">
                                                 <input class="form-check-input border-primary" type="checkbox"

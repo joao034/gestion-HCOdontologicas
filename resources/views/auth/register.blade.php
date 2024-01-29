@@ -170,17 +170,10 @@
                                     </div>
                                 </div>
 
-                                {{-- <select class="form-select form-select-md" name="especialidad_id" aria-label=".form-select-sm example">
-                                            <option>Seleccione una especialidad</option>
-                                            @foreach ($especialidades as $especialidad)
-                                                <option value="{{$especialidad->id}}">{{$especialidad->nombre}}</option>
-                                            @endforeach
-                                            </select> --}}
-
                                 {{-- Especialidades --}}
                                 <div class="row">
                                     <label for=""
-                                        class="form-label fw-bold">{{ __('Especialidades (Seleccione las especialidades del odontólogo)') }}</label>
+                                        class="form-label fw-bold">{{ __('Especialidades') }}</label>
                                     @foreach ($especialidades as $especialidad)
                                         <div class="col-lg-5 col-md-5 col-sm-6">
                                             <input class="form-check-input border-primary" type="checkbox"

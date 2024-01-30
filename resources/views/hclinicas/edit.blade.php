@@ -13,7 +13,7 @@
                     <h3 class="text-center fw-bold">Historia Clínica Odontológica Editable</h3>
 
                     <!--Datos Generales-->
-                    <div class="row justify-content-center">
+                    {{-- <div class="row justify-content-center">
                         <div class="col-md-12 col-lg-12">
                             <div class="card text-start">
                                 <div class="card-body">
@@ -246,174 +246,12 @@
                             </div>
                         </div>
 
-                        <!--Antecedentes Infecciosos-->
-                        {{-- <div class="col-md-12 col-lg-6 mt-3">
-                      <div class="card text-start">
-                          <div class="card-body">
-                            <h5 class="card-title fw-bolder">Antecedentes Infecciosos</h5>
-                            
-                            <div class="row">
-                                <div class="col-md-9">
-                                    <p>¿Ha presentado alguna enfermedad respiratoria en los últimos 4 meses?</p>
-                                </div>
-                                <div class="col-md-1">
-                                    <div class="col-sm">
-                                        <div class="form-check">
-                                        <input class="form-check-input" type="radio" name="enfermedad_respiratoria" value="0" {{ $antInfecciosos['enfermedad_respiratoria'] == '0' ? 'checked' : '' }}>
-                                        <label class="form-check-label" for="">
-                                            Sí
-                                        </label>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="col-md-1">
-                                    <div class="col-sm">
-                                        <div class="form-check">
-                                        <input class="form-check-input" type="radio" id=""  name="enfermedad_respiratoria" value="1" {{ $antInfecciosos['enfermedad_respiratoria'] == '1' ? 'checked' : '' }}>
-                                        <label class="form-check-label" for="">
-                                            No
-                                        </label>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-
-                            <div class="row">
-                                <div class="col-md-9">
-                                    <p>¿Ha presentado fiebre los últimos 4 meses?</p>
-                                </div>
-                                <div class="col-md-1">
-                                    <div class="col-sm">
-                                        <div class="form-check">
-                                        <input class="form-check-input" type="radio" id=""  name="fiebre" value="0" {{ $antInfecciosos['fiebre'] == '0' ? 'checked' : '' }}>
-                                        <label class="form-check-label" for="">
-                                            Sí
-                                        </label>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="col-md-1">
-                                    <div class="col-sm">
-                                        <div class="form-check">
-                                        <input class="form-check-input" type="radio" id=""  name="fiebre" value="1" {{ $antInfecciosos['fiebre'] == '1' ? 'checked' : '' }}>
-                                        <label class="form-check-label" for="">
-                                            No
-                                        </label>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-
-                            <div class="row">
-                                <div class="col-md-9">
-                                    <p>¿Ha sido hospitalizado por alguna razón los últimos 4 meses?</p>
-                                </div>
-                                <div class="col-md-1">
-                                    <div class="col-sm">
-                                        <div class="form-check">
-                                        <input class="form-check-input" type="radio" id=""  name="hospitalizado" value="0" {{ $antInfecciosos['hospitalizado'] == '0' ? 'checked' : '' }}>
-                                        <label class="form-check-label" for="">
-                                            Sí
-                                        </label>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="col-md-1">
-                                    <div class="col-sm">
-                                        <div class="form-check">
-                                        <input class="form-check-input" type="radio" id=""  name="hospitalizado" value="1" {{ $antInfecciosos['hospitalizado'] == '1' ? 'checked' : '' }}>
-                                        <label class="form-check-label" for="">
-                                            No
-                                        </label>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-
-                            <div class="mb-3 col-6">
-                                <label for="" class="form-label">Razón de la hospitalización</label>
-                                <input type="text"
-                                  class="form-control" name="razon_hospitalizacion" id="" aria-describedby="helpId" placeholder="" value="{{$antInfecciosos->razon_hospitalizacion}}">
-                            </div>
-
-                            <div class="row">
-                                <div class="col-md-9">
-                                    <p>¿Ha sido detectado usted o algún miembro de su familia con COVID-19?</p>
-                                </div>
-                                <div class="col-md-1">
-                                    <div class="col-sm">
-                                        <div class="form-check">
-                                        <input class="form-check-input" type="radio" id=""  name="detectado_covid" value="0" {{ $antInfecciosos['hospitalizado'] == '0' ? 'checked' : '' }}>
-                                        <label class="form-check-label" for="">
-                                            Sí
-                                        </label>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="col-md-1">
-                                    <div class="col-sm">
-                                        <div class="form-check">
-                                        <input class="form-check-input" type="radio" id=""  name="detectado_covid" value="1" {{ $antInfecciosos['hospitalizado'] == '1' ? 'checked' : '' }}>
-                                        <label class="form-check-label" for="">
-                                            No
-                                        </label>
-                                        </div>
-                                    </div>
-                                </div>
-
-                                <div class="mb-3 col-6">
-                                    <label for="" class="form-label">Parentesco</label>
-                                    <input type="text"
-                                      class="form-control" name="parentesco_covid" id="" aria-describedby="helpId" placeholder="" value="{{$antInfecciosos->parentesco_covid}}">
-                                </div>
-
-                            </div>
-
-                            <div class="row">
-                                <div class="col-md-6">
-                                    <p>¿En su lugar de trabajo que grado de riesgo tiene de contraer COVID-19?</p>
-                                </div>
-                                <div class="col-md-2">
-                                    <div class="col-sm">
-                                        <div class="form-check">
-                                        <input class="form-check-input" type="radio" id=""  name="grado_contagio" value="alto" {{ $antInfecciosos['grado_contagio'] == 'alto' ? 'checked' : '' }}>
-                                        <label class="form-check-label" for="">
-                                            Alto
-                                        </label>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="col-md-2">
-                                    <div class="col-sm">
-                                        <div class="form-check">
-                                        <input class="form-check-input" type="radio" id=""  name="grado_contagio" value="medio" {{ $antInfecciosos['grado_contagio'] == 'medio' ? 'checked' : '' }}>
-                                        <label class="form-check-label" for="">
-                                            Medio
-                                        </label>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="col-md-2">
-                                    <div class="col-sm">
-                                        <div class="form-check">
-                                        <input class="form-check-input" type="radio" id=""  name="grado_contagio" value="bajo" {{ $antInfecciosos['grado_contagio'] == 'bajo' ? 'checked' : '' }}>
-                                        <label class="form-check-label" for="">
-                                            Bajo
-                                        </label>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-
-                          </div>
-                      </div>
-
-                  </div> --}}
-                    </div>
+                    </div> --}}
+                    @include('hclinicas.components.datos_personales', ['modo' => 'edit'])
                     <!--Fin Datos Generales-->
 
                     <!--Antecedentes Personales y Familiares-->
-                    <div class="row mt-4">
+                    {{-- <div class="row mt-4">
                         <div class="col-12">
                             <div class="card text-start">
                                 <div class="card-body">
@@ -685,11 +523,12 @@
                             </div>
                         </div>
 
-                    </div>
+                    </div> --}}
+                    @include('hclinicas.components.antecedentes_personales', ['modo' => 'edit'])
                     <!--Fin Antecedentes Personales y Familiares-->
 
                     <!--Diagnostico-->
-                    <div class="row justify-content-center mt-4">
+                    {{-- <div class="row justify-content-center mt-4">
                         <div class="col-md-12 col-lg-12">
                             <div class="card text-start">
                                 <div class="card-body">
@@ -719,7 +558,8 @@
                                 </div>
                             </div>
                         </div>
-                    </div>
+                    </div> --}}
+                    @include('hclinicas.components.diagnostico', ['modo' => 'edit'])
                     <!--Fin Diagnostico-->
 
                     <!--Boton Guardar-->

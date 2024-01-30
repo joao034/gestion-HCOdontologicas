@@ -127,7 +127,7 @@
 
 <div>
     <div class="company-logo">
-        <img src="{{public_path('assets/img/logo.png')}}" alt="Logo de la empresa">
+        <img src="{{ public_path('assets/img/logo.png') }}" alt="Logo de la empresa">
     </div>
     <h2>Historia Clínica Odontológica</h2>
     <h3 class="center">Saúde Medical Group</h3>
@@ -226,95 +226,10 @@
     </div>
 
 </div>
-{{-- <hr>
+<hr>
 <h3>Odontograma</h3>
-<hr> --}}
-{{-- 
-<div class="odontograma">
-    @for ($i = 1; $i <= 32; $i++)
-        <div class="diente">
-            <div class="cara"></div>
-            <div class="cara"></div>
-            <div class="cara"></div>
-            <div class="cara"></div>
-            <div class="cara"></div>
-            <div class="numero">{{ $i }}</div>
-        </div>
-    @endfor
-</div>
+<hr>
 
-<div style="background-color: #fff; padding: 10px; text-align: center;">
-    @for ($i = 18; $i > 10; $i--)
-        <div style="display: inline-block; margin-left: 20px;">{{ $i }}</div>
-    @endfor
-</div>
-
-<div style="text-align: center; border-top: 1px solid #BAB9B9; padding: 10px;">
-    @for ($i = 18; $i > 10; $i--)
-        <div style="display: inline-block; margin-left: 5px;">
-
-            <!-- simbolos -->
-            <?php
-            $ruta = $odontograma->getRutaImagenSimbolo($i, $odontograma->id);
-            $imagen = public_path('assets/img/' . $ruta);
-            ?>
-
-            <div
-                style="width: 40px; height: auto; background: url('{{ $imagen }}'); background-repeat: no-repeat; background-position: center center; background-size: cover;">
-                <?php
-                //Encotrar el detalle del odontograma pintado
-                if (($i >= 11 && $i <= 18) || ($i >= 41 && $i <= 48) || ($i >= 81 && $i <= 85) || ($i >= 51 && $i <= 55)) {
-                    $cara_dental_izquierda = 'distal';
-                } else {
-                    $cara_dental_izquierda = 'mesial';
-                }
-                
-                $color = $odontograma->getColorCaraDentalAPintar($cara_dental_izquierda, $i, $odontograma->id);
-                ?>
-                <!-- Cara izquierda-->
-                <button
-                    style="height: 25px;padding: 5px; {{ $color != '' ? 'background-color: ' . $color . ';' : '' }}"
-                    class="btn_diente">
-                </button>
-
-
-                <?php
-                //Encotrar el detalle del odontograma pintado
-                //solo si el color del simbolo es distinto a vacio entra en la funcion
-                $color = $odontograma->getColorCaraDentalAPintar('oclusal', $i, $odontograma->id);
-                ?>
-                <!-- Cara central-->
-                <button
-                    style="width: 35px;height: 23px;padding: 8px;{{ $color != '' ? 'background-color: ' . $color . ';' : '' }}"
-                    class="btn_diente" data-bs-toggle="modal" data-bs-target="#detalle_odontograma"
-                    onclick="crear( 'oclusal', {{ $i }} , {{ $odontograma->id }})">
-                </button>
-
-                <?php
-                //Encotrar el detalle del odontograma pintado
-                if (($i >= 11 && $i <= 18) || ($i >= 41 && $i <= 48) || ($i >= 81 && $i <= 85) || ($i >= 51 && $i <= 55)) {
-                    $cara_dental_derecha = 'mesial';
-                } else {
-                    $cara_dental_derecha = 'distal';
-                }
-                
-                $color = $odontograma->getColorCaraDentalAPintar($cara_dental_derecha, $i, $odontograma->id);
-                ?>
-                <!-- Cara derecha-->
-                <button
-                    style="height: 25px;padding: 5px; {{ $color != '' ? 'background-color: ' . $color . ';' : '' }}"
-                    class="btn_diente" data-bs-toggle="modal" data-bs-target="#detalle_odontograma"
-                    onclick="crear( '{{ $cara_dental_derecha }}', {{ $i }} , {{ $odontograma->id }})">
-                </button>
-
-            </div>
-        </div>
-    @endfor
-</div> --}}
-
-{{-- <div class="contenedor">
-    <img src="{{ public_path('assets/img/odontogramaGeometrico.png') }}" alt="" class="imagen">
-</div> --}}
 
 <hr>
 <h3>Tratamientos</h3>

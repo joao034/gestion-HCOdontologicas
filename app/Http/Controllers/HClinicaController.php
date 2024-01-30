@@ -34,7 +34,7 @@ class HClinicaController extends Controller
             //datos del paciente
             'nombres' => ['required', 'string', 'max:255'],
             'apellidos' => ['required', 'string', 'max:255'],
-            'cedula' => ['nullable', 'string', 'min:10', 'max:10'],
+            'cedula' => ['nullable', 'string', 'min:6', 'max:16'],
             'estado_civil' => ['required', 'string', 'max:255'],
             'direccion' => ['required', 'string', 'max:255'],
             'ocupacion' => ['required', 'string', 'max:255'],
@@ -44,8 +44,8 @@ class HClinicaController extends Controller
             'fecha_nacimiento' => ['required', 'date', 'before:today', 'after:1900-01-01'],
         ];
 
-        //si es mayor o igual a 18 el campo cedula es obligatorio
-        if (isset($data['fecha_nacimiento']) && !empty($data['fecha_nacimiento'])) {
+        //si es mayor o igual a 18 y su tipo de documento es cedula el campo cedula es obligatorio
+        if (isset($data['fecha_nacimiento']) && !empty($data['fecha_nacimiento']) && $data['tipo_documento_id'] == 1) {
             $fecha_nacimiento = date_create($data['fecha_nacimiento']);
             $hoy = date_create(date('Y-m-d'));
             $edad = date_diff($fecha_nacimiento, $hoy);

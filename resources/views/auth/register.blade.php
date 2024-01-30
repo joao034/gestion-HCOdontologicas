@@ -156,7 +156,7 @@
                                                 class="form-label fw-bold">{{ __('Número de Registro') }}</label>
                                             <input type="text"class="form-control form-control-md" name="cedula"
                                                 id="cedula_odo" aria-describedby="helpId"
-                                                placeholder="Escriba su número de registro del ACESS"
+                                                placeholder="Escriba su número de registro del ACESS" maxlength="16"
                                                 value="{{ old('cedula') }}">
                                             @error('cedula')
                                                 <span class="invalid-feedback" role="alert">

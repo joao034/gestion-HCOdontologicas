@@ -27,7 +27,7 @@ class UserController extends Controller
             'tipo_documento_id' => 'required|integer',
             'nombres' => 'required|string|max:255',
             'apellidos' => 'required|string|max:255',
-            'cedula' => 'required|string',
+            'cedula' => 'required|string|min:6|max:16',
             'sexo' => 'required|string|max:255',
             'celular' => 'required|string|min:10|max:10',
             'especialidades' => 'required|array|min:1',

@@ -9,10 +9,10 @@
                     <!--Titulo-->
                     <h3 class="text-center g-2 fw-bold">Historia Clínica Odontológica</h3>
 
-                    @include('hclinicas.components.datos_personales')
+                    @include('hclinicas.components.datos_personales', ['modo' => 'create'])
 
                     <!--Antecedentes Personales y Familiares-->
-                    <div class="row mt-4">
+                    {{-- <div class="row mt-4">
                         <div class="col-12">
                             <div class="card text-start">
                                 <div class="card-body">
@@ -256,11 +256,14 @@
                                 </div>
                             </div>
                         </div>
-                    </div>
+                    </div> --}}
+                    @include('hclinicas.components.antecedentes_personales', ['modo' => 'create'])
                     <!--Fin Antecedentes Personales y Familiares-->
 
                     <!--Diagnostico-->
-                    <div class="row justify-content-center mt-4">
+
+                    @include('hclinicas.components.diagnostico', ['modo' => 'create'])
+                    {{-- <div class="row justify-content-center mt-4">
                         <div class="col-md-12 col-lg-12">
                             <div class="card text-start">
                                 <div class="card-body">
@@ -290,7 +293,7 @@
                                 </div>
                             </div>
                         </div>
-                    </div>
+                    </div> --}}
                     <!--Fin Diagnostico-->
                     <!--Consentimiento-->
                     <div class="form-check mt-2">

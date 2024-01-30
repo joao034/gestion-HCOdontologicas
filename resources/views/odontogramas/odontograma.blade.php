@@ -1,4 +1,5 @@
-  <!-- Cuadrante Superior dentadura adulta -->
+<div id="odontograma">
+    <!-- Cuadrante Superior dentadura adulta -->
     <div class="row">
         <div class="col-xl-1 col-lg-12 col-md-12 col-sm-12 col-xs-12"></div>
         <div class="col-xl-5 col-lg-6 col-md-12 col-sm-12 col-xs-12" style="background-color: #fff;">
@@ -277,3 +278,4 @@
         </div>
     </div>
     <!-- Fin Cuadrante Inferior dentadura adulta -->
+</div>

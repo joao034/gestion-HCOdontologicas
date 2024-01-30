@@ -183,6 +183,7 @@
                                                 <input
                                                     type="text"class="form-control form-control @error('cedula') is-invalid @enderror"
                                                     name="cedula" id="cedula_odo" aria-describedby="helpId"
+                                                    maxlength="16"
                                                     value="{{ $user->odontologo->cedula }}">
                                                 @error('cedula')
                                                     <small class="text-danger"> {{ $message }}</small>

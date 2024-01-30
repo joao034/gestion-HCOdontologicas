@@ -1,5 +1,6 @@
 <!doctype html>
 <html lang="{{ str_replace('_', '-', app()->getLocale()) }}">
+
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -20,8 +21,11 @@
     @vite(['resources/sass/app.scss', 'resources/js/app.js'])
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
     <script src="https://code.jquery.com/ui/1.13.0/jquery-ui.min.js"></script>
+    <!-- HTML to pdf -->
+    <script src="https://rawgit.com/eKoopmans/html2pdf/master/dist/html2pdf.bundle.js"></script>
 
 </head>
+
 <body>
     <div id="app">
 
@@ -35,7 +39,7 @@
                 <div class="col-md-10">
                     <!--Alerts-->
                     <x-flash_alerts></x-flash_alerts>
-                    @yield('content') 
+                    @yield('content')
                     {{-- {{ $slot }} --}}
                 </div>
                 <div class="col-md-1"></div>
@@ -43,4 +47,5 @@
         </main>
     </div>
 </body>
+
 </html>

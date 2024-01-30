@@ -10,7 +10,7 @@
                     <h3 class="text-center fw-bold g-2">Historia Clínica Odontológica</h3>
 
                     <!--Datos Generales-->
-                    <div class="row justify-content-center">
+                    {{-- <div class="row justify-content-center">
                         <div class="col-md-12 col-lg-12">
                             <div class="card text-start">
                                 <div class="card-body">
@@ -231,12 +231,12 @@
                                 </div>
                             </div>
                         </div>
-                    </div>
+                    </div> --}}
+                    @include('hclinicas.components.datos_personales', ['modo' => 'show'])
                     <!--Fin Datos Generales-->
 
                     <!--Antecedentes Personales y Familiares-->
-
-                    <div class="row mt-4">
+                    {{-- <div class="row mt-4">
                         <div class="col-12">
                             <div class="card text-start">
                                 <div class="card-body">
@@ -521,11 +521,12 @@
 
                         </div>
 
-                    </div>
+                    </div> --}}
+                    @include('hclinicas.components.antecedentes_personales', ['modo' => 'show'])
                     <!--Fin Antecedentes Personales-->
 
                     <!--Diagnosticos-->
-                    <div class="row justify-content-center mt-4">
+                    {{-- <div class="row justify-content-center mt-4">
                         <div class="col-md-12 col-lg-12">
                             <div class="card text-start">
                                 <div class="card-body">
@@ -555,7 +556,8 @@
                                 </div>
                             </div>
                         </div>
-                    </div>
+                    </div> --}}
+                    @include('hclinicas.components.diagnostico', ['modo' => 'show'])
                     <!--Fin Diagnosticos-->
 
                     <div class="form-check mt-2">

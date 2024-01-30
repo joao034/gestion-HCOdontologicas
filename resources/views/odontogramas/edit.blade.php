@@ -15,8 +15,14 @@
                     class="fa-solid fa-plus"></i> Nuevo Odontograma </a>
         </div>
 
+        {{-- <div class="mb-2 mx-2">
+            <a class="btn btn-info text-white" href="{{ route('odontogramas.pdf', $odontograma->id) }}" target="_blank"><i
+                    class="fa-solid fa-notes-medical"></i> PDF Historia Clínica</a>
+        </div> --}}
+
         <div class="mb-2 mx-2">
-            <a class="btn btn-info text-white" href="{{ route('odontogramas.pdf', $odontograma->id) }}" target="_blank"><i class="fa-solid fa-notes-medical"></i> PDF Historia Clínica</a>
+            <button type="button" id="btnGeneratePDF" class="btn btn-info text-white"><i
+                    class="fa-solid fa-notes-medical"></i> PDF Historia Clínica</button>
         </div>
 
         @include('odontogramas.sms')
@@ -27,12 +33,65 @@
         </div>
     </div>
 
+
     <!-- Odontograma -->
     @include('odontogramas.odontograma')
+
 
     <!-- Lista de Detalles -->
     @include('presupuestos.components.add-detalle', ['presupuesto' => $odontograma])
     @include('odontogramas.index_detalle')
     @include('odontogramas.detalle_odontograma')
     @include('odontogramas.nuevo')
+
+    <!-- Tabla de detalles, solo funciona para exportar el pdf -->
+    @include('odontogramas.detalles_pdf')
+
+    <script>
+        document.getElementById('btnGeneratePDF').addEventListener('click', function() {
+
+            const odontograma = document.getElementById('odontograma');
+            const detalles_odontograma = document.getElementById('detalles_odontograma');
+
+            // Clonar la tabla
+            /* const tablaClonada = detalles_odontograma.cloneNode(true);
+
+                // Obtener la última fila de la tabla clonada
+                const ultimaFilaClonada = tablaClonada.rows[tablaClonada.rows.length - 1];
+
+                // Eliminar los dos últimos td y su th
+                for (let i = 0; i < 2; i++) {
+                    ultimaFilaClonada.deleteCell(-1); // Elimina la última celda
+                }
+     */
+            // Crear un contenedor para ambos elementos
+            const contenedor = document.createElement('div');
+
+            // Agregar ambos elementos al contenedor
+            contenedor.appendChild(odontograma.cloneNode(true));
+            contenedor.appendChild(detalles_odontograma.cloneNode(true));
+
+            html2pdf()
+                .set({
+                    margin: 0.5,
+                    filename: 'odontograma.pdf',
+                    image: {
+                        type: 'jpeg',
+                        quality: 0.98
+                    },
+                    html2canvas: {
+                        scale: 3,
+                        letterRendering: true
+                    },
+                    jsPDF: {
+                        unit: 'in',
+                        format: 'a3',
+                        orientation: 'landscape'
+                    }
+                })
+                .from(contenedor)
+                .save()
+                .catch(err => console.log(err));
+        });
+    </script>
 @endsection

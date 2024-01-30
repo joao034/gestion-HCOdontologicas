@@ -1,6 +1,7 @@
-<div class="table-responsive">
+<div class="table-responsive" >
     <br>
     <table class="table">
+
         <thead class="bg-dark text-white">
             <tr>
                 <th scope="col">Fecha Hallazgo</th>
@@ -63,8 +64,7 @@
                             </td>
                             <td>
                                 <button type="button" class="btn btn-danger" data-bs-toggle="modal"
-                                    data-bs-target="#borrar{{ $detalle->id }}"
-                                    {{-- {{ $detalle->estado == 'realizado' ? 'disabled' : '' }} --}}>
+                                    data-bs-target="#borrar{{ $detalle->id }}" {{-- {{ $detalle->estado == 'realizado' ? 'disabled' : '' }} --}}>
                                     <i class="fa-regular fa-trash-can"></i>
                                 </button>
                         @endif

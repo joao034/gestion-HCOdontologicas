@@ -1,17 +1,46 @@
-<div class="row mt-4">
+<div class="row mt-2">
     <div class="col-12">
         <div class="card text-start">
             <div class="card-body">
-                <h5 class="card-title fw-bolder">Antecedentes Personales y Familiares</h5>
+                <h5 class="card-title fw-bolder">D. E. ANTECEDENTES PERSONALES Y FAMILIARES</h5>
                 <hr>
                 <p class="fw-bold">¿USTED, SUS PADRES O ABUELOS PADECE O HA PADECIDO ALGUNA DE LAS
                     SIGUIENTES
                     ENFERMEDADES?</p>
 
+                @php
+                    $enfermedades = [
+                        'hipertension' => 'Hipertensión',
+                        'enfermedades cardiacas' => 'Enfermedades Cardiacas',
+                        'diabetes mellitus' => 'Diabetes Mellitus',
+                        'hepatitis' => 'Hepatitis',
+                        'fiebre reumatica' => 'Fiebre Reumática',
+                        'tuberculosis' => 'Tuberculosis',
+                        'asma' => 'Asma',
+                        'hemorragias' => 'Hemorragias',
+                        'epilepsias' => 'Epilepsias',
+                        'alergias' => 'Alergias',
+                    ];
+                @endphp
+
+                {{-- <div class="row">
+                    @foreach ($enfermedades as $key => $enfermedad)
+                        <div class="col-md-3">
+                            <div class="form-check">
+                                <input class="form-check-input border-primary" type="checkbox"
+                                    id="checkbox{{ $key }}" name="enfermedades[]" value="{{ $enfermedad }}"
+                                    {{ ($modo == 'show' || $modo == 'edit') && $antPersonales && $antPersonales->retornar_enfermedades($enfermedad) ? 'checked' : '' }}>
+                                <label class="form-check-label"
+                                    for="checkbox{{ $key }}">{{ $enfermedad }}</label>
+                            </div>
+                        </div>
+                    @endforeach
+                </div> --}}
+
                 <div class="row">
                     <div class="col-lg-3 col-md-6">
                         <input class="form-check-input border-primary" type="checkbox" id="checkHipertension"
-                            name="enfermedades[]" value="hipertension" value="hipertension"
+                            name="enfermedades[]" value="hipertension"
                             {{ ($modo == 'show' || $modo == 'edit') && $antPersonales?->retornar_enfermedades('hipertension') == true ? 'checked' : '' }}>
                         <label class="form-check-label" for="checkHipertension">
                             Hipertensión
@@ -105,9 +134,11 @@
                     <div class="row mt-2">
                         <div class="col-lg-6 col-md-6">
                             <div class="form-floating mb-3">
-                                <input type="text" class="form-control" name="otra_enfermedad" id="otra_enfermedad"
-                                    aria-describedby="helpId" placeholder="Escriba otra enfermedad"
-                                    value="{{ $modo == 'show' || $modo == 'edit' ? $antPersonales?->otra_enfermedad : old('otra_enfermedad') }}" {{ $modo == 'show' ? 'readonly' : '' }}>
+                                <input type="text" class="form-control" name="otra_enfermedad"
+                                    id="otra_enfermedad" aria-describedby="helpId"
+                                    placeholder="Escriba otra enfermedad"
+                                    value="{{ $modo == 'show' || $modo == 'edit' ? $antPersonales?->otra_enfermedad : old('otra_enfermedad') }}"
+                                    {{ $modo == 'show' ? 'readonly' : '' }}>
                                 <label for="otra_enfermedad" class="fw-bold">Otra
                                     Enfermedad</label>
                             </div>
@@ -117,7 +148,8 @@
                             <div class="form-floating mb-3">
                                 <input type="text" class="form-control" name="parentesco" id="parentesco"
                                     aria-describedby="helpId" placeholder="Parentesco"
-                                    value="{{ $modo == 'show' || $modo == 'edit' ? $antPersonales?->otra_enfermedad : old('otra_enfermedad') }}" {{ $modo == 'show' ? 'readonly' : '' }}>
+                                    value="{{ $modo == 'show' || $modo == 'edit' ? $antPersonales?->parentesco : old('parentesco') }}"
+                                    {{ $modo == 'show' ? 'readonly' : '' }}>
                                 <label for="parentesco" class="fw-bold">Parentesco</label>
                             </div>
                         </div>
@@ -157,7 +189,8 @@
                                     embarazo</span>
                                 <input type="number" class="form-control" name="semanas_embarazo"
                                     aria-describedby="helpId" placeholder="Ejemplo: 16" min="1"
-                                    value="{{ $modo == 'show' || $modo == 'edit' ? $antPersonales?->semanas_embarazo : old('semanas_embarazo') }}" {{ $modo == 'show' ? 'readonly' : '' }} >
+                                    value="{{ $modo == 'show' || $modo == 'edit' ? $antPersonales?->semanas_embarazo : old('semanas_embarazo') }}"
+                                    {{ $modo == 'show' ? 'readonly' : '' }}>
                             </div>
                         </div>
 
@@ -170,7 +203,8 @@
                                     medicamento?</label>
                                 <input type="text" class="form-control" name="medicamento" id=""
                                     aria-describedby="helpId" placeholder="Escriba el o los medicamentos que toma."
-                                    value="{{ $modo == 'show' || $modo == 'edit' ? $antPersonales?->medicamento : old('medicamento') }}" {{ $modo == 'show' ? 'readonly' : '' }}>
+                                    value="{{ $modo == 'show' || $modo == 'edit' ? $antPersonales?->medicamento : old('medicamento') }}"
+                                    {{ $modo == 'show' ? 'readonly' : '' }}>
                             </div>
                         </div>
 
@@ -181,7 +215,8 @@
                                 <input type="text" class="form-control" name="otro_antecedente" id=""
                                     aria-describedby="helpId"
                                     placeholder="Escriba si posee otro antecedente que no se encuentre en la lista."
-                                    value="{{ $modo == 'show' || $modo == 'edit' ? $antPersonales?->otro_antecedente : old('otro_antecedente') }}" {{ $modo == 'show' ? 'readonly' : '' }}> 
+                                    value="{{ $modo == 'show' || $modo == 'edit' ? $antPersonales?->otro_antecedente : old('otro_antecedente') }}"
+                                    {{ $modo == 'show' ? 'readonly' : '' }}>
                             </div>
                         </div>
                     </div>

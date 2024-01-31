@@ -94,6 +94,9 @@ class Paciente extends Model
 		return $this->belongsTo(TipoNacionalidad::class, 'tipo_nacionalidad_id');
 	}
 
+	public function consulta(){
+		return $this->hasOne(Consulta::class);
+	}
 
 	public function edad()
 	{

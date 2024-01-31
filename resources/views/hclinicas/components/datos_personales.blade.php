@@ -3,7 +3,7 @@
     <div class="col-md-12 col-lg-12">
         <div class="card text-start">
             <div class="card-body">
-                <h5 class="card-title fw-bolder">A. Datos del Paciente</h5>
+                <h5 class="card-title fw-bolder">A. DATOS DEL PACIENTE</h5>
                 <hr>
                 <div class="row mb-3">
                     <div class="col-md-6">
@@ -155,7 +155,8 @@
                     <div class="col-md-6">
                         <label for="" class="form-label fw-bold">Estado civil <span
                                 class="text-danger">*</span></label>
-                        <select name="estado_civil" id="" class="form-select form-select-md" required {{ $modo == 'show' ? 'disabled' : '' }}>
+                        <select name="estado_civil" id="" class="form-select form-select-md" required
+                            {{ $modo == 'show' ? 'disabled' : '' }}>
                             <option selected value="">Seleccione el estado civil del paciente
                             </option>
                             <option value="soltero"
@@ -187,8 +188,8 @@
                         <div class="mb-3">
                             <label for="" class="form-label fw-bold">Género <span
                                     class="text-danger">*</span></label>
-                            <select class="form-select form-select-md" name="sexo" required {{ $modo == 'show' ? 'disabled' : '' }}
-                                aria-label=".form-select-sm example">
+                            <select class="form-select form-select-md" name="sexo" required
+                                {{ $modo == 'show' ? 'disabled' : '' }} aria-label=".form-select-sm example">
                                 <option selected value="">Seleccione el género del paciente
                                 </option>
                                 <option value="masculino"
@@ -214,12 +215,41 @@
                 <div class="row">
                     <div class="col-md-6">
                         <div class="mb-3">
+                            <label for="" class="form-label fw-bold">Direción
+                                (Ciudad/Barrio) <span class="text-danger">*</span></label>
+                            <input type="text" class="form-control" name="direccion" id=""
+                                aria-describedby="helpId" placeholder="Escriba dónde reside el paciente"
+                                value="{{ $modo == 'show' || $modo == 'edit' ? $paciente->direccion : old('direccion') }}"
+                                {{ $modo == 'show' ? 'readonly' : '' }} required>
+                            @error('direccion')
+                                <small class="text-danger"> {{ $message }}</small>
+                            @enderror
+                        </div>
+                    </div>
+                    <div class="col-md-6">
+                        <div class="mb-3">
+                            <label for="" class="form-label fw-bold">Profesión u
+                                Ocupación <span class="text-danger">*</span></label>
+                            <input type="text" class="form-control" name="ocupacion" id=""
+                                aria-describedby="helpId" placeholder="Escriba la ocupación del paciente"
+                                value="{{ $modo == 'show' || $modo == 'edit' ? $paciente->ocupacion : old('ocupacion') }}"
+                                {{ $modo == 'show' ? 'readonly' : '' }} required>
+                            @error('ocupacion')
+                                <small class="text-danger"> {{ $message }}</small>
+                            @enderror
+                        </div>
+                    </div>
+                </div>
+
+                <div class="row">
+                    <div class="col-md-6">
+                        <div class="mb-3">
                             <label for="" class="form-label fw-bold">Celular</label>
                             <input type="text"
-                                value="{{ $modo == 'show' || $modo == 'edit' ? $paciente->celular : old('celular') }}" {{ $modo == 'show' ? 'readonly' : '' }}
-                                class="form-control" name="celular" minlength="10" maxlength="10" id="celular"
-                                aria-describedby="helpId" placeholder="Escirba el celular del paciente"
-                                pattern="^[0-9]+$">
+                                value="{{ $modo == 'show' || $modo == 'edit' ? $paciente->celular : old('celular') }}"
+                                {{ $modo == 'show' ? 'readonly' : '' }} class="form-control" name="celular"
+                                minlength="10" maxlength="10" id="celular" aria-describedby="helpId"
+                                placeholder="Escirba el celular del paciente" pattern="^[0-9]+$">
 
                             @error('celular')
                                 <small class="text-danger"> {{ $message }}</small>
@@ -232,41 +262,12 @@
                             <label for="" class="form-label fw-bold">Teléfono
                                 Convencional</label>
                             <input type="text"
-                                value="{{ $modo == 'show' || $modo == 'edit' ? $paciente->telef_convencional : old('telef_convencional') }}" {{ $modo == 'show' ? 'readonly' : '' }}
-                                id="telefono" class="form-control" name="telef_convencional" id=""
-                                aria-describedby="helpId" minlength="6" maxlength="9" pattern="^[0-9]+$"
-                                placeholder="Por ejemplo: 2831373">
+                                value="{{ $modo == 'show' || $modo == 'edit' ? $paciente->telef_convencional : old('telef_convencional') }}"
+                                {{ $modo == 'show' ? 'readonly' : '' }} id="telefono" class="form-control"
+                                name="telef_convencional" id="" aria-describedby="helpId" minlength="6"
+                                maxlength="9" pattern="^[0-9]+$" placeholder="Por ejemplo: 2831373">
 
                             @error('telef_convencional')
-                                <small class="text-danger"> {{ $message }}</small>
-                            @enderror
-                        </div>
-                    </div>
-                </div>
-
-                <div class="row">
-                    <div class="col-md-6">
-                        <div class="mb-3">
-                            <label for="" class="form-label fw-bold">Direción
-                                (Ciudad/Barrio) <span class="text-danger">*</span></label>
-                            <input type="text" class="form-control" name="direccion" id=""
-                                aria-describedby="helpId" placeholder="Escriba dónde reside el paciente"
-                                value="{{ $modo == 'show' || $modo == 'edit' ? $paciente->direccion : old('direccion') }}" {{ $modo == 'show' ? 'readonly' : '' }}
-                                required>
-                            @error('direccion')
-                                <small class="text-danger"> {{ $message }}</small>
-                            @enderror
-                        </div>
-                    </div>
-                    <div class="col-md-6">
-                        <div class="mb-3">
-                            <label for="" class="form-label fw-bold">Profesión u
-                                Ocupación <span class="text-danger">*</span></label>
-                            <input type="text" class="form-control" name="ocupacion" id=""
-                                aria-describedby="helpId" placeholder="Escriba la ocupación del paciente"
-                                value="{{ $modo == 'show' || $modo == 'edit' ? $paciente->ocupacion : old('ocupacion') }}" {{ $modo == 'show' ? 'readonly' : '' }}
-                                required>
-                            @error('ocupacion')
                                 <small class="text-danger"> {{ $message }}</small>
                             @enderror
                         </div>

@@ -74,9 +74,9 @@ class Paciente extends Model
 		return $this->hasMany(Odontograma::class);
 	}
 
-	public function diagnostico()
+	public function diagnosticos()
 	{
-		return $this->hasOne(Diagnostico::class);
+		return $this->hasMany(Diagnostico::class);
 	}
 
 	public function representante()

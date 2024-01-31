@@ -10,9 +10,10 @@ class Diagnostico extends Model
     use HasFactory;
 
     protected $fillable = [
+        'paciente_id',
         'diagnostico',
-        'enfermedad_actual',
-        'paciente_id'
+        'CIE',
+        'tipo'
     ];
 
     public function paciente()

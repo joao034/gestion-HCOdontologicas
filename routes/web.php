@@ -15,6 +15,7 @@ use App\Http\Controllers\PresupuestoPorTiempoController;
 use App\Http\Controllers\SMSController;
 use App\Http\Controllers\TopPacientesPorPresupuesto;
 use App\Http\Controllers\AbonoController;
+use App\Http\Controllers\DiagnosticoController;
 use App\Http\Controllers\ExamenComplementarioController;
 
 //use Illuminate\Support\Facades\App;
@@ -47,6 +48,7 @@ Route::middleware('auth')->group(function () {
     Route::resource("presupuestos", PresupuestoController::class);
     Route::resource("users", UserController::class);
     Route::resource("abonos", AbonoController::class);
+    Route::resource("diagnosticos", DiagnosticoController::class);
     Route::resource("examenesComplementarios", ExamenComplementarioController::class);
 
     Route::post('odontogramas/nuevo/{paciente_id}', 'App\Http\Controllers\OdontogramaController@nuevo')->name('odontogramas.nuevo');

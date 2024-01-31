@@ -19,7 +19,6 @@ use App\Models\Consulta;
 
 class HClinicaController extends Controller
 {
-
     protected function validator(array $data)
     {
         $rules = [
@@ -29,8 +28,7 @@ class HClinicaController extends Controller
             //datos del paciente
             'nombres' => ['required', 'string', 'max:255'],
             'apellidos' => ['required', 'string', 'max:255'],
-            //cedula hace referencia al nro del documento
-            'cedula' => ['nullable', 'string', 'min:6', 'max:16'],
+            'cedula' => ['nullable', 'string', 'min:6', 'max:16'], //cedula hace referencia al nro del documento
             'estado_civil' => ['required', 'string', 'max:255'],
             'direccion' => ['required', 'string', 'max:255'],
             'ocupacion' => ['required', 'string', 'max:255'],
@@ -116,7 +114,7 @@ class HClinicaController extends Controller
             $this->guardarActualizarConsulta($request, $paciente);
             $this->almacenarRepresentante($request, $paciente->id);
             $this->almacenarAntecedentePersonales($request, $paciente->id);
-            $this->almacenarDiagnostico($request, $paciente->id);
+            //$this->almacenarDiagnostico($request, $paciente->id);
             DB::commit();
 
             return to_route('hclinicas.index')->with('message', 'Historia Clinica creado exitosamente.');
@@ -169,7 +167,7 @@ class HClinicaController extends Controller
             $this->guardarActualizarConsulta($request, $paciente);
             $this->actualizarRepresentante($request, $paciente);
             $this->actualizarAntecedentePersonal($request, $paciente->id);
-            $this->actualizarDiagnostico($request, $paciente);
+            //$this->actualizarDiagnostico($request, $paciente);
             DB::commit();
             return back()->with('message', 'Historia Clínica actualizada exitosamente');
         } catch (\Exception $e) {

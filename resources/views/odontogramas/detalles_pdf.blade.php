@@ -1,4 +1,4 @@
-<div class="table-responsive" >
+<div class="table-responsive" style="display: none;" >
     <table class="table" id="detalles_odontograma" >
         <h4>Tratamientos</h4>
         <thead class="bg-dark text-white">

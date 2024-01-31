@@ -24,7 +24,7 @@
                     <div class="form-check">
                         <input class="form-check-input" type="checkbox" id="checkbox{{ $key }}"
                             name="partes_sistema[]" value="{{ $key }}"
-                            {{ ($modo == 'show' || $modo == 'edit') && $paciente->consulta->retornar_partes_sistema_checkeadas($key) == true ? 'checked' : '' }}>
+                            {{ ($modo == 'show' || $modo == 'edit') && $paciente->consulta?->retornar_partes_sistema_checkeadas($key) == true ? 'checked' : '' }}>
                         <label class="form-check-label" for="checkbox{{ $key }}">{{ $parte }}</label>
                     </div>
                 </div>

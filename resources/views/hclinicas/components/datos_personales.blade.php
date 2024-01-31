@@ -12,7 +12,7 @@
                         <input type="text"
                             value="{{ $modo == 'show' || $modo == 'edit' ? $paciente->nombres : old('nombres') }}"
                             {{ $modo == 'show' ? 'readonly' : '' }} class="form-control" name="nombres" id=""
-                            aria-describedby="helpId" placeholder="Escriba los nombres del paciente" required autofocus>
+                            aria-describedby="helpId" placeholder="Escriba los nombres del paciente" required>
 
                         @error('nombres')
                             <small class="text-danger"> {{ $message }}</small>

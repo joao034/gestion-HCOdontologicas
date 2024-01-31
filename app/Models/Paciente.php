@@ -98,6 +98,11 @@ class Paciente extends Model
 		return $this->hasOne(Consulta::class);
 	}
 
+	public function examenesComplementarios()
+	{
+		return $this->hasOne(ExamenComplementario::class);
+	}
+
 	public function edad()
 	{
 		return Carbon::parse($this->fecha_nacimiento)->age;

@@ -21,7 +21,9 @@
 
                     @include('hclinicas.components.examen_sistema_estomatognatico', ['modo' => 'create'])
 
-                    {{-- @include('hclinicas.components.diagnostico', ['modo' => 'create']) --}}
+                    @include('hclinicas.components.exanenes_complementarios', ['modo' => 'create'])
+
+                    @include('hclinicas.components.diagnostico', ['modo' => 'create'])
                    
                     <!--Fin Diagnostico-->
                     <!--Consentimiento-->

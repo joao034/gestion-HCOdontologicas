@@ -2,41 +2,28 @@
     <div class="card-body">
         <h5 class="card-title fw-bold">F. CONSTANTES VITALES</h5>
         <hr>
+
+        @php
+            $constantes_vitales = [
+                'presion_arterial' => 'Presión arterial',
+                'frecuencia_cardiaca' => 'Frecuencia cardiaca',
+                'frecuencia_respiratoria' => 'Frecuencia respiratoria',
+                'temperatura' => 'Temperatura ºC',
+            ];
+        @endphp
+
         <div class="row">
-            <div class="col-md-3">
-                <div class="form-floating">
-                    <input type="text" class="form-control" id="floatingInput" placeholder="    
-                    "
-                        name="presion_arterial" required>
-                    <label for="floatingInput" class="fw-bold">Presión arterial<span
-                            class="text-danger">*</span></label>
+            @foreach ($constantes_vitales as $key => $constante)
+                <div class="col-md-3">
+                    <div class="form-floating">
+                        <input type="text" class="form-control" id="floatingInput" placeholder=""  value="{{ $modo == 'show' || $modo == 'edit' ?  $paciente->consulta?->$key : old($key) }}"
+                        {{ $modo == 'show' ? 'readonly' : '' }}
+                            name="{{ $key }}" required>
+                        <label for="floatingInput" class="fw-bold">{{ $constante }}<span
+                                class="text-danger">*</span></label>
+                    </div>
                 </div>
-            </div>
-            <div class="col-md-3">
-                <div class="form-floating">
-                    <input type="text" class="form-control" id="floatingInput"
-                        placeholder="" name="frecuencia_cardiaca" required>
-                    <label for="floatingInput" class="fw-bold">Frecuencia cardiaca<span
-                            class="text-danger">*</span></label>
-                </div>
-            </div>
-            <div class="col-md-3">
-                <div class="form-floating">
-                    <input type="text" class="form-control" id="floatingInput"
-                        name="frecuencia_respiratoria" placeholder="    
-                    " required>
-                    <label for="floatingInput" class="fw-bold">Frecuencia respiratoria<span
-                            class="text-danger">*</span></label>
-                </div>
-            </div>
-            <div class="col-md-3">
-                <div class="form-floating">
-                    <input type="text" class="form-control" id="floatingInput"
-                        name="temperatura" placeholder="    
-                    " required>
-                    <label for="floatingInput" class="fw-bold">Temperatura ºC<span class="text-danger">*</span></label>
-                </div>
-            </div>
+            @endforeach
         </div>
     </div>
 </div>

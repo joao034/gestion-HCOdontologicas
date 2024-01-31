@@ -25,5 +25,17 @@ class Consulta extends Model
         return $this->belongsTo(Paciente::class);
     }
 
+    public function retornar_partes_sistema_checkeadas($parte_sistema_checkeado)
+    {
+        if ($this->partes_examen_estomatognatico != null) {
+            $partesArray = explode(',', $this->partes_examen_estomatognatico);
 
+            foreach ($partesArray as $parte) {
+                if ((trim($parte) === trim($parte_sistema_checkeado))) {
+                    return true;
+                }
+            }
+        }
+        return false;
+    }
 }

@@ -22,17 +22,18 @@
             @foreach ($partes_sistema_estomatognatico as $key => $parte)
                 <div class="col-md-3">
                     <div class="form-check">
-                        <input class="form-check-input" type="checkbox" id="checkbox{{ $key }}" name="partes_sistema[]"
-                            value="{{ $parte }}">
-                        <label class="form-check-label"
-                            for="checkbox{{ $key }}">{{ $parte }}</label>
+                        <input class="form-check-input" type="checkbox" id="checkbox{{ $key }}"
+                            name="partes_sistema[]" value="{{ $key }}"
+                            {{ ($modo == 'show' || $modo == 'edit') && $paciente->consulta->retornar_partes_sistema_checkeadas($key) == true ? 'checked' : '' }}>
+                        <label class="form-check-label" for="checkbox{{ $key }}">{{ $parte }}</label>
                     </div>
                 </div>
             @endforeach
         </div>
 
         <div class="form-floating mt-2">
-            <textarea class="form-control" id="floatingTextarea2" name="observaciones"></textarea>
+            <textarea class="form-control" id="floatingTextarea2" name="observaciones_examen"
+                {{ $modo == 'show' ? 'readonly' : '' }} required>{{ $modo == 'show' || $modo == 'edit' ? $paciente->consulta?->observaciones_examen : old('observaciones_examen') }}</textarea>
             <label for="floatingTextarea2" class="fw-bold">Observaciones</label>
         </div>
     </div>

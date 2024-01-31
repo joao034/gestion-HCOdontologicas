@@ -15,16 +15,11 @@ use App\Models\TipoNacionalidad;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Validator;
-
+use App\Models\Consulta;
 
 class HClinicaController extends Controller
 {
-    /**
-     * Valida los datos de la HCOdontologica del formulario.
-     *
-     * @param  array  $data
-     * @return \Illuminate\Contracts\Validation\Validator
-     */
+
     protected function validator(array $data)
     {
         $rules = [
@@ -34,6 +29,7 @@ class HClinicaController extends Controller
             //datos del paciente
             'nombres' => ['required', 'string', 'max:255'],
             'apellidos' => ['required', 'string', 'max:255'],
+            //cedula hace referencia al nro del documento
             'cedula' => ['nullable', 'string', 'min:6', 'max:16'],
             'estado_civil' => ['required', 'string', 'max:255'],
             'direccion' => ['required', 'string', 'max:255'],
@@ -67,6 +63,20 @@ class HClinicaController extends Controller
         return Validator::make($data, $rules);
     }
 
+    private function validate_consulta_data()
+    {
+        return [
+            'motivo_consulta' => 'required|string|max:255',
+            'enfermedad_actual' => 'required|string|max:255',
+            'presion_arterial' => 'required|numeric|',
+            'frecuencia_cardiaca' => 'required|numeric|',
+            'frecuencia_respiratoria' => 'required|numeric|',
+            'temperatura' => 'required|numeric|between:35,42',
+            //'partes_sistema' => 'string|max:255',
+            'observaciones_examen' => 'required|string|max:255',
+        ];
+    }
+
     private function mostrarErroresDeValidacion($request)
     {
         $validator = $this->validator($request->all());
@@ -74,11 +84,6 @@ class HClinicaController extends Controller
             return redirect()->back()->withErrors($validator)->withInput();
     }
 
-    /**
-     * Despliega la lista de pacientes.
-     *
-     * @return \Illuminate\Http\Response
-     */
     public function index(Request $request)
     {
         $search = trim($request->get('buscador'));
@@ -86,11 +91,6 @@ class HClinicaController extends Controller
         return view('hclinicas.index', compact(['pacientes', 'search']));
     }
 
-    /**
-     * Muestra la vista create.
-     *
-     * @return \Illuminate\Http\Response
-     */
     public function create()
     {
         $tipos_documento = TipoDocumento::orderBy('nombre', 'asc')->get();
@@ -98,15 +98,10 @@ class HClinicaController extends Controller
         return view("hclinicas.create", compact(['tipos_documento', 'tipos_nacionalidad']));
     }
 
-    /**
-     * Store a newly created resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @return \Illuminate\Http\Response
-     */
     public function store(Request $request)
     {
         try {
+            //dd($request->all());
             DB::beginTransaction();
             $paciente = new Paciente();
             //validar los datos
@@ -118,6 +113,7 @@ class HClinicaController extends Controller
 
             $this->guardarOActualizarPaciente($paciente, $request);
             //insertar datos otras tablas
+            $this->guardarActualizarConsulta($request, $paciente);
             $this->almacenarRepresentante($request, $paciente->id);
             $this->almacenarAntecedentePersonales($request, $paciente->id);
             $this->almacenarDiagnostico($request, $paciente->id);
@@ -131,12 +127,6 @@ class HClinicaController extends Controller
         }
     }
 
-    /**
-     * Display the specified resource.
-     *
-     * @param  \App\Models\  $autor
-     * @return \Illuminate\Http\
-     */
     public function show(int $id)
     {
         try {
@@ -153,12 +143,6 @@ class HClinicaController extends Controller
         }
     }
 
-    /**
-     * Muesta la vista edit
-     *
-     * @param  \App\Models\  $id_paciente
-     * @return \Illuminate\Http\
-     */
     public function edit(int $id)
     {
         $paciente = Paciente::getPacienteFormateado($id);
@@ -170,13 +154,6 @@ class HClinicaController extends Controller
         return view('hclinicas.edit', compact(['paciente', 'representante', 'antPersonales', 'diagnostico', 'tipos_documento', 'tipos_nacionalidad']));
     }
 
-    /**
-     * Actualiza la hclinica del paciente en storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  \App\Models\Paciente  $id_paciente
-     * @return \Illuminate\Http\Response
-     */
     public function update(Request $request, int $id_paciente)
     {
         try {
@@ -189,6 +166,7 @@ class HClinicaController extends Controller
                 return to_route('hclinicas.create')->with('danger', 'La cédula del representante no puede ser igual a la del paciente.');
             }
             $this->guardarOActualizarPaciente($paciente, $request);
+            $this->guardarActualizarConsulta($request, $paciente);
             $this->actualizarRepresentante($request, $paciente);
             $this->actualizarAntecedentePersonal($request, $paciente->id);
             $this->actualizarDiagnostico($request, $paciente);
@@ -196,17 +174,11 @@ class HClinicaController extends Controller
             return back()->with('message', 'Historia Clínica actualizada exitosamente');
         } catch (\Exception $e) {
             DB::rollback();
-            return back()->with('danger', 'No se pudo actualizar la Historia Clínica.'. $e->getMessage());
+            return back()->with('danger', 'No se pudo actualizar la Historia Clínica.' . $e->getMessage());
             throw $e;
         }
     }
 
-    /**
-     * Eliminar la hclinica del storage.
-     *
-     * @param  \App\Models\Paciente  $id_paciente
-     * @return \Illuminate\Http\Response
-     */
     public function destroy(int $id)
     {
         try {
@@ -244,6 +216,24 @@ class HClinicaController extends Controller
         $paciente->telef_convencional = $request->input('telef_convencional');
         $paciente->consentimiento = $request->input('consentimiento');
         $paciente->save();
+    }
+
+    private function guardarActualizarConsulta(Request $request, Paciente $paciente)
+    {
+        $this->validate($request, $this->validate_consulta_data());
+        $paciente->consulta == null ? $paciente->consulta = new Consulta() : $paciente->consulta;
+        $paciente->consulta->paciente_id = $paciente->id;
+        $paciente->consulta->motivo_consulta = $request->input('motivo_consulta');
+        $paciente->consulta->enfermedad_actual = $request->input('enfermedad_actual');
+        $paciente->consulta->presion_arterial = $request->input('presion_arterial');
+        $paciente->consulta->frecuencia_cardiaca = $request->input('frecuencia_cardiaca');
+        $paciente->consulta->frecuencia_respiratoria = $request->input('frecuencia_respiratoria');
+        $paciente->consulta->temperatura = $request->input('temperatura');
+        if ($request->input('partes_sistema') != null || $request->input('partes_sistema') != "") {
+            $paciente->consulta->partes_examen_estomatognatico = implode(",", $request->input('partes_sistema'));
+        }
+        $paciente->consulta->observaciones_examen = $request->input('observaciones_examen');
+        $paciente->consulta->save();
     }
 
     private function almacenarRepresentante(Request $request, int $paciente_id)

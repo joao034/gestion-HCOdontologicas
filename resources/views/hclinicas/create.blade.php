@@ -15,15 +15,13 @@
 
                     @include('hclinicas.components.enfermedad_actual', ['modo' => 'create'])
 
-                    @include('hclinicas.components.antecedentes_personales', ['modo' => 'create'])
+                    {{-- @include('hclinicas.components.antecedentes_personales', ['modo' => 'create']) --}}
+
+                    @include('hclinicas.components.antecedentes_patologicos', ['modo' => 'create'])
 
                     @include('hclinicas.components.constantes_vitales', ['modo' => 'create'])
 
                     @include('hclinicas.components.examen_sistema_estomatognatico', ['modo' => 'create'])
-
-                    @include('hclinicas.components.exanenes_complementarios', ['modo' => 'create'])
-
-                    @include('hclinicas.components.diagnostico', ['modo' => 'create'])
                    
                     <!--Fin Diagnostico-->
                     <!--Consentimiento-->

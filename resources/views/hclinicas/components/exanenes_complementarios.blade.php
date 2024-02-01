@@ -4,7 +4,7 @@
         <div class="form-floating mt-2">
             <textarea class="form-control" style="height: 100px" id="examenes_solicitados" name="examenes_solicitados"
                 required {{ $modo == 'show' ? 'readonly' : '' }}>{{ $modo == 'show' || $modo == 'edit' ? $paciente->examenesComplementarios?->examenes_solicitados : old('examenes_solicitados') }}</textarea>
-            <label for="examenes_solicitados" class="fw-bold">Solicitar exámenes <span class="text-danger">*</span>
+            <label for="examenes_solicitados" class="fw-bold">Exámenes solicitados <span class="text-danger">*</span>
             </label>
         </div>
     </div>

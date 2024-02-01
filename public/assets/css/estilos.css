@@ -119,3 +119,8 @@ input[type="radio"]:hover {
     background-color: #3243a6;
 	color: #fff;
 }
+
+.info_extra{
+    color: gray;
+    font-weight: normal;
+}

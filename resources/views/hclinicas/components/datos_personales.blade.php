@@ -3,7 +3,7 @@
     <div class="col-md-12 col-lg-12">
         <div class="card text-start">
             <div class="card-body">
-                <h5 class="card-title fw-bolder">A. DATOS DEL PACIENTE</h5>
+                <h5 class="card-title fw-bold">A. DATOS DEL PACIENTE</h5>
                 <hr>
                 <div class="row mb-3">
                     <div class="col-md-6">

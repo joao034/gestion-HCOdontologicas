@@ -253,7 +253,8 @@
                     @include('hclinicas.components.motivo_consulta', ['modo' => 'edit'])
                     @include('hclinicas.components.enfermedad_actual', ['modo' => 'edit'])
 
-                    @include('hclinicas.components.antecedentes_personales', ['modo' => 'edit'])
+                    {{-- @include('hclinicas.components.antecedentes_personales', ['modo' => 'edit']) --}}
+                    @include('hclinicas.components.antecedentes_patologicos', ['modo' => 'edit'])
 
                     @include('hclinicas.components.constantes_vitales', ['modo' => 'edit'])
                     @include('hclinicas.components.examen_sistema_estomatognatico', ['modo' => 'edit'])

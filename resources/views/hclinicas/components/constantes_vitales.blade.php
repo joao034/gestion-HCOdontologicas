@@ -5,9 +5,9 @@
 
         @php
             $constantes_vitales = [
-                'presion_arterial' => 'Presión arterial',
-                'frecuencia_cardiaca' => 'Frecuencia cardiaca',
-                'frecuencia_respiratoria' => 'Frecuencia respiratoria',
+                'presion_arterial' => 'Presión arterial (mmHg)',
+                'frecuencia_cardiaca' => 'Frecuencia cardiaca / min',
+                'frecuencia_respiratoria' => 'Frecuencia respiratoria / min',
                 'temperatura' => 'Temperatura ºC',
             ];
         @endphp
@@ -18,9 +18,8 @@
                     <div class="form-floating">
                         <input type="text" class="form-control" id="floatingInput" placeholder=""  value="{{ $modo == 'show' || $modo == 'edit' ?  $paciente->consulta?->$key : old($key) }}"
                         {{ $modo == 'show' ? 'readonly' : '' }}
-                            name="{{ $key }}" required>
-                        <label for="floatingInput" class="fw-bold">{{ $constante }}<span
-                                class="text-danger">*</span></label>
+                            name="{{ $key }}">
+                        <label for="floatingInput" class="fw-bold">{{ $constante }}</label>
                     </div>
                 </div>
             @endforeach

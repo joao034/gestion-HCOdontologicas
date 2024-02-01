@@ -15,7 +15,9 @@
 
                     @include('hclinicas.components.enfermedad_actual', ['modo' => 'show'])
 
-                    @include('hclinicas.components.antecedentes_personales', ['modo' => 'show'])
+                    {{-- @include('hclinicas.components.antecedentes_personales', ['modo' => 'show']) --}}
+
+                    @include('hclinicas.components.antecedentes_patologicos', ['modo' => 'show'])
 
                     @include('hclinicas.components.constantes_vitales', ['modo' => 'show'])
 

@@ -16,6 +16,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Validator;
 use App\Models\Consulta;
+use App\Models\AntecedentePatologico;
 
 class HClinicaController extends Controller
 {
@@ -66,12 +67,19 @@ class HClinicaController extends Controller
         return [
             'motivo_consulta' => 'required|string|max:255',
             'enfermedad_actual' => 'required|string|max:255',
-            'presion_arterial' => 'required|numeric|',
-            'frecuencia_cardiaca' => 'required|numeric|',
-            'frecuencia_respiratoria' => 'required|numeric|',
-            'temperatura' => 'required|numeric|between:35,42',
             //'partes_sistema' => 'string|max:255',
             'observaciones_examen' => 'required|string|max:255',
+            /* 'presion_arterial' => 'numeric|',
+            'frecuencia_cardiaca' => 'numeric|',
+            'frecuencia_respiratoria' => 'numeric|',
+            'temperatura' => 'numeric|between:35,42', */
+        ];
+    }
+
+    private function validate_ant_patologicos_data(){
+        return [
+            'desc_personales' => 'required|string|max:255',
+            'desc_familiares' => 'required|string|max:255',
         ];
     }
 
@@ -113,7 +121,8 @@ class HClinicaController extends Controller
             //insertar datos otras tablas
             $this->guardarActualizarConsulta($request, $paciente);
             $this->almacenarRepresentante($request, $paciente->id);
-            $this->almacenarAntecedentePersonales($request, $paciente->id);
+            $this->guardarActualizarAntecedentePatologico($request, $paciente);
+            //$this->almacenarAntecedentePersonales($request, $paciente->id);
             //$this->almacenarDiagnostico($request, $paciente->id);
             DB::commit();
 
@@ -166,7 +175,8 @@ class HClinicaController extends Controller
             $this->guardarOActualizarPaciente($paciente, $request);
             $this->guardarActualizarConsulta($request, $paciente);
             $this->actualizarRepresentante($request, $paciente);
-            $this->actualizarAntecedentePersonal($request, $paciente->id);
+            $this->guardarActualizarAntecedentePatologico($request, $paciente);
+            //$this->actualizarAntecedentePersonal($request, $paciente->id);
             //$this->actualizarDiagnostico($request, $paciente);
             DB::commit();
             return back()->with('message', 'Historia Clínica actualizada exitosamente');
@@ -232,6 +242,22 @@ class HClinicaController extends Controller
         }
         $paciente->consulta->observaciones_examen = $request->input('observaciones_examen');
         $paciente->consulta->save();
+    }
+
+    private function guardarActualizarAntecedentePatologico(Request $request, Paciente $paciente)
+    {
+        $this->validate($request, $this->validate_ant_patologicos_data());
+        $paciente->antecedentes_patologicos == null ? $paciente->antecedentes_patologicos = new AntecedentePatologico() : $paciente->antecedentes_patologicos;
+        $paciente->antecedentes_patologicos->paciente_id = $paciente->id;
+        if ($request->ant_personales != null || $request->ant_personales != "") {
+            $paciente->antecedentes_patologicos->ant_personales = implode(",", $request->ant_personales);
+        }
+        $paciente->antecedentes_patologicos->desc_personales = $request->desc_personales;
+        if ($request->ant_familiares != null || $request->ant_familiares != "") {
+            $paciente->antecedentes_patologicos->ant_familiares = implode(",", $request->ant_familiares);
+        }
+        $paciente->antecedentes_patologicos->desc_familiares = $request->desc_familiares;
+        $paciente->antecedentes_patologicos->save();
     }
 
     private function almacenarRepresentante(Request $request, int $paciente_id)

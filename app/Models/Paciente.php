@@ -94,13 +94,19 @@ class Paciente extends Model
 		return $this->belongsTo(TipoNacionalidad::class, 'tipo_nacionalidad_id');
 	}
 
-	public function consulta(){
+	public function consulta()
+	{
 		return $this->hasOne(Consulta::class);
 	}
 
 	public function examenesComplementarios()
 	{
 		return $this->hasOne(ExamenComplementario::class);
+	}
+
+	public function antecedentes_patologicos()
+	{
+		return $this->hasOne(AntecedentePatologico::class);
 	}
 
 	public function edad()
@@ -132,7 +138,7 @@ class Paciente extends Model
 	public static function getPacienteFormateado(int $id)
 	{
 		return Paciente::selectRaw('*, EXTRACT(YEAR FROM CURRENT_DATE) - EXTRACT(YEAR FROM fecha_nacimiento) - CASE WHEN EXTRACT(MONTH FROM CURRENT_DATE) * 100 + EXTRACT(DAY FROM CURRENT_DATE) < EXTRACT(MONTH FROM fecha_nacimiento) * 100 + EXTRACT(DAY FROM fecha_nacimiento) THEN 1 ELSE 0 END as edad')
-        ->where('id', $id)
-        ->first();
+			->where('id', $id)
+			->first();
 	}
 }

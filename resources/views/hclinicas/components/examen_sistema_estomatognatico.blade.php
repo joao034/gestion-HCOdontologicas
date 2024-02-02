@@ -34,7 +34,7 @@
         <div class="form-floating mt-2">
             <textarea class="form-control" id="observaciones_examen" name="observaciones_examen"
                 {{ $modo == 'show' ? 'readonly' : '' }} required>{{ $modo == 'show' || $modo == 'edit' ? $paciente->consulta?->observaciones_examen : old('observaciones_examen') }}</textarea>
-            <label for="observaciones_examen" class="fw-bold">Observaciones</label>
+            <label for="observaciones_examen" class="fw-bold fs-5">Observaciones <span class="text-danger"> * <span class="info_extra fs-6">(En caso de presentar patología anotar "Sin patología aparente")</span></span></label>
         </div>
     </div>
 </div>

@@ -7,6 +7,7 @@
                 <th scope="col" class="col">Diagnóstico</th>
                 <th scope="col" class="col">CIE</th>
                 <th scope="col" class="col">Tipo</th>
+                <th scope="col" class="col">Acciones</th>
             </tr>
         </thead>
         <tbody>
@@ -24,10 +25,10 @@
                         </button>
 
                         <!--eliminar-->
-                        <button type="button" class="btn btn-danger" data-bs-toggle="modal"
+                        {{-- <button type="button" class="btn btn-danger" data-bs-toggle="modal"
                             data-bs-target="#delete{{ $diagnostico->id }}">
                             <i class="fa-regular fa-trash-can"></i> Eliminar
-                        </button>
+                        </button> --}}
 
                     </td>
                 </tr>

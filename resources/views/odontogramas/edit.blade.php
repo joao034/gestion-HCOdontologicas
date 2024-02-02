@@ -2,10 +2,13 @@
 @section('content')
     <x-navegacion-paciente :paciente="$odontograma->paciente" />
 
-    <h3 class="text-center mt-4 mb-3 fw-bold">Odontograma de
-        {{ $odontograma->paciente->nombres . ' ' . $odontograma->paciente->apellidos }}</h3>
+    <hr>
+    <h5 class="text-center mt-4 mb-3 fw-bold">H. ODONTOGRAMA </h5>
+    <hr>
 
-    <h5 class="text-center mt-2 mb-4">Fecha de última actualización:
+    <h5 class="text-center"><span class="fw-bold">Paciente:</span>
+        {{ $odontograma->paciente->nombres . ' ' . $odontograma->paciente->apellidos }}</h5>
+    <h5 class="text-center mt-2 mb-4"><span class="fw-bold">Fecha de última actualización:</span>
         {{ \Carbon\Carbon::parse($odontograma->updated_at)->format('d/m/Y') }}</h5>
 
     <!-- Botones -->
@@ -33,7 +36,6 @@
         </div>
     </div>
 
-
     <!-- Odontograma -->
     @include('odontogramas.odontograma')
 
@@ -53,17 +55,6 @@
             const odontograma = document.getElementById('odontograma');
             const detalles_odontograma = document.getElementById('detalles_odontograma');
 
-            // Clonar la tabla
-            /* const tablaClonada = detalles_odontograma.cloneNode(true);
-
-                // Obtener la última fila de la tabla clonada
-                const ultimaFilaClonada = tablaClonada.rows[tablaClonada.rows.length - 1];
-
-                // Eliminar los dos últimos td y su th
-                for (let i = 0; i < 2; i++) {
-                    ultimaFilaClonada.deleteCell(-1); // Elimina la última celda
-                }
-     */
             // Crear un contenedor para ambos elementos
             const contenedor = document.createElement('div');
 

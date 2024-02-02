@@ -1,7 +1,7 @@
 @extends('layouts.app')
 @section('content')
     <x-navegacion-paciente :paciente="$paciente" />
-    <h3 class="fw-bold text-center mt-4">Exámenes Complementarios</h3>
+    <h3 class="fw-bold text-center mt-4">Exámenes Complementarios de {{$paciente->nombres . ' ' . $paciente->apellidos}}</h3>
     <form action="{{ route('examenesComplementarios.store') }}" method="POST">
         @csrf
         <input type="hidden" name="paciente_id" value="{{$paciente->id}}">

@@ -1,7 +1,7 @@
 @extends('layouts.app')
 @section('content')
     <x-navegacion-paciente :paciente="$paciente" />
-    <h3 class="fw-bold text-center mt-4">Diagnóstico</h3>
+    <h3 class="fw-bold text-center mt-4">Diagnóstico de {{$paciente->nombres . ' ' . $paciente->apellidos}}</h3>
 
     <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#create{{ $paciente->id }}">
         + Nuevo

@@ -1,3 +1,6 @@
+<hr>
+<h5 class="fw-bold">O. TRATAMIENTO</h5>
+<hr>
 <div class="table-responsive" >
     <br>
     <table class="table">

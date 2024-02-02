@@ -4,6 +4,7 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use App\Helpers\Utils;
 
 class AntecedentePatologico extends Model
 {
@@ -22,18 +23,6 @@ class AntecedentePatologico extends Model
     public function paciente()
     {
         return $this->belongsTo(Paciente::class, 'id_paciente');
-    }
-
-    public function validar_checks($elemento_a_checkear, $lista){
-        if($lista != null){
-            $lista_array = explode(',', $lista);
-            foreach ($lista_array as $elemento) {
-                if ((trim($elemento) === trim($elemento_a_checkear))) {
-                    return true;
-                }
-            }
-        }
-        return false;
     }
 
     public function validar_checks_personales($ant_patologico)

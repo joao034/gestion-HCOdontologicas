@@ -201,7 +201,7 @@
                 <div class="mb-3">
                     <label for="" class="form-label fw-bold">Género <span
                             class="text-danger">*</span></label>
-                    @if ($modo == 'show' || $modo == 'edit')
+                    @if ($modo == 'show')
                         <input type="text" class="form-control" value="{{ strtoupper($paciente->sexo) }}"
                             readonly>
                     @else

@@ -22,7 +22,7 @@
                     <div class="form-check">
                         <input class="form-check-input border-primary" type="checkbox" id="checkbox{{ $key }}"
                             name="ant_personales[]" value="{{ $key }}"
-                            {{ ($modo == 'show' || $modo == 'edit') && \App\Helpers\Utils::validar_check($key, $paciente->antecedentes_patologicos?->ant_personales) == true ? 'checked' : '' }}>
+                            {{ ($modo == 'show' || $modo == 'edit') && $paciente->antecedentes_patologicos?->validar_checks_personales($key) == true ? 'checked' : '' }}>
                         <label class="form-check-label" for="checkbox{{ $key }}">{{ $ant_personal }}</label>
                     </div>
                 </div>
@@ -63,7 +63,7 @@
                     <div class="form-check">
                         <input class="form-check-input border-primary" type="checkbox" id="checkbox{{ $key }}"
                             name="ant_familiares[]" value="{{ $key }}"
-                            {{ ($modo == 'show' || $modo == 'edit') && \App\Helpers\Utils::validar_check($key, $paciente->antecedentes_patologicos?->ant_familiares)== true ? 'checked' : '' }}>
+                            {{ ($modo == 'show' || $modo == 'edit') && $paciente->antecedentes_patologicos?->validar_checks_familiares($key)== true ? 'checked' : '' }}>
                         <label class="form-check-label" for="checkbox{{ $key }}">{{ $ant_familiar }}</label>
                     </div>
                 </div>

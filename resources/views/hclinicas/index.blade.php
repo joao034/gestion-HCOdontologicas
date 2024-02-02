@@ -1,7 +1,7 @@
 @extends('layouts.app')
 @section('content')
 
-<h2 class="text-center"> <img src="assets/icons/historia.png"> Historias Clínicas Odontológicas</h2>
+<h2 class="text-center fw-bold"> <img src="assets/icons/historia.png"> Pacientes</h2>
 
 <!--Input para buscar una historia-->
 <form action="{{ route('hclinicas.index') }}" method="GET">
@@ -21,7 +21,7 @@
     </div>
 </form>
 
-<a href="{{ route('hclinicas.create') }}" class="btn btn-primary"><i class="fa-solid fa-plus"></i> Nueva historia clínica</a>
+<a href="{{ route('hclinicas.create') }}" class="btn btn-primary"><i class="fa-solid fa-plus"></i> Nuevo paciente</a>
 
 
 <div class="table-responsive">
@@ -30,11 +30,11 @@
         <thead class="bg-dark text-white">
             <tr>
                 <th scope="col" class="col-md-1">Nº</th>
-                <th scope="col" class="col-md-2">Cédula</th>
+                <th scope="col" class="col-md-2">Nro Identificación</th>
                 <th scope="col" class="col-md-3">Paciente</th>
                 <th scope="col" class="col-md-1">Edad</th>
                 <th scope="col" class="col-md-2">Celular</th>
-                <th scope="col" class="col-md-3">Acciones</th>
+                <th scope="col" class="col-md-3">Historia clínica</th>
             </tr>
         </thead>
         <tbody>

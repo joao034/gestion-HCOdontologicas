@@ -11,18 +11,19 @@
 
                     @include('hclinicas.components.datos_personales', ['modo' => 'create'])
 
-                    {{-- @include('hclinicas.components.motivo_consulta', ['modo' => 'create'])
+                    @include('hclinicas.components.motivo_consulta', ['modo' => 'create'])
 
                     @include('hclinicas.components.enfermedad_actual', ['modo' => 'create'])
- --}}
+
                     {{-- @include('hclinicas.components.antecedentes_personales', ['modo' => 'create']) --}}
 
-                   {{--  @include('hclinicas.components.antecedentes_patologicos', ['modo' => 'create'])
+                    @include('hclinicas.components.antecedentes_patologicos', ['modo' => 'create'])
 
                     @include('hclinicas.components.constantes_vitales', ['modo' => 'create'])
 
-                    @include('hclinicas.components.examen_sistema_estomatognatico', ['modo' => 'create']) --}}
+                    @include('hclinicas.components.examen_sistema_estomatognatico', ['modo' => 'create'])
                    
+                    <!--Fin Diagnostico-->
                     <!--Consentimiento-->
                     <div class="form-check mt-2">
                         <input class="form-check-input border-primary" type="checkbox" id="consentimiento"

@@ -42,6 +42,9 @@
 
     <!-- Lista de Detalles -->
     @include('presupuestos.components.add-detalle', ['presupuesto' => $odontograma])
+
+    @include('hclinicas.components.indicadores_salud_bucal')
+
     @include('odontogramas.index_detalle')
     @include('odontogramas.detalle_odontograma')
     @include('odontogramas.nuevo')

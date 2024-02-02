@@ -17,6 +17,7 @@ use App\Http\Controllers\TopPacientesPorPresupuesto;
 use App\Http\Controllers\AbonoController;
 use App\Http\Controllers\DiagnosticoController;
 use App\Http\Controllers\ExamenComplementarioController;
+use App\Http\Controllers\ConsultaController;
 
 //use Illuminate\Support\Facades\App;
 
@@ -43,6 +44,7 @@ Route::middleware('auth')->group(function () {
     Route::resource("tratamientos", TratamientoController::class);
     Route::resource("especialidades", EspecialidadController::class);
     //Route::resource("odontologos", OdontologoController::class);
+    Route::resource("consultas", ConsultaController::class);
     Route::resource("odontogramas", OdontogramaController::class);
     Route::resource("detalleOdontogramas", OdontogramaDetalleController::class);
     Route::resource("presupuestos", PresupuestoController::class);

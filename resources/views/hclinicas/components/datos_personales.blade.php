@@ -87,7 +87,7 @@
                         identificación</label>
                     <input type="text" class="form-control" name="cedula"
                         value="{{ $modo == 'show' || $modo == 'edit' ? $paciente->cedula : old('cedula') }}"
-                        {{ $modo == 'show' ? 'readonly' : '' }} minlength="10" maxlength="16" id="cedula"
+                        {{ $modo == 'show' ? 'readonly' : '' }} minlength="6" maxlength="16" id="cedula"
                         aria-describedby="helpId" placeholder="Escriba el nro de identificación del paciente">
                     @error('cedula')
                         <small class="text-danger"> {{ $message }}</small>

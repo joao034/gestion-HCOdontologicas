@@ -62,26 +62,7 @@ class HClinicaController extends Controller
         return Validator::make($data, $rules);
     }
 
-    private function validate_consulta_data()
-    {
-        return [
-            'motivo_consulta' => 'required|string|max:255',
-            'enfermedad_actual' => 'required|string|max:255',
-            //'partes_sistema' => 'string|max:255',
-            'observaciones_examen' => 'required|string|max:255',
-            /* 'presion_arterial' => 'numeric|',
-            'frecuencia_cardiaca' => 'numeric|',
-            'frecuencia_respiratoria' => 'numeric|',
-            'temperatura' => 'numeric|between:35,42', */
-        ];
-    }
-
-    private function validate_ant_patologicos_data(){
-        return [
-            'desc_personales' => 'required|string|max:255',
-            'desc_familiares' => 'required|string|max:255',
-        ];
-    }
+    
 
     private function mostrarErroresDeValidacion($request)
     {
@@ -119,14 +100,14 @@ class HClinicaController extends Controller
 
             $this->guardarOActualizarPaciente($paciente, $request);
             //insertar datos otras tablas
-            $this->guardarActualizarConsulta($request, $paciente);
             $this->almacenarRepresentante($request, $paciente->id);
-            $this->guardarActualizarAntecedentePatologico($request, $paciente);
+            //$this->guardarActualizarConsulta($request, $paciente);
+            //$this->guardarActualizarAntecedentePatologico($request, $paciente);
             //$this->almacenarAntecedentePersonales($request, $paciente->id);
             //$this->almacenarDiagnostico($request, $paciente->id);
             DB::commit();
 
-            return to_route('hclinicas.index')->with('message', 'Historia Clinica creado exitosamente.');
+            return to_route('consultas.edit', $paciente->id)->with('message', 'Paciente creado exitosamente.');
         } catch (\Exception $e) {
             DB::rollback();
             return to_route('hclinicas.create')->with('danger', 'No se pudo crear la Historia Clinica.' . $e->getMessage());
@@ -173,13 +154,13 @@ class HClinicaController extends Controller
                 return to_route('hclinicas.create')->with('danger', 'La cédula del representante no puede ser igual a la del paciente.');
             }
             $this->guardarOActualizarPaciente($paciente, $request);
-            $this->guardarActualizarConsulta($request, $paciente);
             $this->actualizarRepresentante($request, $paciente);
-            $this->guardarActualizarAntecedentePatologico($request, $paciente);
+            //$this->guardarActualizarConsulta($request, $paciente);
+            //$this->guardarActualizarAntecedentePatologico($request, $paciente);
             //$this->actualizarAntecedentePersonal($request, $paciente->id);
             //$this->actualizarDiagnostico($request, $paciente);
             DB::commit();
-            return back()->with('message', 'Historia Clínica actualizada exitosamente');
+            return back()->with('message', 'Datos actualizados exitosamente');
         } catch (\Exception $e) {
             DB::rollback();
             return back()->with('danger', 'No se pudo actualizar la Historia Clínica.' . $e->getMessage());
@@ -226,40 +207,7 @@ class HClinicaController extends Controller
         $paciente->save();
     }
 
-    private function guardarActualizarConsulta(Request $request, Paciente $paciente)
-    {
-        $this->validate($request, $this->validate_consulta_data());
-        $paciente->consulta == null ? $paciente->consulta = new Consulta() : $paciente->consulta;
-        $paciente->consulta->paciente_id = $paciente->id;
-        $paciente->consulta->motivo_consulta = $request->input('motivo_consulta');
-        $paciente->consulta->enfermedad_actual = $request->input('enfermedad_actual');
-        $paciente->consulta->presion_arterial = $request->input('presion_arterial');
-        $paciente->consulta->frecuencia_cardiaca = $request->input('frecuencia_cardiaca');
-        $paciente->consulta->frecuencia_respiratoria = $request->input('frecuencia_respiratoria');
-        $paciente->consulta->temperatura = $request->input('temperatura');
-        if ($request->input('partes_sistema') != null || $request->input('partes_sistema') != "") {
-            $paciente->consulta->partes_examen_estomatognatico = implode(",", $request->input('partes_sistema'));
-        }
-        $paciente->consulta->observaciones_examen = $request->input('observaciones_examen');
-        $paciente->consulta->save();
-    }
-
-    private function guardarActualizarAntecedentePatologico(Request $request, Paciente $paciente)
-    {
-        $this->validate($request, $this->validate_ant_patologicos_data());
-        $paciente->antecedentes_patologicos == null ? $paciente->antecedentes_patologicos = new AntecedentePatologico() : $paciente->antecedentes_patologicos;
-        $paciente->antecedentes_patologicos->paciente_id = $paciente->id;
-        if ($request->ant_personales != null || $request->ant_personales != "") {
-            $paciente->antecedentes_patologicos->ant_personales = implode(",", $request->ant_personales);
-        }
-        $paciente->antecedentes_patologicos->desc_personales = $request->desc_personales;
-        if ($request->ant_familiares != null || $request->ant_familiares != "") {
-            $paciente->antecedentes_patologicos->ant_familiares = implode(",", $request->ant_familiares);
-        }
-        $paciente->antecedentes_patologicos->desc_familiares = $request->desc_familiares;
-        $paciente->antecedentes_patologicos->save();
-    }
-
+    
     private function almacenarRepresentante(Request $request, int $paciente_id)
     {
         try {
@@ -288,6 +236,7 @@ class HClinicaController extends Controller
         }
     }
 
+    //no se usa
     private function almacenarDiagnostico(Request $request, int $paciente_id)
     {
         if (null != $request->input('diagnostico') || null != $request->input('enfermedad_actual')) {

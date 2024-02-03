@@ -1,6 +1,8 @@
-<div class="table-responsive" style="display: none;" >
+<div class="table-responsive"  >
     <table class="table" id="detalles_odontograma" >
-        <h4>Tratamientos</h4>
+        <hr>
+        <h5 class="fw-bold">P. TRATAMIENTOS</h5>
+        <hr>
         <thead class="bg-dark text-white">
             <tr>
                 <th scope="col">Fecha Hallazgo</th>
@@ -15,13 +17,13 @@
         </thead>
         <tbody>
             <!--Si no hay resultados-->
-            @if ($detalles_odontograma->count() < 1)
+            @if ($detalles->count() < 1)
                 <tr>
                     <td colspan="6">No hay detalles del odontograma.</td>
                 </tr>
             @else
                 <!--Si hay resultados-->
-                @foreach ($detalles_odontograma as $detalle)
+                @foreach ($detalles as $detalle)
                     <tr class="">
                         <td>{{ $detalle->created_at->format('d-m-Y') }}</td>
                         <td>{{ $detalle->fecha_realizado == null ? ' - ' : \Carbon\Carbon::parse($detalle->fecha_realizado)->format('d-m-Y') }}
@@ -39,5 +41,4 @@
             @endif
         </tbody>
     </table>
-    {{ $detalles_odontograma->links() }}
 </div>

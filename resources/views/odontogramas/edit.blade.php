@@ -23,12 +23,12 @@
                     class="fa-solid fa-notes-medical"></i> PDF Historia Clínica</a>
         </div> --}}
 
-        <div class="mb-2 mx-2">
+        {{-- <div class="mb-2 mx-2">
             <button type="button" id="btnGeneratePDF" class="btn btn-info text-white"><i
                     class="fa-solid fa-notes-medical"></i> PDF Historia Clínica</button>
-        </div>
+        </div> --}}
 
-        @include('odontogramas.sms')
+        {{-- @include('odontogramas.sms') --}}
 
         <div class="mb-2">
             <a class="btn btn-secondary" href="{{ route('presupuestos.edit', $odontograma->id) }}"><i
@@ -50,8 +50,8 @@
     @include('odontogramas.nuevo')
 
     <!-- Tabla de detalles, solo funciona para exportar el pdf -->
-    @include('odontogramas.detalles_pdf')
-
+    {{-- @include('odontogramas.detalles_pdf')
+ --}}
     <script>
         document.getElementById('btnGeneratePDF').addEventListener('click', function() {
 

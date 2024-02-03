@@ -80,9 +80,10 @@ class OdontogramaDetalleController extends Controller
         $simboloAzul = $simbolosAzules->where('color', $colorAzul)->first();
 
         $detalles_odontograma = $this->getDetallesOdontograma($id);
+        $detalles = $odontograma->get_detalles();
 
         return view('odontogramas.edit', compact([
-            'tratamientos', 'odontograma', 'detalles_odontograma',
+            'tratamientos', 'odontograma', 'detalles_odontograma', 'detalles',
             'odontologos', 'simbolosRojos', 'simbolosAzules', 'simboloRojo', 'simboloAzul'
         ]));
     }

@@ -54,6 +54,10 @@ class Odontograma extends Model
 		return $this->hasMany(OdontogramaDetalle::class);
 	}
 
+	public function get_detalles(){
+		return OdontogramaDetalle::where('odontograma_cabecera_id', $this->id)->orderBy('created_at', 'desc')->get();
+	}
+
 	//devuelve el color pintado en la cara dental
     public function getColorCaraDentalAPintar( $cara_dental, $num_diente, $id_odontograma ){
 		try{

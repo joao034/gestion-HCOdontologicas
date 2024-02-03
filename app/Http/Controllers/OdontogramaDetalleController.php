@@ -16,11 +16,6 @@ use Illuminate\Support\Facades\Validator;
 
 class OdontogramaDetalleController extends Controller
 {
-
-    public function __construct()
-    {
-    }
-
     protected function validator(array $data)
     {
         return Validator::make($data, [
@@ -67,7 +62,7 @@ class OdontogramaDetalleController extends Controller
     {
         $odontograma = Odontograma::find($id);
         $tratamientos = Tratamiento::orderBy('nombre', 'asc')->get();
-        $odontologos = $this->getOdontologosActivos();
+        $odontologos = User::get_odontologos_activos();
         $necesario = 'necesario';
         $realizado = 'realizado';
         $simbolosRojos = Simbolo::getSimbolosPorTipo($necesario);
@@ -217,13 +212,5 @@ class OdontogramaDetalleController extends Controller
     private function eliminarElementosRepetidos($array)
     {
         return array_unique($array);
-    }
-
-    //obtener usuarios tipo odontologos que esten activos
-    private function getOdontologosActivos()
-    {
-        return User::where('role', '=', 'odontologo')
-            ->where('active', '=', 1)
-            ->get();
     }
 }

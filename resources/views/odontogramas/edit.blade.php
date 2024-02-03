@@ -12,11 +12,11 @@
         {{ \Carbon\Carbon::parse($odontograma->updated_at)->format('d/m/Y') }}</h5>
 
     <!-- Botones -->
-    <div class="d-flex justify-content-between mt-2 mb-2">
-        <div class="mb-2">
+    <div class="d-flex justify-content-end mt-2 mb-2">
+        {{-- <div class="mb-2">
             <a class="btn btn-info text-white" data-bs-toggle="modal" data-bs-target="#nuevo{{ $odontograma->id }}"> <i
                     class="fa-solid fa-plus"></i> Nuevo Odontograma </a>
-        </div>
+        </div> --}}
 
         {{-- <div class="mb-2 mx-2">
             <a class="btn btn-info text-white" href="{{ route('odontogramas.pdf', $odontograma->id) }}" target="_blank"><i

@@ -67,7 +67,7 @@
                     <a class="nav-link active text-white" href="{{ route('hclinicas.index') }}" aria-current="page">
                         <img class="svg-icon" src="{{ asset('assets/icons/hclinica.svg') }}" alt="">Pacientes</a>
                     <a class="nav-link active text-white" href="{{ route('reportes.get_pacientes_por_odontologo') }}">
-                        <img class="svg-icon" src="{{ asset('assets/icons/user.svg') }}"> Mis pacientes</a>
+                        <img class="svg-icon" src="{{ asset('assets/icons/user.svg') }}"> Pacientes con tratamientos pendientes</a>
                 @endif
 
             </ul>

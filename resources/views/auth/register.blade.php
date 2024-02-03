@@ -134,7 +134,7 @@
                                         <label for="" class="form-label fw-bold">Tipo de documento de identificación <span
                                                 class="text-danger">*</span></label>
                                         <select class="form-select form-select-md" name="tipo_documento_id" id="">
-                                            <option selected value="">Seleccione el tipo de documento de identificación</option>
+                                            <option selected value="">Seleccione el tipo de identificación</option>
                                             @foreach ($tipos_documento as $tipo_documento)
                                                 <option value="{{ $tipo_documento->id }}"
                                                     {{ old('tipo_documento_id') == $tipo_documento->id ? 'selected' : '' }}>

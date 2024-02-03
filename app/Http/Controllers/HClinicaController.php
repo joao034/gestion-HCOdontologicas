@@ -15,8 +15,7 @@ use App\Models\TipoNacionalidad;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Validator;
-use App\Models\Consulta;
-use App\Models\AntecedentePatologico;
+use App\Models\HistoriaClinica;
 
 class HClinicaController extends Controller
 {
@@ -62,7 +61,18 @@ class HClinicaController extends Controller
         return Validator::make($data, $rules);
     }
 
-    
+    public function update_profesional_responsable(Request $request, int $paciente_id){
+        try {
+            $paciente = Paciente::find($paciente_id);
+            $hclinica = count($paciente->historias_clinicas) == 1 ? $paciente->historias_clinicas->first() : new HistoriaClinica();
+            $hclinica->paciente_id = $paciente->id;
+            $hclinica->odontologo_id = $request->odontologo_id;
+            $hclinica->save();
+            return back()->with('message', 'Profesional responsable actualizado correctamente');
+        } catch (\Exception $e) {
+            return back()->with('danger', 'No se pudo actualizar el profesional responsable. ' . $e->getMessage());
+        }
+    }
 
     private function mostrarErroresDeValidacion($request)
     {

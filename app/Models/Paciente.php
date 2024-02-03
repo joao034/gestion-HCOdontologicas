@@ -60,6 +60,11 @@ class Paciente extends Model
 		'consentimiento',
 	];
 
+	public function historias_clinicas()
+    {
+        return $this->hasMany(HistoriaClinica::class);
+    }
+
 	public function antecedentes_infecciosos()
 	{
 		return $this->hasOne(AntecedentesInfeccioso::class);
@@ -116,12 +121,12 @@ class Paciente extends Model
 	}
 
 	//Devuelve la lista de pacientes con paginacion mediante eloquent
-	public static function getAllPacientesWithPagination($search, $ordeBay = 'apellidos', $order = 'asc')
+	public static function getAllPacientesWithPagination($search, $orderBy = 'apellidos', $order = 'asc')
 	{
 		return Paciente::where('nombres', 'LIKE', '%' . $search . '%')
 			->orWhere('apellidos', 'LIKE', '%' . $search . '%')
 			->orWhere('cedula', 'LIKE', '%' . $search . '%')
-			->orderBy($ordeBay, $order)
+			->orderBy($orderBy, $order)
 			->paginate(10);
 	}
 

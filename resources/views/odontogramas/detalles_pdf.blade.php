@@ -12,7 +12,7 @@
                 <th scope="col">Cara Dental</th>
                 <th scope="col">Odontólogo</th>
                 <th scope="col">Estado</th>
-                <th scope="col">Observación</th>
+                <th scope="col">Prescripción</th>
             </tr>
         </thead>
         <tbody>

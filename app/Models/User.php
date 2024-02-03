@@ -60,6 +60,13 @@ class User extends Authenticatable
 		return $this->hasOne(Odontologo::class);
 	}
 
+	public static function get_odontologos_activos()
+    {
+        return User::where('role', '=', 'odontologo')
+            ->where('active', '=', 1)
+            ->get();
+    }
+
 	/* public function rol()
 	{
 		return $this->belongsTo(Rol::class, 'rol_id');

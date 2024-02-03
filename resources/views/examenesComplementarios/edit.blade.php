@@ -2,9 +2,9 @@
 @section('content')
     <x-navegacion-paciente :paciente="$paciente" />
     <hr>
-    <h3 class="fw-bold text-center mt-4">Exámenes Complementarios</h3>
+    <h4 class="fw-bold text-center mt-4">Exámenes Complementarios</h4>
     <hr>
-    <p class="fs-5 text-center"><strong>Paciente: </strong>{{$paciente->nombres . ' ' . $paciente->apellidos}}</p>
+    <h4 class="text-center"><strong>Paciente: </strong>{{$paciente->nombres . ' ' . $paciente->apellidos}}</h4>
     <form action="{{ route('examenesComplementarios.store') }}" method="POST">
         @csrf
         <input type="hidden" name="paciente_id" value="{{$paciente->id}}">

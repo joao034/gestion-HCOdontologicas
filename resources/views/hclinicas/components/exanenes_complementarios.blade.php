@@ -1,6 +1,7 @@
 <div class="card mt-2">
     <div class="card-body">
         <h5 class="card-title fw-bold">L. PEDIDO DE EXÁMENES COMPLEMENTARIOS</h5>
+        <hr>
         <div class="form-floating mt-2">
             <textarea class="form-control" style="height: 80px" id="examenes_solicitados" name="examenes_solicitados"
                 required {{ $modo == 'show' ? 'readonly' : '' }}>{{ $modo == 'show' || $modo == 'edit' ? $paciente->examenesComplementarios?->examenes_solicitados : old('examenes_solicitados') }}</textarea>
@@ -13,6 +14,7 @@
 <div class="card mt-2">
     <div class="card-body">
         <h5 class="card-title fw-bold">M. INFORME DE EXÁMENES</h5>
+        <hr>
         @php
             $examenes = [
                 'biometria' => 'BIOMETRIA',

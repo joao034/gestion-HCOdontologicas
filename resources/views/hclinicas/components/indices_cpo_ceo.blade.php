@@ -24,7 +24,6 @@
         <label for="caries" class="fw-bold">Caries (C/c) <span class="text-danger">*</span></label>
     </div>
 
-
     <div class="form-floating">
         <input type="number" class="form-control" id="perdidas" name="perdidas" required
             value="{{ $odontograma?->indice_cpo_cpe?->perdidas }}" {{ $modo == 'show' ? 'readonly' : '' }}>

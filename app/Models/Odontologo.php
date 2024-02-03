@@ -1,9 +1,5 @@
 <?php
 
-/**
- * Created by Reliese Model.
- */
-
 namespace App\Models;
 
 use Carbon\Carbon;
@@ -50,6 +46,11 @@ class Odontologo extends Model
 		'celular'
 	];
 
+	public function historias_clinicas()
+    {
+        return $this->hasMany(HistoriaClinica::class);
+    }
+
 	public function especialidades()
     {
         return $this->belongsToMany(Especialidad::class, 'odontologo_especialidad');
@@ -77,5 +78,10 @@ class Odontologo extends Model
 			$nombres[] = $especialidad->nombre;
 		}
 		return implode(', ', $nombres);
+	}
+
+	public function get_full_name()
+	{
+		return $this->nombres . ' ' . $this->apellidos;
 	}
 }

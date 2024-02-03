@@ -63,7 +63,7 @@
                 @else
                     <select class="form-select form-select-md" name="tipo_documento_id" id="" required
                         {{ $modo == 'show' ? 'disabled' : '' }}>
-                        <option selected value="">Seleccione el tipo de documento de identificación
+                        <option selected value="">Seleccione el tipo de identificación
                         </option>
                         @foreach ($tipos_documento as $tipo_documento)
                             <option value="{{ $tipo_documento->id }}"

@@ -142,7 +142,7 @@
 
                     <!--Odontologos-->
                     <div class="row mt-2">
-                        <div class="mb-3">
+                        {{-- <div class="mb-3">
                             <label for="" class="form-label fw-bold">Odontólogo</label>
                             <select required class="form-select form-select-md" name="odontologo_id" id="">
                                 @if (Auth::user()->role === 'admin')
@@ -158,13 +158,14 @@
                                     </option>
                                 @endif
                             </select>
-                        </div>
+                        </div> --}}
+                        @include('components.select_odontologos_activos')
                     </div>
 
                     <!--Observacion-->
                     <div class="row">
                         <div class="mb-3">
-                            <label for="" class="form-label fw-bold">Observación</label>
+                            <label for="" class="form-label fw-bold">Prescripción</label>
                             <input type="text" class="form-control" name="observacion" id=""
                                 aria-describedby="helpId" placeholder="Escriba alguna observación">
                         </div>

@@ -45,6 +45,13 @@
 
                         @include('hclinicas.components.exanenes_complementarios', ['modo' => 'show'])
 
+                        <hr>
+                        <h5 class="fw-bold mt-2">N. DIAGNÓSTICO</h5>
+                        <hr>
+                        @include('diagnosticos.table', ['modo' => 'show'] )
+
+                        @include('profesional_responsable.show')
+
                         @include('odontogramas.detalles_pdf', [
                             'modo' => 'show',
                             'detalles' => $paciente->odontogramasCabecera->first()->get_detalles(),

@@ -6,7 +6,9 @@ use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\Models\Paciente;
 use App\Models\Diagnostico;
+use App\Models\HistoriaClinica;
 use Exception;
+use App\Models\User;
 
 class DiagnosticoController extends Controller
 {
@@ -22,7 +24,8 @@ class DiagnosticoController extends Controller
 
     public function show(int $id_paciente){
         $paciente = Paciente::find($id_paciente);
-        return view('diagnosticos.show', compact('paciente'));
+        $odontologos = User::get_odontologos_activos();
+        return view('diagnosticos.show', compact('paciente', 'odontologos'));
     }
 
     public function edit(int $id_paciente){

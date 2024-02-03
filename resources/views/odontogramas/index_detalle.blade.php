@@ -1,5 +1,5 @@
 <hr>
-<h5 class="fw-bold">P. TRATAMIENTO</h5>
+<h5 class="fw-bold px-3">P. TRATAMIENTO</h5>
 <hr>
 <div class="table-responsive" >
     <br>

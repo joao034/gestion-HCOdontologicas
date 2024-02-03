@@ -9,8 +9,7 @@ use Illuminate\Http\Request;
 use App\Models\OdontogramaDetalle;
 use Carbon\Carbon;
 use Barryvdh\DomPDF\Facade\Pdf;
-use Dompdf\Dompdf;
-use Dompdf\Options;
+use App\Models\IndiceCPO;
 
 class OdontogramaController extends Controller
 {
@@ -33,6 +32,23 @@ class OdontogramaController extends Controller
         $odontograma_detalles = $this->getDetallesOdontograma($odontograma_cabecera_id);
         $pdf = PDF::loadView('odontogramas.pdf', compact(['odontograma', 'paciente', 'odontograma_detalles']));
         return $pdf->stream('hclinica_' . $paciente->nombres . ' ' . $paciente->apellidos . '.pdf');
+    }
+
+    public function updateCpo(Request $request, int $odontograma_cabecera_id)
+    {
+        try {
+            $odontograma = Odontograma::find($odontograma_cabecera_id);
+            $odontograma->indice_cpo_cpe != null ?  $indice_cpo = $odontograma->indice_cpo_cpe : $indice_cpo = new IndiceCPO();
+            $indice_cpo->odontograma_id = $odontograma->id;
+            $indice_cpo->tipo = $request->tipo;
+            $indice_cpo->caries = $request->caries;
+            $indice_cpo->perdidas = $request->perdidas;
+            $indice_cpo->obturadas = $request->obturadas;
+            $indice_cpo->save();
+            return back()->with('message', 'CPO actualizado correctamente');
+        } catch (\Exception $e) {
+            return back()->with('danger', 'No se pudo actualizar el CPO' . $e->getMessage());
+        }
     }
 
     public function nuevo(int $paciente_id)

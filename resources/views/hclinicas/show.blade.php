@@ -5,7 +5,7 @@
         <div class="card">
             <div class="card-body">
 
-                <button class="btn btn-primary" id="btn" type="button"><i class="fa-solid fa-notes-medical"></i> Exportar
+                <button class="btn btn-primary mx-2" id="btn" type="button"><i class="fa-solid fa-notes-medical"></i> Exportar
                     Historia Clínica</button>
                 <div class="container">
                     <!--Titulo-->
@@ -38,6 +38,8 @@
                             'modo' => 'show',
                             'odontograma' => $paciente->odontogramasCabecera->first(),
                         ])
+
+                        @include('hclinicas.components.indices_cpo_ceo', ['modo' => 'show', 'odontograma' => $paciente->odontogramasCabecera->first()])
 
                         @include('hclinicas.components.exanenes_complementarios', ['modo' => 'show'])
 

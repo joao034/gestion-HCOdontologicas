@@ -2,7 +2,7 @@
     <div class="card-body">
         <h5 class="card-title fw-bold">L. PEDIDO DE EXÁMENES COMPLEMENTARIOS</h5>
         <div class="form-floating mt-2">
-            <textarea class="form-control" style="height: 100px" id="examenes_solicitados" name="examenes_solicitados"
+            <textarea class="form-control" style="height: 80px" id="examenes_solicitados" name="examenes_solicitados"
                 required {{ $modo == 'show' ? 'readonly' : '' }}>{{ $modo == 'show' || $modo == 'edit' ? $paciente->examenesComplementarios?->examenes_solicitados : old('examenes_solicitados') }}</textarea>
             <label for="examenes_solicitados" class="fw-bold">Exámenes solicitados <span class="text-danger">*</span>
             </label>
@@ -35,7 +35,7 @@
         </div>
 
         <div class="form-floating mt-2">
-            <textarea class="form-control" style="height: 100px" name="observaciones"
+            <textarea class="form-control" style="height: 80px" name="observaciones"
                 required {{ $modo == 'show' ? 'readonly' : '' }}>{{ $modo == 'show' || $modo == 'edit' ? $paciente->examenesComplementarios?->observaciones : old('observaciones') }}</textarea>
             <label for="observaciones" class="fw-bold">Observaciones <span class="text-danger">*</span>
             </label>

@@ -46,6 +46,9 @@ Route::middleware('auth')->group(function () {
     //Route::resource("odontologos", OdontologoController::class);
     Route::resource("consultas", ConsultaController::class);
     Route::resource("odontogramas", OdontogramaController::class);
+
+    Route::put('odontogramas/update-cpo/{id}', [OdontogramaController::class, 'updateCpo'])->name('update.cpo');
+
     Route::resource("detalleOdontogramas", OdontogramaDetalleController::class);
     Route::resource("presupuestos", PresupuestoController::class);
     Route::resource("users", UserController::class);

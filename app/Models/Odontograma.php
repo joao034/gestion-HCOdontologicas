@@ -54,6 +54,11 @@ class Odontograma extends Model
 		return $this->hasMany(OdontogramaDetalle::class);
 	}
 
+	public function indicadores_salud()
+	{
+		return $this->hasOne(IndicadorSaludBucal::class);
+	}
+
 	public function indice_cpo_cpe()
 	{
 		return $this->hasOne(IndiceCPO::class);

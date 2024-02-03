@@ -39,7 +39,9 @@
                             'odontograma' => $paciente->odontogramasCabecera->first(),
                         ])
 
-                        @include('hclinicas.components.indices_cpo_ceo', ['modo' => 'show', 'odontograma' => $paciente->odontogramasCabecera->first()])
+                        @include('indicadores_salud_bucal.show', ['modo' => 'show', 'odontograma' => $paciente->odontogramasCabecera->first()])
+
+                        @include('indice_cpo.show', ['modo' => 'show', 'odontograma' => $paciente->odontogramasCabecera->first()])
 
                         @include('hclinicas.components.exanenes_complementarios', ['modo' => 'show'])
 

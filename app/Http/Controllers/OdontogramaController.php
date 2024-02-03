@@ -10,6 +10,7 @@ use App\Models\OdontogramaDetalle;
 use Carbon\Carbon;
 use Barryvdh\DomPDF\Facade\Pdf;
 use App\Models\IndiceCPO;
+use App\Models\IndicadorSaludBucal;
 
 class OdontogramaController extends Controller
 {
@@ -48,6 +49,22 @@ class OdontogramaController extends Controller
             return back()->with('message', 'CPO actualizado correctamente');
         } catch (\Exception $e) {
             return back()->with('danger', 'No se pudo actualizar el CPO' . $e->getMessage());
+        }
+    }
+
+    public function update_indicador_salud_bucal(Request $request, int $odontograma_cabecera_id)
+    {
+        try {
+            $odontograma = Odontograma::find($odontograma_cabecera_id);
+            $indicador_salud = $odontograma->indicadores_salud != null ? $odontograma->indicadores_salud : new IndicadorSaludBucal();
+            $indicador_salud->odontograma_id = $odontograma->id;
+            $indicador_salud->enfermedad_periodontal = $request->enfermedad_periodontal;
+            $indicador_salud->tipo_oclusion = $request->tipo_oclusion;
+            $indicador_salud->nivel_fluorosis = $request->nivel_fluorosis;
+            $indicador_salud->save();
+            return back()->with('message', 'Indicador de salud bucal actualizado correctamente');
+        } catch (\Exception $e) {
+            return back()->with('danger', 'No se pudo actualizar el indicador de salud bucal' . $e->getMessage());
         }
     }
 

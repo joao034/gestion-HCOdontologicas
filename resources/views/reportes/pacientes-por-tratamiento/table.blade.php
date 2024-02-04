@@ -3,7 +3,7 @@
     <table class="table">
         <thead class="bg-dark text-white">
             <tr>
-                <th scope="col">Cédula</th>
+                <th scope="col">Nro. de identificación</th>
                 <th scope="col">Paciente</th>
                 <th scope="col">Edad</th>
                 <th scope="col">Celular</th>

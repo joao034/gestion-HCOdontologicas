@@ -64,13 +64,16 @@ class UserController extends Controller
         try {
             DB::beginTransaction();
             $user = new User();
-            $this->store_update_user_data($request, $user);
+            if($this->store_update_user_data($request, $user) === false){
+                DB::rollBack();
+                return back()->with('danger', 'Error al crear el usuario');
+            }
             if ($request->role === 'odontologo') {
                 $odontologo = new Odontologo();
                 $this->store_update_odontologo($request, $user, $odontologo);
             }
             DB::commit();
-            return to_route('users.index')->with('message', 'Usuario tipo' . $request->role . ' creado correctamente');
+            return to_route('users.index')->with('message', 'Usuario tipo ' . $request->role . ' creado correctamente');
         } catch (\Exception $e) {
             return back()->with('danger', 'Error al crear el usuario ' . $e->getMessage());
         }
@@ -103,8 +106,10 @@ class UserController extends Controller
             $user->email = $request->email;
             $user->password = bcrypt($request->password);
             $user->save();
+            return true;
         } catch (\Exception $e) {
-            return back()->with('danger', 'Error al crear el usuario. ' . $e->getMessage());
+            //session()->flash('danger', 'Error al crear el usuario. ' . $e->getMessage());
+            return false;
         }
     }
 

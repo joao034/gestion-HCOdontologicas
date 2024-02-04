@@ -34,7 +34,7 @@ class OdontogramaDetalleController extends Controller
             'odontologo_id.required' => 'Seleccione un odontólogo.',
             'cara_dental.required' => 'Seleccione una cara dental.',
             'simbolo_id.required' => 'Seleccione un símbolo.',
-            'observacion.max' => 'La observación no puede tener más de :max caracteres.',
+            'observacion.max' => 'La prescripción no puede tener más de :max caracteres.',
         ];
     }
 

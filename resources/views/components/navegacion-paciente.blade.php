@@ -2,11 +2,11 @@
     $rutas = [
         'hclinicas.show' => 'Historia Clínica',
         'hclinicas.edit' => 'Datos Personales',
-        'consultas.edit' => 'Consultas',
-        'odontogramas.show' => 'Odontogramas',
+        'consultas.edit' => 'Consulta',
+        'odontogramas.show' => 'Odontograma',
         'examenesComplementarios.show' => 'Exámenes Complementarios',
         'diagnosticos.show' => 'Diagnóstico',
-        'presupuestos.show' => 'Presupuestos',
+        'presupuestos.show' => 'Presupuesto',
         //'hclinicas.edit' => 'Editar Historia Clínica',
     ];
 @endphp

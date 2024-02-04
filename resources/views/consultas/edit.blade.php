@@ -9,7 +9,9 @@
 
                 <div class="container">
                     <!--Titulo-->
+                    <hr>
                     <h3 class="text-center g-2 fw-bold">Consultas</h3>
+                    <hr>
                     <p class="text-center fs-5"><strong>Paciente: </strong>{{$paciente->nombres . ' ' . $paciente->apellidos}}</p>
 
                     {{-- @include('hclinicas.components.datos_personales', ['modo' => 'create']) --}}

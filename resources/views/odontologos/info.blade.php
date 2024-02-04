@@ -1,3 +1,4 @@
+<!--No se usa-->
 <div class="modal" tabindex="-1" id="edit{{ $odontologo->id }}">
     <div class="modal-dialog">
       <div class="modal-content">

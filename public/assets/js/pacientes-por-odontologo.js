@@ -33,7 +33,7 @@ function actualizarTabla(pacientes) {
     var tabla = '<table class="table">';
     tabla += '<thead class="bg-dark text-white">';
     tabla += "<tr>";
-    tabla += '<th scope="col">Cédula</th>';
+    tabla += '<th scope="col">Nro. Identificación</th>';
     tabla += '<th scope="col">Paciente</th>';
     tabla += '<th scope="col">Edad</th>';
     tabla += '<th scope="col">Celular</th>';
@@ -45,7 +45,7 @@ function actualizarTabla(pacientes) {
 
     if (pacientes.length === 0) {
         tabla += "<tr>";
-        tabla += '<td colspan="4" class="">No hay resultados de pacientes</td>';
+        tabla += '<td colspan="4" class="">No tiene pacientes con tratamientos pendientes</td>';
         tabla += "</tr>";
     } else {
         $.each(pacientes, function (index, paciente) {
@@ -88,3 +88,5 @@ function actualizarTabla(pacientes) {
 function redirigirAHclinicas(pacienteId) {
     window.open("/hclinicas/" + pacienteId, "_blank");
 }
+
+

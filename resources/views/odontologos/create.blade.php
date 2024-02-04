@@ -1,4 +1,4 @@
-<!-- Modal Nuevo -->
+<!-- No se usa -->
 <div class="modal" tabindex="-1" id="create">
     <div class="modal-dialog">
         <div class="modal-content">

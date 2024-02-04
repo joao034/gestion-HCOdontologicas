@@ -11,7 +11,7 @@
     <div class="row">
         <div class="input-group mb-3">
             <div class="col-9 col-md-7 col-lg-5">
-                <input type="text" class="form-control" name="buscador" placeholder="Buscar por cédula, nombres o apellidos" 
+                <input type="text" class="form-control" name="buscador" placeholder="Buscar por nro. de idetificación, nombres o apellidos" 
                     value= "{{ $search }}" aria-label="Recipient's username" aria-describedby="button-addon2">
             </div>
             <div class="col-md-3">

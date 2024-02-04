@@ -15,6 +15,26 @@ class PacientesPorOdontologoController extends Controller
     public function get_pacientes_por_odontologo(Request $request)
     {
         $odontologos = Odontologo::all();
+        $odontologoId = $request->odontologo_id;
+
+        $odontogramaDetalleIds = OdontogramaDetalle::where('odontologo_id', $odontologoId)
+            ->where('estado', '=', 'necesario')
+            ->pluck('odontograma_cabecera_id');
+
+        $odontogramaCabeceraPacienteIds = Odontograma::whereIn('id', $odontogramaDetalleIds)
+            ->pluck('paciente_id');
+
+        $pacientes = Paciente::whereIn('id', $odontogramaCabeceraPacienteIds)
+            ->orderBy('apellidos', 'asc')
+            ->paginate(8);
+
+        return view('reportes.pacientes-por-odontologo.index', compact(['pacientes', 'odontologos', 'odontologoId']));
+    }
+
+    //Funciona con JS
+    /* public function get_pacientes_por_odontologo(Request $request)
+    {
+        $odontologos = Odontologo::all();
 
         $odontogramaDetalleIds = OdontogramaDetalle::where('odontologo_id', $request->odontologo_id)
             ->where('estado', '=', 'necesario')
@@ -27,15 +47,11 @@ class PacientesPorOdontologoController extends Controller
             ->orderBy('apellidos', 'asc')
             ->get();
 
-        if ($request->ajax()) {
-            return response()->json(['pacientes' => $pacientes]);
-        }
         return view('reportes.pacientes-por-odontologo.index', compact(['pacientes', 'odontologos']));
-    }
+    } */
 
     public function generate_pdf(Request $request)
     {
-
         if($request->odontologo_id_origen == "0"){
             return back()->with('danger', 'Debe seleccionar un odontólogo');
         }

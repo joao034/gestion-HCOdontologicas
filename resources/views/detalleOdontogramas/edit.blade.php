@@ -62,9 +62,9 @@
                     <!--Observacion-->
                     <div class="row">
                         <div class="mb-3">
-                            <label for="" class="form-label fw-bold">Observación</label>
+                            <label for="" class="form-label fw-bold">Prescripción</label>
                             <input type="text" class="form-control" name="observacion" id=""
-                                aria-describedby="helpId" placeholder="Escriba alguna observación"
+                                aria-describedby="helpId" placeholder="Escriba alguna prescripción"
                                 value="{{ $detalle->observacion }}">
                         </div>
                     </div>

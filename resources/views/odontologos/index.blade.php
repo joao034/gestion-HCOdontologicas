@@ -1,3 +1,4 @@
+<!--No se usa-->
 @extends('layouts.app')
 @section('content')
 

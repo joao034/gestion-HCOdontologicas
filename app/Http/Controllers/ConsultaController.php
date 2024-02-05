@@ -25,7 +25,7 @@ class ConsultaController extends Controller
             $this->guardarActualizarAntecedentePatologico($request, $paciente);
             return back()->with('message', 'Consulta actualizada correctamente');
         } catch (Exception $e) {
-            return back()->with('danger', 'Error al actualizar la consulta');
+            return back()->with('danger', 'Error al actualizar la consulta, ingrese valores numéricos');
         }
     }
 
@@ -36,10 +36,10 @@ class ConsultaController extends Controller
             'enfermedad_actual' => 'required|string|max:255',
             //'partes_sistema' => 'string|max:255',
             'observaciones_examen' => 'required|string|max:255',
-            /* 'presion_arterial' => 'numeric|',
-            'frecuencia_cardiaca' => 'numeric|',
+            //'presion_arterial' => 'numeric|',
+            /* 'frecuencia_cardiaca' => 'numeric|',
             'frecuencia_respiratoria' => 'numeric|',
-            'temperatura' => 'numeric|between:35,42', */
+            'temperatura' => 'numeric|between:35,42' */
         ];
     }
 

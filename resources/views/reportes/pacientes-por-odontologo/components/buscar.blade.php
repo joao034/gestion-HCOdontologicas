@@ -8,8 +8,9 @@
                 <div class="col-md-5">
                     <select class="form-select form-select-md" name="odontologo_id" required id="odontologo_id" autofocus
                         onchange="syncSelect(this.value, 'odontologo_id_origen')">
-                        <option value="">Seleccione un odontólogo</option>
+                        
                         @if (Auth::user()->role === 'admin')
+                        <option value="">Seleccione un odontólogo</option>
                             @foreach ($odontologos as $odontologo)
                                 <option value="{{ $odontologo->id }}"
                                     {{ old('odontologo_id', $odontologoId) == $odontologo->id ? 'selected' : '' }}>
@@ -42,9 +43,9 @@
 
 <script>
     $("#generatePdfBtn").click(function () {
-        let odontologoId = $("#odontologo_id_origen").val();
+        let odontologoId = $("#odontologo_id").val();
         window.open(
-            "/reportes/pdf/pacientes-por-odontologo?odontologo_id_origen=" +
+            "/reportes/pdf/pacientes-por-odontologo?odontologo_id=" +
                 odontologoId,
             "_blank"
         );

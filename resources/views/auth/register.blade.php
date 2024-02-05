@@ -8,15 +8,16 @@
                     <div class="card-body">
                         <form method="POST" action="{{ route('users.store') }}">
                             @csrf
-
+                            @method('POST')
                             <div class="row mb-3">
                                 <label for=""
                                     class="col-md-4 col-form-label text-md-end fw-bold">{{ __('Tipo de usuario') }}</label>
                                 <div class="col-md-6">
-                                    <select name="role" class="form-select form-select-md" id="roles"
-                                        value="{{ old('role') }}" autofocus required>
+                                    <select name="role" class="form-select form-select-md" id="roles" value=""
+                                        autofocus required>
                                         <option value="">Seleccione un tipo de usuario</option>
-                                        <option value="admin">Administrador</option>
+                                        <option value="admin" {{ old('role') == 'admin' ? 'selected' : '' }}>Administrador
+                                        </option>
                                         <option value="odontologo">Odontólogo</option>
                                     </select>
                                     @error('role')
@@ -93,109 +94,116 @@
                             <div id="datos_odontologo" style="display:none">
                                 <h5 class="card-title fw-bold">{{ __('Información del odontólogo') }}</h5>
                                 <hr>
-                                <div class="row mt-2">
-                                    <div class="col-md-6">
-                                        <div class="mb-3">
-                                            <label for="" class="form-label fw-bold">{{ __('Nombres') }}</label>
-                                            <input type="text"class="form-control form-control-md" name="nombres"
-                                                id="" aria-describedby="helpId" placeholder="Escriba sus nombres"
-                                                value="{{ old('nombres') }}">
+                                <div class="" id="datos_odontologo_required">
+                                    <div class="row mt-2">
+                                        <div class="col-md-6">
+                                            <div class="mb-3">
+                                                <label for=""
+                                                    class="form-label fw-bold">{{ __('Nombres') }} <span class="text-danger">*</span></label>
+                                                <input type="text"class="form-control form-control-md" name="nombres"
+                                                    id="" aria-describedby="helpId"
+                                                    placeholder="Escriba sus nombres" value="{{ old('nombres') }}">
+                                            </div>
+                                        </div>
+                                        <div class="col-md-6">
+                                            <div class="mb-3">
+                                                <label for=""
+                                                    class="form-label fw-bold">{{ __('Apellidos') }} <span class="text-danger">*</span></label>
+                                                <input type="text" class="form-control form-control-md" name="apellidos"
+                                                    id="" aria-describedby="helpId"
+                                                    placeholder="Escriba sus apellidos" value="{{ old('apellidos') }}">
+                                            </div>
                                         </div>
                                     </div>
-                                    <div class="col-md-6">
-                                        <div class="mb-3">
-                                            <label for="" class="form-label fw-bold">{{ __('Apellidos') }}</label>
-                                            <input type="text" class="form-control form-control-md" name="apellidos"
-                                                id="" aria-describedby="helpId" placeholder="Escriba sus apellidos"
-                                                value="{{ old('apellidos') }}">
-                                        </div>
-                                    </div>
-                                </div>
 
-                                <div class="row mb-3">
-                                    <div class="col-md-6">
-                                        <label for="" class="form-label fw-bold">Tipo de nacionalidad <span
-                                                class="text-danger">*</span></label>
-                                        <select class="form-select form-select-md" name="tipo_nacionalidad_id" id="">
-                                            <option value="">Seleccione el tipo de nacionalidad</option>
-                                            @foreach ($tipos_nacionalidad as $tipo_nacionalidad)
-                                                <option value="{{ $tipo_nacionalidad->id }}"
-                                                    {{ old('tipo_nacionalidad_id') == $tipo_nacionalidad->id ? 'selected' : '' }}>
-                                                    {{ strtoupper($tipo_nacionalidad->nombre) }}</option>
-                                            @endforeach
-                                        </select>
-                
-                                        @error('tipo_nacionalidad_id')
+                                    <div class="row mb-3">
+                                        <div class="col-md-6">
+                                            <label for="" class="form-label fw-bold">Tipo de nacionalidad <span
+                                                    class="text-danger">*</span></label>
+                                            <select class="form-select form-select-md" name="tipo_nacionalidad_id"
+                                                id="">
+                                                <option value="">Seleccione el tipo de nacionalidad</option>
+                                                @foreach ($tipos_nacionalidad as $tipo_nacionalidad)
+                                                    <option value="{{ $tipo_nacionalidad->id }}"
+                                                        {{ old('tipo_nacionalidad_id') == $tipo_nacionalidad->id ? 'selected' : '' }}>
+                                                        {{ strtoupper($tipo_nacionalidad->nombre) }}</option>
+                                                @endforeach
+                                            </select>
+
+                                            @error('tipo_nacionalidad_id')
+                                                <small class="text-danger"> {{ $message }}</small>
+                                            @enderror
+
+                                        </div>
+                                        <div class="col-md-6">
+                                            <label for="" class="form-label fw-bold">Tipo de documento de
+                                                identificación <span class="text-danger">*</span></label>
+                                            <select class="form-select form-select-md" name="tipo_documento_id"
+                                                id="">
+                                                <option selected value="">Seleccione el tipo de identificación
+                                                </option>
+                                                @foreach ($tipos_documento as $tipo_documento)
+                                                    <option value="{{ $tipo_documento->id }}"
+                                                        {{ old('tipo_documento_id') == $tipo_documento->id ? 'selected' : '' }}>
+                                                        {{ mb_strtoupper($tipo_documento->nombre) }}
+                                                    </option>
+                                                @endforeach
+                                            </select>
+                                        </div>
+                                        @error('tipo_documento_id')
                                             <small class="text-danger"> {{ $message }}</small>
                                         @enderror
-                
                                     </div>
-                                    <div class="col-md-6">
-                                        <label for="" class="form-label fw-bold">Tipo de documento de identificación <span
-                                                class="text-danger">*</span></label>
-                                        <select class="form-select form-select-md" name="tipo_documento_id" id="">
-                                            <option selected value="">Seleccione el tipo de identificación</option>
-                                            @foreach ($tipos_documento as $tipo_documento)
-                                                <option value="{{ $tipo_documento->id }}"
-                                                    {{ old('tipo_documento_id') == $tipo_documento->id ? 'selected' : '' }}>
-                                                    {{ mb_strtoupper($tipo_documento->nombre) }}
-                                                </option>
-                                            @endforeach
-                                        </select>
-                                    </div>
-                                    @error('tipo_documento_id')
-                                        <small class="text-danger"> {{ $message }}</small>
-                                    @enderror
-                                </div>
 
-                                <div class="row">
-
-                                    <div class="col-md-6">
-                                        <div class="mb-3">
-                                            <label for=""
-                                                class="form-label fw-bold">{{ __('Número de Registro') }}</label>
-                                            <input type="text"class="form-control form-control-md" name="cedula"
-                                                id="cedula_odo" aria-describedby="helpId"
-                                                placeholder="Escriba su número de registro del ACESS" maxlength="16"
-                                                value="{{ old('cedula') }}">
-                                            @error('cedula')
-                                                <span class="invalid-feedback" role="alert">
-                                                    <strong>{{ $message }}</strong>
-                                                </span>
-                                            @enderror
+                                    <div class="row">
+                                        <div class="col-md-6">
+                                            <div class="mb-3">
+                                                <label for=""
+                                                    class="form-label fw-bold">{{ __('Número de Registro') }} <span class="text-danger">*</span></label>
+                                                <input type="text"class="form-control form-control-md" name="cedula"
+                                                    id="cedula_odo" aria-describedby="helpId"
+                                                    placeholder="Escriba su número de registro del ACESS" maxlength="16"
+                                                    value="{{ old('cedula') }}">
+                                                @error('cedula')
+                                                    <span class="invalid-feedback" role="alert">
+                                                        <strong>{{ $message }}</strong>
+                                                    </span>
+                                                @enderror
+                                            </div>
                                         </div>
+
                                     </div>
 
-                                </div>
-
-                                <div class="row">
-                                    <div class="col-md-6">
-                                        <div class="mb-3">
-                                            <label for="" class="form-label fw-bold">{{ __('Celular') }}</label>
-                                            <input type="text" class="form-control form-control-md" name="celular"
-                                                id="celu" minlength="10" maxlength="10"
-                                                value="{{ old('celular') }}" aria-describedby="helpId"
-                                                placeholder="Escriba su celular">
+                                    <div class="row">
+                                        <div class="col-md-6">
+                                            <div class="mb-3">
+                                                <label for=""
+                                                    class="form-label fw-bold">{{ __('Celular') }} <span class="text-danger">*</span></label>
+                                                <input type="text" class="form-control form-control-md" name="celular"
+                                                    id="celu" minlength="10" maxlength="10"
+                                                    value="{{ old('celular') }}" aria-describedby="helpId"
+                                                    placeholder="Escriba su celular">
+                                            </div>
                                         </div>
-                                    </div>
-                                    <div class="col-md-6">
-                                        <div class="mb-3">
-                                            <label for="" class="form-label fw-bold">{{ __('Género') }}</label>
-                                            <select class="form-select form-select-md" name="sexo"
-                                                aria-label=".form-select-sm example">
-                                                <option>Seleccione el género</option>
-                                                <option value="masculino">Masculino</option>
-                                                <option value="femenino">Femenino</option>
-                                                <option value="otro">Otro</option>
-                                            </select>
+                                        <div class="col-md-6">
+                                            <div class="mb-3">
+                                                <label for=""
+                                                    class="form-label fw-bold">{{ __('Género') }} <span class="text-danger">*</span></label>
+                                                <select class="form-select form-select-md" name="sexo"
+                                                    aria-label=".form-select-sm example">
+                                                    <option>Seleccione el género</option>
+                                                    <option value="masculino">Masculino</option>
+                                                    <option value="femenino">Femenino</option>
+                                                    <option value="otro">Otro</option>
+                                                </select>
+                                            </div>
                                         </div>
                                     </div>
                                 </div>
 
                                 {{-- Especialidades --}}
                                 <div class="row">
-                                    <label for=""
-                                        class="form-label fw-bold">{{ __('Especialidades') }}</label>
+                                    <label for="" class="form-label fw-bold">{{ __('Especialidades') }}</label>
                                     @foreach ($especialidades as $especialidad)
                                         <div class="col-lg-5 col-md-5 col-sm-6">
                                             <input class="form-check-input border-primary" type="checkbox"
@@ -213,7 +221,7 @@
                             </div>
 
                             <!--Registrar Button -->
-
+                            <hr>
                             <div class="row mb-0 text-end">
                                 <div class="col-md-6 offset-md-4">
                                     <button type="submit" class="btn btn-primary">
@@ -221,12 +229,11 @@
                                     </button>
                                 </div>
                             </div>
+                        </form>
                     </div>
-                    </form>
                 </div>
             </div>
         </div>
-    </div>
     </div>
     <script>
         $(document).ready(function() {
@@ -240,11 +247,11 @@
             });
         });
 
-        /* function setRequieredOdontologoInputs() {
-            const inputs = document.querySelectorAll('#datos_odontologo input');
+        function setRequieredOdontologoInputs() {
+            const inputs = document.querySelectorAll('#datos_odontologo_required input');
             inputs.forEach(input => {
                 input.required = true;
             });
-        } */
+        }
     </script>
 @endsection

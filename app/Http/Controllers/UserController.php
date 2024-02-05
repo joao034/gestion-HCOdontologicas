@@ -8,6 +8,7 @@ use App\Models\Odontologo;
 use App\Models\TipoDocumento;
 use App\Models\TipoNacionalidad;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Validator;
 
 use App\Models\User;
 use Illuminate\Support\Facades\DB;
@@ -18,6 +19,25 @@ class UserController extends Controller
     public function __construct()
     {
         $this->middleware('role.admin');
+    }
+
+    protected function validator(array $data)
+    {
+        $rules = [
+            'tipo_nacionalidad_id' => 'required|integer',
+            'tipo_documento_id' => 'required|integer',
+            'nombres' => 'required|string|max:255',
+            'apellidos' => 'required|string|max:255',
+            'cedula' => 'required|string|min:6|max:16',
+            'sexo' => 'required|string|max:255',
+            'celular' => 'required|string|min:10|max:10',
+            'especialidades' => 'required|array|min:1',
+        ];
+
+        if (isset($data['cedula']) && $data['tipo_documento_id'] == 1) {
+            $rules['cedula'] = ['validar_cedula', 'min:10', 'max:10'];
+        }
+        return Validator::make($data, $rules);
     }
 
     private function validate_odontologo_data()
@@ -64,17 +84,18 @@ class UserController extends Controller
         try {
             DB::beginTransaction();
             $user = new User();
-            if($this->store_update_user_data($request, $user) === false){
+            if ($this->store_update_user_data($request, $user) === false) {
                 DB::rollBack();
                 return back()->with('danger', 'Error al crear el usuario');
             }
             if ($request->role === 'odontologo') {
-                $odontologo = new Odontologo();
-                $this->store_update_odontologo($request, $user, $odontologo);
+                //$odontologo = new Odontologo();
+                $this->store_update_odontologo($request, $user);
             }
             DB::commit();
             return to_route('users.index')->with('message', 'Usuario tipo ' . $request->role . ' creado correctamente');
         } catch (\Exception $e) {
+            DB::rollBack();
             return back()->with('danger', 'Error al crear el usuario ' . $e->getMessage());
         }
     }
@@ -100,6 +121,7 @@ class UserController extends Controller
     private function store_update_user_data(Request $request, User $user)
     {
         try {
+            //$this->validator($request->all())->validate();
             $this->validate($request, $this->validate_user_data());
             $user->name = $request->name;
             $user->role = $request->role;
@@ -130,7 +152,10 @@ class UserController extends Controller
 
     private function store_update_odontologo(Request $request, User $user)
     {
-        $this->validate($request, $this->validate_odontologo_data());
+        //$this->validate($request, $this->validate_odontologo_data());
+        $this->validator($request->all())->validate();
+        $user->odontologo == null ? $user->odontologo = new Odontologo() : $user->odontologo;
+
         $user->odontologo->tipo_nacionalidad_id = $request->tipo_nacionalidad_id;
         $user->odontologo->tipo_documento_id = $request->tipo_documento_id;
         $user->odontologo->user_id = $user->id;

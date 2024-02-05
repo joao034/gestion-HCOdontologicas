@@ -113,13 +113,12 @@ class OdontogramaDetalleController extends Controller
     public function asignar_tratamientos_a_odontologo(Request $request)
     {
         try {
-            
             if ($request->odontologo_id_origen == $request->odontologo_id_destino) {
                 return back()->with('danger', 'Seleccione diferentes odontólogos.');
             }
 
             //verificar que no sean ceros
-            if ($request->odontologo_id_origen == "0" || $request->odontologo_id_destino == "0") {
+            if ($request->odontologo_id_origen == "" || $request->odontologo_id_destino == "") {
                 return back()->with('danger', 'Seleccione un odontólogo.');
             }
 

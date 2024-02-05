@@ -12,7 +12,12 @@ return new class extends Migration
     public function up(): void
     {
         Schema::table('consultas', function (Blueprint $table) {
-            $table->string('presion_arterial')->change();
+            $table->dropColumn('presion_arterial');
+        });
+
+        // Agregar una nueva columna del tipo string
+        Schema::table('consultas', function (Blueprint $table) {
+            $table->string('presion_arterial')->after('enfermedad_actual'); // Ajusta 'otra_columna_existente' según tu estructura
         });
     }
 
@@ -22,7 +27,7 @@ return new class extends Migration
     public function down(): void
     {
         Schema::table('consultas', function (Blueprint $table) {
-            //
+            $table->dropColumn('presion_arterial');
         });
     }
 };

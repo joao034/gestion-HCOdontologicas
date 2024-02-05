@@ -26,7 +26,7 @@ class PacientesPorOdontologoController extends Controller
 
         $pacientes = Paciente::whereIn('id', $odontogramaCabeceraPacienteIds)
             ->orderBy('apellidos', 'asc')
-            ->paginate(8);
+            ->paginate(10);
 
         return view('reportes.pacientes-por-odontologo.index', compact(['pacientes', 'odontologos', 'odontologoId']));
     }

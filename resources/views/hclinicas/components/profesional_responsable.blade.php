@@ -19,9 +19,15 @@
                             {{ $user->odontologo->get_full_name() . ' - ' . $user->odontologo->get_nombres_especialidades() }}
                         </option>
                     @endforeach
-                @else
-                    <option value="{{ Auth::user()->odontologo->id }}" selected data-registro={{Auth::user()->odontologo->cedula}}>
+                @endif
+                @if ($paciente->historias_clinicas->first()?->odontologo == null)
+                    <option value="" selected>Seleccione un odontólogo</option>
+                    <option value="{{ Auth::user()->odontologo->id }}" data-registro={{Auth::user()->odontologo->cedula}}>
                         {{ Auth::user()->odontologo->get_full_name() . ' - ' . Auth::user()->odontologo->get_nombres_especialidades() }}
+                    </option>
+                @else
+                    <option value="{{ $paciente->historias_clinicas->first()?->odontologo->id }}" selected data-registro={{$paciente->historias_clinicas->first()?->odontologo->cedula}}>
+                        {{ $paciente->historias_clinicas->first()?->odontologo->get_full_name() . ' - ' . $paciente->historias_clinicas->first()?->odontologo->get_nombres_especialidades() }}
                     </option>
                 @endif
             </select>

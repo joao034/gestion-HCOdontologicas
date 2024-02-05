@@ -67,7 +67,7 @@
                         </option>
                         @foreach ($tipos_documento as $tipo_documento)
                             <option value="{{ $tipo_documento->id }}"
-                                {{ old('tipo_documento_id') == $tipo_documento->id || ($modo == 'show' || $modo == 'edit') && $paciente->tipo_documento_id == $tipo_documento->id ? 'selected' : '' }}>
+                                {{ old('tipo_documento_id') == $tipo_documento->id || (($modo == 'show' || $modo == 'edit') && $paciente->tipo_documento_id == $tipo_documento->id) ? 'selected' : '' }}>
                                 {{ mb_strtoupper($tipo_documento->nombre) }}
                             </option>
                         @endforeach
@@ -123,37 +123,39 @@
                 </div>
             </div>
 
-            <div class="row" id="representanteDiv" style="display: none;">
-                <div class="col-md-6">
-                    <div class="mb-3">
-                        <label for="" class="form-label fw-bold">Cédula del
-                            Representante <span class="text-danger">*</span></label>
-                        <input type="text" class="form-control" value="{{ old('cedula_representante') }}"
-                            {{ $modo == 'show' ? 'readonly' : '' }} name="cedula_representante" minlength="10"
-                            maxlength="10" id="" aria-describedby="helpId"
-                            placeholder="Escriba la cédula del representante" pattern="^[0-9]+$">
+            @if (($modo == 'edit' || $modo == 'show') && $paciente->edad() < 12)
+                <div class="row" id="representanteDiv" style="display: none;">
+                    <div class="col-md-6">
+                        <div class="mb-3">
+                            <label for="" class="form-label fw-bold">Nro. de identificación del Representante <span class="text-danger">*</span></label>
+                            <input type="text" class="form-control" value="{{ $modo == 'show' || $modo == 'edit' ? $paciente?->representante?->cedula_representante : old('cedula_representante') }}"
+                                {{ $modo == 'show' ? 'readonly' : '' }} name="cedula_representante" minlength="10"
+                                maxlength="10" id="" aria-describedby="helpId"
+                                placeholder="Escriba la cédula del representante" pattern="^[0-9]+$">
 
-                        @error('cedula_representante')
-                            <small class="text-danger"> {{ $message }}</small>
-                        @enderror
+                            @error('cedula_representante')
+                                <small class="text-danger"> {{ $message }}</small>
+                            @enderror
+                        </div>
+                    </div>
+
+                    <div class="col-md-6">
+                        <div class="mb-3">
+                            <label for="" class="form-label fw-bold">Representante <span
+                                    class="text-danger">*</span></label>
+                            <input type="text" class="form-control" value="{{ $modo == 'show' || $modo == 'edit' ? $paciente?->representante?->representante : old('representante') }}"
+                                {{ $modo == 'show' ? 'readonly' : '' }} name="representante" id="representante"
+                                aria-describedby="helpId" placeholder="Nombre del representante">
+
+                            @error('representante')
+                                <small class="text-danger"> {{ $message }}</small>
+                            @enderror
+
+                        </div>
                     </div>
                 </div>
+            @endif
 
-                <div class="col-md-6">
-                    <div class="mb-3">
-                        <label for="" class="form-label fw-bold">Representante <span
-                                class="text-danger">*</span></label>
-                        <input type="text" class="form-control" value="{{ old('representante') }}"
-                            {{ $modo == 'show' ? 'readonly' : '' }} name="representante" id="representante"
-                            aria-describedby="helpId" placeholder="Nombre del representante">
-
-                        @error('representante')
-                            <small class="text-danger"> {{ $message }}</small>
-                        @enderror
-
-                    </div>
-                </div>
-            </div>
 
         </div>
 
@@ -170,21 +172,21 @@
                         <option selected value="">Seleccione el estado civil del paciente
                         </option>
                         <option value="soltero"
-                            {{ old('estado_civil') == 'soltero' || ($modo == 'show' || $modo == 'edit') && $paciente->estado_civil == 'soltero' ? 'selected' : '' }}>
+                            {{ old('estado_civil') == 'soltero' || (($modo == 'show' || $modo == 'edit') && $paciente->estado_civil == 'soltero') ? 'selected' : '' }}>
                             Soltero/a</option>
                         <option value="casado"
-                            {{ old('estado_civil') == 'casado' || ($modo == 'show' || $modo == 'edit') && $paciente->estado_civil == 'casado' ? 'selected' : '' }}>
+                            {{ old('estado_civil') == 'casado' || (($modo == 'show' || $modo == 'edit') && $paciente->estado_civil == 'casado') ? 'selected' : '' }}>
                             Casado/a
                         </option>
                         <option value="unionlibre"
-                            {{ old('estado_civil') == 'unionlibre' || ($modo == 'show' || $modo == 'edit') && $paciente->estado_civil == 'unionlibre' ? 'selected' : '' }}>
+                            {{ old('estado_civil') == 'unionlibre' || (($modo == 'show' || $modo == 'edit') && $paciente->estado_civil == 'unionlibre') ? 'selected' : '' }}>
                             Unión
                             Libre</option>
                         <option value="divorciado"
-                            {{ old('estado_civil') == 'divorciado' || ($modo == 'show' || $modo == 'edit') && $paciente->estado_civil == 'divorciado' ? 'selected' : '' }}>
+                            {{ old('estado_civil') == 'divorciado' || (($modo == 'show' || $modo == 'edit') && $paciente->estado_civil == 'divorciado') ? 'selected' : '' }}>
                             Divorciado/a</option>
                         <option value="viudo"
-                            {{ old('estado_civil') == 'viudo' || ($modo == 'show' || $modo == 'edit') && $paciente->estado_civil == 'viudo' ? 'selected' : '' }}>
+                            {{ old('estado_civil') == 'viudo' || (($modo == 'show' || $modo == 'edit') && $paciente->estado_civil == 'viudo') ? 'selected' : '' }}>
                             Viudo/a
                         </option>
                     </select>
@@ -208,14 +210,14 @@
                             <option selected value="">Seleccione el género del paciente
                             </option>
                             <option value="masculino"
-                                {{ old('sexo') == 'masculino' || ($modo == 'show' || $modo == 'edit') && $paciente->sexo == 'masculino' ? 'selected' : '' }}>
+                                {{ old('sexo') == 'masculino' || (($modo == 'show' || $modo == 'edit') && $paciente->sexo == 'masculino') ? 'selected' : '' }}>
                                 Masculino</option>
                             <option value="femenino"
-                                {{ old('sexo') == 'femenino' ||($modo == 'show' || $modo == 'edit') && $paciente->sexo == 'femenino' ? 'selected' : '' }}>
+                                {{ old('sexo') == 'femenino' || (($modo == 'show' || $modo == 'edit') && $paciente->sexo == 'femenino') ? 'selected' : '' }}>
                                 Femenino
                             </option>
                             <option value="otro"
-                                {{ old('sexo') == 'otro' || ($modo == 'show' || $modo == 'edit') && $paciente->sexo == 'otro' ? 'selected' : '' }}>
+                                {{ old('sexo') == 'otro' || (($modo == 'show' || $modo == 'edit') && $paciente->sexo == 'otro') ? 'selected' : '' }}>
                                 Otro
                             </option>
                         </select>

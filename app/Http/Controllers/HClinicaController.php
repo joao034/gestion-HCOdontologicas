@@ -55,7 +55,7 @@ class HClinicaController extends Controller
             $edad = date_diff($fecha_nacimiento, $hoy);
             if ($edad->y < 12) {
                 $rules['representante'] = ['required', 'string', 'max:100'];
-                $rules['cedula_representante'] = ['required', 'string', 'min:10', 'max:10', 'validar_cedula'];
+                $rules['cedula_representante'] = ['required', 'string', 'min:10', 'max:10'];
             }
         }
         return Validator::make($data, $rules);

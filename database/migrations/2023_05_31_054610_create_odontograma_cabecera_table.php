@@ -16,7 +16,7 @@ return new class extends Migration
             $table->timestamps();
             /* $table->string('diagnostico')->nullable();
             $table->string('enfermedad_actual')->nullable(); */
-            $table->date('fecha_creacion');
+            //$table->date('fecha_creacion');
             $table->float('total');
             
             //clave foranea

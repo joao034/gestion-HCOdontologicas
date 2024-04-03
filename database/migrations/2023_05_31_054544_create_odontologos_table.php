@@ -16,7 +16,7 @@ return new class extends Migration
             $table->timestamps();
             $table->string('nombres', 50);
             $table->string('apellidos', 50);
-            $table->string('cedula', 10)->unique();
+            $table->string('cedula', 16)->unique();
             $table->string('celular', 10);
             $table->string('sexo', 20);
             $table->unsignedBigInteger('especialidad_id');

@@ -22,8 +22,8 @@ return new class extends Migration
         DB::table('tipos_documento')->insert([
             ['nombre' => 'Cédula'],
             ['nombre' => 'DNI'],
-            ['nombre' => 'pasaporte'],
-            ['nombre' => 'visa'],
+            ['nombre' => 'Pasaporte'],
+            ['nombre' => 'Visa'],
         ]);
     }
 

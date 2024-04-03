@@ -16,7 +16,7 @@ return new class extends Migration
             $table->unsignedBigInteger('paciente_id');
             $table->text('motivo_consulta');
             $table->text('enfermedad_actual');
-            $table->float('presion_arterial')->nullable();
+            $table->string('presion_arterial')->nullable();
             $table->float('frecuencia_cardiaca')->nullable();
             $table->float('frecuencia_respiratoria')->nullable();
             $table->float('temperatura')->nullable();

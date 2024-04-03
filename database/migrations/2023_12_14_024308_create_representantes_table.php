@@ -14,12 +14,11 @@ return new class extends Migration
         Schema::create('representantes', function (Blueprint $table) {
             $table->id();
             $table->timestamps();
-
             $table->string('representante', 50)->nullable();
             $table->string('cedula_representante', 10)->nullable();
 
             $table->unsignedBigInteger('paciente_id');
-            $table->foreign('paciente_id')->references('id')->on('pacientes')->onDelete('cascade');
+            //$table->foreign('paciente_id')->references('id')->on('pacientes')->onDelete('cascade');
         });
     }
 

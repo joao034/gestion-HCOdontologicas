@@ -14,10 +14,10 @@ return new class extends Migration
         Schema::create('antecedentes_patologicos', function (Blueprint $table) {
             $table->id();
             $table->unsignedBigInteger('paciente_id');
-            $table->string('ant_personales');
-            $table->text('desc_personales');
-            $table->string('ant_familiares');
-            $table->text('desc_familiares');
+            $table->string('ant_personales')->nullable();
+            $table->text('desc_personales')->nullable();
+            $table->string('ant_familiares')->nullable();
+            $table->text('desc_familiares')->nullable();
             $table->timestamps();
 
             // Definir la relación con la tabla pacientes

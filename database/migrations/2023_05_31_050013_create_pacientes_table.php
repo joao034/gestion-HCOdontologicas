@@ -25,6 +25,13 @@ return new class extends Migration
             $table->string('telef_convencional', 10)->nullable();
             $table->boolean('consentimiento')->default(true);
             $table->timestamps();
+
+            //foreing keys
+            $table->unsignedBigInteger('tipo_documento_id')->default(1);
+            $table->unsignedBigInteger('tipo_nacionalidad_id')->default(1);
+
+            /* $table->foreign('tipo_documento_id')->references('id')->on('tipos_documento');
+            $table->foreign('tipo_nacionalidad_id')->references('id')->on('tipo_nacionalidad'); */
         });
 
      /*    Schema::create('contacto_paciente', function (Blueprint $table) {

@@ -39,7 +39,6 @@ class Odontograma extends Model
 	];
 
 	protected $fillable = [
-		'fecha_creacion',
 		'paciente_id',
 		'total'
 	];

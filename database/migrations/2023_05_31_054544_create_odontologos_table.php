@@ -19,12 +19,12 @@ return new class extends Migration
             $table->string('cedula', 16)->unique();
             $table->string('celular', 10);
             $table->string('sexo', 20);
-            $table->unsignedBigInteger('especialidad_id');
             $table->unsignedBigInteger('user_id');
 
             //llave foranea
-            $table->foreign('especialidad_id')->references('id')->on('especialidades');
             $table->foreign('user_id')->references('id')->on('users');
+            $table->unsignedBigInteger('tipo_documento_id')->default(1);
+            $table->unsignedBigInteger('tipo_nacionalidad_id')->default(1);
         });
     }
 

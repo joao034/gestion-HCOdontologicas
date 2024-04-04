@@ -33,6 +33,13 @@ class DatabaseSeeder extends Seeder
             'role' => 'admin',
         ]);
 
+        DB::table('users')->insert([
+            'name' => 'Any endodoncista',
+            'email' => 'anyaguilar@gmail.com',
+            'password' => Hash::make('12345678'),
+            'role' => 'odontologo',
+        ]);
+
         $this->call(EspecialidadesSeeder::class);
         $this->call(SimbolosSeeder::class);
         $this->call(TratamientosSeeder::class);

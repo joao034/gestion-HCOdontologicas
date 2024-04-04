@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Events\NuevoPacienteEvent;
 use App\Http\Controllers\Controller;
 use App\Models\AntecedentesInfeccioso;
 use App\Models\AntecedentesPersonalesFamiliare;
@@ -111,6 +112,8 @@ class HClinicaController extends Controller
             $this->guardarOActualizarPaciente($paciente, $request);
             //insertar datos otras tablas
             $this->almacenarRepresentante($request, $paciente->id);
+
+            NuevoPacienteEvent::dispatch($paciente);
             //$this->guardarActualizarConsulta($request, $paciente);
             //$this->guardarActualizarAntecedentePatologico($request, $paciente);
             //$this->almacenarAntecedentePersonales($request, $paciente->id);

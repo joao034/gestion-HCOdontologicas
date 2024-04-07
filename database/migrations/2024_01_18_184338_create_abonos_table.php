@@ -17,8 +17,7 @@ return new class extends Migration
             $table->decimal('monto', 8, 2);
             
             // Foreign key
-            $table->unsignedBigInteger('odontograma_detalle_id');
-            $table->foreign('odontograma_detalle_id')->references('id')->on('odontograma_detalle');
+            $table->foreignId('odontograma_detalle_id')->constrained('odontograma_detalle');
         });
     }
 

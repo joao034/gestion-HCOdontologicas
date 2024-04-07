@@ -6,14 +6,11 @@ use Illuminate\Support\Facades\Schema;
 
 return new class extends Migration
 {
-    /**
-     * Run the migrations.
-     */
     public function up(): void
     {
         Schema::create('consultas', function (Blueprint $table) {
             $table->id();
-            $table->unsignedBigInteger('paciente_id');
+            $table->timestamps();
             $table->text('motivo_consulta');
             $table->text('enfermedad_actual');
             $table->string('presion_arterial')->nullable();
@@ -22,17 +19,13 @@ return new class extends Migration
             $table->float('temperatura')->nullable();
             $table->text('partes_examen_estomatognatico')->nullable();
             $table->text('observaciones_examen')->nullable();
-            // Otros campos relacionados con la consulta
-            $table->timestamps();
+            
 
             // Definir claves foráneas
-            $table->foreign('paciente_id')->references('id')->on('pacientes');
+            $table->unsignedBigInteger('paciente_id');
         });
     }
 
-    /**
-     * Reverse the migrations.
-     */
     public function down(): void
     {
         Schema::dropIfExists('consultas');

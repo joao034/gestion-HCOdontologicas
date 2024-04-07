@@ -6,26 +6,19 @@ use Illuminate\Support\Facades\Schema;
 
 return new class extends Migration
 {
-    /**
-     * Run the migrations.
-     */
     public function up(): void
     {
         Schema::create('examenes_complementarios', function (Blueprint $table) {
             $table->id();
             $table->timestamps();
-            $table->unsignedBigInteger('paciente_id');
             $table->text('examenes_solicitados')->nullable();
             $table->string('tipos_examen')->nullable();
             $table->text('observaciones')->nullable();
             
-            $table->foreign('paciente_id')->references('id')->on('pacientes');
+            $table->unsignedBigInteger('paciente_id');
         });
     }
 
-    /**
-     * Reverse the migrations.
-     */
     public function down(): void
     {
         Schema::dropIfExists('examenes_complementarios');

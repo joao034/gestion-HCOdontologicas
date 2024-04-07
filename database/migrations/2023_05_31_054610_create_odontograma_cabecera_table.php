@@ -6,28 +6,21 @@ use Illuminate\Support\Facades\Schema;
 
 return new class extends Migration
 {
-    /**
-     * Run the migrations.
-     */
+
     public function up(): void
     {
         Schema::create('odontograma_cabecera', function (Blueprint $table) {
             $table->id();
             $table->timestamps();
-            /* $table->string('diagnostico')->nullable();
-            $table->string('enfermedad_actual')->nullable(); */
             //$table->date('fecha_creacion');
             $table->float('total');
             
-            //clave foranea
+            //foreign key
             $table->foreignId('paciente_id')->constrained('pacientes');
             
         });
     }
 
-    /**
-     * Reverse the migrations.
-     */
     public function down(): void
     {
         Schema::dropIfExists('odontograma_cabecera');

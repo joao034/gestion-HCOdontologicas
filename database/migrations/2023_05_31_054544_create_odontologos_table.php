@@ -6,9 +6,6 @@ use Illuminate\Support\Facades\Schema;
 
 return new class extends Migration
 {
-    /**
-     * Run the migrations.
-     */
     public function up(): void
     {
         Schema::create('odontologos', function (Blueprint $table) {
@@ -19,18 +16,14 @@ return new class extends Migration
             $table->string('cedula', 16)->unique();
             $table->string('celular', 10);
             $table->string('sexo', 20);
-            $table->unsignedBigInteger('user_id');
 
             //llave foranea
-            $table->foreign('user_id')->references('id')->on('users');
+            $table->unsignedBigInteger('user_id');
             $table->unsignedBigInteger('tipo_documento_id')->default(1);
             $table->unsignedBigInteger('tipo_nacionalidad_id')->default(1);
         });
     }
 
-    /**
-     * Reverse the migrations.
-     */
     public function down(): void
     {
         Schema::dropIfExists('odontologos');

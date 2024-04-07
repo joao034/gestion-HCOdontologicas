@@ -2,8 +2,11 @@
 
 namespace App\Providers;
 
+use App\Events\DetallePresupuestoModificado;
 use App\Events\NuevoPacienteEvent;
 use App\Listeners\CrearOdontogramaListener;
+use App\Listeners\RestarTotalPresupuestoListener;
+use App\Listeners\SumarTotalPresupuestoListener;
 use Illuminate\Auth\Events\Registered;
 use Illuminate\Auth\Listeners\SendEmailVerificationNotification;
 use Illuminate\Foundation\Support\Providers\EventServiceProvider as ServiceProvider;
@@ -22,6 +25,10 @@ class EventServiceProvider extends ServiceProvider
         ],
         NuevoPacienteEvent::class => [
             CrearOdontogramaListener::class
+        ],
+        DetallePresupuestoModificado::class => [
+            SumarTotalPresupuestoListener::class,
+            RestarTotalPresupuestoListener::class
         ]
     ];
 

@@ -4,6 +4,8 @@ namespace App\Http\Controllers;
 
 use App\Events\DetallePresupuestoModificado;
 use App\Http\Controllers\Controller;
+use App\Http\Requests\StoreOdontogramaDetalleRequest;
+use App\Http\Requests\UpdateOdontogramaDetalleRequest;
 use App\Models\Odontograma;
 use App\Models\Odontologo;
 use Illuminate\Http\Request;
@@ -17,46 +19,13 @@ use Illuminate\Support\Facades\Validator;
 
 class OdontogramaDetalleController extends Controller
 {
-    protected function validator(array $data)
-    {
-        return Validator::make($data, [
-            'tratamiento_id' => ['required'],
-            'cara_dental' => ['required'],
-            'simbolo_id' => ['required'],
-            'odontologo_id' => ['required'],
-            'observacion' => ['nullable', 'string', 'max:255'],
-        ], $this->messages());
-    }
-
-    protected function messages()
-    {
-        return [
-            'tratamiento_id.required' => 'Seleccione un tratamiento.',
-            'odontologo_id.required' => 'Seleccione un odontólogo.',
-            'cara_dental.required' => 'Seleccione una cara dental.',
-            'simbolo_id.required' => 'Seleccione un símbolo.',
-            'observacion.max' => 'La prescripción no puede tener más de :max caracteres.',
-        ];
-    }
-
-    private function mostrarErroresDeValidacion($request)
-    {
-        $validator = $this->validator($request->all());
-        if ($validator->fails()) {
-            return redirect()->back()->withErrors($validator)->withInput();
-        }
-    }
-
-
-    public function store(Request $request)
+    public function store(StoreOdontogramaDetalleRequest $request)
     {
         try {
-            $this->mostrarErroresDeValidacion($request);
-            $this->validator($request->all())->validate();
             $this->guardarDetalle($request);
             return back()->with('message', 'Detalle del odontograma agreagado correctamente.');
         } catch (\Exception $e) {
-            return back()->with('danger', "No se pudo guardar el detalle del odontograma. ". $e->getMessage());
+            return back()->with('danger', "No se pudo guardar el detalle del odontograma.");
         }
     }
 
@@ -85,16 +54,9 @@ class OdontogramaDetalleController extends Controller
         ]));
     }
 
-    public function update(int $id, Request $request)
+    public function update(int $id, UpdateOdontogramaDetalleRequest $request)
     {
         try {
-            $request->validate([
-                'estado' => 'required',
-                'odontologo_id' => 'required',
-                'tratamiento_id' => 'required',
-                'observacion' => 'nullable|string|max:255',
-            ]);
-
             $detalle_odontograma = OdontogramaDetalle::find($id);
 
             if ($request->estado === 'realizado') {
@@ -134,7 +96,7 @@ class OdontogramaDetalleController extends Controller
         }
     }
 
-    private function guardarDetalle($request)
+    private function guardarDetalle(Request $request)
     {
         $detalle_odontograma = new OdontogramaDetalle();
         $this->asignarVariables($detalle_odontograma, $request);
@@ -201,12 +163,6 @@ class OdontogramaDetalleController extends Controller
     {
         $detalles_odontograma = OdontogramaDetalle::query()
             ->where('odontograma_cabecera_id', '=', "$odontograma_cabecera_id")
-            /* ->where(function ($query) {
-                $query->where('estado', '=', 'necesario')
-                    ->orWhere('estado', '=', 'realizado')
-                    ->orWhere('estado', '=', 'fuera_presupuesto');
-            }) */
-            //ordenar primero los necesarios
             ->orderByRaw("FIELD(estado , 'necesario', 'realizado', 'hallazgo')")
             ->paginate(10);
 

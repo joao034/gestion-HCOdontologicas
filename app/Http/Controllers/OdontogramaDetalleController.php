@@ -47,6 +47,7 @@ class OdontogramaDetalleController extends Controller
         }
     }
 
+
     public function store(Request $request)
     {
         try {

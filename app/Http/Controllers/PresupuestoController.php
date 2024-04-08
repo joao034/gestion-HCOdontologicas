@@ -20,10 +20,6 @@ use Illuminate\Support\Facades\Auth;
 class PresupuestoController extends Controller
 {
 
-    public function __construct()
-    {
-    }
-
     //deprecated
     /*  public function index( Request $request )
     {

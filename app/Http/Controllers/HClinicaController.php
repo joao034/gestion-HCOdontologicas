@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Events\NuevoPacienteEvent;
 use App\Http\Controllers\Controller;
+use App\Http\Requests\UserRequest;
 use App\Models\AntecedentesInfeccioso;
 use App\Models\AntecedentesPersonalesFamiliare;
 use App\Models\Paciente;
@@ -19,7 +20,7 @@ use Illuminate\Support\Facades\Validator;
 use App\Models\HistoriaClinica;
 
 class HClinicaController extends Controller
-{
+{ 
     protected function validator(array $data)
     {
         $rules = [
@@ -96,9 +97,10 @@ class HClinicaController extends Controller
         return view("hclinicas.create", compact(['tipos_documento', 'tipos_nacionalidad']));
     }
 
-    public function store(Request $request)
+    public function store(UserRequest $request)
     {
         try {
+            dd($request->validated());
             //dd($request->all());
             DB::beginTransaction();
             $paciente = new Paciente();

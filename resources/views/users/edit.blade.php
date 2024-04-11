@@ -181,11 +181,11 @@
                                                 <label for=""
                                                     class="form-label fw-bold">{{ __('Número de registro') }}</label>
                                                 <input
-                                                    type="text"class="form-control form-control @error('cedula') is-invalid @enderror"
-                                                    name="cedula" id="cedula_odo" aria-describedby="helpId"
+                                                    type="text"class="form-control form-control @error('num_identificacion') is-invalid @enderror"
+                                                    name="num_identificacion" id="cedula_odo" aria-describedby="helpId"
                                                     maxlength="16"
-                                                    value="{{ $user->odontologo->cedula }}">
-                                                @error('cedula')
+                                                    value="{{ $user->odontologo->num_identificacion }}">
+                                                @error('num_identificacion')
                                                     <small class="text-danger"> {{ $message }}</small>
                                                 @enderror
                                             </div>
@@ -212,16 +212,16 @@
                                             <div class="mb-3">
                                                 <label for=""
                                                     class="form-label fw-bold">{{ __('Género') }}</label>
-                                                <select class="form-select form-select" name="sexo" required
+                                                <select class="form-select form-select" name="genero" required
                                                     aria-label=".form-select-sm example">
                                                     <option value="masculino"
-                                                        {{ $user->odontologo['sexo'] == 'masculino' ? 'selected' : '' }}>
+                                                        {{ $user->odontologo['genero'] == 'masculino' ? 'selected' : '' }}>
                                                         Masculino</option>
                                                     <option value="femenino"
-                                                        {{ $user->odontologo['sexo'] == 'femenino' ? 'selected' : '' }}>
+                                                        {{ $user->odontologo['genero'] == 'femenino' ? 'selected' : '' }}>
                                                         Femenino</option>
                                                     <option value="otro"
-                                                        {{ $user->odontologo['sexo'] == 'otro' ? 'selected' : '' }}>Otro
+                                                        {{ $user->odontologo['genero'] == 'otro' ? 'selected' : '' }}>Otro
                                                     </option>
                                                 </select>
                                             </div>

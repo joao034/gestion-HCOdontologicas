@@ -28,14 +28,14 @@ class UserController extends Controller
             'tipo_documento_id' => 'required|integer',
             'nombres' => 'required|string|max:255',
             'apellidos' => 'required|string|max:255',
-            'cedula' => 'required|string|min:6|max:16',
-            'sexo' => 'required|string|max:255',
+            'num_identificacion' => 'required|string|min:6|max:16',
+            'genero' => 'required|string|max:255',
             'celular' => 'required|string|min:10|max:10',
             'especialidades' => 'required|array|min:1',
         ];
 
-        if (isset($data['cedula']) && $data['tipo_documento_id'] == 1) {
-            $rules['cedula'] = ['validar_cedula', 'min:10', 'max:10'];
+        if (isset($data['num_identificacion']) && $data['tipo_documento_id'] == 1) {
+            $rules['num_identificacion'] = ['validar_cedula', 'min:10', 'max:10'];
         }
         return Validator::make($data, $rules);
     }
@@ -47,8 +47,8 @@ class UserController extends Controller
             'tipo_documento_id' => 'required|integer',
             'nombres' => 'required|string|max:255',
             'apellidos' => 'required|string|max:255',
-            'cedula' => 'required|string|min:6|max:16',
-            'sexo' => 'required|string|max:255',
+            'num_identificacion' => 'required|string|min:6|max:16',
+            'genero' => 'required|string|max:255',
             'celular' => 'required|string|min:10|max:10',
             'especialidades' => 'required|array|min:1',
         ];
@@ -161,8 +161,8 @@ class UserController extends Controller
         $user->odontologo->user_id = $user->id;
         $user->odontologo->nombres = $request->nombres;
         $user->odontologo->apellidos = $request->apellidos;
-        $user->odontologo->cedula = $request->cedula;
-        $user->odontologo->sexo = $request->sexo;
+        $user->odontologo->num_identificacion = $request->num_identificacion;
+        $user->odontologo->genero = $request->genero;
         $user->odontologo->celular = $request->celular;
         $user->odontologo->save();
         $this->almacenarEspecialidadesSeleccionadas($user->odontologo, $request);

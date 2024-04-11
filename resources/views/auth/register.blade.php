@@ -160,11 +160,11 @@
                                             <div class="mb-3">
                                                 <label for=""
                                                     class="form-label fw-bold">{{ __('Número de Registro') }} <span class="text-danger">*</span></label>
-                                                <input type="text"class="form-control form-control-md" name="cedula"
+                                                <input type="text"class="form-control form-control-md" name="num_identificacion"
                                                     id="cedula_odo" aria-describedby="helpId"
                                                     placeholder="Escriba su número de registro del ACESS" maxlength="16"
-                                                    value="{{ old('cedula') }}">
-                                                @error('cedula')
+                                                    value="{{ old('num_identificacion') }}">
+                                                @error('num_identificacion')
                                                     <span class="invalid-feedback" role="alert">
                                                         <strong>{{ $message }}</strong>
                                                     </span>
@@ -189,7 +189,7 @@
                                             <div class="mb-3">
                                                 <label for=""
                                                     class="form-label fw-bold">{{ __('Género') }} <span class="text-danger">*</span></label>
-                                                <select class="form-select form-select-md" name="sexo"
+                                                <select class="form-select form-select-md" name="genero"
                                                     aria-label=".form-select-sm example">
                                                     <option>Seleccione el género</option>
                                                     <option value="masculino">Masculino</option>

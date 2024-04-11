@@ -41,8 +41,8 @@ class Odontologo extends Model
 		'user_id',
 		'nombres',
 		'apellidos',
-		'cedula',
-		'sexo',
+		'num_identificacion',
+		'genero',
 		'celular'
 	];
 

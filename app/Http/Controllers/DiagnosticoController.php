@@ -4,10 +4,8 @@ namespace App\Http\Controllers;
 
 use App\Http\Controllers\Controller;
 use App\Http\Requests\DiagnosticoRequest;
-use Illuminate\Http\Request;
 use App\Models\Paciente;
 use App\Models\Diagnostico;
-use App\Models\HistoriaClinica;
 use Exception;
 use App\Models\User;
 

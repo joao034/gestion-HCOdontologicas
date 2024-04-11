@@ -19,7 +19,8 @@ return new class extends Migration
             $table->string('parentesco_covid')->nullable();
             $table->string('grado_contagio')->nullable();
             
-            $table->unsignedBigInteger('paciente_id')->nullable();
+            //$table->unsignedBigInteger('paciente_id')->nullable();
+            $table->unsignedBigInteger('hclinica_id')->nullable();
         });
     }
 

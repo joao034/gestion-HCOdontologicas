@@ -12,9 +12,9 @@ return new class extends Migration
             $table->id();
             
             $table->string('tipo');
-            $table->integer('caries');
-            $table->integer('perdidas');
-            $table->integer('obturadas');
+            $table->integer('caries')->default(0);
+            $table->integer('perdidas')->default(0);
+            $table->integer('obturadas')->default(0);
             $table->timestamps();
 
             $table->foreignId('odontograma_id')->constrained('odontograma_cabecera');

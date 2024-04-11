@@ -12,9 +12,10 @@ return new class extends Migration
             $table->id();
             $table->timestamps();
             $table->string('representante', 100)->nullable();
-            $table->string('cedula_representante', 16)->nullable();
+            $table->string('num_identificacion', 16)->nullable();
+            $table->string('parentesco', 30)->nullable();
 
-            $table->unsignedBigInteger('paciente_id');
+            //$table->unsignedBigInteger('paciente_id');
         });
     }
 

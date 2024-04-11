@@ -12,11 +12,11 @@ return new class extends Migration
         Schema::create('odontograma_cabecera', function (Blueprint $table) {
             $table->id();
             $table->timestamps();
-            //$table->date('fecha_creacion');
             $table->float('total');
             
             //foreign key
-            $table->foreignId('paciente_id')->constrained('pacientes');
+            //$table->foreignId('paciente_id')->constrained('pacientes');
+            $table->foreignId('hclinica_id')->constrained('historias_clinicas');
             
         });
     }

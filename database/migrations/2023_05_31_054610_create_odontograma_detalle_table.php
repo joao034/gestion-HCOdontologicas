@@ -21,8 +21,6 @@ return new class extends Migration
             //foreign keys
             $table->foreignId('odontograma_cabecera_id')->constrained('odontograma_cabecera');
             $table->foreignId('tratamiento_id')->constrained('tratamientos');
-            /* $table->foreignId('odontologo_id')->constrained('odontologos');
-            $table->foreignId('simbolo_id')->constrained('simbolos');        */  
             $table->unsignedBigInteger('odontologo_id')->nullable();
             $table->unsignedBigInteger('simbolo_id')->nullable();   
         });

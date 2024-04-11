@@ -125,7 +125,7 @@ class Paciente extends Model
 	{
 		return Paciente::where('nombres', 'LIKE', '%' . $search . '%')
 			->orWhere('apellidos', 'LIKE', '%' . $search . '%')
-			->orWhere('cedula', 'LIKE', '%' . $search . '%')
+			->orWhere('num_identificacion', 'LIKE', '%' . $search . '%')
 			->orderBy($orderBy, $order)
 			->paginate(10);
 	}
@@ -136,7 +136,7 @@ class Paciente extends Model
 		return DB::table('pacientes')->selectRaw('*, EXTRACT(YEAR FROM CURRENT_DATE) - EXTRACT(YEAR FROM fecha_nacimiento) - CASE WHEN EXTRACT(MONTH FROM CURRENT_DATE) * 100 + EXTRACT(DAY FROM CURRENT_DATE) < EXTRACT(MONTH FROM fecha_nacimiento) * 100 + EXTRACT(DAY FROM fecha_nacimiento) THEN 1 ELSE 0 END as edad')
 			->orWhere('nombres', 'LIKE', '%' . $search . '%')
 			->orWhere('apellidos', 'LIKE', '%' . $search . '%')
-			->orWhere('cedula', 'LIKE', '%' . $search . '%')
+			->orWhere('num_identificacion', 'LIKE', '%' . $search . '%')
 			->orderBy($ordeBay, $order)
 			->paginate(10);
 	}

@@ -22,7 +22,8 @@ return new class extends Migration
             $table->string('otra_enfermedad', 100)->nullable();
             $table->string('otro_habito', 100)->nullable();
 
-            $table->unsignedBigInteger('paciente_id')->nullable();
+            //$table->unsignedBigInteger('paciente_id')->nullable();
+            $table->unsignedBigInteger('hclinica_id')->nullable();
         });
     }
 

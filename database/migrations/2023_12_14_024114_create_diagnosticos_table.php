@@ -17,7 +17,7 @@ return new class extends Migration
             $table->string('tipo')->nullable();
 
             //foreing key
-            $table->unsignedBigInteger('paciente_id');
+            $table->unsignedBigInteger('hclinica_id');
         });
     }
 

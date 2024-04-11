@@ -15,7 +15,7 @@ return new class extends Migration
             $table->string('tipos_examen')->nullable();
             $table->text('observaciones')->nullable();
             
-            $table->unsignedBigInteger('paciente_id');
+            $table->unsignedBigInteger('hclinica_id');
         });
     }
 

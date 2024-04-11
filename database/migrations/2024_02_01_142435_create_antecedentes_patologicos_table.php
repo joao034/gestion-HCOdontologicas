@@ -16,7 +16,7 @@ return new class extends Migration
             $table->text('desc_familiares')->nullable();
             $table->timestamps();
 
-            $table->unsignedBigInteger('paciente_id');
+            $table->unsignedBigInteger('hclinica_id');
         });
     }
 

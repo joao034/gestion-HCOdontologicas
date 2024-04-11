@@ -12,8 +12,8 @@ return new class extends Migration
             $table->id();
             $table->string('nombres', 50);
             $table->string('apellidos', 50);
-            $table->string('cedula', 16)->unique();
-            $table->string('sexo', 20);
+            $table->string('num_identificacion', 16)->unique(); //change in models...
+            $table->string('genero', 20); //change in models...
             $table->date('fecha_nacimiento');
             $table->string('estado_civil', 30);
             $table->string('ocupacion', 50)->nullable();
@@ -21,11 +21,12 @@ return new class extends Migration
             $table->string('celular', 10)->nullable();
             $table->string('telef_convencional', 10)->nullable();
             $table->boolean('consentimiento')->default(true);
+            //considerar agregar un correo
             $table->timestamps();
 
             //foreing keys
-            $table->unsignedBigInteger('tipo_documento_id')->default(1);
-            $table->unsignedBigInteger('tipo_nacionalidad_id')->default(1);
+            $table->unsignedBigInteger('tipo_documento_id');
+            $table->unsignedBigInteger('tipo_nacionalidad_id');
         });
         
     }

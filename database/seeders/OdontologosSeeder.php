@@ -26,8 +26,8 @@ class OdontologosSeeder extends Seeder
             'user_id' => $user->id,
             'nombres' => 'Ana',
             'apellidos' => 'Aguilar',
-            'cedula' => '1802471092',
-            'sexo' => 'femenino',
+            'num_identificacion' => '1802471092',
+            'genero' => 'femenino',
             'celular' => '0999999999'
         ]);
     }

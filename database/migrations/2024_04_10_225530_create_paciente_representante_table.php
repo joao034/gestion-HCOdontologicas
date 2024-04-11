@@ -8,17 +8,17 @@ return new class extends Migration
 {
     public function up(): void
     {
-        Schema::create('historias_clinicas', function (Blueprint $table) {
+        Schema::create('paciente_representante', function (Blueprint $table) {
             $table->id();
             $table->timestamps();
 
-            $table->unsignedBigInteger('paciente_id');
-            $table->unsignedBigInteger('odontologo_id');
+            $table->foreignId('paciente_id')->constrained('pacientes');
+            $table->foreignId('representante_id')->constrained('representantes');
         });
     }
 
     public function down(): void
     {
-        Schema::dropIfExists('historias_clinicas');
+        Schema::dropIfExists('paciente_representante');
     }
 };

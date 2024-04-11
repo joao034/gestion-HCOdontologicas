@@ -22,7 +22,7 @@ return new class extends Migration
             
 
             // Definir claves foráneas
-            $table->unsignedBigInteger('paciente_id');
+            $table->unsignedBigInteger('hclinica_id');
         });
     }
 

@@ -12,15 +12,15 @@ return new class extends Migration
             $table->id();
             $table->timestamps();
             $table->string('nombres', 50);
-            $table->string('apellidos', 50);
-            $table->string('cedula', 16)->unique();
+            $table->string('apellidos', 50); 
+            $table->string('num_identificacion', 16)->unique(); //change in models...
             $table->string('celular', 10);
-            $table->string('sexo', 20);
+            $table->string('genero', 20); //change in models
 
             //llave foranea
             $table->unsignedBigInteger('user_id');
-            $table->unsignedBigInteger('tipo_documento_id')->default(1);
-            $table->unsignedBigInteger('tipo_nacionalidad_id')->default(1);
+            $table->unsignedBigInteger('tipo_documento_id');
+            $table->unsignedBigInteger('tipo_nacionalidad_id');
         });
     }
 

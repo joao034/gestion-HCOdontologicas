@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Http\Controllers\Controller;
+use App\Http\Requests\TratamientoRequest;
 use Illuminate\Http\Request;
 use App\Models\Tratamiento;
 use Illuminate\Support\Facades\Validator;
@@ -15,23 +16,8 @@ class TratamientoController extends Controller
         $this->middleware('role.admin');
     }
 
-    /**
-     * Valida los datos del tratamiento del formulario.
-     *
-     * @param  array  $data
-     * @return \Illuminate\Contracts\Validation\Validator
-     */
-    protected function validator(array $data)
-    {
-        return Validator::make($data, [
-            'nombre' => ['required', 'string', 'max:255'],
-            'precio' => ['required', 'numeric'],
-        ]);
-    }
-
     public function index()
     {
-        //retornar en orden alfabético los tratamientos
         $tratamientos = Tratamiento::orderBy('nombre', 'asc')->get();
         return view('tratamientos.index', compact('tratamientos'));
     }
@@ -40,12 +26,10 @@ class TratamientoController extends Controller
     {
     }
 
-    public function store(Request $request)
+    public function store(TratamientoRequest $request)
     {
         try{
             $tratamiento = new Tratamiento();
-            //valida el ingreso de los datos
-            $this->validator($request->all())->validate();
             $this->storeAndUpdate($request, $tratamiento);
             return to_route('tratamientos.index')->with('message', 'Tratamiento creado correctamente');
         }catch(\Exception $e){
@@ -54,26 +38,14 @@ class TratamientoController extends Controller
         
     }
 
-    public function show($id)
-    {
-    }
-
-    public function edit($id)
-    {
-    }   
-
-    public function update(Request $request, $id)
+    public function update(TratamientoRequest $request, Tratamiento $tratamiento)
     {
         try{
-            $tratamiento = Tratamiento::find($id);
-            //valida el ingreso de los datos
-            $this->validator($request->all())->validate();
             $this->storeAndUpdate($request, $tratamiento);
-
+            return to_route('tratamientos.index')->with('message', 'Tratamiento actualizado correctamente');
         }catch(\Exception $e){
             return to_route('tratamientos.index')->with('danger', 'No se pudo actualizar el tratamiento');
         }
-        return to_route('tratamientos.index')->with('message', 'Tratamiento actualizado correctamente');
     }
 
     public function destroy($id)

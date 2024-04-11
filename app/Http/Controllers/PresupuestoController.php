@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Events\DetallePresupuestoModificado;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 
@@ -18,10 +19,6 @@ use Illuminate\Support\Facades\Auth;
 
 class PresupuestoController extends Controller
 {
-
-    public function __construct()
-    {
-    }
 
     //deprecated
     /*  public function index( Request $request )
@@ -85,10 +82,11 @@ class PresupuestoController extends Controller
             $detalle_presupuesto->num_pieza_dental = "-";
             $detalle_presupuesto->cara_dental = "-";
             $detalle_presupuesto->precio = Tratamiento::find($request->tratamiento_id)->precio;
-            $detalle_presupuesto->simbolo_id = Simbolo::first()->id;
             $detalle_presupuesto->odontologo_id = $this->guardarOdontologId($request);
             $detalle_presupuesto->estado = 'necesario';
             $detalle_presupuesto->save();
+
+            DetallePresupuestoModificado::dispatch( $detalle_presupuesto, 'add' );
             return back()->with('message', 'Tratamiento agregado al presupuesto.');
         } catch (Exception $e) {
             return back()->with('danger', 'No se agregó el tratamiento al presupuesto.' . $e->getMessage());

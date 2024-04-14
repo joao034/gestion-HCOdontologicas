@@ -12,9 +12,7 @@
                     <hr>
                     <h3 class="text-center g-2 fw-bold">Consultas</h3>
                     <hr>
-                    {{-- <p class="text-center fs-5"><strong>Paciente: </strong>{{$paciente->nombres . ' ' . $paciente->apellidos}}</p> --}}
-                    <p class="text-center fs-5"><strong>Hclinica: </strong>{{$hClinica->id}}</p>
-
+                    <p class="text-center fs-5"><strong>Paciente: </strong>{{$hClinica->paciente->nombreCompleto()}}
                     {{-- @include('hclinicas.components.datos_personales', ['modo' => 'create']) --}}
 
                     @include('hclinicas.components.motivo_consulta', ['modo' => 'edit'])

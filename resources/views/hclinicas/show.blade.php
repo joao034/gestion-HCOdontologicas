@@ -1,6 +1,6 @@
 @extends('layouts.app')
 @section('content')
-<a href="{{ route('hclinicas.create') }}" class="btn btn-primary"><i class="fa-solid fa-plus"></i> Nueva historia clinica</a>
+<a href="{{ route('hclinicas.create') }}" class="btn btn-primary"><i class="fa-solid fa-plus"></i> Nueva historia clínica</a>
 
 <div class="table-responsive">
     <br>
@@ -8,7 +8,7 @@
         <thead class="bg-dark text-white">
             <tr>
                 <th scope="col" class="">Nº</th>
-                <th scope="col" class="">Fecha</th>
+                <th scope="col" class="">Fecha de creación</th>
                 <th scope="col" class="">Paciente</th>
                 <th scope="col" class="">Odontólogo</th>
             </tr>
@@ -17,8 +17,8 @@
             @forelse ($hClinicas as $hClinica)
                 <tr class="">
                     <td scope="row">{{ $hClinica->id }}</td>
-                    <td>{{ $hClinica->created_at }}</td>
-                    <td>{{ $hClinica->paciente_id }}</td>
+                    <td>{{ $hClinica->created_at->format('d/m/y') }}</td>
+                    <td>{{ $hClinica->paciente->nombreCompleto() }}</td>
                     <td>{{ $hClinica->odontologo_id}} </td>
                     <td>
                         <!--editar-->

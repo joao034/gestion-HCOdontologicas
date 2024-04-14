@@ -1,6 +1,6 @@
 <nav class="navbar navbar-expand-lg navbar-light bg-primary shadow-sm">
     <div class="container">
-        <a class="navbar-brand text-white" href="{{ url('/hclinicas') }}">
+        <a class="navbar-brand text-white">
             <img src="{{ asset('assets/img/logo.png') }}" width="35px" height="auto" style="border-radius: 5px"
                 alt="">
             <span class=""> Saúde Medical Group</span>

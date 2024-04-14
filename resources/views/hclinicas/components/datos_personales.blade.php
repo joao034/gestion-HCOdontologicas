@@ -113,7 +113,7 @@
                 <div class="mb-3">
                     <label for="" class="form-label fw-bold">Edad</label>
                     <input type="text"
-                        value="{{ $modo == 'show' || $modo == 'edit' ? $paciente->edad : old('edad') }}"
+                        value="{{ $modo == 'show' || $modo == 'edit' ? $paciente->edad() : old('edad') }}"
                         {{ $modo == 'show' ? 'readonly' : '' }} class="form-control" name="edad" id="edad"
                         aria-describedby="helpId" placeholder="" readonly min="0" max="120" required>
 

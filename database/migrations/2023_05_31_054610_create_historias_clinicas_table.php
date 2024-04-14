@@ -13,7 +13,7 @@ return new class extends Migration
             $table->timestamps();
 
             $table->foreignId('paciente_id')->constrained('pacientes');
-            $table->unsignedBigInteger('odontologo_id');
+            $table->unsignedBigInteger('odontologo_id')->nullable();
         });
     }
 

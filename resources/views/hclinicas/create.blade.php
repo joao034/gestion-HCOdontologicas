@@ -1,6 +1,6 @@
 @extends('layouts.app')
 @section('content')
-    <form action="{{ route('hclinicas.store') }}" method="POST">
+    <form action="{{ route('pacientes.store') }}" method="POST">
         @csrf
         <div class="card border">
             <div class="card-body">
@@ -29,7 +29,7 @@
                             name="consentimiento" required value="1" {{ old('consentimiento') ? 'checked' : '' }}>
 
                         <label class="form-check-label" for="consentimiento">
-                            Acepto de manera libre y voluntaria dar mi consentimiento para la recolección, procesamiento
+                            El paciente acepta de manera libre y voluntaria dar mi consentimiento para la recolección, procesamiento
                             y
                             uso de mis datos personales con fines médicos y en el contexto de la historia clínica
                             odontológica.

@@ -6,12 +6,13 @@
 
 namespace App\Models;
 
+use App\Observers\PacienteObserver;
 use Carbon\Carbon;
 use Illuminate\Database\Eloquent\Collection;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Support\Facades\DB;
-
+use Illuminate\Database\Eloquent\Attributes\ObservedBy;
 
 /**
  * Class Paciente
@@ -38,6 +39,8 @@ use Illuminate\Support\Facades\DB;
  *
  * @package App\Models
  */
+
+ #[ObservedBy([PacienteObserver::class])]
 class Paciente extends Model
 {
 	use HasFactory;

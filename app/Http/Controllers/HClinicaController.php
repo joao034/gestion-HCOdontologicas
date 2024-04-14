@@ -41,6 +41,7 @@ class HClinicaController extends Controller
         ];
 
         //si es mayor o igual a 18 y su tipo de documento es cedula el campo cedula es obligatorio
+        //crear rules
         if (isset($data['fecha_nacimiento']) && !empty($data['fecha_nacimiento']) && $data['tipo_documento_id'] == 1) {
             $fecha_nacimiento = date_create($data['fecha_nacimiento']);
             $hoy = date_create(date('Y-m-d'));

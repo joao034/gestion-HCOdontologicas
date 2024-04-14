@@ -18,6 +18,8 @@ use App\Http\Controllers\AbonoController;
 use App\Http\Controllers\DiagnosticoController;
 use App\Http\Controllers\ExamenComplementarioController;
 use App\Http\Controllers\ConsultaController;
+use App\Http\Controllers\PacienteController;
+use App\Models\Paciente;
 
 //use Illuminate\Support\Facades\App;
 
@@ -39,6 +41,7 @@ Auth::routes();
 
 Route::middleware('auth')->group(function () {
 
+    Route::resource('pacientes', PacienteController::class);
     Route::resource("hclinicas", HClinicaController::class);
 
     Route::resource("tratamientos", TratamientoController::class);

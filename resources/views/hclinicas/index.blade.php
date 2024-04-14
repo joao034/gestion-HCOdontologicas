@@ -48,7 +48,7 @@
                 @foreach ($pacientes as $paciente)
                 <tr class="">
                     <td scope="row">{{$paciente->id}}</td>
-                    <td>{{$paciente->cedula}}</td>
+                    <td>{{$paciente->num_identificacion}}</td>
                     <td>{{$paciente->apellidos . ' ' . $paciente->nombres}}</td>
                     <td>{{$paciente->edad}} años</td>
                     <td>{{$paciente->celular}}</td>

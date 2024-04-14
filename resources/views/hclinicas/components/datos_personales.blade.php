@@ -85,11 +85,11 @@
                 <div class="mb-3">
                     <label for="" class="form-label fw-bold">Nro del documento de
                         identificación</label>
-                    <input type="text" class="form-control" name="cedula"
-                        value="{{ $modo == 'show' || $modo == 'edit' ? $paciente->cedula : old('cedula') }}"
+                    <input type="text" class="form-control" name="num_identificacion"
+                        value="{{ $modo == 'show' || $modo == 'edit' ? $paciente->num_identificacion : old('num_identificacion') }}"
                         {{ $modo == 'show' ? 'readonly' : '' }} minlength="6" maxlength="16" id="cedula"
                         aria-describedby="helpId" placeholder="Escriba el nro de identificación del paciente">
-                    @error('cedula')
+                    @error('num_identificacion')
                         <small class="text-danger"> {{ $message }}</small>
                     @enderror
                 </div>
@@ -202,28 +202,28 @@
                     <label for="" class="form-label fw-bold">Género <span
                             class="text-danger">*</span></label>
                     @if ($modo == 'show')
-                        <input type="text" class="form-control" value="{{ strtoupper($paciente->sexo) }}"
+                        <input type="text" class="form-control" value="{{ strtoupper($paciente->genero) }}"
                             readonly>
                     @else
-                        <select class="form-select form-select-md" name="sexo" required
+                        <select class="form-select form-select-md" name="genero" required
                             {{ $modo == 'show' ? 'disabled' : '' }} aria-label=".form-select-sm example">
                             <option selected value="">Seleccione el género del paciente
                             </option>
                             <option value="masculino"
-                                {{ old('sexo') == 'masculino' || (($modo == 'show' || $modo == 'edit') && $paciente->sexo == 'masculino') ? 'selected' : '' }}>
+                                {{ old('genero') == 'masculino' || (($modo == 'show' || $modo == 'edit') && $paciente->genero == 'masculino') ? 'selected' : '' }}>
                                 Masculino</option>
                             <option value="femenino"
-                                {{ old('sexo') == 'femenino' || (($modo == 'show' || $modo == 'edit') && $paciente->sexo == 'femenino') ? 'selected' : '' }}>
+                                {{ old('genero') == 'femenino' || (($modo == 'show' || $modo == 'edit') && $paciente->genero == 'femenino') ? 'selected' : '' }}>
                                 Femenino
                             </option>
                             <option value="otro"
-                                {{ old('sexo') == 'otro' || (($modo == 'show' || $modo == 'edit') && $paciente->sexo == 'otro') ? 'selected' : '' }}>
+                                {{ old('genero') == 'otro' || (($modo == 'show' || $modo == 'edit') && $paciente->genero == 'otro') ? 'selected' : '' }}>
                                 Otro
                             </option>
                         </select>
                     @endif
 
-                    @error('sexo')
+                    @error('genero')
                         <small class="text-danger"> {{ $message }}</small>
                     @enderror
                 </div>

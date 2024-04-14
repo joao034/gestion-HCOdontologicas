@@ -13,6 +13,9 @@ use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Database\Eloquent\Attributes\ObservedBy;
+use Illuminate\Database\Eloquent\Relations\BelongsTo;
+use Illuminate\Database\Eloquent\Relations\HasMany;
+use Illuminate\Database\Eloquent\Relations\HasOne;
 
 /**
  * Class Paciente
@@ -63,12 +66,12 @@ class Paciente extends Model
 		'consentimiento',
 	];
 
-	public function historias_clinicas()
+	public function historiasClinicas() : HasMany
     {
         return $this->hasMany(HistoriaClinica::class);
     }
 
-	public function antecedentes_infecciosos()
+	/* public function antecedentes_infecciosos()
 	{
 		return $this->hasOne(AntecedentesInfeccioso::class);
 	}
@@ -76,51 +79,31 @@ class Paciente extends Model
 	public function antecedentes_personales_familiares()
 	{
 		return $this->hasOne(AntecedentesPersonalesFamiliare::class);
-	}
+	} */
 
-	public function odontogramasCabecera()
-	{
-		return $this->hasMany(Odontograma::class);
-	}
-
-	public function diagnosticos()
-	{
-		return $this->hasMany(Diagnostico::class);
-	}
-
-	public function representante()
+	public function representante() : HasOne
 	{
 		return $this->hasOne(Representante::class);
 	}
 
-	public function tipo_documento()
+	public function tipo_documento() : BelongsTo
 	{
 		return $this->belongsTo(TipoDocumento::class, 'tipo_documento_id');
 	}
 
-	public function tipo_nacionalidad()
+	public function tipo_nacionalidad() : BelongsTo
 	{
 		return $this->belongsTo(TipoNacionalidad::class, 'tipo_nacionalidad_id');
-	}
-
-	public function consulta()
-	{
-		return $this->hasOne(Consulta::class);
-	}
-
-	public function examenesComplementarios()
-	{
-		return $this->hasOne(ExamenComplementario::class);
-	}
-
-	public function antecedentes_patologicos()
-	{
-		return $this->hasOne(AntecedentePatologico::class);
 	}
 
 	public function edad()
 	{
 		return Carbon::parse($this->fecha_nacimiento)->age;
+	}
+
+	public function nombreCompleto() : string 
+	{
+		return $this->nombres . ' ' . $this->apellidos; 
 	}
 
 	//Devuelve la lista de pacientes con paginacion mediante eloquent

@@ -19,7 +19,7 @@
                 @endphp
 
                 @if ($user && $user->role === 'admin')
-                    <a class="nav-link active text-white" href="{{ route('hclinicas.index') }}" aria-current="page">
+                    <a class="nav-link active text-white" href="{{ route('pacientes.index') }}" aria-current="page">
                         <img class="svg-icon" src="{{ asset('assets/icons/hclinica.svg') }}" alt=""> Pacientes</a>
 
                     <li class="nav-item dropdown">

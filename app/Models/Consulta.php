@@ -4,6 +4,7 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Relations\BelongsTo;
 
 class Consulta extends Model
 {
@@ -20,9 +21,14 @@ class Consulta extends Model
         'observaciones_examen',
     ];
 
-    public function paciente()
+    //delete
+    /* public function paciente()
     {
         return $this->belongsTo(Paciente::class);
+    } */
+
+    public function historia_clinica() : BelongsTo{
+        return $this->belongsTo(HistoriaClinica::class);
     }
 
     public function retornar_partes_sistema_checkeadas($parte_sistema_checkeado)

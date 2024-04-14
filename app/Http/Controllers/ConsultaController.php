@@ -7,22 +7,23 @@ use Illuminate\Http\Request;
 use App\Models\Paciente;
 use App\Models\AntecedentePatologico;
 use App\Models\Consulta;
+use App\Models\HistoriaClinica;
 use Exception;
 
 class ConsultaController extends Controller
 {
-    public function edit($paciente_id)
+    public function edit($hClinica_id)
     {
-        $paciente = Paciente::find($paciente_id);
-        return view('consultas.edit', compact('paciente'));
+        $hClinica = HistoriaClinica::find($hClinica_id);
+        return view('consultas.edit', compact('hClinica'));
     }
 
-    public function update(Request $request, int $paciente_id)
+    public function update(Request $request, int $hClinica_id)
     {
         try {
-            $paciente = Paciente::find($paciente_id);
-            $this->guardarActualizarConsulta($request, $paciente);
-            $this->guardarActualizarAntecedentePatologico($request, $paciente);
+            $hClinica = HistoriaClinica::find($hClinica_id);
+            $this->guardarActualizarConsulta($request, $hClinica);
+            $this->guardarActualizarAntecedentePatologico($request, $hClinica);
             return back()->with('message', 'Consulta actualizada correctamente');
         } catch (Exception $e) {
             return back()->with('danger', 'Error al actualizar la consulta, ingrese valores numéricos');

@@ -22,7 +22,7 @@
                     <div class="form-check">
                         <input class="form-check-input border-primary" type="checkbox" id="checkbox{{ $key }}"
                             name="ant_personales[]" value="{{ $key }}"
-                            {{ ($modo == 'show' || $modo == 'edit') && $paciente->antecedentes_patologicos?->validar_checks_personales($key) == true ? 'checked' : '' }}>
+                            {{ ($modo == 'show' || $modo == 'edit') && $hClinica->antecedentes_patologicos?->validar_checks_personales($key) == true ? 'checked' : '' }}>
                         <label class="form-check-label" for="checkbox{{ $key }}">{{ $ant_personal }}</label>
                     </div>
                 </div>
@@ -31,7 +31,7 @@
 
         <div class="form-floating mt-2">
             <textarea class="form-control" style="height: 80px" name="desc_personales"
-                required {{ $modo == 'show' ? 'readonly' : '' }}>{{ $modo == 'show' || $modo == 'edit' ? $paciente->antecedentes_patologicos?->desc_personales : old('desc_personales') }}</textarea>
+                required {{ $modo == 'show' ? 'readonly' : '' }}>{{ $modo == 'show' || $modo == 'edit' ? $hClinica->antecedentes_patologicos?->desc_personales : old('desc_personales') }}</textarea>
             <label for="desc_personales" class="fw-bold fs-5">Descripción <span class="text-danger">* <span class="info_extra fs-6">(En el caso de no presentar antecedentes se anotará 'No refiere antecedentes')</span></span>
             </label>
         </div>
@@ -63,7 +63,7 @@
                     <div class="form-check">
                         <input class="form-check-input border-primary" type="checkbox" id="checkbox{{ $key }}"
                             name="ant_familiares[]" value="{{ $key }}"
-                            {{ ($modo == 'show' || $modo == 'edit') && $paciente->antecedentes_patologicos?->validar_checks_familiares($key)== true ? 'checked' : '' }}>
+                            {{ ($modo == 'show' || $modo == 'edit') && $hClinica->antecedentes_patologicos?->validar_checks_familiares($key)== true ? 'checked' : '' }}>
                         <label class="form-check-label" for="checkbox{{ $key }}">{{ $ant_familiar }}</label>
                     </div>
                 </div>
@@ -72,7 +72,7 @@
 
         <div class="form-floating mt-2">
             <textarea class="form-control" style="height: 80px" name="desc_familiares"
-                required {{ $modo == 'show' ? 'readonly' : '' }}>{{ $modo == 'show' || $modo == 'edit' ? $paciente->antecedentes_patologicos?->desc_familiares : old('desc_familiares') }}</textarea>
+                required {{ $modo == 'show' ? 'readonly' : '' }}>{{ $modo == 'show' || $modo == 'edit' ? $hClinica->antecedentes_patologicos?->desc_familiares : old('desc_familiares') }}</textarea>
             <label for="observaciones" class="fw-bold fs-5">Descripción <span class="text-danger">* <span class="info_extra fs-6">(En el caso de no presentar antecedentes se anotará 'No refiere antecedentes')</span></span>
             </label>
         </div>

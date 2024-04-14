@@ -16,7 +16,7 @@
             @foreach ($constantes_vitales as $key => $constante)
                 <div class="col-md-3">
                     <div class="form-floating">
-                        <input type="text" class="form-control" id="floatingInput" placeholder=""  value="{{ $modo == 'show' || $modo == 'edit' ?  $paciente->consulta?->$key : old($key) }}"
+                        <input type="text" class="form-control" id="floatingInput" placeholder=""  value="{{ $modo == 'show' || $modo == 'edit' ?  $hClinica->consulta?->$key : old($key) }}"
                         {{ $modo == 'show' ? 'readonly' : '' }}
                             name="{{ $key }}">
                         <label for="floatingInput" class="fw-bold">{{ $constante }}</label>

@@ -102,7 +102,7 @@ class OdontogramaDetalleController extends Controller
         $this->asignarVariables($detalle_odontograma, $request);
         $detalle_odontograma->save();
 
-        DetallePresupuestoModificado::dispatch($detalle_odontograma, 'add');
+        //DetallePresupuestoModificado::dispatch($detalle_odontograma, 'add');
     }
 
     private function asignarVariables(OdontogramaDetalle $detalle_odontograma, Request $request)
@@ -152,7 +152,7 @@ class OdontogramaDetalleController extends Controller
         try {
             $detalle_odontograma = OdontogramaDetalle::find($id);
             $detalle_odontograma->delete();
-            DetallePresupuestoModificado::dispatch( $detalle_odontograma, 'delete' );
+            //DetallePresupuestoModificado::dispatch( $detalle_odontograma, 'delete' );
             return back()->with('message', 'Detalle del odontograma eliminado correctamente.');
         } catch (\Exception $e) {
             return back()->with('danger', 'No se pudo eliminar el detalle del odontograma.');

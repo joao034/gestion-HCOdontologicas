@@ -26,10 +26,10 @@ class EventServiceProvider extends ServiceProvider
         NuevoPacienteEvent::class => [
             CrearOdontogramaListener::class
         ],
-        DetallePresupuestoModificado::class => [
+        /* DetallePresupuestoModificado::class => [
             SumarTotalPresupuestoListener::class,
             RestarTotalPresupuestoListener::class
-        ]
+        ] */
     ];
 
     /**

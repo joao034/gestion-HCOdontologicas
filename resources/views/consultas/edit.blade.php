@@ -1,7 +1,7 @@
 @extends('layouts.app')
 @section('content')
-    <x-navegacion-paciente :paciente="$paciente" />
-    <form action="{{ route('consultas.update', $paciente->id) }}" method="post">
+    <x-navegacion-hclinica :hClinica="$hClinica" />
+    <form action="{{ route('consultas.update', $hClinica->id) }}" method="post">
         @csrf
         @method('PUT')
         <div class="card border">
@@ -12,7 +12,8 @@
                     <hr>
                     <h3 class="text-center g-2 fw-bold">Consultas</h3>
                     <hr>
-                    <p class="text-center fs-5"><strong>Paciente: </strong>{{$paciente->nombres . ' ' . $paciente->apellidos}}</p>
+                    {{-- <p class="text-center fs-5"><strong>Paciente: </strong>{{$paciente->nombres . ' ' . $paciente->apellidos}}</p> --}}
+                    <p class="text-center fs-5"><strong>Hclinica: </strong>{{$hClinica->id}}</p>
 
                     {{-- @include('hclinicas.components.datos_personales', ['modo' => 'create']) --}}
 

@@ -43,19 +43,19 @@ Route::middleware('auth')->group(function () {
 
     Route::resource('pacientes', PacienteController::class);
     Route::resource("hclinicas", HClinicaController::class);
-
     Route::resource("tratamientos", TratamientoController::class);
     Route::resource("especialidades", EspecialidadController::class);
     //Route::resource("odontologos", OdontologoController::class);
     Route::resource("consultas", ConsultaController::class);
     Route::resource("odontogramas", OdontogramaController::class);
 
+    //Route::get('hclinicas/{hclinica_id}/datos-personales')->name('hclinica.datosPersonales');
+
     Route::put('odontogramas/update-cpo/{id}', [OdontogramaController::class, 'updateCpo'])->name('update.cpo');
 
     Route::put('odontogramas/update-indicador_salud_bucal/{id}', [OdontogramaController::class, 'update_indicador_salud_bucal'])->name('update.indicador_salud_bucal');
 
-    //id = id del paciente
-    Route::put('hclinicas/update-profesional_responsable/{id}', [HClinicaController::class, 'update_profesional_responsable'])->name('update.profesional_responsable');
+    Route::put('hclinicas/update-profesional_responsable/{paciente_id}', [HClinicaController::class, 'update_profesional_responsable'])->name('update.profesional_responsable');
 
     Route::resource("detalleOdontogramas", OdontogramaDetalleController::class);
     Route::resource("presupuestos", PresupuestoController::class);

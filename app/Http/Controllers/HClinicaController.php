@@ -84,18 +84,13 @@ class HClinicaController extends Controller
             return redirect()->back()->withErrors($validator)->withInput();
     }
 
-    public function index(Request $request)
-    {
-        $search = trim($request->get('buscador'));
-        $pacientes = Paciente::getAllPacientesWithPaginationDB($search, 'apellidos', 'asc');
-        return view('hclinicas.index', compact(['pacientes', 'search']));
-    }
 
     public function create()
     {
-        $tipos_documento = TipoDocumento::orderBy('nombre', 'asc')->get();
+        //delete
+        /* $tipos_documento = TipoDocumento::orderBy('nombre', 'asc')->get();
         $tipos_nacionalidad = TipoNacionalidad::all();
-        return view("hclinicas.create", compact(['tipos_documento', 'tipos_nacionalidad']));
+        return view("hclinicas.create", compact(['tipos_documento', 'tipos_nacionalidad'])); */
     }
 
     public function store(UserRequest $request)
@@ -131,20 +126,26 @@ class HClinicaController extends Controller
         }
     }
 
-    public function show(int $id)
-    {
-        try {
-            $paciente = Paciente::getPacienteFormateado($id);
-            $representante = Representante::where('paciente_id', $paciente->id)->first();
-            $antPersonales = AntecedentesPersonalesFamiliare::where('paciente_id', $paciente->id)->first();
-            $diagnostico = Diagnostico::where('paciente_id', $paciente->id)->first();
+    public function show(int $paciente_id)
+    {   
+        $hClinicas = HistoriaClinica::where('paciente_id', $paciente_id)->get();
+        return view('hclinicas.show', compact(['hClinicas']));
+
+       /*  try {
+            $hclinica = HistoriaClinica::find($id);
+            dd($hclinica);
+            $paciente = Paciente::getPacienteFormateado($hclinica->paciente_id);
+            //$representante = Representante::where('paciente_id', $paciente->id)->first();
+            //$antPersonales = AntecedentesPersonalesFamiliare::where('paciente_id', $paciente->id)->first();
+            //$diagnostico = Diagnostico::where('paciente_id', $paciente->id)->first();
             $tipos_documento = TipoDocumento::orderBy('nombre', 'asc')->get();
             $tipos_nacionalidad = TipoNacionalidad::all();
-            return view('hclinicas.show', compact(['paciente', 'antPersonales', 'representante', 'diagnostico', 'tipos_documento', 'tipos_nacionalidad']));
+            return view('hclinicas.show', compact(['paciente', 'tipos_documento', 'tipos_nacionalidad']));
+            //return view('hclinicas.show', compact(['paciente', 'antPersonales', 'representante', 'diagnostico', 'tipos_documento', 'tipos_nacionalidad']));
         } catch (\Exception $e) {
             return to_route('hclinicas.index')->with('danger', 'No se pudo mostrar la Historia Clinica.' . $e->getMessage());
             throw $e;
-        }
+        } */
     }
 
     public function edit(int $id)

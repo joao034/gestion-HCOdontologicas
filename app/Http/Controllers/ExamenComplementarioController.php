@@ -3,11 +3,11 @@
 namespace App\Http\Controllers;
 
 use App\Http\Controllers\Controller;
+use App\Http\Requests\ExamenComplementarioRequest;
 use Illuminate\Http\Request;
 use App\Models\ExamenComplementario;
 use App\Models\HistoriaClinica;
 use Exception;
-use App\Models\Paciente;
 
 class ExamenComplementarioController extends Controller
 {
@@ -23,31 +23,26 @@ class ExamenComplementarioController extends Controller
         return view('examenesComplementarios.edit', compact('hClinica'));
     }
 
-    public function store(Request $request)
+    public function store(ExamenComplementarioRequest $request)
     {
         try {
-            $request->validate([
-                'paciente_id' => 'required|numeric',
-                'examenes_solicitados' => 'required',
-                'observaciones' => 'required',
-            ]);
-            $paciente = Paciente::find($request->paciente_id);
-            $this->guardar_actualizar_examenes_complementarios($request, $paciente);
-            return to_route('examenesComplementarios.show', $request->paciente_id,)->with('message', 'Examenenes Complementarios almacenados correctamente');;
+            $hClinica = HistoriaClinica::find($request->hclinica_id);
+            $this->guardar_actualizar_examenes_complementarios($request, $hClinica);
+            return back()->with('message', 'Examenenes Complementarios almacenados correctamente');;
         } catch (Exception $e) {
             return back()->with('danger', 'Error al almacenar los examenes complementarios'. $e->getMessage());
         }
     }
 
-    private function guardar_actualizar_examenes_complementarios(Request $request, Paciente $paciente)
+    private function guardar_actualizar_examenes_complementarios(Request $request, HistoriaClinica $hClinica)
     {
-        $paciente->examenesComplementarios == null ? $paciente->examenesComplementarios = new ExamenComplementario() : $paciente->examenesComplementarios;
-        $paciente->examenesComplementarios->paciente_id = $paciente->id;
-        $paciente->examenesComplementarios->examenes_solicitados = $request->examenes_solicitados;
+        $hClinica->examenComplementario == null ? $hClinica->examenComplementario = new ExamenComplementario() : $hClinica->examenComplementario;
+        $hClinica->examenComplementario->hclinica_id = $hClinica->id;
+        $hClinica->examenComplementario->examenes_solicitados = $request->examenes_solicitados;
         if ($request->tipos_examen != null || $request->tipos_examen != "") {
-            $paciente->examenesComplementarios->tipos_examen = implode(",", $request->tipos_examen);
+            $hClinica->examenComplementario->tipos_examen = implode(",", $request->tipos_examen);
         }
-        $paciente->examenesComplementarios->observaciones = $request->observaciones;
-        $paciente->examenesComplementarios->save();
+        $hClinica->examenComplementario->observaciones = $request->observaciones;
+        $hClinica->examenComplementario->save();
     }
 }

@@ -9,5 +9,5 @@
     <div class="d-flex justify-content-end">
         <a class="btn btn-primary text-white" href="{{ route('examenesComplementarios.edit', $hClinica->id) }}">Editar</a>
     </div>
-    @include('hclinicas.components.exanenes_complementarios', ['modo' => 'show'])
+    @include('hclinicas.components.examenes_complementarios', ['modo' => 'show'])
 @endsection

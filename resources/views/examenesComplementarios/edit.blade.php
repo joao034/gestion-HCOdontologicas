@@ -7,8 +7,8 @@
     <h4 class="text-center"><strong>Paciente: </strong>{{$hClinica->paciente->nombreCompleto()}}</h4>
     <form action="{{ route('examenesComplementarios.store') }}" method="POST">
         @csrf
-        <input type="hidden" name="hclinica_id" value="{{$hClinia->paciente_id}}">
-        @include('hclinicas.components.exanenes_complementarios', ['modo' => 'edit'])
+        <input type="hidden" name="hclinica_id" value="{{$hClinica->id}}">
+        @include('hclinicas.components.examenes_complementarios', ['modo' => 'edit'])
         <div class="text-end">
             <button type="submit" class="btn btn-primary mt-3"><i class="fa-solid fa-check"></i>
                 Guardar</button>

@@ -7,7 +7,7 @@
 
                 <div class="container">
                     <!--Titulo-->
-                    <h3 class="text-center g-2 fw-bold">Historia Clínica Odontológica</h3>
+                    <h3 class="text-center g-2 fw-bold">Nuevo Paciente</h3>
 
                     @include('hclinicas.components.datos_personales', ['modo' => 'create'])
 
@@ -38,7 +38,7 @@
 
                     <div class="text-end">
                         <button type="submit" class="btn btn-primary mt-3"><i class="fa-solid fa-check"></i>
-                            Guardar Historia Clínica</button>
+                            Guardar Paciente</button>
                     </div>
                 </div>
             </div>

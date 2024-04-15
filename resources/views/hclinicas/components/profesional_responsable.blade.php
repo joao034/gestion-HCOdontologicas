@@ -9,7 +9,7 @@
         </div>
     @else
         {{-- @include('components.select_odontologos_activos') --}}
-        <div class="mb-3">
+        {{-- <div class="mb-3">
             <label for="" class="form-label fw-bold">Odontólogo</label>
             <select required class="form-select form-select-md" name="odontologo_id" id="odontologoSelect"
                 onchange="selectOdontologo()">
@@ -37,15 +37,15 @@
                     @endif
                 @endif
             </select>
-        </div>
+        </div> --}}
     @endif
 
-    <div>
+    {{-- <div>
         <label for="nombres" class="form-label fw-bold">Número de registro</label>
         <input type="text" value="{{ $paciente->historias_clinicas->first()?->odontologo->cedula }}"
             id="numero_registro" {{ $modo == 'show' ? 'readonly' : '' }} class="form-control" id=""
             aria-describedby="helpId" placeholder="Número de registro" readonly>
-    </div>
+    </div> --}}
 </div>
 
 <script>

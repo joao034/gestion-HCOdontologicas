@@ -6,6 +6,7 @@ use App\Events\DetallePresupuestoModificado;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\StoreOdontogramaDetalleRequest;
 use App\Http\Requests\UpdateOdontogramaDetalleRequest;
+use App\Models\HistoriaClinica;
 use App\Models\Odontograma;
 use App\Models\Odontologo;
 use Illuminate\Http\Request;
@@ -29,9 +30,12 @@ class OdontogramaDetalleController extends Controller
         }
     }
 
-    public function show(int $id)
+    public function show(int $hclinica_id)
     {
-        $odontograma = Odontograma::find($id);
+        $hClinica = HistoriaClinica::find( $hclinica_id );
+  
+        $odontograma = $hClinica->odontograma; 
+
         $tratamientos = Tratamiento::orderBy('nombre', 'asc')->get();
         $odontologos = User::get_odontologos_activos();
         $necesario = 'necesario';
@@ -45,10 +49,10 @@ class OdontogramaDetalleController extends Controller
         $simboloRojo = $simbolosRojos->where('color', $colorRojo)->first();
         $simboloAzul = $simbolosAzules->where('color', $colorAzul)->first();
 
-        $detalles_odontograma = $this->getDetallesOdontograma($id);
+        $detalles_odontograma = $this->getDetallesOdontograma($odontograma->id);
         $detalles = $odontograma->get_detalles();
 
-        return view('odontogramas.edit', compact([
+        return view('odontogramas.edit', compact([ 'hClinica',
             'tratamientos', 'odontograma', 'detalles_odontograma', 'detalles',
             'odontologos', 'simbolosRojos', 'simbolosAzules', 'simboloRojo', 'simboloAzul'
         ]));

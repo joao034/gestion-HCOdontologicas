@@ -1,13 +1,13 @@
 @extends('layouts.app')
 @section('content')
-    <x-navegacion-paciente :paciente="$odontograma->paciente" />
+    <x-navegacion-hClinica :hClinica="$hClinica" />
 
     <hr>
     <h5 class="text-center mt-4 mb-3 fw-bold">H. ODONTOGRAMA </h5>
     <hr>
 
     <h5 class="text-center"><span class="fw-bold">Paciente:</span>
-        {{ $odontograma->paciente->nombres . ' ' . $odontograma->paciente->apellidos }}</h5>
+{{ $hClinica->paciente->nombreCompleto() }}</h5>
     <h5 class="text-center mt-2 mb-4"><span class="fw-bold">Fecha de última actualización:</span>
         {{ \Carbon\Carbon::parse($odontograma->updated_at)->format('d/m/Y') }}</h5>
 
@@ -31,7 +31,7 @@
         {{-- @include('odontogramas.sms') --}}
 
         <div class="mb-2">
-            <a class="btn btn-secondary" href="{{ route('presupuestos.edit', $odontograma->id) }}"><i
+            <a class="btn btn-secondary" href="{{ route('presupuestos.edit', $hClinica->id) }}"><i
                     class="fa-regular fa-file"></i> Ir al Presupuesto </a>
         </div>
     </div>

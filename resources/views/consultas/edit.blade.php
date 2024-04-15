@@ -1,6 +1,6 @@
 @extends('layouts.app')
 @section('content')
-    <x-navegacion-hclinica :hClinica="$hClinica" />
+    <x-navegacion-hClinica :hClinica="$hClinica" />
     <form action="{{ route('consultas.update', $hClinica->id) }}" method="post">
         @csrf
         @method('PUT')

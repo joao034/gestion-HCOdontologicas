@@ -10,7 +10,7 @@ class Diagnostico extends Model
     use HasFactory;
 
     protected $fillable = [
-        'paciente_id',
+        'hclinica_id',
         'diagnostico',
         'CIE',
         'tipo'

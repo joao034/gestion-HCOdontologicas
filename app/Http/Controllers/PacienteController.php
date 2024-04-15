@@ -23,8 +23,7 @@ class PacienteController extends Controller
     {
         try {
             Paciente::create($request->all());
-            //TODO: dispatch an event which create a new hclinica
-            return to_route('pacientes.index');
+            return to_route('pacientes.index')->with('message', 'Paciente registrado exitosamente');
         } catch (Exception $e) {
             return to_route('pacientes.index', 'No se pudo guardar el nuevo paciente');
         }

@@ -29,7 +29,7 @@ class HistoriaClinica extends Model
 
     public function odontograma(): HasOne
     {
-        return $this->hasOne(Odontograma::class);
+        return $this->hasOne(Odontograma::class, 'hclinica_id');
     }
 
     public function consulta(): HasOne
@@ -39,12 +39,12 @@ class HistoriaClinica extends Model
 
     public function diagnostico(): HasOne
     {
-        return $this->hasOne(Diagnostico::class);
+        return $this->hasOne(Diagnostico::class, 'hclinica_id');
     }
 
     public function examenComplementario(): HasOne
     {
-        return $this->hasOne(ExamenComplementario::class);
+        return $this->hasOne(ExamenComplementario::class, 'hclinica_id');
     }
 
     public function antecedentes_patologicos()

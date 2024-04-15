@@ -3,11 +3,11 @@
         //'hclinicas.show' => 'Historia Clínica',
         'pacientes.edit' => 'Datos Personales',
         'consultas.edit' => 'Consulta',
-        'odontogramas.show' => 'Odontograma',
+        'detalleOdontogramas.show' => 'Odontograma',
         'examenesComplementarios.show' => 'Exámenes Complementarios',
         'diagnosticos.show' => 'Diagnóstico',
-        'presupuestos.show' => 'Presupuesto',
-    ];
+        'presupuestos.edit' => 'Presupuesto',
+    ]; 
 @endphp
 
 <nav class="nav justify-content-center">

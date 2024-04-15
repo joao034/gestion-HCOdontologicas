@@ -1,4 +1,4 @@
-<div class="modal" tabindex="-1" id="create{{ $paciente->id }}">
+<div class="modal" tabindex="-1" id="create{{ $hClinica->id }}">
     <div class="modal-dialog">
         <div class="modal-content">
             <div class="modal-header">
@@ -8,7 +8,7 @@
             <form action="{{ route('diagnosticos.store') }}" method="post">
                 @csrf
                 <div class="modal-body">
-                    <input type="hidden" name="paciente_id" value="{{ $paciente->id }}">
+                    <input type="hidden" name="hclinica_id" value="{{ $hClinica->id }}">
                     @include('hclinicas.components.diagnostico', ['modo' => 'create'])
                 </div>
                 <div class="modal-footer">

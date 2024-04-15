@@ -2,12 +2,12 @@
     <div class="card-body">
         <h4 class="card-title fw-bold text-center mb-4">Presupuesto Nº {{ $presupuesto->id }}</h4>
 
-        <a class="btn btn-info float-end text-white" href="{{ route('detalleOdontogramas.show', $presupuesto->id) }}"><i
+        <a class="btn btn-info float-end text-white" href="{{ route('detalleOdontogramas.show', $hClinica->id) }}"><i
                 class="fa-solid fa-tooth"></i> Ir al
             odontograma</a>
 
         <h6 class="fs-5"><strong>Paciente:</strong>
-            {{ $presupuesto->paciente->nombres . ' ' . $presupuesto->paciente->apellidos }}</h6>
+            {{ $hClinica->paciente->nombreCompleto() }}</h6>
         <h6 class="fs-5"><strong>Fecha:</strong>
             {{ \Carbon\Carbon::parse($presupuesto->created_at)->format('d/m/Y') }}</h6>
         <hr>

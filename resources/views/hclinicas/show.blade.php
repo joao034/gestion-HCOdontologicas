@@ -22,15 +22,10 @@
                     <td>{{ $hClinica->odontologo_id}} </td>
                     <td>
                         <!--editar-->
-                        <a href="{{ route('consultas.edit', $hClinica->id) }}" class="btn btn-secondary"><i
+                        <a href="{{ route('pacientes.edit', $hClinica->id) }}" class="btn btn-secondary"><i
                                 class="fa-regular fa-pen-to-square"></i> Ver</a>
-                        <!--eliminar-->
-                        {{-- <a class="btn btn-danger" data-bs-toggle="modal" data-bs-target="#delete{{$paciente->id}}">
-                    <i class="fa-regular fa-trash-can"></i> Eliminar
-                </a> --}}
                     </td>
                 </tr>
-                {{-- @include('hclinicas.destroy') --}}
             @empty
                 <tr>
                     <td colspan="6">El paciente no tiene historias clinicas.</td>

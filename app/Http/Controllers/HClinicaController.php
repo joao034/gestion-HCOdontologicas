@@ -85,14 +85,8 @@ class HClinicaController extends Controller
     }
 
 
-    public function create()
-    {
-        //delete
-        /* $tipos_documento = TipoDocumento::orderBy('nombre', 'asc')->get();
-        $tipos_nacionalidad = TipoNacionalidad::all();
-        return view("hclinicas.create", compact(['tipos_documento', 'tipos_nacionalidad'])); */
-    }
 
+    //delete
     public function store(UserRequest $request)
     {
         try {
@@ -111,7 +105,7 @@ class HClinicaController extends Controller
             //insertar datos otras tablas
             $this->almacenarRepresentante($request, $paciente->id);
 
-            NuevoPacienteEvent::dispatch($paciente);
+            
             //$this->guardarActualizarConsulta($request, $paciente);
             //$this->guardarActualizarAntecedentePatologico($request, $paciente);
             //$this->almacenarAntecedentePersonales($request, $paciente->id);
@@ -126,6 +120,7 @@ class HClinicaController extends Controller
         }
     }
 
+    //TODO: use to present all hclinica
     public function show(int $paciente_id)
     {   
         $hClinicas = HistoriaClinica::where('paciente_id', $paciente_id)->get();
@@ -148,6 +143,7 @@ class HClinicaController extends Controller
         } */
     }
 
+    
     public function edit(int $id)
     {
         $paciente = Paciente::getPacienteFormateado($id);

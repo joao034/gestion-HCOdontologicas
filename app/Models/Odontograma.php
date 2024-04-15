@@ -34,18 +34,18 @@ class Odontograma extends Model
 	protected $table = 'odontograma_cabecera';
 
 	protected $casts = [
-		'paciente_id' => 'int',
+		'hclinica_id' => 'int',
 		'total' => 'float'
 	];
 
 	protected $fillable = [
-		'paciente_id',
+		'hclinica_id',
 		'total'
 	];
 
-	public function paciente()
+	public function historiaClinica()
 	{
-		return $this->belongsTo(Paciente::class);
+		return $this->belongsTo(HistoriaClinica::class);
 	}
 
 	public function odontograma_detalles()

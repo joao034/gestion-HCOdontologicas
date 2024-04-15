@@ -50,10 +50,6 @@
                             <!--editar-->
                             <a href="{{ route('hclinicas.show', $paciente->id) }}" class="btn btn-secondary"><i
                                     class="fa-regular fa-pen-to-square"></i> Ver</a>
-                            <!--eliminar-->
-                            {{-- <a class="btn btn-danger" data-bs-toggle="modal" data-bs-target="#delete{{$paciente->id}}">
-                        <i class="fa-regular fa-trash-can"></i> Eliminar
-                    </a> --}}
                         </td>
                     </tr>
                     @include('hclinicas.destroy')

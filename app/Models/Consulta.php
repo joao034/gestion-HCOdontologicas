@@ -10,7 +10,7 @@ class Consulta extends Model
 {
     use HasFactory;
     protected $fillable = [
-        'paciente_id',
+        'hclinica_id',
         'motivo_consulta',
         'enfermedad_actual',
         'presion_arterial',
@@ -21,13 +21,7 @@ class Consulta extends Model
         'observaciones_examen',
     ];
 
-    //delete
-    /* public function paciente()
-    {
-        return $this->belongsTo(Paciente::class);
-    } */
-
-    public function historia_clinica() : BelongsTo{
+    public function historiaClinica() : BelongsTo{
         return $this->belongsTo(HistoriaClinica::class);
     }
 

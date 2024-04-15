@@ -3,6 +3,7 @@
 namespace App\Observers;
 
 use App\Models\HistoriaClinica;
+use App\Models\Odontograma;
 use App\Models\Paciente;
 
 class PacienteObserver
@@ -12,9 +13,14 @@ class PacienteObserver
      */
     public function created(Paciente $paciente): void
     {
-        HistoriaClinica::create([
+        $hClinica = HistoriaClinica::create([
             'paciente_id' => $paciente->id,
             'odontologo_id' => null
+        ]);
+
+        Odontograma::create([
+            'total' => 0,
+            'hclinica_id' => $hClinica->id
         ]);
     }
 

@@ -13,21 +13,13 @@ use App\Models\Simbolo;
 use App\Models\Tratamiento;
 use App\Models\Paciente;
 use App\Models\Abono;
+use App\Models\HistoriaClinica;
 use Exception;
 use Barryvdh\DomPDF\Facade\Pdf;
 use Illuminate\Support\Facades\Auth;
 
 class PresupuestoController extends Controller
 {
-
-    //deprecated
-    /*  public function index( Request $request )
-    {
-        $search = trim( $request->get('search') );
-        //devulve el paciente con sus presupuestos
-        $pacientes = Paciente::getAllPacientesWithPagination( $search, 'updated_at', 'desc' );
-        return view('presupuestos.index', compact(['search', 'pacientes']));
-    } */
 
     public function pdf($presupuesto_id)
     {
@@ -93,16 +85,17 @@ class PresupuestoController extends Controller
         }
     }
 
-    public function edit(int $presupuesto_id)
+    public function edit(int $hclinica_id)
     {
-        $presupuesto = Odontograma::find($presupuesto_id);
-        $detalles_presupuesto = $this->getDetallesPresupuesto($presupuesto_id);
+        $hClinica = HistoriaClinica::find($hclinica_id);
+        $presupuesto = $hClinica->odontograma->first();
+        $detalles_presupuesto = $this->getDetallesPresupuesto($presupuesto->id);
         $tratamientos = Tratamiento::orderBy('nombre', 'asc')->get();
-        $total_abonado = $this->getTotalAbonado($presupuesto_id);
-        $total_realizado = $this->getTotalRealizado($presupuesto_id);
-        $detalles = OdontogramaDetalle::where('odontograma_cabecera_id', $presupuesto_id)->get();
+        $total_abonado = $this->getTotalAbonado($presupuesto->id);
+        $total_realizado = $this->getTotalRealizado($presupuesto->id);
+        $detalles = OdontogramaDetalle::where('odontograma_cabecera_id', $presupuesto->id)->get();
         $abonos = Abono::whereIn('odontograma_detalle_id', $detalles->pluck('id'))->get();
-        return view('presupuestos.detalle_presupuesto', compact('detalles_presupuesto', 'presupuesto', 'tratamientos', 'total_abonado', 'total_realizado', 'abonos'));
+        return view('presupuestos.detalle_presupuesto', compact('hClinica', 'detalles_presupuesto', 'presupuesto', 'tratamientos', 'total_abonado', 'total_realizado', 'abonos'));
     }
 
     //no se ocupa

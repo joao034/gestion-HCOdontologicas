@@ -6,15 +6,16 @@ use App\Http\Controllers\Controller;
 use App\Http\Requests\DiagnosticoRequest;
 use App\Models\Paciente;
 use App\Models\Diagnostico;
+use App\Models\HistoriaClinica;
 use Exception;
 use App\Models\User;
 
 class DiagnosticoController extends Controller
 {
-    public function show(int $id_paciente){
-        $paciente = Paciente::find($id_paciente);
+    public function show(int $hclinica_id){
+        $hClinica = HistoriaClinica::find($hclinica_id);
         $odontologos = User::get_odontologos_activos();
-        return view('diagnosticos.show', compact('paciente', 'odontologos'));
+        return view('diagnosticos.show', compact('hClinica', 'odontologos'));
     }
 
     public function edit(Paciente $paciente){

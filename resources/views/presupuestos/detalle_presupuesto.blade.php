@@ -1,6 +1,6 @@
 @extends('layouts.app')
 @section('content')
-    <x-navegacion-paciente :paciente="$presupuesto->paciente" />
+    <x-navegacion-hClinica :hClinica="$hClinica" />
 
     @include('presupuestos.components.presupueto-info')
 

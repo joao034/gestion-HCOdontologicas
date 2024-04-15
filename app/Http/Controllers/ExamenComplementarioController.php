@@ -5,21 +5,22 @@ namespace App\Http\Controllers;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\Models\ExamenComplementario;
+use App\Models\HistoriaClinica;
 use Exception;
 use App\Models\Paciente;
 
 class ExamenComplementarioController extends Controller
 {
-    public function show(int $id_paciente)
+    public function show(int $hclinica_id)
     {
-        $paciente = Paciente::find($id_paciente);
-        return view('examenesComplementarios.show', ['paciente' => $paciente]);
+        $hClinica = HistoriaClinica::find($hclinica_id);
+        return view('examenesComplementarios.show', ['hClinica' => $hClinica]);
     }
 
-    public function edit(int $id_paciente)
+    public function edit(int $hclinica_id)
     {
-        $paciente = Paciente::find($id_paciente);
-        return view('examenesComplementarios.edit', ['paciente' => $paciente]);
+        $hClinica = HistoriaClinica::find($hclinica_id);
+        return view('examenesComplementarios.edit', compact('hClinica'));
     }
 
     public function store(Request $request)

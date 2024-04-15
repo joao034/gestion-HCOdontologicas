@@ -4,7 +4,6 @@ namespace App\Http\Controllers;
 
 use App\Http\Controllers\Controller;
 use App\Models\Odontograma;
-use App\Models\Paciente;
 use Illuminate\Http\Request;
 use App\Models\OdontogramaDetalle;
 use Carbon\Carbon;
@@ -14,17 +13,6 @@ use App\Models\IndicadorSaludBucal;
 
 class OdontogramaController extends Controller
 {
-
-    public function __construct()
-    {
-    }
-
-    public function index(Request $request)
-    {
-        /* $search = trim( $request->get('search') );
-        $pacientes = Paciente::getAllPacientesWithPagination( $search, 'updated_at', 'desc' );
-        return view('odontogramas.index', compact(['search', 'pacientes'])); */
-    }
 
     public function pdf(int $odontograma_cabecera_id)
     {
@@ -82,21 +70,10 @@ class OdontogramaController extends Controller
         }
     }
 
-    //muestra la lista de los odontogramas de un paciente
-    public function show(int $paciente_id)
+    //TODO: use to show the odontogram
+    public function show(int $hClinica_id)
     {
-        $paciente = Paciente::find($paciente_id);
-
-        // Ordenar los odontogramas por fecha en orden descendente
-        $odontogramas = $paciente->odontogramasCabecera()->latest('updated_at')->get();
-
-        //si el paciente tiene mas de un odontograma muestra la vista show
-        if ($odontogramas->count() > 1) {
-            return view('odontogramas.show', compact(['paciente', 'odontogramas']));
-        }
-
-        //Si tiene solo un odontograma redirije directamente al unico odontograma disponible
-        return to_route('detalleOdontogramas.show', $odontogramas->first()->id);
+       
     }
 
     public function destroy(int $id)

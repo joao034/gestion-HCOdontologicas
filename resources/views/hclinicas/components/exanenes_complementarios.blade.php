@@ -4,7 +4,7 @@
         <hr>
         <div class="form-floating mt-2">
             <textarea class="form-control" style="height: 80px" id="examenes_solicitados" name="examenes_solicitados"
-                required {{ $modo == 'show' ? 'readonly' : '' }}>{{ $modo == 'show' || $modo == 'edit' ? $paciente->examenesComplementarios?->examenes_solicitados : old('examenes_solicitados') }}</textarea>
+                required {{ $modo == 'show' ? 'readonly' : '' }}>{{ $modo == 'show' || $modo == 'edit' ? $hClinica->examenesComplementarios?->examenes_solicitados : old('examenes_solicitados') }}</textarea>
             <label for="examenes_solicitados" class="fw-bold">Exámenes solicitados <span class="text-danger">*</span>
             </label>
         </div>
@@ -29,7 +29,7 @@
                     <div class="form-check">
                         <input class="form-check-input border-primary" type="checkbox" id="checkbox{{ $key }}"
                             name="tipos_examen[]" value="{{ $key }}"
-                            {{ ($modo == 'show' || $modo == 'edit') && $paciente->examenesComplementarios?->retornar_tipos_examen($key) == true ? 'checked' : '' }}>
+                            {{ ($modo == 'show' || $modo == 'edit') && $hClinica->examenesComplementarios?->retornar_tipos_examen($key) == true ? 'checked' : '' }}>
                         <label class="form-check-label" for="checkbox{{ $key }}">{{ $examen }}</label>
                     </div>
                 </div>
@@ -38,7 +38,7 @@
 
         <div class="form-floating mt-2">
             <textarea class="form-control" style="height: 80px" name="observaciones"
-                required {{ $modo == 'show' ? 'readonly' : '' }}>{{ $modo == 'show' || $modo == 'edit' ? $paciente->examenesComplementarios?->observaciones : old('observaciones') }}</textarea>
+                required {{ $modo == 'show' ? 'readonly' : '' }}>{{ $modo == 'show' || $modo == 'edit' ? $hClinica->examenesComplementarios?->observaciones : old('observaciones') }}</textarea>
             <label for="observaciones" class="fw-bold">Observaciones <span class="text-danger">*</span>
             </label>
         </div>

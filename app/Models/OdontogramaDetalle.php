@@ -10,6 +10,8 @@ use Carbon\Carbon;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use App\Models\Odontograma;
+use App\Observers\OdontogramaDetalleObserver;
+use Illuminate\Database\Eloquent\Attributes\ObservedBy;
 
 /**
  * Class OdontogramaDetalle
@@ -33,9 +35,10 @@ use App\Models\Odontograma;
  * 
  * @package App\Models
  */
+
+ #[ObservedBy([OdontogramaDetalleObserver::class])]
 class OdontogramaDetalle extends Model
 {
-
 	use HasFactory;
 	protected $table = 'odontograma_detalle';
 
@@ -83,8 +86,6 @@ class OdontogramaDetalle extends Model
 	{
 		return $this->hasMany(Abono::class);
 	}
-
-	
 
 	public function retornar_caras_dentales($cara_dental_buscar) {
 		

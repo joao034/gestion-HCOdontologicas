@@ -7,7 +7,7 @@
         </div>
 
         <!--Formulario-->
-        <form action="{{ route('odontogramas.nuevo', ['paciente_id' => $odontograma->paciente_id]) }}" method="POST">
+        {{-- <form action="{{ route('odontogramas.nuevo', ['paciente_id' => $odontograma->paciente_id]) }}" method="POST">
             @csrf 
             <input type="hidden" name="paciente_id" id="paciente_id">
             <input type="hidden" name="odontograma_id" id="odontograma_id">
@@ -19,7 +19,7 @@
                 <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancelar</button>
                 <button type="submit" class="btn btn-primary">Crear</button>
             </div>
-        </form>
+        </form> --}}
       </div>
     </div>
   </div>

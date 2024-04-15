@@ -11,7 +11,7 @@
                 @csrf
                 @method('GET')
                 <div class="modal-body">
-                    ¿Desea enviar el presupuesto al celular <strong> {{ $presupuesto->paciente->celular}}</strong> del paciente <strong>{{ $presupuesto->paciente->nombres . ' ' . $presupuesto->paciente->apellidos  }} </strong> ?
+                    ¿Desea enviar el presupuesto al celular <strong> {{ $hClinica->paciente->celular}}</strong> del paciente <strong>{{ $hClinica->paciente->nombreCompleto()  }} </strong> ?
                 </div>
 
                 <div class="modal-footer">

@@ -22,14 +22,7 @@ class EventServiceProvider extends ServiceProvider
     protected $listen = [
         Registered::class => [
             SendEmailVerificationNotification::class,
-        ],
-        NuevoPacienteEvent::class => [
-            CrearOdontogramaListener::class
-        ],
-        /* DetallePresupuestoModificado::class => [
-            SumarTotalPresupuestoListener::class,
-            RestarTotalPresupuestoListener::class
-        ] */
+        ]
     ];
 
     /**

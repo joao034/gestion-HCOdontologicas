@@ -9,7 +9,7 @@ class ExamenComplementario extends Model
 {
     use HasFactory;
     protected $table = 'examenes_complementarios';
-    protected $fillable = ['paciente_id', 'examenes_solicitados', 'tipos_examen', 'observaciones'];
+    protected $fillable = ['hclinica_id', 'examenes_solicitados', 'tipos_examen', 'observaciones'];
     
     public function paciente()
     {

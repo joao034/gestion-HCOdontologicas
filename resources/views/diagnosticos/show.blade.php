@@ -1,11 +1,11 @@
 @extends('layouts.app')
 @section('content')
-    <x-navegacion-paciente :paciente="$paciente" />
+    <x-navegacion-hClinica :hClinica="$hClinica" />
     <hr>
     <h4 class="fw-bold text-center mt-4">N. Diagnóstico</h4>
     <hr>
-    <h4 class="text-center"><strong>Paciente: </strong>{{ $paciente->nombres . ' ' . $paciente->apellidos }}</h4>
-    <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#create{{ $paciente->id }}">
+    <h4 class="text-center"><strong>Paciente: </strong>{{ $hClinica->paciente->nombreCompleto() }}</h4>
+    <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#create{{ $hClinica->id }}">
         + Nuevo
     </button>
 

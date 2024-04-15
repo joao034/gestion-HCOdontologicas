@@ -14,10 +14,11 @@
             </tr>
         </thead>
         <tbody>
-            @if ($paciente->diagnosticos->isEmpty())
+           
+            {{-- @if ($hClinica->diagnostico->isEmpty())
                 <td>No hay diagnósticos del paciente</td>
             @else
-                @foreach ($paciente->diagnosticos as $diagnostico)
+                @foreach ($hClinica->diagnosticos as $diagnostico)
                     <tr class="">
                         <td scope="row">{{ $diagnostico->id }}</td>
                         <td>{{ $diagnostico->diagnostico }}</td>
@@ -30,13 +31,7 @@
                                 <button type="button" class="btn btn-secondary" data-bs-toggle="modal"
                                     data-bs-target="#edit{{ $diagnostico->id }}">
                                     <i class="fa-regular fa-pen-to-square"></i> Editar
-                                </button>
-
-                                <!--eliminar-->
-                                {{-- <button type="button" class="btn btn-danger" data-bs-toggle="modal"
-                        data-bs-target="#delete{{ $diagnostico->id }}">
-                        <i class="fa-regular fa-trash-can"></i> Eliminar
-                    </button> --}}
+                            </button>
 
                             </td>
                         @endif
@@ -45,7 +40,7 @@
                     @include('diagnosticos.edit')
                     @include('diagnosticos.delete')
                 @endforeach
-            @endif
+            @endif --}}
 
         </tbody>
     </table>

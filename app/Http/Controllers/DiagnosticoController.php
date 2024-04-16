@@ -25,7 +25,7 @@ class DiagnosticoController extends Controller
     public function store(DiagnosticoRequest $request){
         try{
             Diagnostico::create($request->all());
-            return to_route('diagnosticos.show', $request->paciente_id)->with('message', 'Diagnóstico guardado correctamente');
+            return back()->with('message', 'Diagnóstico guardado correctamente');
         }catch(Exception $e){
             return redirect()->back()->with('danger', 'Error al guardar el diagnóstico. '. $e->getMessage());
         }

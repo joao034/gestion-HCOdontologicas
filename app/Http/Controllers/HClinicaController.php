@@ -64,11 +64,9 @@ class HClinicaController extends Controller
         return Validator::make($data, $rules);
     }
 
-    public function update_profesional_responsable(Request $request, int $paciente_id){
+    public function update_profesional_responsable(Request $request, int $hclinica_id){
         try {
-            $paciente = Paciente::find($paciente_id);
-            $hclinica = count($paciente->historias_clinicas) == 1 ? $paciente->historias_clinicas->first() : new HistoriaClinica();
-            $hclinica->paciente_id = $paciente->id;
+            $hclinica = HistoriaClinica::find($hclinica_id);
             $hclinica->odontologo_id = $request->odontologo_id;
             $hclinica->save();
             return back()->with('message', 'Profesional responsable actualizado correctamente');

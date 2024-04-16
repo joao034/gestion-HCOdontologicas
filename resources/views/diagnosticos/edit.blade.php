@@ -9,7 +9,7 @@
                 @csrf
                 @method('PUT')
                 <div class="modal-body">
-                    <input type="hidden" name="paciente_id" value="{{ $paciente->id }}">
+                    <input type="hidden" name="hclinica_id" value="{{ $hClinica->id }}">
                     @include('hclinicas.components.diagnostico', ['modo' => 'edit'])
                 </div>
                 <div class="modal-footer">

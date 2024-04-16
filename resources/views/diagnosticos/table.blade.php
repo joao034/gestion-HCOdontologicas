@@ -15,7 +15,7 @@
         </thead>
         <tbody>
            
-            {{-- @if ($hClinica->diagnostico->isEmpty())
+            @if ($hClinica->diagnosticos->isEmpty())
                 <td>No hay diagnósticos del paciente</td>
             @else
                 @foreach ($hClinica->diagnosticos as $diagnostico)
@@ -40,7 +40,7 @@
                     @include('diagnosticos.edit')
                     @include('diagnosticos.delete')
                 @endforeach
-            @endif --}}
+            @endif
 
         </tbody>
     </table>

@@ -5,6 +5,7 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
+use Illuminate\Database\Eloquent\Relations\HasMany;
 use Illuminate\Database\Eloquent\Relations\HasOne;
 
 class HistoriaClinica extends Model
@@ -37,9 +38,9 @@ class HistoriaClinica extends Model
         return $this->hasOne(Consulta::class, 'hclinica_id');
     }
 
-    public function diagnostico(): HasOne
+    public function diagnosticos(): HasMany
     {
-        return $this->hasOne(Diagnostico::class, 'hclinica_id');
+        return $this->hasMany(Diagnostico::class, 'hclinica_id');
     }
 
     public function examenComplementario(): HasOne

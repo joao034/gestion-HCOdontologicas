@@ -14,7 +14,7 @@ class DiagnosticoRequest extends FormRequest
     public function rules(): array
     {
         return [
-            'paciente_id' => 'required',
+            'hclinica_id' => 'required',
             'diagnostico' => 'required',
             'CIE' => 'required',
             'tipo' => 'required'

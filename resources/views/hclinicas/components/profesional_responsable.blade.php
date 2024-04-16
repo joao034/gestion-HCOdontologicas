@@ -4,12 +4,12 @@
         <div class="col-md-8">
             <label for="nombres" class="form-label fw-bold">Odontólogo</label>
             <input type="text"
-                value="{{ $paciente->historias_clinicas->first()?->odontologo->get_full_name() . ' - ' . $paciente->historias_clinicas->first()?->odontologo->get_nombres_especialidades() }}"
+                value="{{ $hClinica?->odontologo->get_full_name() . ' - ' . $hClinica?->odontologo->get_nombres_especialidades() }}"
                 class="form-control" id="" aria-describedby="helpId" placeholder="Odontólogo responsable" readonly>
         </div>
     @else
-        {{-- @include('components.select_odontologos_activos') --}}
-        {{-- <div class="mb-3">
+        @include('components.select_odontologos_activos')
+       {{--  <div class="mb-3">
             <label for="" class="form-label fw-bold">Odontólogo</label>
             <select required class="form-select form-select-md" name="odontologo_id" id="odontologoSelect"
                 onchange="selectOdontologo()">
@@ -17,7 +17,7 @@
                     <option value="" selected>Seleccione un odontólogo</option>
                     @foreach ($odontologos as $user)
                         <option value="{{ $user->odontologo->id }}" data-registro={{ $user->odontologo->cedula }}
-                            {{ $paciente->historias_clinicas->first()?->odontologo->id == $user->odontologo->id ? 'selected' : '' }}>
+                            {{ $hClinica?->odontologo->id == $user->odontologo->id ? 'selected' : '' }}>
                             {{ $user->odontologo->get_full_name() . ' - ' . $user->odontologo->get_nombres_especialidades() }}
                         </option>
                     @endforeach

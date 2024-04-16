@@ -16,9 +16,9 @@ class Diagnostico extends Model
         'tipo'
     ];
 
-    public function paciente()
+    public function historiaClinica()
     {
-        return $this->belongsTo(Paciente::class);
+        return $this->belongsTo(HistoriaClinica::class);
     }
 
 }

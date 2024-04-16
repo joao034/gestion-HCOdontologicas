@@ -14,6 +14,7 @@ use App\Models\Tratamiento;
 use App\Models\Paciente;
 use App\Models\Abono;
 use App\Models\HistoriaClinica;
+use App\Services\PresupuestoService;
 use Exception;
 use Barryvdh\DomPDF\Facade\Pdf;
 use Illuminate\Support\Facades\Auth;
@@ -23,12 +24,14 @@ class PresupuestoController extends Controller
 
     public function pdf($presupuesto_id)
     {
+        $presupuestoService = new PresupuestoService();
+
         $presupuesto = Odontograma::find($presupuesto_id);
         $hClinica = HistoriaClinica::find($presupuesto->hclinica_id);
         $paciente = Paciente::find($hClinica->paciente_id);
-        $detalles_presupuesto = $this->getDetallesPresupuesto($presupuesto_id);
-        $total_abonado = $this->getTotalAbonado($presupuesto_id);
-        $total_realizado = $this->getTotalRealizado($presupuesto_id);
+        $detalles_presupuesto = $presupuestoService->getDetallesPresupuesto($presupuesto_id);
+        $total_abonado = $presupuestoService->getTotalAbonado($presupuesto_id);
+        $total_realizado = $presupuestoService->getTotalRealizado($presupuesto_id);
         $pdf = Pdf::loadView('presupuestos.pdf', compact('paciente', 'presupuesto', 'detalles_presupuesto', 'total_abonado', 'total_realizado'));
         return $pdf->stream('presupuesto_' . $paciente->nombreCompleto() . '.pdf');
     }
@@ -74,12 +77,14 @@ class PresupuestoController extends Controller
 
     public function edit(int $hclinica_id)
     {
+        $presupuestoService = new PresupuestoService();
+
         $hClinica = HistoriaClinica::find($hclinica_id);
         $presupuesto = $hClinica->odontograma->first();
-        $detalles_presupuesto = $this->getDetallesPresupuesto($presupuesto->id);
+        $detalles_presupuesto = $presupuestoService->getDetallesPresupuesto($presupuesto->id);
         $tratamientos = Tratamiento::orderBy('nombre', 'asc')->get();
-        $total_abonado = $this->getTotalAbonado($presupuesto->id);
-        $total_realizado = $this->getTotalRealizado($presupuesto->id);
+        $total_abonado = $presupuestoService->getTotalAbonado($presupuesto->id);
+        $total_realizado = $presupuestoService->getTotalRealizado($presupuesto->id);
         $detalles = OdontogramaDetalle::where('odontograma_cabecera_id', $presupuesto->id)->get();
         $abonos = Abono::whereIn('odontograma_detalle_id', $detalles->pluck('id'))->get();
         return view('presupuestos.detalle_presupuesto', compact('hClinica', 'detalles_presupuesto', 'presupuesto', 'tratamientos', 'total_abonado', 'total_realizado', 'abonos'));
@@ -131,28 +136,6 @@ class PresupuestoController extends Controller
         }
     }
 
-    private function getTotalRealizado(int $presupuesto_id)
-    {
-        $detalles_presupuesto = $detalles_presupuesto = OdontogramaDetalle::query()
-        ->where('odontograma_cabecera_id', '=', "$presupuesto_id")
-        ->where('estado', '=', 'realizado')->get();
-        $sumatorio = 0;
-        foreach ($detalles_presupuesto as $detalle_presupuesto) {
-            $sumatorio += $detalle_presupuesto->precio;
-        }
-        return $sumatorio;
-    }
-
-
-    private function getTotalAbonado(int $presupuesto_id)
-    {
-        $detalles_presupuesto = $this->getDetallesPresupuesto($presupuesto_id);
-        $sumatorio = 0;
-        foreach ($detalles_presupuesto as $detalle_presupuesto) {
-            $sumatorio += $this->getTotalDeAbonosDeDetalle($detalle_presupuesto->id);
-        }
-        return $sumatorio;
-    }
 
     //validar que el monto ingresado sea menor o igual al saldo
     private function esValidoElMonto(float $monto, OdontogramaDetalle $detalle_presupuesto)
@@ -165,31 +148,6 @@ class PresupuestoController extends Controller
         return true;
     }
 
-    private function getDetallesPresupuesto(int $id)
-    {
-        $detalles_presupuesto = OdontogramaDetalle::query()
-            ->where('odontograma_cabecera_id', '=', "$id")
-            ->where('estado', '!=', 'hallazgo')
-            ->orderByRaw("FIELD(estado , 'realizado', 'necesario')")
-            ->get();
-
-        $detalles_presupuesto->map(function ($detalle_presupuesto) {
-            $detalle_presupuesto->abonos = $this->getTotalDeAbonosDeDetalle($detalle_presupuesto->id);
-            return $detalle_presupuesto;
-        });
-
-        return $detalles_presupuesto;
-    }
-
-    private function getTotalDeAbonosDeDetalle(int $id_detalle)
-    {
-        $abonos = Abono::where('odontograma_detalle_id', '=', "$id_detalle")->get();
-        $sumatorio = 0;
-        foreach ($abonos as $abono) {
-            $sumatorio += $abono->monto;
-        }
-        return $sumatorio;
-    }
 
     //actualiza el precio de un detalle del presupuesto
     public function updatePrecio(int $id_detalle_presupuesto, Request $request)

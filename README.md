@@ -13,6 +13,7 @@ Permite salvar información del estado dental del paciente (tratamientos hechos 
 El software arma el presupuesto en base a los tratamientos que se agreguen en el odontograma del paciente. Además, permite registrar abonos.
 ![image](https://github.com/user-attachments/assets/b0f6047f-d16c-42df-909e-606db541d78a)
 ![image](https://github.com/user-attachments/assets/b3ecf972-fa70-4b3f-8e45-02b4606e9ef1)
+![2024-09-09_10h02_17](https://github.com/user-attachments/assets/67ea1cdb-7beb-470f-a356-fd889ee02018)
 
 
 ## Módulo de Usuarios
